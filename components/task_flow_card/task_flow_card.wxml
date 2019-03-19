@@ -1,0 +1,14 @@
+<!--components/task_flow_card/task_flow_card.wxml-->
+<view class="task-flow-card" >
+  <view class="title-wrap">
+    <view class="task-flow-title">{{taskFlowData.taskName}}</view>
+    <image src="../../assets/imgs/task_flow/check{{taskFlowData.isCompleted?'_ok':''}}.svg" class="task-flow-status" />
+  </view>
+  <view class="task-flow-date-limit">{{taskFlowData.beginDate}}~{{taskFlowData.endDate}}</view>
+  <view class="task-flow-member-count">参与人员:{{taskFlowData.members.length}}人</view>
+  <view class="task-flow-leader">负责人: {{taskFlowData.leader.nickName}}</view>
+  <view class="task-flow-describe">
+    任务概要: {{taskFlowData.describe}}
+  </view>
+  <view class="task-flow-go">查看详情</view>
+</view>

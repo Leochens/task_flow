@@ -1,0 +1,60 @@
+/* components/task_flow_card/task_flow_card.wxss */
+/* task-flow-card  item ===> component*/
+.task-flow-card{
+  width: 280rpx;
+  position: relative;
+  height: 360rpx;
+  box-shadow: -4rpx 5rpx 6rpx #ddd;
+  border: 1rpx solid #eee;
+  padding: 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  display: inline-block;
+  margin: 10rpx;
+
+}
+
+.title-wrap{
+  display: flex;
+  justify-content: space-between;
+}
+.task-flow-title{
+  font-size: 32rpx;
+  display: inline-block;
+}
+
+.task-flow-leader{
+  margin: 10rpx 0;
+}
+.task-flow-date-limit{
+  font-size: 20rpx;
+  color: #666;
+}
+.task-flow-member-count{
+  margin: 10rpx 0;
+
+}
+.task-flow-status{
+  height: 40rpx;
+  width: 40rpx;
+}
+.task-flow-detail{
+  display: inline-block;
+  margin: 10rpx 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+
+}
+
+.task-flow-go{
+  position: absolute;
+  bottom: 20rpx;
+  right: 20rpx;
+  color: #666;
+  text-decoration: underline;
+}

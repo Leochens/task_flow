@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>按钮_选中</title>
+    <desc>Created with Sketch.</desc>
+    <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="任务流详情(负责人)" transform="translate(-310.000000, -146.000000)" fill="#2967AF" fill-rule="nonzero">
+            <g id="content" transform="translate(0.000000, 108.000000)">
+                <g id="item1" transform="translate(48.000000, 22.000000)">
+                    <g id="按钮_选中" transform="translate(262.000000, 16.000000)">
+                        <path d="M6.475,7.2625 L9.5375,4.2 L10.7625,5.425 L6.475,9.71250001 L3.5875,6.82500001 L4.81249999,5.59999999 L6.475,7.2625 Z M7,14 C3.15,14 0,10.85 0,7 C0,3.15 3.15,0 7,0 C10.85,0 14,3.15 14,7 C14,10.85 10.85,14 7,14 Z M7,12.25 C9.8875,12.25 12.25,9.8875 12.25,7 C12.25,4.1125 9.8875,1.74999999 7,1.74999999 C4.1125,1.74999999 1.74999999,4.1125 1.74999999,7 C1.74999999,9.8875 4.1125,12.25 7,12.25 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

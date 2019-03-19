@@ -1,0 +1,82 @@
+/* pages/invite/invite.wxss */
+
+.confirm,
+.cancel{
+  width: 100rpx;
+}
+.wrap{
+  margin: 20rpx 32rpx;
+  display: flex;
+  justify-content: center;
+}
+.card{
+  width: 660rpx;
+  height: 300rpx;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  align-items: center;
+  font-size: 32rpx;
+}
+.user-info{
+  display: flex;
+  align-items: center;
+  margin: 32rpx;
+  margin-bottom: 0;
+}
+.nick-name{
+   font-size: 32rpx;
+   margin-right: 32rpx;
+}
+.title{
+  text-align: center;
+  font-weight: 500;
+  font-size: 50rpx;
+}
+.avatar{
+  display: inline-block;
+  width: 100rpx;
+  height: 100rpx;
+  border: 1px solid #ccc;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin-right: 32rpx;
+
+}
+.member-count{
+  text-align: center;
+  font-size: 20rpx;
+  margin-top: 32rpx;
+}
+.btn-group{
+  margin-top: 120rpx;
+  /* width: 660rpx; */
+}
+.confirm,
+.cancel{
+  width: 660rpx;
+  height: 94rpx;
+  background-color: #2665AE;
+  text-align: center;
+  color: #fff;
+  line-height: 94rpx;
+  text-align: center;
+  border-radius: 14rpx;
+  font-size: 28rpx;
+  margin-bottom: 58rpx;
+}
+.cancel{
+  background-color: #2665AE;
+  color: #666;
+  background-color: #fff;
+}
+.copyright{
+  display: flex;
+  justify-content: center;
+  align-self:flex-end;
+  margin-top: 330rpx;
+}
+.copyright image{
+  height: 54rpx;
+  width: 230rpx;
+
+}

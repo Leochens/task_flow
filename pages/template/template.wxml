@@ -1,0 +1,5 @@
+<template name="list">
+  <view class='list' wx:for="{{dataList}}">
+    <text>{{index}}</text>:<text>{{item}}</text>
+  </view>
+</template>

@@ -1,0 +1,36 @@
+<view class='container'>
+  <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+    <text class='icon-back'></text>
+    <text class='icon-homefill'></text>
+  </navigator>
+  <!-- Tab布局 -->
+  <view class='title'>
+    <view class='titleSel' bindtap='titleClick' data-idx='0'>
+      <text>进行中</text>
+      <hr class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}" />
+    </view>
+    <view class='titleSel' bindtap='titleClick' data-idx='1'>
+      <text>已完成</text>
+      <hr class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+    </view>
+  </view>
+  <!-- 内容布局 -->
+  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
+    <!-- 进行中 -->
+    <swiper-item class='swiper'>
+      <!-- 以后要写成组件的 方便传值和状态切换 -->
+      <task-flow-card 
+      wx:for="{{taskFlowList}}" 
+      wx:key="{{key}}" 
+      taskFlowData="{{item}}"
+      bindtap='toTaskFlowDetail'
+      nav="{{nav}}" 
+      />
+    </swiper-item>
+    <!-- 已完成 -->
+    <swiper-item class='swiper' class='swiper'>已完成</swiper-item>
+  </swiper>
+  <view class='hover-btn'>
+    <image src='../../assets/imgs/index/add_task.png'></image>
+  </view>
+</view>

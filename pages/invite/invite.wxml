@@ -1,0 +1,23 @@
+<!-- pages/invite/invite.wxml -->
+<view class='wrap'>
+  <view>
+    <view class='card'>
+      <view class='user-info'>
+        <image class='avatar' src='http://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/64'></image>
+        <!-- <view class='avatar'></view> -->
+        <text class='nick-name'>RyanHardy</text>
+        邀请您加入任务流
+      </view>
+      <view class='title'>情人节活动</view>
+      <view class='member-count'>当前参加人数: 6</view>
+    </view>
+    <view class='btn-group'>
+      <view class='confirm'>确认加入</view>
+      <view class='cancel'>取消</view>
+    </view>
+    <view class='copyright'>
+      <image src='../../assets/imgs/copyright.png'></image>
+    </view>
+  
+  </view>
+</view>

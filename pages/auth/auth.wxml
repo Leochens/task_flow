@@ -1,0 +1,14 @@
+<!--pages/auth/auth.wxml-->
+<view class="icon-text">
+    <view>
+      <image class="app-icon" src="/assets/imgs/app-icon.png" />
+    </view>
+    <view class="text">活动任务流</view>
+  </view>
+
+  <view class='dep-line'></view>
+  <view class='msg-wrap'>
+    <view class='apply'>申请获得您的以下权限</view>
+    <view class='info'>获得您的公开信息(昵称，头像等)</view>
+    <button class='auth-btn' open-type="getUserInfo" bindgetuserinfo='info'>授权登录</button>
+  </view>

@@ -1,0 +1,60 @@
+<!-- pages/task_flow/task_flow.wxml -->
+<view class='wrap'>
+  <view class='task-flow-info'>
+    <view class="task-flow-name">
+      情人节活动
+      <image src="../../assets/imgs/task_flow/edit.svg" />
+    </view>
+    <view class="else">
+      <view class="task-flow-date">2019.2.5~2019.2.16</view>
+      <view class="task-flow-leader">负责人:RyanHardy</view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class="child-task-list">
+      <view class="line"></view>
+      <view wx:for="{{taskList}}" wx:key="{{index}}" class="item">
+        <view class="dot-wrap">
+          <view class="dot {{item.status?'ok':''}}"></view>
+          <view class="date">{{item.date}}</view>
+        </view>
+        <view class="task-card">
+          <view class="task-title">
+            <view class="title-wrap">
+              <view class="task-name">{{item.taskName}}</view>
+              <view class="task-member-count">
+                <image src="../../assets/imgs/task_flow/member.svg" />
+                {{item.execPeople.length}}
+              </view>
+            </view>
+            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.status?'_ok':''}}.svg" />
+          </view>
+          <view class="task-info">
+            <view class="exec-perple">执行人:{{item.execPeople}}</view>
+            <view class="deadline-time">截止到{{item.deadlineTime}}</view>
+          </view>
+          <view class="task-describe">{{item.detail}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='tabbar'>
+    <view class='tab-item'>
+      <image src='../../assets/imgs/task_flow/add.svg' class='tab-item-icon'></image>
+      <view class='text'>加子任务</view>
+    </view>
+    <view class='tab-item'>
+      <image src='../../assets/imgs/task_flow/add_member.svg' class='tab-item-icon'></image>
+      <view class='text'>加新成员</view>
+    </view>
+    <view class='tab-item'>
+      <image src='../../assets/imgs/task_flow/star.svg' class='tab-item-icon'></image>
+      <view class='text'>加入星标</view>
+    </view>
+    <view class='tab-item'>
+      <image src='../../assets/imgs/task_flow/curve.svg' class='tab-item-icon'></image>
+      <view class='text'>任务曲线</view>
+    </view>
+    <view class='tab-item-important'>全部成员</view>
+  </view>
+</view>

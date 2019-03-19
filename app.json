@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/task_flow/task_flow",
+    "pages/invite/invite",
+    "pages/logs/logs",
+    "pages/test/test",
+    "pages/auth/auth"
+  ],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#2665AE",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "assets/imgs/index/message_selected.png",
+        "iconPath": "assets/imgs/index/message.png",
+        "pagePath": "pages/logs/logs",
+        "text": "消息"
+      },
+      {
+        "selectedIconPath": "assets/imgs/index/task_flow_selected.png",
+        "iconPath": "assets/imgs/index/task_flow.png",
+        "pagePath": "pages/index/index",
+        "text": "任务流"
+      },
+      {
+        "selectedIconPath": "assets/imgs/index/me_selected.png",
+        "iconPath": "assets/imgs/index/me.png",
+        "pagePath": "pages/logs/logs",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "任务流",
+    "navigationBarTextStyle": "black"
+
+  }
+}
