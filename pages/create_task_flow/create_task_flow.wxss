@@ -1,0 +1,77 @@
+/* pages/create_task_flow/create_task_flow.wxss */
+.wrap{
+
+}
+.note-wrap{
+    display: flex;
+    justify-content: center;
+}
+.note{
+    color: #666;
+    font-weight: 500;
+    position: relative;
+}
+.note::before
+{
+    content: "";
+    display: inline-block;
+    height: 6rpx;
+    background-color: #ddd;
+    position: absolute;
+    width: 200rpx;
+    left: -230rpx;
+    top: 50%;
+}
+.note::after{
+    content: "";
+    display: inline-block;
+    height: 6rpx;
+    background-color: #ddd;
+    position: absolute;
+    width: 200rpx;
+    top: 50%;
+    right: -230rpx;
+}
+.blanks{
+    width: 70%;
+    margin: auto;
+}
+.task-item{
+    margin: 20rpx 0;
+}
+.task-item .tips{
+    font-size: 28rpx;
+    color: #666;
+}
+.task-item picker{
+    font-size: 28rpx;
+    height: 65rpx;
+    border: 1rpx solid #ddd;
+    border-radius: 16rpx;
+    line-height: 65rpx;
+    color: #666;
+}
+.task-item input{
+    border: 1rpx solid #ddd;
+    border-radius: 16rpx;
+    padding: 8rpx 16rpx;
+    font-size: 24rpx;
+    color: #666;
+}
+.task-item textarea{
+    border: 1rpx solid #ddd;
+    border-radius: 16rpx;
+    padding: 8rpx;
+    width: 97%;
+    height: 250rpx;
+    font-size: 24rpx;
+    color: #666;
+
+}
+.complete{
+  width: 70%;
+  background-color: #2665AE;
+  color: #fff;
+  font-size: 28rpx;
+  margin-top: 20rpx; 
+}

@@ -5,7 +5,8 @@
     "pages/invite/invite",
     "pages/logs/logs",
     "pages/test/test",
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/create_task_flow/create_task_flow"
   ],
   "tabBar": {
     "color": "#666",
@@ -36,7 +37,7 @@
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "任务流",
+    "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
-
   }
 }

@@ -1,0 +1,36 @@
+<view class="wrap">
+    <view class="note-wrap">
+        <text class="note">创建任务流</text>
+    </view>
+    <view class="blanks">
+        <view class="task-item">
+            <label class='tips'>任务流标题</label>
+            <input type='text'></input>
+        </view>
+        <view class="task-item">
+            <label class="tips">开始日期</label>
+            <picker mode="date" value="{{date}}" start="2019-01-01" end="2100-09-01" bindchange="bindDateChange">
+                <view class="picker">选择日期: {{date}}</view>
+            </picker>
+        </view>
+        <view class="task-item">
+            <label class="tips">结束日期</label>
+            <picker mode="date" value="{{date}}" start="2019-01-01" end="2100-09-01" bindchange="bindDateChange">
+                <view class="picker">选择日期: {{date}}</view>
+            </picker>
+        </view>
+        <view class="task-item">
+            <label class='tips'>负责人</label>
+            <input type='text' value="RyanHardy"></input>
+        </view>
+        <view class="task-item">
+            <label class='tips'>联系电话[选填]</label>
+            <input type='text' value=""></input>
+        </view>
+        <view class="task-item">
+            <label class='tips'>任务概要</label>
+            <textarea value=""></textarea>
+        </view>
+    </view>
+    <button class='complete'>完成</button>
+</view>

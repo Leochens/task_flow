@@ -62,13 +62,13 @@
   margin:20rpx;
   margin-top: 30rpx;
   /* height:100vh; */
-  min-height: 95vh;
-  max-height:100vh;
+  height: 90%;
   overflow: auto;
   font-size: 20rpx;
   padding: 10rpx;
-
+  position: fixed;
 }
+
 .hover-btn{
   position: fixed;
   bottom: 20rpx;

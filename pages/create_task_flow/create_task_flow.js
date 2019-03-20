@@ -1,4 +1,4 @@
-// common/tab-bar/tab-bar.js
+// pages/create_task_flow/create_task_flow.js
 Page({
 
   /**

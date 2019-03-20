@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "task-flow-card":"../../components/task_flow_card/task_flow_card"
+    "task-flow-card":"../../components/task_flow_card/task_flow_card",
+    "nav-bar": "/components/nav_bar/nav_bar"
   }
 }

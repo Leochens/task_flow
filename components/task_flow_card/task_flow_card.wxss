@@ -10,7 +10,7 @@
   border-radius: 20rpx;
   font-size: 24rpx;
   display: inline-block;
-  margin: 10rpx;
+  margin: 10rpx 0;
 
 }
 

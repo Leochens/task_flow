@@ -5,332 +5,419 @@ const app = getApp()
 
 Page({
   data: {
-    isHide: false,
     isLogin: false,
     hasAuth: false,
     currentIndex: 0,
+    navbarData: {
+      showCapsule: 1,
+      title: '我的主页'
+    },
+    height: app.globalData.height * 6,  
+    completedTaskFlowList: [{
+      "taskID": "000239",
+      "taskName": "情人节活动",
+      "leader": {
+        "openID": "fjhegfakdbajksbfsjfhsvfafs",
+        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+        "city": "Baoding",
+        "country": "China",
+        "gender": 1,
+        "language": "zh_CN",
+        "nickName": "Ryan Hardy",
+        "province": "Hebei",
+        "phoneNumber": "18332518328"
+      },
+      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+      "isCompleted": true,
+      "beginDate": "2019.2.5",
+      "endDate": "2019.2.16",
+      "members": [{
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        }
+      ],
+    }, {
+      "taskID": "000239",
+      "taskName": "情人节活动",
+      "leader": {
+        "openID": "fjhegfakdbajksbfsjfhsvfafs",
+        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+        "city": "Baoding",
+        "country": "China",
+        "gender": 1,
+        "language": "zh_CN",
+        "nickName": "Ryan Hardy",
+        "province": "Hebei",
+        "phoneNumber": "18332518328"
+      },
+      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+      "isCompleted": true,
+      "beginDate": "2019.2.5",
+      "endDate": "2019.2.16",
+      "members": [{
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        },
+        {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "nickName": "Ryan Hardy"
+        }
+      ],
+    }, ],
     taskFlowList: [{
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
+        },
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
+      }, {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
+        },
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
+      }, {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
+        },
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
+      }, {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
+          "openID": "fjhegfakdbajksbfsjfhsvfafs",
+          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
+        },
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
       },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
+      {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
           "openID": "fjhegfakdbajksbfsjfhsvfafs",
           "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
         },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },{
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
       },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
+      {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
           "openID": "fjhegfakdbajksbfsjfhsvfafs",
           "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
         },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },{
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
       },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
+      {
+        "taskID": "000239",
+        "taskName": "情人节活动",
+        "leader": {
           "openID": "fjhegfakdbajksbfsjfhsvfafs",
           "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
+          "city": "Baoding",
+          "country": "China",
+          "gender": 1,
+          "language": "zh_CN",
+          "nickName": "Ryan Hardy",
+          "province": "Hebei",
+          "phoneNumber": "18332518328"
         },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },{
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
-      },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },
-    {
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
-      },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },
-    {
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
-      },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    },
-    {
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
-      },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": false,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": [
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        },
-        {
-          "openID": "fjhegfakdbajksbfsjfhsvfafs",
-          "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-          "nickName": "Ryan Hardy"
-        }
-      ],
-    }]
+        "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
+        "isCompleted": false,
+        "beginDate": "2019.2.5",
+        "endDate": "2019.2.16",
+        "members": [{
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          },
+          {
+            "openID": "fjhegfakdbajksbfsjfhsvfafs",
+            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
+            "nickName": "Ryan Hardy"
+          }
+        ],
+      }
+    ]
   },
   //swiper切换时会调用
-  pagechange: function (e) {
+  pagechange: function(e) {
     if ("touch" === e.detail.source) {
       let currentPageIndex = this.data.currentIndex
       currentPageIndex = (currentPageIndex + 1) % 2
@@ -339,26 +426,31 @@ Page({
       })
     }
   },
-  toTaskFlowDetail:function() {
-      wx.navigateTo({
-        url: '../task_flow/task_flow',
-        success:function(res){
-          console.log(res);
-        },
-        fail:function(err){
-          console.log(err);
-        }
-      })
+  toTaskFlowDetail: function() {
+    wx.navigateTo({
+      url: '../task_flow/task_flow',
+      success: function(res) {
+        console.log(res);
+      },
+      fail: function(err) {
+        console.log(err);
+      }
+    })
+  },
+  addNewTaskFlow: function() {
+    wx.navigateTo({
+      url: '../create_task_flow/create_task_flow'
+    })
   },
   //用户点击tab时调用
-  titleClick: function (e) {
+  titleClick: function(e) {
     let currentPageIndex =
       this.setData({
         //拿到当前索引并动态改变
         currentIndex: e.currentTarget.dataset.idx
       })
   },
-  getSetting: function () {
+  getSetting: function() {
     const that = this;
     // 获取用户信息
     wx.getSetting({
@@ -388,27 +480,27 @@ Page({
       }
     })
   },
-  onShow: function () {
+  onShow: function() {
 
   },
   //事件处理函数
-  onLoad: function () {
+  onLoad: function() {
     this.getSetting();
     const hasAuth = wx.getStorageSync("HASAUTH");
     console.log(hasAuth);
     this.setData({
       hasAuth
-    })
+    });
   },
   // 用户分享
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: '任务流邀请',
       path: '/pages/test/test?taskID=t000223',
-      success: function (res) {
+      success: function(res) {
         console.log("suc", res);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("fai", res);
 
       }

@@ -3,11 +3,11 @@
 wx.cloud.init();
 
 App({
-  onShow: function (options) {
+  onShow: function(options) {
 
   },
 
-  login: function () {
+  login: function() {
     const that = this;
     // 登录
     wx.login({
@@ -18,7 +18,7 @@ App({
           data: {
             code: res.code
           },
-          success: function (res) {
+          success: function(res) {
             console.log("登录成功 换取sessionKey成功", res);
             const data = res.result
             // 把 SessionId 和过期时间放在内存中的全局对象和本地缓存里边
@@ -34,7 +34,7 @@ App({
 
             console.log("写入sessionId到缓存成功");
           },
-          fail: function (err) {
+          fail: function(err) {
             console.log("换取失败", err);
           }
         })
@@ -42,11 +42,11 @@ App({
     })
   },
 
-  checkSeesion: function () {
+  checkSeesion: function() {
     // 1.查看缓存中的sessionId是否过期,若是过期,重新登录
     const sessionId = wx.getStorageSync('SESSIONID')
     const expiredTime = wx.getStorageSync('EXPIREDTIME')
-    console.log(sessionId,expiredTime);
+    console.log(sessionId, expiredTime);
     const now = +new Date()
     if (now - expiredTime <= 1 * 24 * 60 * 60 * 1000 * 7) {
       this.globalData.sessionId = sessionId
@@ -57,18 +57,28 @@ App({
       this.login();
     }
   },
-  onLaunch: function (options) {
+  onLaunch: function(options) {
     console.log("opts", options);
 
     // 1. 检查是否存有sessionKey和openId
     // 2. 若有 检查sessionKey是否过期
     this.checkSeesion();
+
+    wx.getSystemInfo({
+      success: (res) => {
+        this.globalData.height = res.statusBarHeight;
+        // this.globalData.height = res.screenHeight;
+        console.log(res);
+      }
+    })
   },
   globalData: {
     userInfo: null,
     loading: true,
     sessionId: null,
     expiredTime: 0,
-    isLogin: false
+    isLogin: false,
+    share: false,  // 分享默认为false
+    height: 0,
   }
 })
