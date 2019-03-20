@@ -63,22 +63,24 @@ App({
     // 1. 检查是否存有sessionKey和openId
     // 2. 若有 检查sessionKey是否过期
     this.checkSeesion();
-
+    const that = this;
     wx.getSystemInfo({
-      success: (res) => {
-        this.globalData.height = res.statusBarHeight;
-        // this.globalData.height = res.screenHeight;
-        console.log(res);
+      success: function(e) {
+        that.globalData.StatusBar = e.statusBarHeight;
+        let custom = wx.getMenuButtonBoundingClientRect();
+        that.globalData.Custom = custom;
+        that.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
       }
     })
   },
+
   globalData: {
     userInfo: null,
     loading: true,
     sessionId: null,
     expiredTime: 0,
     isLogin: false,
-    share: false,  // 分享默认为false
+    share: false, // 分享默认为false
     height: 0,
   }
 })

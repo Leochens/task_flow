@@ -1,16 +1,16 @@
 /* components/task_flow_card/task_flow_card.wxss */
 /* task-flow-card  item ===> component*/
 .task-flow-card{
-  width: 280rpx;
+  width: 660rpx;
   position: relative;
-  height: 360rpx;
-  box-shadow: -4rpx 5rpx 6rpx #ddd;
+  height: 240rpx;
+  /* box-shadow: -4rpx 5rpx 6rpx #ddd; */
   border: 1rpx solid #eee;
   padding: 16rpx;
   border-radius: 20rpx;
-  font-size: 24rpx;
-  display: inline-block;
-  margin: 10rpx 0;
+  font-size: 20rpx;
+  display: block;
+  margin: 10rpx auto;
 
 }
 
@@ -46,15 +46,15 @@
   text-overflow: ellipsis;
   white-space: wrap;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 
 }
 
 .task-flow-go{
   position: absolute;
-  bottom: 20rpx;
-  right: 20rpx;
+  bottom: 10rpx;
+  right: 30rpx;
   color: #666;
   text-decoration: underline;
 }

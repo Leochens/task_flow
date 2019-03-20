@@ -1,36 +1,49 @@
-<nav-bar navbar-data="{{navbarData}}" />
-<view class='container' style="margin-top:{{height}}rpx;">
-  <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
-    <text class='icon-back'></text>
-    <text class='icon-homefill'></text>
-  </navigator>
-  <!-- Tab布局 -->
-  <view class='title'>
-    <view class='titleSel' bindtap='titleClick' data-idx='0'>
-      <text>进行中</text>
-      <hr class="{{0 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}}" />
-    </view>
-    <view class='titleSel' bindtap='titleClick' data-idx='1'>
-      <text>已完成</text>
-      <hr class="{{1 == currentIndex ? 'headerLineSel' : 'headerLineUnsel'}} " />
+<view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+  <view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+      <view class="action text-center" style='width: 100rpx'>
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn icon-my icon bg-green shadow'></button>
+        <block wx:else>
+          <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})" bindtap="showModal" data-target="viewModal"></view>
+        </block>
+      </view>
+      <!-- 样式1 -->
+      <block wx:if="{{!isClassify?'cur':''}}">
+        <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
+          <view class='icon-cu-image text-white'>
+            <text class="icon-apps  margin-0"></text>
+          </view>
+        </view>
+        <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="2">
+          <view class='icon-cu-image text-white'>
+            <text class="icon-favor{{2==TabCur?'fill':''}}  margin-0"></text>
+          </view>
+        </view>
+        <view class="action" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
+          <view class='icon-cu-image text-white'>
+            <text class="icon-roundcheck{{3==TabCur?'fill':''}}  margin-0"></text>
+          </view>
+        </view>
+        <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
+          <view class='icon-cu-image'></view>
+        </view>
+      </block>
+      <!-- 样式2 -->
+      <block wx:if="{{isClassify?'cur':''}}">
+        <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
+          <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{7}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
+            {{index>0?"Tab"+index:"返回"}}
+          </view>
+        </scroll-view>
+      </block>
     </view>
   </view>
-  <!-- 内容布局 -->
-  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
-    <!-- 进行中 -->
-    <swiper-item class='swiper'>
-      <task-flow-card wx:for="{{taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
-      <view style='height:100rpx'> </view>
+</view>
 
-    </swiper-item>
-    <!-- 已完成 -->
-    <swiper-item class='swiper' class='swiper'>
+<view class='task-flows' style='margin-top:{{CustomBar}}px;'>
 
-      <task-flow-card wx:for="{{completedTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
-    </swiper-item>
-    <view style='height:100rpx'> </view>
-  </swiper>
-  <view class='hover-btn' bindtap='addNewTaskFlow'>
-    <image src='../../assets/imgs/index/add_task.png'></image>
-  </view>
+  <task-flow-card wx:for="{{taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
+</view>
+<view class='hover-btn' bindtap='addNewTaskFlow'>
+  <image src='../../assets/imgs/index/add_task.png'></image>
 </view>
