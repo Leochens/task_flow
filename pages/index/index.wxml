@@ -16,12 +16,12 @@
         </view>
         <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="2">
           <view class='icon-cu-image text-white'>
-            <text class="icon-favor{{2==TabCur?'fill':''}}  margin-0"></text>
+            <text class="icon-favor{{2==TabCur && 2==isFilter?'fill':''}}  margin-0"></text>
           </view>
         </view>
         <view class="action" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
           <view class='icon-cu-image text-white'>
-            <text class="icon-roundcheck{{3==TabCur?'fill':''}}  margin-0"></text>
+            <text class="icon-roundcheck{{3==TabCur && 3==isFilter?'fill':''}}  margin-0"></text>
           </view>
         </view>
         <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
@@ -42,7 +42,7 @@
 
 <view class='task-flows' style='margin-top:{{CustomBar}}px;'>
 
-  <task-flow-card wx:for="{{taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
+  <task-flow-card wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
 </view>
 <view class='hover-btn' bindtap='addNewTaskFlow'>
   <image src='../../assets/imgs/index/add_task.png'></image>
