@@ -24,32 +24,7 @@ Component({
         "isCompleted": false,
         "beginDate": "2019.2.5",
         "endDate": "2019.2.16",
-        "members": [{
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-          },
-          {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-          },
-          {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-          },
-          {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-          },
-          {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-          }
-        ],
+        "members":{}
       }
     }
   },
@@ -58,13 +33,21 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    count: 0
   },
-
+  ready:function(){
+    this.setData({
+      count: Object.keys(this.properties.taskFlowData.members).length
+    })
+  },
+  
   /**
    * 组件的方法列表
    */
   methods: {
-    
+    test: function(){
+      console.log(this.properties); 
+     
+    }
   }
 })
