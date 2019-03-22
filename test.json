@@ -16,41 +16,15 @@
     "isCompleted": false,
     "beginDate": "2019.2.5",
     "endDate": "2019.2.16",
-    "members": [
-        {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-        },
-        {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-        },
-        {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-        },
-        {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-        },
-        {
-            "openID": "fjhegfakdbajksbfsjfhsvfafs",
-            "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-            "nickName": "Ryan Hardy"
-        }
-    ],
+    "members": {},
     "childTasks": [
         {
             "childTaskID": "000111",
             "childTaskName": "去市场采购玫瑰花",
             "beginDate": "2019.2.5",
             "endDate": "2019.2.16",
-            "isCompleted":false,
-            "members":[
+            "isCompleted": false,
+            "members": [
                 {}
             ]
         }

@@ -105,7 +105,6 @@
 }
 .task-card .title-wrap .task-name{ 
     text-overflow: ellipsis;
-    max-width: 300rpx;
     overflow: hidden;
     white-space: nowrap;
     max-width: 400rpx;

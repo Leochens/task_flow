@@ -1,8 +1,15 @@
 //app.js
 // const url = "http://api.mokis.top:8899"
 wx.cloud.init();
+import {
+  Provider
 
-App({
+} from './libs/wechat-weapp-redux';
+const configureStore = require('./store/store.js');
+const store = configureStore();
+// console.log(store);
+// console.log(store.getState());
+App(Provider(store)({
   onShow: function(options) {
 
   },
@@ -83,4 +90,4 @@ App({
     share: false, // 分享默认为false
     height: 0,
   }
-})
+}));

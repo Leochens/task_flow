@@ -11,6 +11,7 @@
   "dependencies": {
     "miniprogram-datepicker": "^0.3.0",
     "redux": "^4.0.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "wechat-weapp-redux": "^0.1.3"
   }
 }

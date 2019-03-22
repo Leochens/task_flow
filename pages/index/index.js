@@ -1,21 +1,25 @@
 //index.js
-//获取应用实例
+import {
+  bindActionCreators
+} from 'redux';
+import {
+  connect
+} from '../../libs/wechat-weapp-redux';
 const MENU = {
   NONE: 0,
   CLASSIFY: "1",
   FAVOR: "2",
   COMPLETED: "3"
 }
+//获取应用实例
 const app = getApp()
-
-Page({
+const page = {
   data: {
     isLogin: false,
     hasAuth: false,
     currentIndex: 0,
     isClassify: false,
     isFilter: MENU.NONE,
-
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -43,12 +47,15 @@ Page({
       "isCompleted": true,
       "beginDate": "2019.2.5",
       "endDate": "2019.2.16",
-      "members": { "sfafebge":"sfafebge", "yawgfueferg":"sfafebge", "112234":"sfafebge"}
-    }
-    ]
+      "members": {
+        "sfafebge": "sfafebge",
+        "yawgfueferg": "sfafebge",
+        "112234": "sfafebge"
+      }
+    }]
   },
 
-  getUserInfo: function (e) {
+  getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
@@ -101,31 +108,31 @@ Page({
       isClassify: which == 0 ? false : true
     })
   },
-  toTaskFlowDetail: function () {
+  toTaskFlowDetail: function() {
     wx.navigateTo({
       url: '../task_flow/task_flow',
-      success: function (res) {
+      success: function(res) {
         console.log(res);
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err);
       }
     })
   },
-  addNewTaskFlow: function () {
+  addNewTaskFlow: function() {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow'
     })
   },
   //用户点击tab时调用
-  titleClick: function (e) {
+  titleClick: function(e) {
     let currentPageIndex =
       this.setData({
         //拿到当前索引并动态改变
         currentIndex: e.currentTarget.dataset.idx
       })
   },
-  getSetting: function () {
+  getSetting: function() {
     const that = this;
     // 获取用户信息
     wx.getSetting({
@@ -155,11 +162,11 @@ Page({
       }
     })
   },
-  onShow: function () {
-
+  onShow: function() {
+    console.log(this.data)
   },
   //事件处理函数
-  onLoad: function () {
+  onLoad: function() {
     this.getSetting();
     const hasAuth = wx.getStorageSync("HASAUTH");
     console.log(hasAuth);
@@ -168,19 +175,30 @@ Page({
     });
   },
   // 用户分享
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: '任务流邀请',
       path: '/pages/test/test?taskID=t000223',
-      success: function (res) {
+      success: function(res) {
         console.log("suc", res);
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log("fai", res);
 
       }
     }
   }
+};
 
-
+const mapStateToData = (state, options) => {
+  return {
+    v:state.v
+  };
+}
+const mapDispatchToPage = dispatch => ({
+  setVisibilityFilter: filter => dispatch(setVisibilityFilter(filter)),
+  toggleTodo: id => dispatch(toggleTodo(id)),
+  addTodo: text => dispatch(addTodo(text)),
 })
+const _page = connect(mapStateToData)(page);
+Page(_page);
