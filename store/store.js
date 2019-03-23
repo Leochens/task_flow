@@ -1,13 +1,20 @@
-import { createStore,applyMiddleware,compose } from 'redux';
-import { createLogger} from 'redux-logger';
+import { createStore, applyMiddleware, compose } from '../libs/redux';
+import { createLogger } from '../libs/redux-logger';
 import devTools from '../libs/remote-redux-devtools';
+import createSagaMiddleware, { effects } from '../libs/redux-saga';
+import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
+const sm = createSagaMiddleware();
+console.log(sm)
 import RootReducer from '../reducers/index';
+import sagas from '../effects/index';
 const logger = createLogger();
-const store = createStore(RootReducer);
 function configureStore() {
-    return createStore(RootReducer, applyMiddleware(logger));
-   }
+    const store = createStore(RootReducer([]), compose(
+        applyMiddleware(sm, logger),
+    ));
+    sm.run(sagas);
+    return store;
+}
 
-
-module.exports =  configureStore;
+module.exports = configureStore;
 

@@ -3,14 +3,14 @@
 	"packOptions": {
 		"ignore": []
 	},
-  "cloudfunctionRoot": "./functions/",
+	"cloudfunctionRoot": "functions/",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"nodeModules": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"uglifyFileName": false
 	},

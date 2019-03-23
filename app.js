@@ -3,15 +3,11 @@
 wx.cloud.init();
 import {
   Provider
-
 } from './libs/wechat-weapp-redux';
 const configureStore = require('./store/store.js');
 const store = configureStore();
-// console.log(store);
-// console.log(store.getState());
 App(Provider(store)({
   onShow: function(options) {
-
   },
 
   login: function() {

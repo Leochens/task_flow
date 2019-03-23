@@ -9,9 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.4.0",
     "miniprogram-datepicker": "^0.3.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2",
+    "regenerator-runtime": "^0.13.2",
     "wechat-weapp-redux": "^0.1.3"
   }
 }

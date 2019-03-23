@@ -1,7 +1,7 @@
 //index.js
 import {
   bindActionCreators
-} from 'redux';
+} from '../../libs/redux';
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
@@ -54,7 +54,6 @@ const page = {
       }
     }]
   },
-
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -167,12 +166,12 @@ const page = {
   },
   //事件处理函数
   onLoad: function() {
-    this.getSetting();
-    const hasAuth = wx.getStorageSync("HASAUTH");
-    console.log(hasAuth);
-    this.setData({
-      hasAuth
-    });
+    // this.getSetting();
+    // const hasAuth = wx.getStorageSync("HASAUTH");
+    // console.log(hasAuth);
+    // this.setData({
+    //   hasAuth
+    // });
   },
   // 用户分享
   onShareAppMessage: function(res) {
@@ -192,13 +191,11 @@ const page = {
 
 const mapStateToData = (state, options) => {
   return {
-    v:state.v
+
   };
 }
 const mapDispatchToPage = dispatch => ({
-  setVisibilityFilter: filter => dispatch(setVisibilityFilter(filter)),
-  toggleTodo: id => dispatch(toggleTodo(id)),
-  addTodo: text => dispatch(addTodo(text)),
+
 })
-const _page = connect(mapStateToData)(page);
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);
