@@ -1,8 +1,8 @@
 
-import Redux from '../../../libs/redux';
+import {combineReducers} from '../../../libs/redux';
 
 import ids from './ids';
 
-export default (resource) => Redux.combineReducers({
+export default (resource) => combineReducers({
     ids: ids(resource)
 });

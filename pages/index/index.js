@@ -11,6 +11,7 @@ const MENU = {
   FAVOR: "2",
   COMPLETED: "3"
 }
+import { fetchProjects} from '../../actions/index';
 //获取应用实例
 const app = getApp()
 const page = {
@@ -54,6 +55,7 @@ const page = {
       }
     }]
   },
+
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -172,6 +174,8 @@ const page = {
     // this.setData({
     //   hasAuth
     // });
+    this.fetchProjects();
+   
   },
   // 用户分享
   onShareAppMessage: function(res) {
@@ -195,7 +199,7 @@ const mapStateToData = (state, options) => {
   };
 }
 const mapDispatchToPage = dispatch => ({
-
+  fetchProjects: () => dispatch(fetchProjects())
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

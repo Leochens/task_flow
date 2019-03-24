@@ -8,7 +8,7 @@ export default resource => (previousState = [], { type, payload, requestPayload,
         case CRUD_CREATE_SUCCESS:
         return [payload.id, ...previousState];
     case CRUD_GET_LIST_SUCCESS:
-        return payload.data.map(record => record.id);
+        return (payload.data?payload.data:payload).map(record => record.id);
     case CRUD_DELETE_SUCCESS: {
         const index = previousState.findIndex(el => el == requestPayload.id); // eslint-disable-line eqeqeq
         if (index === -1) {

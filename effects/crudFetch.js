@@ -1,5 +1,5 @@
 
-import {effects} from '../libs/redux-saga';
+import { effects } from '../libs/redux-saga';
 import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
 import {
   FETCH_START,
@@ -8,16 +8,16 @@ import {
   FETCH_CANCEL,
 } from '../actions/fetchActions';
 
-const {takeEvery, takeLatest, put, call, cancelled, select} = effects;
+const { takeEvery, takeLatest, put, call, cancelled, select } = effects;
 
 const crudFetch = (restClient, successSideEffects = () => [], failureSideEffects = () => []) => {
-  function *handleFetch(action) {
-    const {type, payload, meta} = action;
+  function* handleFetch(action) {
+    const { type, payload, meta } = action;
     const restType = meta.fetch;
     delete meta.fetch;
     yield [
-      put({type: `${type}_LOADING`, payload, meta}),
-      put({type: FETCH_START}),
+      put({ type: `${type}_LOADING`, payload, meta }),
+      put({ type: FETCH_START }),
     ];
     let response;
     try {
@@ -31,7 +31,7 @@ const crudFetch = (restClient, successSideEffects = () => [], failureSideEffects
           meta,
         }),
         ...successSideEffects(type, meta.resource, payload, response).map(a => put(a)),
-        put({type: FETCH_END}),
+        put({ type: FETCH_END }),
       ];
     } catch (error) {
       yield [
@@ -42,17 +42,17 @@ const crudFetch = (restClient, successSideEffects = () => [], failureSideEffects
           meta,
         }),
         ...failureSideEffects(type, meta.resource, payload, error).map(a => put(a)),
-        put({type: FETCH_ERROR}),
+        put({ type: FETCH_ERROR }),
       ];
     } finally {
       if (yield cancelled()) {
-        yield put({type: FETCH_CANCEL});
+        yield put({ type: FETCH_CANCEL });
         return; /* eslint no-unsafe-finally:0 */
       }
     }
   }
 
-  return function *watchCrudFetch() {
+  return function* watchCrudFetch() {
     yield [
       // 只监听最新的action
       takeLatest(action => action.meta && action.meta.fetch && action.meta.cancelPrevious, handleFetch),

@@ -1,7 +1,7 @@
-import {combineReducers} from '../libs/redux';
+import { combineReducers } from '../libs/redux';
 import auth from './auth'
 // import resourceReducer from './resourceReducers/index'
-const resourceReducer = require('./resource/index.js').default;
+const resourceReducer = require('./resource/index').default;
 // import pages from './pages/index'
 // import todos from './todos'
 // import rehydrated from './rehydrated'

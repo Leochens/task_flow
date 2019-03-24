@@ -1,5 +1,5 @@
 import {FETCH_START, FETCH_END, FETCH_ERROR} from '../actions/fetchActions'
-import {effects} from '../libs/redux';
+import {effects} from '../libs/redux-saga';
 import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
 
 const {takeEvery} = effects;

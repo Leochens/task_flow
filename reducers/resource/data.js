@@ -75,7 +75,7 @@ import {
     }
     switch (type) {
       case CRUD_GET_LIST_SUCCESS:
-        return addRecords(payload.data, previousState);
+        return addRecords(payload.data?payload.data:payload, previousState);
       case CRUD_UPDATE: // replace record in edit form with edited one to avoid displaying previous record version
         return addRecords([{...previousState[payload.data.id], ...payload.data}], previousState);
       case CRUD_GET_ONE_SUCCESS:

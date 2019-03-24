@@ -9,7 +9,7 @@ import RootReducer from '../reducers/index';
 import sagas from '../effects/index';
 const logger = createLogger();
 function configureStore() {
-    const store = createStore(RootReducer([]), compose(
+    const store = createStore(RootReducer([{name: "task-flows"},{name: "users"},{name:'projects'}]), compose(
         applyMiddleware(sm, logger),
     ));
     sm.run(sagas);
