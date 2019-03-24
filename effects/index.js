@@ -4,9 +4,6 @@ import appConfig from '../appConfig';
 import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
 
 import simpleRestClient from '../rest/simple';
-
-// import { watchAddTodo } from './projectTodoCount'
-// import { watchFetchLoading } from './navBarLoading'
 import { watchShowNotification } from './hideNotification'
 import failure from './failure'
 import {
@@ -21,8 +18,6 @@ const restClient = simpleRestClient(appConfig.apiBaseUrl)
 const successSideEffects = () => [];
 const failureSideEffects = failure;
 function* handleFetch(action) {
-
-
   const { type, payload, meta } = action;
   const restType = meta.fetch;
   delete meta.fetch;
@@ -70,8 +65,6 @@ function* handleFetch(action) {
 // const { fork } = effects;
 
 export default function* root() {
-
-
   yield takeEvery(action => action.meta && action.meta.fetch && !action.meta.cancelPrevious, handleFetch);
   yield takeLatest(action => action.meta && action.meta.fetch && action.meta.cancelPrevious, handleFetch);
   // yield watchAddTodo()

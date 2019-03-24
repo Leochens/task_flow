@@ -6,7 +6,10 @@ export const updateTodo = (id, data) => (crudUpdate('todos', id, {...data, id}))
 
 export const addProject = (name) => (crudCreate('projects', {name}));
 export const fetchProjects = () => (crudGetList('projects'));
+export const fetchUsers= () => (crudGetList('users'));
+export const fetchTasks = () => (crudGetList('tasks'));
+export const fetchTaskFlows = () => (crudGetList('taskFlows'));
+
+
 // export const fetchTest = () => (crudGetList('test'));
-
-
 // export const test = () => (crudGetList())

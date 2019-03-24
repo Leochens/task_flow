@@ -21,6 +21,7 @@ export default (resources) => {
     auth,
     // pages,
     // rehydrated,
+    // users,
     notification
   });
 };

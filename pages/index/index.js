@@ -11,7 +11,7 @@ const MENU = {
   FAVOR: "2",
   COMPLETED: "3"
 }
-import { fetchProjects} from '../../actions/index';
+import { fetchProjects, fetchUsers, fetchTasks, fetchTaskFlows} from '../../actions/index';
 //获取应用实例
 const app = getApp()
 const page = {
@@ -30,30 +30,7 @@ const page = {
     scrollLeft: 0,
     height: app.globalData.height * 6,
     filterTaskFlowList: [],
-    taskFlowList: [{
-      "taskID": "000239",
-      "taskName": "情人节活动",
-      "leader": {
-        "openID": "fjhegfakdbajksbfsjfhsvfafs",
-        "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132",
-        "city": "Baoding",
-        "country": "China",
-        "gender": 1,
-        "language": "zh_CN",
-        "nickName": "Ryan Hardy",
-        "province": "Hebei",
-        "phoneNumber": "18332518328"
-      },
-      "describe": "情人节就要到了，公司准备举办一个情人节活动，具体包括给公司的情侣送花…",
-      "isCompleted": true,
-      "beginDate": "2019.2.5",
-      "endDate": "2019.2.16",
-      "members": {
-        "sfafebge": "sfafebge",
-        "yawgfueferg": "sfafebge",
-        "112234": "sfafebge"
-      }
-    }]
+    taskFlowList: []
   },
 
   getUserInfo: function(e) {
@@ -165,16 +142,14 @@ const page = {
   },
   onShow: function() {
     console.log(this.data)
+
   },
   //事件处理函数
   onLoad: function() {
-    // this.getSetting();
-    // const hasAuth = wx.getStorageSync("HASAUTH");
-    // console.log(hasAuth);
-    // this.setData({
-    //   hasAuth
-    // });
     this.fetchProjects();
+    this.fetchUsers();
+    this.fetchTaskFlows();
+    this.fetchTasks(1)
    
   },
   // 用户分享
@@ -194,12 +169,17 @@ const page = {
 };
 
 const mapStateToData = (state, options) => {
-  return {
 
+  return {
+    taskFlowList: state.taskFlows.list.ids.map(id=>state.taskFlows.data[id]),
+    tasks: state.tasks
   };
 }
 const mapDispatchToPage = dispatch => ({
-  fetchProjects: () => dispatch(fetchProjects())
+  fetchProjects: () => dispatch(fetchProjects()),
+  fetchUsers: () => dispatch(fetchUsers()),
+  fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),
+  fetchTaskFlows: uid => dispatch(fetchTaskFlows(uid))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

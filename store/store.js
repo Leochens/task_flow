@@ -4,12 +4,11 @@ import devTools from '../libs/remote-redux-devtools';
 import createSagaMiddleware, { effects } from '../libs/redux-saga';
 import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
 const sm = createSagaMiddleware();
-console.log(sm)
 import RootReducer from '../reducers/index';
 import sagas from '../effects/index';
 const logger = createLogger();
 function configureStore() {
-    const store = createStore(RootReducer([{name: "task-flows"},{name: "users"},{name:'projects'}]), compose(
+    const store = createStore(RootReducer([{name: "taskFlows"},{name: "users"},{name:'projects'},{name:"tasks"},{name:"test"}]), compose(
         applyMiddleware(sm, logger),
     ));
     sm.run(sagas);

@@ -14,7 +14,7 @@ export const CRUD_GET_LIST_SUCCESS = 'CRUD_GET_LIST_SUCCESS';
 export const crudGetList = (resource, pagination, sort, filter, basePath, meta) => ({
     type: CRUD_GET_LIST,
     payload: { pagination, sort, filter, basePath },
-    meta: { resource, fetch: GET_LIST, cancelPrevious: true, ...meta },
+    meta: { resource, fetch: GET_LIST, cancelPrevious: false, ...meta },
 });
 
 export const CRUD_GET_ONE = 'CRUD_GET_ONE';
