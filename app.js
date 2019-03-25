@@ -16,31 +16,32 @@ App(Provider(store)({
     wx.login({
       success: res => {
         // 获得code 向服务端换取openId和sessionKey存储到缓存里
-        wx.cloud.callFunction({
-          name: "getSessionKey",
-          data: {
-            code: res.code
-          },
-          success: function(res) {
-            console.log("登录成功 换取sessionKey成功", res);
-            const data = res.result
-            // 把 SessionId 和过期时间放在内存中的全局对象和本地缓存里边
-            that.globalData.sessionId = data.session_key
-            that.globalData.openId = data.openid
-            wx.setStorageSync('SESSIONID', data.session_key);
-            wx.setStorageSync('OPENID', data.openid);
-            // 假设登录态保持7天
-            const expiredTime = +new Date() + 1 * 24 * 60 * 60 * 1000 * 7;
-            that.globalData.expiredTime = expiredTime
-            wx.setStorageSync('EXPIREDTIME', expiredTime);
-            that.globalData.isLogin = true
+        console.log(res.code)
+        // wx.cloud.callFunction({
+        //   name: "getSessionKey",
+        //   data: {
+        //     code: res.code
+        //   },
+        //   success: function(res) {
+        //     console.log("登录成功 换取sessionKey成功", res);
+        //     const data = res.result
+        //     // 把 SessionId 和过期时间放在内存中的全局对象和本地缓存里边
+        //     that.globalData.sessionId = data.session_key
+        //     that.globalData.openId = data.openid
+        //     wx.setStorageSync('SESSIONID', data.session_key);
+        //     wx.setStorageSync('OPENID', data.openid);
+        //     // 假设登录态保持7天
+        //     const expiredTime = +new Date() + 1 * 24 * 60 * 60 * 1000 * 7;
+        //     that.globalData.expiredTime = expiredTime
+        //     wx.setStorageSync('EXPIREDTIME', expiredTime);
+        //     that.globalData.isLogin = true
 
-            console.log("写入sessionId到缓存成功");
-          },
-          fail: function(err) {
-            console.log("换取失败", err);
-          }
-        })
+        //     console.log("写入sessionId到缓存成功");
+        //   },
+        //   fail: function(err) {
+        //     console.log("换取失败", err);
+        //   }
+        // })
       }
     })
   },

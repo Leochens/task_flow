@@ -29,7 +29,6 @@ function* handleFetch(action) {
 
   try {
     const auth = yield select(state => state.auth);
-    console.log("3333")
     response = yield call(restClient, restType, meta.resource, payload, auth);
     yield put({
       type: `${type}_SUCCESS`,
@@ -67,7 +66,5 @@ function* handleFetch(action) {
 export default function* root() {
   yield takeEvery(action => action.meta && action.meta.fetch && !action.meta.cancelPrevious, handleFetch);
   yield takeLatest(action => action.meta && action.meta.fetch && action.meta.cancelPrevious, handleFetch);
-  // yield watchAddTodo()
-  // yield watchFetchLoading();
   yield watchShowNotification();
 }
