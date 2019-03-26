@@ -63,10 +63,8 @@ App(Provider(store)({
   },
   onLaunch: function(options) {
     console.log("opts", options);
-
     // 1. 检查是否存有sessionKey和openId
     // 2. 若有 检查sessionKey是否过期
-    this.checkSeesion();
     const that = this;
     wx.getSystemInfo({
       success: function(e) {

@@ -1,5 +1,5 @@
 const base = {
-    apiBaseUrl: 'http://localhost:6789',
+    apiBaseUrl: 'http://localhost:8899',
   };
   
   let appConfig = base;

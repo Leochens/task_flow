@@ -12,6 +12,7 @@ const MENU = {
   COMPLETED: "3"
 }
 import { fetchProjects, fetchUsers, fetchTasks, fetchTaskFlows} from '../../actions/index';
+import {login} from '../../actions/auth';
 //获取应用实例
 const app = getApp()
 const page = {
@@ -144,12 +145,26 @@ const page = {
     console.log(this.data)
 
   },
+  _login: function(){
+
+    const that = this;
+    wx.login({
+      success:function(res){
+        console.log(res)
+        that.login(res.code);
+      },
+      fail: function(err){
+        console.log(err);
+      }
+    })
+  },
   //事件处理函数
   onLoad: function() {
+    this._login();
     this.fetchProjects();
-    this.fetchUsers();
+    // this.fetchUsers();
     this.fetchTaskFlows();
-    this.fetchTasks(1)
+    // this.fetchTasks(1)
    
   },
   // 用户分享
@@ -176,6 +191,7 @@ const mapStateToData = (state, options) => {
   };
 }
 const mapDispatchToPage = dispatch => ({
+  login: code => dispatch(login(code)),
   fetchProjects: () => dispatch(fetchProjects()),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),

@@ -10,15 +10,19 @@ export const fetchJson = (url, options = {}) => {
   if (options.auth && options.auth.authenticated && options.auth.token) {
     requestHeaders['Authorization'] = `Bearer ${options.auth.token}`;
   }
-
+  
   return new Promise((resolve, reject) => {
     wx.request({
       url,
       ...options,
       header: requestHeaders,
-      success: function ({ data, statusCode }) {
+      success: function ({ data, statusCode,header }) {
         if (statusCode < 200 || statusCode >= 300) {
           reject(new Error((data && data.message) || preDefinedError[statusCode] || '请求失败'));
+        }
+        var cookie = header["Set-Cookie"];
+        if (cookie != null) {
+          wx.setStorageSync("SID", header["Set-Cookie"]);
         }
         resolve({ data, statusCode });
       },
