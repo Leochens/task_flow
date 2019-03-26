@@ -11,8 +11,15 @@ const MENU = {
   FAVOR: "2",
   COMPLETED: "3"
 }
-import { fetchProjects, fetchUsers, fetchTasks, fetchTaskFlows} from '../../actions/index';
-import {login} from '../../actions/auth';
+import {
+  fetchProjects,
+  fetchUsers,
+  fetchTasks,
+  fetchTaskFlows
+} from '../../actions/index';
+import {
+  login
+} from '../../actions/auth';
 //获取应用实例
 const app = getApp()
 const page = {
@@ -145,27 +152,40 @@ const page = {
     console.log(this.data)
 
   },
-  _login: function(){
-
+  // 检测SID是否过期 过期后要重新登录
+  checkSID: function() {
+    const SID = wx.getStorageSync('SID');
+    const SID_EXPIRATION = wx.getStorageSync('SID_EXPIRATION')
+    const now = Date.parse(new Date());
+    if (SID && SID_EXPIRATION > now) { //存在SID并且没有过期
+      console.log("存在SID并且没有过期",SID);
+      return;
+    } else { // 不存在SID或SID已经过期 那么需要登录
+      this._login();
+      return;
+    }
+  },
+  _login: function() {
     const that = this;
     wx.login({
-      success:function(res){
+      success: function(res) {
         console.log(res)
         that.login(res.code);
       },
-      fail: function(err){
+      fail: function(err) {
         console.log(err);
       }
     })
   },
   //事件处理函数
   onLoad: function() {
-    this._login();
-    this.fetchProjects();
+    this.checkSID();
+    // this.fetchProjects();
+    this.fetchUsers();
     // this.fetchUsers();
-    this.fetchTaskFlows();
+    // this.fetchTaskFlows();
     // this.fetchTasks(1)
-   
+
   },
   // 用户分享
   onShareAppMessage: function(res) {
@@ -186,7 +206,7 @@ const page = {
 const mapStateToData = (state, options) => {
 
   return {
-    taskFlowList: state.taskFlows.list.ids.map(id=>state.taskFlows.data[id]),
+    taskFlowList: state.taskFlows.list.ids.map(id => state.taskFlows.data[id]),
     tasks: state.tasks
   };
 }

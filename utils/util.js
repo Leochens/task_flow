@@ -1,3 +1,5 @@
+import appConfig from '../appConfig';
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -16,6 +18,12 @@ const formatNumber = n => {
 
 
 
+
+const getExpiration = () => {
+  const timestamp = Date.parse(new Date());
+  const expiration = timestamp + appConfig.expiration;
+  return expiration;
+}
 
 
 module.exports = {

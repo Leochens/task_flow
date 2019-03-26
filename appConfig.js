@@ -1,10 +1,8 @@
-const base = {
-    apiBaseUrl: 'http://localhost:8899',
-  };
-  
-  let appConfig = base;
-  
-  // if (process.env.NODE_ENV == 'development') {
-  //   appConfig = {apiBaseUrl: "http://localhost:6789"};
-  // }
-  export default appConfig;
+const appConfig = {
+  apiBaseUrl: 'http://localhost:8899',
+  // apiBaseUrl: 'https://api.mokis.top',
+  expiration: 3000 * 60 * 60, //设置SID过期时间
+};
+
+
+export default appConfig;
