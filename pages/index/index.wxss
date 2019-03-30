@@ -191,3 +191,10 @@ page {
 .DrawerPage .cu-bar.tabbar .action {
   flex: initial;
 }
+
+.empty-list{
+  font-size: 30rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 100rpx;
+}

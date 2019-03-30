@@ -12,6 +12,7 @@ const auth = (state = {
   switch (action.type) {
     case CRUD_CREATE_SUCCESS:
       wx.setStorageSync("SID", action.payload.SID);
+      wx.setStorageSync("u_id", action.payload.u_id);
       wx.setStorageSync("SID_EXPIRATION", getExpiration()); // 设置过期时间
       return {
         authenticated: true,

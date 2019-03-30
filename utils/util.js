@@ -27,5 +27,6 @@ const getExpiration = () => {
 
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  getExpiration
 }

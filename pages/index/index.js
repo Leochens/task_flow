@@ -1,8 +1,5 @@
 //index.js
 import {
-  bindActionCreators
-} from '../../libs/redux';
-import {
   connect
 } from '../../libs/wechat-weapp-redux';
 const MENU = {
@@ -12,19 +9,18 @@ const MENU = {
   COMPLETED: "3"
 }
 import {
-  fetchProjects,
   fetchUsers,
   fetchTasks,
   fetchTaskFlows
 } from '../../actions/index';
 import {
-  login
+  login,
+  gotUserInfo
 } from '../../actions/auth';
 //获取应用实例
 const app = getApp()
 const page = {
   data: {
-    isLogin: false,
     hasAuth: false,
     currentIndex: 0,
     isClassify: false,
@@ -43,11 +39,18 @@ const page = {
 
   getUserInfo: function(e) {
     console.log(e)
+    if(!e.detail.userInfo){
+      console.log("用户拒绝授权");
+      return;
+    }
+    wx.setStorageSync('userInfo', e.detail.userInfo);
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
-    })
+    });
+    // 向后端发送userInfo
+    this.gotUserInfo(this.data.u_id, e.detail.userInfo);
   },
   menuTabSelect(e) {
 
@@ -60,7 +63,7 @@ const page = {
           console.log("切换已完成");
           this.setData({
             isFilter: this.data.isFilter ? MENU.NONE : MENU.COMPLETED,
-            filterTaskFlowList: this.data.taskFlowList.filter(item => item.isCompleted)
+            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed)
           });
           break;
         }
@@ -69,7 +72,7 @@ const page = {
           console.log("切换星标");
           this.setData({
             isFilter: this.data.isFilter ? MENU.NONE : MENU.FAVOR,
-            filterTaskFlowList: this.data.taskFlowList.filter(item => item.isCompleted)
+            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed)
           });
           break;
         }
@@ -158,7 +161,7 @@ const page = {
     const SID_EXPIRATION = wx.getStorageSync('SID_EXPIRATION')
     const now = Date.parse(new Date());
     if (SID && SID_EXPIRATION > now) { //存在SID并且没有过期
-      console.log("存在SID并且没有过期",SID);
+      console.log("存在SID并且没有过期", SID,now);
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
       this._login();
@@ -177,14 +180,24 @@ const page = {
       }
     })
   },
+  getUserInfoFromStorage: function(){
+    const userInfo = wx.getStorageSync('userInfo');
+    if(userInfo){
+      console.log("get ",userInfo);
+      this.setData({
+        userInfo,
+        hasUserInfo:true
+      })
+    }
+
+  },
   //事件处理函数
   onLoad: function() {
-    this.checkSID();
-    // this.fetchProjects();
-    this.fetchUsers();
+    this.checkSID(); 
+    this.getUserInfoFromStorage();
+    // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
     // this.fetchUsers();
-    // this.fetchTaskFlows();
-    // this.fetchTasks(1)
+    this.fetchTaskFlows(this.data.u_id)
 
   },
   // 用户分享
@@ -206,16 +219,16 @@ const page = {
 const mapStateToData = (state, options) => {
 
   return {
-    taskFlowList: state.taskFlows.list.ids.map(id => state.taskFlows.data[id]),
-    tasks: state.tasks
+    taskFlowList: state.task_flows.list.ids.map(id => state.task_flows.data[id]),
+    u_id: wx.getStorageSync('u_id')
   };
 }
 const mapDispatchToPage = dispatch => ({
   login: code => dispatch(login(code)),
-  fetchProjects: () => dispatch(fetchProjects()),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),
-  fetchTaskFlows: uid => dispatch(fetchTaskFlows(uid))
+  fetchTaskFlows: uid => dispatch(fetchTaskFlows(uid)),
+  gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

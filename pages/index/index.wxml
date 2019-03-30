@@ -1,10 +1,12 @@
+<import src="../template/notification.wxml" />
+<template is="notification" />
 <view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
   <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
       <view class="action text-center" style='width: 100rpx'>
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='cu-btn icon-my icon bg-green shadow'></button>
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" bindtap='getUserInfo' class='cu-btn icon-my icon bg-green shadow'></button>
         <block wx:else>
-          <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})" bindtap="showModal" data-target="viewModal"></view>
+          <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})" data-target="viewModal"></view>
         </block>
       </view>
       <!-- 样式1 -->
@@ -39,10 +41,13 @@
     </view>
   </view>
 </view>
-
 <view class='task-flows' style='margin-top:{{CustomBar}}px;'>
-
-  <task-flow-card wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
+  <view wx:if="{{filterTaskFlowList.length || taskFlowList.length}}">
+    <task-flow-card wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' />
+  </view>
+  <view wx:else>
+    <view class="empty-list">暂无数据</view>
+  </view>
 </view>
 <view class='hover-btn' bindtap='addNewTaskFlow'>
   <image src='../../assets/imgs/index/add_task.png'></image>
