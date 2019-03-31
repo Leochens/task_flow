@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-
-  }
+    "nav-bar":"../../common/nav_bar/nav_bar"
+  },
+  "navigationBarTextStyle": "black"
 }

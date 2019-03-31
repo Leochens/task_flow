@@ -1,15 +1,2 @@
 <!--pages/test/test.wxml-->
-<text>Hello World</text>
-
-<button open-type='getUserInfo' bindtap='info'>授权</button>
-<view>{{nickName}}</view>
-<view>{{str}}</view>
-<view>任务流ID{{taskID}}</view>
-<form report-submit='true' bindsubmit='onSubmit'>
-  <button form-type='submit'>发送任务通知</button>
-</form>
-<view>{{formId}}</view>
-<view>
-
-  
-</view>
+<nav-bar title="任务流详情"></nav-bar>
