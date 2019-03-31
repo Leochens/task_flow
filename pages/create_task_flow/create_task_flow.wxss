@@ -1,6 +1,6 @@
 /* pages/create_task_flow/create_task_flow.wxss */
 .wrap{
-
+  
 }
 .note-wrap{
     display: flex;

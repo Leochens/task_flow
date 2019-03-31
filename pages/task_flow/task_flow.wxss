@@ -1,5 +1,7 @@
 /* pages/task_flow/task_flow.wxss */
-
+page{
+    background-color: #fff;
+}
 .wrap{
     color: #666;
 }
@@ -7,7 +9,8 @@
 
 .task-flow-info{
     padding: 20rpx;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1rpx solid #ddd;
+
 
 }
 .task-flow-name{
@@ -35,9 +38,9 @@
 /*content*/
 
 .content{
-    position: absolute;
-    top: 126rpx;
-    bottom: 100rpx;
+    /* position: absolute;
+    top: 260rpx;
+    bottom: 100rpx; */
 
     overflow: scroll;
 }

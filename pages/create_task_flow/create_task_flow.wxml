@@ -1,5 +1,5 @@
 <nav-bar navbar-data="{{}}"/>
-<view class="wrap" style='{{}}'>
+<view class="wrap" style=''>
     <view class="note-wrap">
         <text class="note">创建任务流</text>
     </view>

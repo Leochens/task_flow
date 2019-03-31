@@ -1,49 +1,45 @@
 // pages/task_flow/task_flow.js
-Page({
+import {
+  connect
+} from '../../libs/wechat-weapp-redux';
+const app = getApp();
+
+const page = {
 
   /**
    * 页面的初始数据
    */
   data: {
-    taskList: [{
-      date: "2019.2.5",
-      taskName: "去市场采购玫瑰花",
-      execPeople: ["张小三", "李大四"],
-      status: true,
-      deadlineTime: "22:30",
-      detail: "张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。"
-    },
-    {
-      date: "2019.2.15",
-      taskName: "去市场采购玫瑰花",
-      execPeople: ["张小三", "李大四","王五"],
-      status: false,
-      deadlineTime: "22:30",
-      detail: "张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。"
-    },
-    {
-      date: "2019.2.5",
-      taskName: "去市场采购玫瑰花",
-      execPeople: ["张小三", "李大四"],
-      status: true,
-      deadlineTime: "22:30",
-      detail: "张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。"
-    },
-    {
-      date: "2019.2.5",
-      taskName: "去市场采购玫瑰花",
-      execPeople: ["张小三", "李大四"],
-      status: false,
-      deadlineTime: "22:30",
-      detail: "张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。"
-    }]
+    id: '',
+    tf_name: '',
+    tf_describe: '',
+    leader: {},
+    is_completed: false,
+    tasks: [],
+    begin_time: '',
+    end_time: '',
+    category: '',
+    members: [],
+    CustomBar: app.globalData.CustomBar,
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {  
+  onLoad: function (options) {
     wx.hideTabBar({});
+    const tf = options.tf;
+    if (!tf) return;
+    const _tf = JSON.parse(options.tf);
+    console.log(_tf);
+    const { id, tf_name, tf_describe, leader_id, is_completed, tasks, members, begin_time, end_time,
+      category } = _tf;
+
+    this.setData({
+      id,tf_describe,tf_name,is_completed,tasks,begin_time,end_time,category,members,
+      leader: members.filter(mem=>mem.id === leader_id)[0]
+    })
   },
 
   /**
@@ -94,4 +90,18 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+};
+
+const mapStateToData = state => {
+  return {
+
+  }
+}
+
+const mapDispatchToPage = dispatch => {
+  return {
+
+  }
+}
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
+Page(_page)

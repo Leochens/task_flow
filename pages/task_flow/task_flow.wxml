@@ -1,39 +1,46 @@
 <!-- pages/task_flow/task_flow.wxml -->
-<view class='wrap'>
+<nav-bar></nav-bar>
+<view class='wrap' style='margin-top:{{CustomBar}}px'>
   <view class='task-flow-info'>
     <view class="task-flow-name">
-      情人节活动
+      {{tf_name}}
       <image src="../../assets/imgs/task_flow/edit.svg" />
     </view>
     <view class="else">
-      <view class="task-flow-date">2019.2.5~2019.2.16</view>
-      <view class="task-flow-leader">负责人:RyanHardy</view>
+      <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
+      <view class="task-flow-leader">负责人:{{leader.nick_name}}</view>
     </view>
   </view>
   <view class='content'>
     <view class="child-task-list">
       <view class="line"></view>
-      <view wx:for="{{taskList}}" wx:key="{{index}}" class="item">
+      <view wx:for="{{tasks}}" wx:key="{{index}}" class="item">
         <view class="dot-wrap">
-          <view class="dot {{item.status?'ok':''}}"></view>
-          <view class="date">{{item.date}}</view>
+          <view class="dot {{item.is_completed?'ok':''}}"></view>
+          <view class="date">{{item.begin_time}}</view>
         </view>
         <view class="task-card">
           <view class="task-title">
             <view class="title-wrap">
-              <view class="task-name">{{item.taskName}}</view>
+              <view class="task-name">{{item.t_name}}</view>
               <view class="task-member-count">
                 <image src="../../assets/imgs/task_flow/member.svg" />
-                {{item.execPeople.length}}
+                {{item.members.length}}
               </view>
             </view>
             <image class="task-status " src="../../assets/imgs/task_flow/check{{item.status?'_ok':''}}.svg" />
           </view>
           <view class="task-info">
-            <view class="exec-perple">执行人:{{item.execPeople}}</view>
-            <view class="deadline-time">截止到{{item.deadlineTime}}</view>
+            <view class="exec-perple">
+              执行人:
+              <text wx:for="{{item.members}}" 
+              wx:for-item="it" 
+              wx:for-index="id" 
+              wx:key="id">{{it.nick_name}}</text>
+            </view>
+            <view class="deadline-time">截止到{{item.end_time}}</view>
           </view>
-          <view class="task-describe">{{item.detail}}</view>
+          <view class="task-describe">{{item.t_describe}}</view>
         </view>
       </view>
     </view>

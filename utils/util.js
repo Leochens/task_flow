@@ -17,7 +17,13 @@ const formatNumber = n => {
 }
 
 
-
+const formatDate = utcDate => {
+  if(typeof utcDate != 'string') return ;
+  const strs = utcDate.split('T');
+  const [date,_time] = strs;
+  const time = _time.split('.')[0];
+  return `${date} ${time}`;
+}
 
 const getExpiration = () => {
   const timestamp = Date.parse(new Date());
@@ -28,5 +34,6 @@ const getExpiration = () => {
 
 module.exports = {
   formatTime: formatTime,
-  getExpiration
+  getExpiration,
+  formatDate
 }

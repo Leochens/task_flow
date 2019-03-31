@@ -1,0 +1,8 @@
+/* common/nav_bar/nav_bar.wxss */
+
+.wrap{
+  border: 1rpx solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;right: 0;
+}

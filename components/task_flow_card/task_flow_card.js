@@ -17,10 +17,10 @@ Component({
   },
   ready:function(){
     const tf = this.properties.taskFlowData;
-    const leader = tf.member.filter(mem => mem.id === tf.leader_id)[0];
+    const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
     console.log(leader);
     this.setData({
-      count: tf.member.length,
+      count: tf.members.length,
       leader
     })
   },

@@ -2,18 +2,18 @@
 import { CRUD_GET_LIST_SUCCESS } from '../../actions/dataActions';
 
 const range = ['task_flows'];
-const tasks = (state = {}, action) => {
+const task_flows = (state = [], action) => {
     const { type, payload, requestPayload, meta } = action;
 
     switch (type) {
-        case CRUD_GET_LIST_SUCCESS:{
-            if(!range.includes(meta.resource)) return state;
-            return {
+        case CRUD_GET_LIST_SUCCESS: {
+            if (!range.includes(meta.resource)) return state;
+            return [
                 ...state,
-                ...payload.entities.tasks
-            }
+                ...payload.result
+            ]
         }
-        default : return state;
+        default: return state;
     }
 }
-export default tasks;
+export default task_flows;

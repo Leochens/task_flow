@@ -97,9 +97,13 @@ const page = {
       isClassify: which == 0 ? false : true
     })
   },
-  toTaskFlowDetail: function() {
+  toTaskFlowDetail: function(e) {
+    // console.log(e);
+    const tf_id = e.target.dataset.tfid;
+    const tf=this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
     wx.navigateTo({
-      url: '../task_flow/task_flow',
+      url: '../task_flow/task_flow?tf='+JSON.stringify(tf),
+      
       success: function(res) {
         console.log(res);
       },
@@ -217,9 +221,27 @@ const page = {
 };
 
 const mapStateToData = (state, options) => {
-
+  const ids = {...state.ids};
+  const entities = {...state.entities};
+  // 组装一个完整的tf列表
+  const _taskFlowList = ids.task_flows.map(id=>entities.task_flows[id]);
+  const taskFlowList = _taskFlowList.map(item=>{
+    const {members,tasks} = item;
+    let _item = {...item};
+    _item.members = members.map(mid=>entities.members[mid]);
+    _item.tasks = tasks.map(tid=>entities.tasks[tid]);
+    _item.tasks = _item.tasks.map(t=>{
+      const _t = {...t};
+      const memIds = _t.members; 
+      const mems = memIds.map(mid => entities.members[mid]);
+      _t.members = mems;
+      return _t;
+    })
+    console.log(_item);
+    return _item;
+  });
   return {
-    taskFlowList: state.task_flows.list.ids.map(id => state.task_flows.data[id]),
+    taskFlowList,
     u_id: wx.getStorageSync('u_id')
   };
 }

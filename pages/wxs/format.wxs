@@ -1,0 +1,28 @@
+
+var formatDateTime = function (utcDate) {
+  if (typeof utcDate != 'string') return '';
+  const strs = utcDate.split('T');
+  const date = strs[0];
+  const _time = strs[1];
+  const time = _time.split('.')[0];
+  return date + " " + time;
+}
+var formatDate = function (utcDate) {
+  if (typeof utcDate != 'string') return '?';
+  const strs = utcDate.split('T');
+  const date = strs[0];
+  console.log('????',date);
+  return date;
+}
+var formatTime = function (utcDate) {
+  if (typeof utcDate != 'string') return '';
+  const strs = utcDate.split('T');
+  const _time = strs[1];
+  const time = _time.split('.')[0];
+  return time;
+}
+module.exports = {
+  formatDate: formatDate,
+  formatDateTime: formatDateTime,
+  formatTime: formatTime
+}
