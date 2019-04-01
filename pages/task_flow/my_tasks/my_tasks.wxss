@@ -1,1 +1,121 @@
 /* pages/task_flow/my_tasks/my_tasks.wxss */
+.wrap{
+    width: 85vw;
+    margin: auto;
+    font-size: 24rpx;
+    color: #333;
+
+}
+.title-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.title-wrap .block{
+    width: 33.33%;
+}
+.tf-name,.date{
+    text-align: center;
+    font-size: 20rpx;
+}
+.tf-name{
+    font-size: 40rpx;
+}
+.person{
+    text-align: right;
+}
+.tasks{
+    margin-top: 30rpx;
+    height: 80vh;
+    overflow: auto;
+}
+.tasks .item{
+    border: 1rpx solid #eee;
+    border-radius: 8rpx;
+    padding: 10rpx 20rpx;
+    box-sizing: border-box;
+    margin: 20rpx 0;
+    color: #666;
+}
+.tasks .item .b1,
+.tasks .item .b2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 30rpx;
+
+}
+.tasks .item .b1 .name{
+    margin-right: 20rpx;
+    color: #333;
+}
+.tasks .item .b1 image{
+    width: 20rpx;
+    height: 20rpx;
+    margin-right: 10rpx;
+}
+.tasks .item .b2 {
+    font-size: 24rpx;
+}
+.tasks .item .b2 .exec-people{
+    margin-right: 20rpx;
+}
+.tasks .item .t-describe{
+    margin: 20rpx 0;
+    font-size: 24rpx;
+}
+
+.btn-group{
+    border-top: 1rpx solid #eee;
+    padding-top: 20rpx;
+    margin-top: 20rpx;
+
+}
+.btn-group .btn{
+    border-radius: 8rpx;
+    background-color: #2967AF;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    font-weight: bold;
+    width: 110rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    display: inline-block;
+    margin-right: 20rpx;
+}
+.btn.finished{
+    background-color: #ddd;
+}
+.btn.breaked{
+    background-color: #DBCC19;
+}
+.btn.break{
+    background-color: #2AC434;
+}
+
+
+.hide{
+    display: none;
+}
+.break-reason{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.break-reason input{
+    width: 65vw;
+    display: inline-block;
+    border: 1rpx solid #eee;
+    border-radius: 8rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    padding-left: 10rpx;
+    transition: all .3s ease-in-out;
+
+}
+.break-reason input:hover{
+    border-color: #2967AF;
+    border-width: 2rpx;
+}

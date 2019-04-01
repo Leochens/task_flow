@@ -1,2 +1,141 @@
-<!--pages/task_flow/my_tasks/my_tasks.wxml-->
-<text>pages/task_flow/my_tasks/my_tasks.wxml</text>
+<!-- pages/task_flow/my_tasks/my_tasks.wxml -->
+<nav-bar title="我的任务" />
+<view class="wrap">
+    <view class="title-wrap">
+        <view class="block"></view>
+        <view class="block">
+            <view class="tf-name">情人节活动</view>
+            <view class="date">2019-02-01~2019-2-18</view>
+        </view>
+        <view class="block">
+            <view class="person">负责人:RyanHardy</view>
+            <view class="person">任务人:张小三</view>
+        </view>
+    </view>
+    <view class="tasks">
+        <view class="item">
+            <view class="b1">
+                <view class="name">去市场采购玫瑰花</view>
+                <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
+                2
+            </view>
+            <view class="b2">
+                <view class="exec-people">执行人: 李大四,张小三</view>
+                <view class="deadline">截止到:2019-2-16 12:34:22</view>
+            </view>
+            <view class="t-describe">
+                张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。
+            </view>
+            <view class="btn-group">
+                <view class="btn">完成</view>
+                <view class="btn break">请假</view>
+                <!-- <view class="btn finished">已完成</view> -->
+                <!-- <view class="btn finished">请假中</view> -->
+                <!-- <view class="btn breaked">已请假</view> -->
+                <!-- <view class="break-reason">
+                    <input placeholder="请输入请假理由" />
+                    <view class="btn">申请</view>
+                </view> -->
+            </view>
+        </view>
+        <view class="item">
+            <view class="b1">
+                <view class="name">去市场采购玫瑰花</view>
+                <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
+                2
+            </view>
+            <view class="b2">
+                <view class="exec-people">执行人: 李大四,张小三</view>
+                <view class="deadline">截止到:2019-2-16 12:34:22</view>
+            </view>
+            <view class="t-describe">
+                张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。
+            </view>
+            <view class="btn-group">
+                <!-- <view class="btn" >完成</view> -->
+                <!-- <view class="btn break">请假</view> -->
+                <view class="btn finished">已完成</view>
+                <!-- <view class="btn finished">请假中</view> -->
+                <!-- <view class="btn breaked">已请假</view> -->
+                <!-- <view class="break-reason">
+                    <input placeholder="请输入请假理由" />
+                    <view class="btn">申请</view>
+                </view> -->
+            </view>
+        </view>
+        <view class="item">
+            <view class="b1">
+                <view class="name">去市场采购玫瑰花</view>
+                <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
+                2
+            </view>
+            <view class="b2">
+                <view class="exec-people">执行人: 李大四,张小三</view>
+                <view class="deadline">截止到:2019-2-16 12:34:22</view>
+            </view>
+            <view class="t-describe">
+                张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。
+            </view>
+            <view class="btn-group">
+                <!-- <view class="btn" >完成</view> -->
+                <!-- <view class="btn break">请假</view> -->
+                <!-- <view class="btn finished">已完成</view> -->
+                <view class="btn finished">请假中</view>
+                <!-- <view class="btn breaked">已请假</view> -->
+                <!-- <view class="break-reason">
+                    <input placeholder="请输入请假理由" />
+                    <view class="btn">申请</view>
+                </view> -->
+            </view>
+        </view>
+        <view class="item">
+            <view class="b1">
+                <view class="name">去市场采购玫瑰花</view>
+                <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
+                2
+            </view>
+            <view class="b2">
+                <view class="exec-people">执行人: 李大四,张小三</view>
+                <view class="deadline">截止到:2019-2-16 12:34:22</view>
+            </view>
+            <view class="t-describe">
+                张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。
+            </view>
+            <view class="btn-group">
+                <!-- <view class="btn" >完成</view> -->
+                <!-- <view class="btn break">请假</view> -->
+                <!-- <view class="btn finished">已完成</view> -->
+                <!-- <view class="btn finished">请假中</view> -->
+                <view class="btn breaked">已请假</view>
+                <!-- <view class="break-reason">
+                    <input placeholder="请输入请假理由" />
+                    <view class="btn">申请</view>
+                </view> -->
+            </view>
+        </view>
+                <view class="item">
+            <view class="b1">
+                <view class="name">去市场采购玫瑰花</view>
+                <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />2
+            </view>
+            <view class="b2">
+                <view class="exec-people">执行人: 李大四,张小三</view>
+                <view class="deadline">截止到:2019-2-16 12:34:22</view>
+            </view>
+            <view class="t-describe">
+                张小三和李大四，在13日下午去公司附近的花鸟鱼虫市场采购情人节当天要用的玫瑰花，采购完成后放到公司大厅。记得留存发票。
+            </view>
+            <view class="btn-group">
+                <!-- <view class="btn" >完成</view> -->
+                <!-- <view class="btn break">请假</view> -->
+                <!-- <view class="btn finished">已完成</view> -->
+                <!-- <view class="btn finished">请假中</view> -->
+                <!-- <view class="btn breaked">已请假</view> -->
+                <view class="break-reason">
+                    <input placeholder="请输入请假理由" />
+                    <view class="btn">申请</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
