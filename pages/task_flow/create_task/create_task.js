@@ -1,66 +1,57 @@
 // pages/task_flow/create_task/create_task.js
+import {
+  compareDate,
+  formatTime
+} from '../../../utils/util';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    beginDate: formatTime(new Date()),
+    endDate: formatTime(new Date())
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  bindBeginDateChange: function (e) {
+    const {
+      beginDate: oldBegindate,
+      endDate
+    } = this.data;
+    const beginDate = e.detail;
+    console.log("beginDate", e.detail);
+    if (compareDate(beginDate, endDate)) {
+      wx.showModal({
+        title: '日期选择有误',
+        content: '开始日期不能比结束日期大',
+      });
+      this.setData({
+        beginDate: oldBegindate
+      })
+      return false
+    };
+    this.setData({
+      beginDate
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  bindEndDateChange: function (e) {
+    const endDate = e.detail;
+    const {
+      endDate: oldEndDate,
+      beginDate
+    } = this.data;
+    console.log("endDate", e.detail);
+    if (compareDate(beginDate, endDate)) {
+      wx.showModal({
+        title: '日期选择有误',
+        content: '结束日期不能比开始日期小',
+      })
+      this.setData({
+        endDate: oldEndDate
+      })
+      return false;
+    }
+    this.setData({
+      endDate
+    })
   }
 })

@@ -11,11 +11,11 @@
 </view>
 <view class='rh-form-item'>
   <label class='rh-lable'>开始时间</label>
-  <input class='rh-input'></input>
+  <date-time-picker value="{{beginDate}}" bind:onChange='bindBeginDateChange'/>
 </view>
 <view class='rh-form-item'>
   <label class='rh-lable'>结束时间</label>
-  <input class='rh-input'></input>
+  <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange'/>
 </view>
 <view class='rh-form-item'>
   <label class='rh-lable'>选择任务人</label>

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "nav-bar":"../../../common/nav_bar/nav_bar"
+    "nav-bar":"../../../common/nav_bar/nav_bar",
+    "date-time-picker":"../../../components/date_time_picker/date_time_picker"
   }
 }
