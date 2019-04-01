@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/task_flow/create_task/select_member/select_member",
+    "pages/index/index",
     "pages/task_flow/create_task/create_task",
     "pages/create_task_flow/create_task_flow",
     "pages/test/test",
     "pages/invite/invite",
-    "pages/index/index",
     "pages/task_flow/task_flow",
     "pages/logs/logs",
     "pages/auth/auth",
@@ -14,7 +15,6 @@
     "pages/task/task",
     "pages/me/me",
     "pages/message/message",
-    "pages/task_flow/create_task/select_member/select_member",
     "pages/task/comments/comments",
     "pages/task_flow/my_tasks/my_tasks",
     "pages/settings/settings",

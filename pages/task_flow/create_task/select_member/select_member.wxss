@@ -1,1 +1,70 @@
 /* pages/task_flow/create_task/select_member/select_member.wxss */
+
+.members {
+  position: absolute;
+  width: 90%;
+  margin: 20rpx 5%;
+  height: 75vh;
+  overflow: auto;
+}
+
+.member-item {
+  width: 20%;
+  display: inline-block;
+  padding: 10rpx 0;
+  color: #666;
+  font-size: 28rpx;
+}
+
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  display: block;
+  margin: auto;
+  border-radius: 8rpx;
+  position: relative;
+}
+
+.member-name {
+  margin-top: 10rpx;
+  text-align: center;
+}
+.member-item.selected{
+  color: #2665AE;
+  font-weight: bold;
+}
+.member-item.selected .avatar::before {
+  content: '已选';
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  line-height: 120rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.bottom-wrap{
+  position: absolute;
+  bottom: 1vh;
+  width: 90%;
+  margin: 0 5%;
+  border-top: 1rpx solid #ddd;
+}
+
+.bottom-wrap .ok-btn{
+  width: 80%;
+  height: 94rpx;
+  background-color: #2665AE;
+  border-radius: 8rpx;
+  line-height: 94rpx;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  margin:30rpx auto;
+
+}

@@ -1,2 +1,263 @@
-<!--pages/task_flow/create_task/select_member/select_member.wxml-->
-<text>pages/task_flow/create_task/select_member/select_member.wxml</text>
+<!-- pages/task_flow/create_task/select_member/select_member.wxml -->
+<nav-bar title="选择任务人"></nav-bar>
+<view class="members">
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+    <view class="member-item selected">
+        <image class="avatar" src="https://t12.baidu.com/it/u=2126351807,3022701237&fm=76" />
+        <view class="member-name">张小三</view>
+    </view>
+</view>
+<view class="bottom-wrap">
+    <view class="ok-btn">完成选择</view>
+</view>

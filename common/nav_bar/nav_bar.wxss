@@ -3,6 +3,7 @@
 .wrap{
   /* border: 1rpx solid #ddd; */
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;right: 0;
   display: flex;
@@ -10,6 +11,7 @@
   color: #666;
   font-weight: bolder;
   font-size: 30rpx;
+  background-color: #fff;
 }
 .back_icon{
   display: inline-block;
