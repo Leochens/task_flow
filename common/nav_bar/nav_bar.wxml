@@ -1,4 +1,5 @@
 <!--common/nav_bar/nav_bar.wxml-->
-<view class='wrap' style='height:{{CustomBar}}px;padding-top:{{StatusBar}}px;line-height: {{CustomBar-StatusBar}}px'>
-    <image bindtap='back' class='back_icon' style="height:{{CustomBar-StatusBar}}px;width:30px;"  src='./back.svg'/>{{title}}
+<view style='height:{{CustomBar}}px'></view>
+<view wx:if="{{!blank}}" class='wrap' style='height:{{CustomBar}}px;padding-top:{{StatusBar}}px;line-height: {{CustomBar-StatusBar}}px'>
+    <image  bindtap='back' class='back_icon' style="height:{{CustomBar-StatusBar}}px;width:30px;"  src='./back.svg'/>{{title}}
 </view>

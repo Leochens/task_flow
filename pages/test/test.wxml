@@ -1,2 +1,3 @@
-<!--pages/test/test.wxml-->
+<!-- pages/test/test.wxml -->
 <nav-bar title="任务流详情"></nav-bar>
+<date-time-picker bind:onChange='onGetV'/>

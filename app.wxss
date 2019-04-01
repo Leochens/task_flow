@@ -1,6 +1,6 @@
 @import "icon.wxss";
 @import "colorui.wxss";
-
+ 
 .cu-modal.show {
   z-index: 99999;
 }
@@ -166,4 +166,38 @@
 
 .notification-content icon {
   margin-right: 12px;
+}
+
+
+
+
+.rh-form{
+  width: 70%;
+  margin:auto;
+  color: #333;
+}
+.rh-form-item{
+margin: 20rpx 0;
+}
+.rh-input{
+  font-size: 28rpx;
+  height: 65rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  line-height: 65rpx;
+  color: #666;
+}
+.rh-textarea{
+  font-size: 28rpx;
+  height: 150rpx;
+  width: 100%;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  color: #666;
+}
+.rh-label{
+ font-size: 28rpx;
+  color: #666;
 }

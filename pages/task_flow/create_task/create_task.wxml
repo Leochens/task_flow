@@ -1,2 +1,24 @@
 <!--pages/task_flow/create_task/create_task.wxml-->
-<text>pages/task_flow/create_task/create_task.wxml</text>
+<nav-bar title="创建子任务"/>
+<view class='rh-form' style="margin-top:50rpx">
+<view class='rh-form-item'>
+  <label class='rh-lable'>子任务标题</label>
+  <input class='rh-input'></input>
+</view>
+<view class='rh-form-item'>
+  <label class='rh-lable'>子任务概述</label>
+  <textarea class='rh-textarea'></textarea>
+</view>
+<view class='rh-form-item'>
+  <label class='rh-lable'>开始时间</label>
+  <input class='rh-input'></input>
+</view>
+<view class='rh-form-item'>
+  <label class='rh-lable'>结束时间</label>
+  <input class='rh-input'></input>
+</view>
+<view class='rh-form-item'>
+  <label class='rh-lable'>选择任务人</label>
+  <view class='rh-input'></view>
+</view>
+</view>

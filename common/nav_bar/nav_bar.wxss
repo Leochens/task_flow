@@ -9,6 +9,7 @@
   align-items: center;
   color: #666;
   font-weight: bolder;
+  font-size: 30rpx;
 }
 .back_icon{
   display: inline-block;

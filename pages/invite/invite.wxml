@@ -1,5 +1,6 @@
 <!-- pages/invite/invite.wxml -->
-<view class='wrap'>
+<nav-bar blank="true" />
+<view class='wrap' >
   <view>
     <view class='card'>
       <view class='user-info'>

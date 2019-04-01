@@ -11,6 +11,9 @@ Component({
     onBack: {
       type: Function,
       value: ()=>{console.log("hello?");wx.navigateBack()}
+    },
+    blank: {
+      type: Boolean
     }
   },
 

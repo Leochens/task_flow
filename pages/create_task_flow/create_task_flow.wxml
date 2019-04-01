@@ -1,5 +1,5 @@
 <nav-bar title="创建任务流"/>
-<view class="wrap" style='margin-top:{{CustomBar}}px'>
+<view class="wrap">
     <view class="blanks">
         <view class="task-item">
             <label class='tips'>任务流标题</label>
@@ -7,15 +7,11 @@
         </view>
         <view class="task-item">
             <label class="tips">开始日期</label>
-            <picker mode="date" value="{{date}}" start="2019-01-01" end="2100-09-01" bindchange="bindBeginDateChange">
-                <view class="picker">{{beginDate||'选择开始日期'}}</view>
-            </picker>
+            <date-time-picker value='{{beginDate}}' bind:onChange="bindBeginDateChange"/>
         </view>
         <view class="task-item">
             <label class="tips">结束日期</label>
-            <picker mode="date" value="{{date}}" start="2019-01-01" end="2100-09-01" bindchange="bindEndDateChange">
-                <view class="picker">{{endDate||'选择结束日期'}}</view>
-            </picker>
+            <date-time-picker value="{{endDate}}" bind:onChange="bindEndDateChange"/>
         </view>
         <view class="task-item">
             <label class='tips'>负责人</label>

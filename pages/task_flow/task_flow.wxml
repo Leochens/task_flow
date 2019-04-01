@@ -1,6 +1,6 @@
 <!-- pages/task_flow/task_flow.wxml -->
-<nav-bar></nav-bar>
-<view class='wrap' style='margin-top:{{CustomBar}}px'>
+<nav-bar title="任务流详情"></nav-bar>
+<view class='wrap'>
   <view class='task-flow-info'>
     <view class="task-flow-name">
       {{tf_name}}
