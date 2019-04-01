@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/me/me",
     "pages/task_flow/add_member/add_member",
     "pages/task_flow/my_tasks/my_tasks",
     "pages/task_flow/all_members/all_members",
@@ -14,7 +15,6 @@
     "pages/auth/auth",
     "pages/task_flow/task_flow_data/task_flow_data",
     "pages/task/task",
-    "pages/me/me",
     "pages/message/message",
     "pages/task/comments/comments",
     "pages/settings/settings",
@@ -29,7 +29,7 @@
       {
         "selectedIconPath": "assets/imgs/index/message_selected.png",
         "iconPath": "assets/imgs/index/message.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/message/message",
         "text": "消息"
       },
       {
@@ -41,7 +41,7 @@
       {
         "selectedIconPath": "assets/imgs/index/me_selected.png",
         "iconPath": "assets/imgs/index/me.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/me/me",
         "text": "我的"
       }
     ]

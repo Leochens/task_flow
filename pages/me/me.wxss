@@ -1,1 +1,62 @@
 /* pages/me/me.wxss */
+.bgc{
+    height: 20vh;
+    background-color: #2967AF;
+}
+
+.profile-card{
+    width: 80%;
+    top: 10vh;
+    margin: auto;
+    border: 1rpx solid #eee;
+    border-radius: 8rpx;
+    background-color: #fff;
+    box-shadow: 0 4rpx 10rpx 3rpx #ECF2F9;
+    padding: 20rpx;
+    color: #666;
+    margin-top: -100rpx;
+}
+.profile-card .avatar{
+    width: 132rpx;
+    height: 132rpx;
+    display: block;
+    margin: auto;
+}
+.profile-card .nick-name{
+    font-size: 40rpx;
+    text-align: center;
+}
+.others{
+    width: 40%;
+    margin: 30rpx auto 0;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24rpx;
+}
+
+.menus{
+    /* width: 80%;
+    margin: 30rpx auto; */
+    margin-top: 10%;
+}
+
+
+.menus .item{
+    width: 33.33%;
+    padding: 10rpx;
+    display: inline-block;
+}
+
+.menus .item .icon{
+    height: 100rpx;
+    width: 100rpx;
+    background-color: #eee;
+    margin: auto;
+}
+.menus .item .name{
+    margin-top: 10rpx;
+    text-align: center;
+    font-size: 30rpx;
+}

@@ -1,2 +1,21 @@
 <!--pages/me/me.wxml-->
-<text>pages/me/me.wxml</text>
+<view class="bgc">
+
+</view>
+<view class="profile-card">
+    <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132"></image>
+    <view class="nick-name">RyanHardy</view>
+    <view class="others">
+        <view class="location">
+            <!-- <image src="" class="location-icon" /> -->
+            河北 保定
+        </view>
+        <view class="gender">男</view>
+    </view>
+</view>
+<view class="menus">
+    <view wx:for="{{9}}" wx:key class="item">
+        <view class="icon"></view>
+        <view class="name">设置</view>
+    </view>
+</view>
