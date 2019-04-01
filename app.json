@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/task_flow/add_member/add_member",
     "pages/task_flow/my_tasks/my_tasks",
     "pages/task_flow/all_members/all_members",
     "pages/task_flow/create_task/select_member/select_member",
@@ -11,7 +12,6 @@
     "pages/task_flow/task_flow",
     "pages/logs/logs",
     "pages/auth/auth",
-    "pages/task_flow/add_member/add_member",
     "pages/task_flow/task_flow_data/task_flow_data",
     "pages/task/task",
     "pages/me/me",

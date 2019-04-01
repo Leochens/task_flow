@@ -1,1 +1,32 @@
 /* pages/task_flow/add_member/add_member.wxss */
+.main{
+    border: 1rpx solid #eee;
+    border-radius: 16rpx;
+    padding: 20rpx;
+    width: 50vw;
+    margin: 8vh auto;
+    font-size: 30rpx;
+    color: #666;
+}
+.tip{
+    text-align: center;
+    font-weight: bold;
+}
+.add{
+    height: 172rpx;
+    width: 172rpx;
+    display: block;
+    margin:100rpx auto;
+
+}
+.ok-btn{
+    border-radius: 8rpx;
+    background-color: #2665AE;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    width: 180rpx;
+    margin: auto;
+    height: 70rpx;
+    line-height: 70rpx;
+}
