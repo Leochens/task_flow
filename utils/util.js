@@ -25,6 +25,15 @@ const formatDate = utcDate => {
   return `${date} ${time}`;
 }
 
+// 把对象中特定字段的的时间格式化
+const formatDateInObject = obj => {
+  for(let id in obj){
+    const {begin_time,end_time } = obj[id];
+    obj[id].begin_time = formatDate(begin_time);
+    obj[id].end_time = formatDate(end_time);
+  }
+}
+
 const getExpiration = () => {
   const timestamp = Date.parse(new Date());
   const expiration = timestamp + appConfig.expiration;
@@ -43,5 +52,6 @@ module.exports = {
   getExpiration,
   formatDate,
   S2I,
-  compareDate
+  compareDate,
+  formatDateInObject
 }

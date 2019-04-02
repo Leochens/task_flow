@@ -237,7 +237,6 @@ const mapStateToData = (state, options) => {
       _t.members = mems;
       return _t;
     })
-    console.log(_item);
     return _item;
   });
   return {

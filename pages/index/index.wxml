@@ -27,7 +27,9 @@
           </view>
         </view>
         <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
-          <view class='icon-cu-image'></view>
+          <view class='icon-cu-image text-white text-bold'  bindtap='addNewTaskFlow'>
+            <text class='icon-add '></text>
+          </view>
         </view>
       </block>
       <!-- 样式2 -->
@@ -49,6 +51,6 @@
     <view class="empty-list">暂无数据</view>
   </view>
 </view>
-<view class='hover-btn' bindtap='addNewTaskFlow'>
+<!-- <view class='hover-btn'>
   <image src='../../assets/imgs/index/add_task.png'></image>
-</view>
+</view> -->

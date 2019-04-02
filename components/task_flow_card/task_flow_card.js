@@ -21,8 +21,8 @@ Component({
     const tf = this.properties.taskFlowData;
     // console.log(tf);
     const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
-    const { begin_time, end_time, tasks } = tf;
-    const dateData = this.calculateDate(this.formatDate(begin_time), this.formatDate(end_time));
+    const { begin_time, end_time, tasks,members } = tf;
+    const dateData = this.calculateDate(begin_time, end_time);
     const taskData = this.calculateTask(tasks);
 
     this.setData({
@@ -31,7 +31,8 @@ Component({
         dateData,
         taskData
       },
-      leader
+      leader,
+      members
     })
   },
 
@@ -44,7 +45,6 @@ Component({
 
     },
     toggle: function (e) {
-      console.log(e);
       this.setData({
         isProcessPaneActive: !this.data.isProcessPaneActive
       })
@@ -57,7 +57,6 @@ Component({
       const duration = ed.getTime() - bd.getTime();
       const now = (new Date());
       let last = parseInt((ed.getTime() - now.getTime()) / dayUnit);
-      console.log(last);
       last = last >= 0 ? last : 0;
       const durationD = parseInt(duration / dayUnit);
       const percent = ((durationD - last) / durationD).toFixed(4) * 100;
@@ -77,14 +76,6 @@ Component({
           completedCount: ctLen,
           percent: (ctLen/(all||1)).toFixed(4)*100
         }
-    },
-
-    formatDate: utcDate => {
-      if (typeof utcDate != 'string') return;
-      const strs = utcDate.split('T');
-      const [date, _time] = strs;
-      const time = _time.split('.')[0];
-      return `${date} ${time}`;
     }
   }
 })
