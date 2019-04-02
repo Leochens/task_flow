@@ -3,7 +3,7 @@
 .task-flow-card{
   width: 660rpx;
   position: relative;
-  height: 240rpx;
+  /* height: 240rpx; */
   /* box-shadow: -4rpx 5rpx 6rpx #ddd; */
   border: 1rpx solid #eee;
   padding: 16rpx;
@@ -11,6 +11,9 @@
   font-size: 20rpx;
   display: block;
   margin: 10rpx auto;
+  color: #666;
+  transition: height .3s ease-in-out;
+
 
 }
 
@@ -57,4 +60,39 @@
   right: 30rpx;
   color: #666;
   text-decoration: underline;
+}
+.task-flow-describe{
+  position: relative;
+  padding-right: 60rpx;
+}
+.toggle{
+  height: 55rpx;
+  width: 55rpx;
+  position: absolute;
+  right: -4rpx;
+  top: -20rpx;
+  transition: transform .3s ease-in-out;
+}
+
+.process-pane{
+  padding: 20rpx 0;
+  border-top: 1rpx solid #eee;
+  overflow: hidden;
+  transition: transform .3s ease-in-out;
+  
+}
+.process-pane .title{
+  font-size: 20rpx;
+
+}
+.process-pane .bar-wrap{
+  width: 100%;
+  height: 20rpx;
+  border: 1rpx solid #eee;
+  border-radius: 10rpx;
+}
+.process-pane .bar-wrap .bar-inner{
+  height: 100%;
+  background-color: #2967AF;
+  border-radius: 10rpx;
 }
