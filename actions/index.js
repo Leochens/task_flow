@@ -14,8 +14,11 @@ export const fetchTaskFlows = u_id => {
         console.log("待nomalize==>",response);
         const task_flows = normalize(response.data, Schemas.taskFlows);
         console.log("nomalize后==>",task_flows);
-
         return task_flows;
     }
     return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows`, { normalizeFunc });
 };
+
+export const addTaskFlow = (u_id,tf) =>{
+    return crudCreate('task_flows',{tf},`users/${u_id}/task_flows`);
+}

@@ -75,7 +75,7 @@ Component({
         return {
           count: all,
           completedCount: ctLen,
-          percent: (ctLen/all).toFixed(4)*100
+          percent: (ctLen/(all||1)).toFixed(4)*100
         }
     },
 

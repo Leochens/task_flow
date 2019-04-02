@@ -4,7 +4,9 @@ import {
   compareDate,
   formatTime
 } from '../../utils/util';
-Page({
+import {connect} from '../../libs/wechat-weapp-redux';
+import {addTaskFlow} from '../../actions/index';
+const _page = {
 
   /**
    * 页面的初始数据
@@ -12,7 +14,8 @@ Page({
   data: {
     CustomBar: app.globalData.CustomBar,
     beginDate: formatTime(new Date()),
-    endDate: formatTime(new Date())
+    endDate: formatTime(new Date()),
+    leader:wx.getStorageSync('userInfo').nickName 
   },
 
   bindBeginDateChange: function (e) {
@@ -56,5 +59,39 @@ Page({
     this.setData({
       endDate
     })
+  },
+  onSubmit:function(e){
+
+    console.log("表单提交事件",e);
+    const {tf_name,tf_describe} = e.detail.value;
+    if(!tf_name || !tf_describe){
+
+      return ;
+    }
+
+    const {beginDate:begin_time,endDate:end_time} = this.data;
+    console.log(this.addTaskFlow)
+    const u_id = wx.getStorageSync('u_id');
+    this.addTaskFlow(u_id,JSON.stringify({
+        tf_name,
+        tf_describe,
+        begin_time,
+        end_time,
+        leader_id: u_id
+    }));
+    
   }
-})
+};
+const mapStateToData = state => {
+  return {
+
+  }
+}
+const mapDispatchToPage = dispatch => {
+    return {
+      addTaskFlow: (u_id,tf) => dispatch(addTaskFlow(u_id,tf))
+    }
+}
+
+const page = connect(mapStateToData,mapDispatchToPage)(_page);
+Page(page)

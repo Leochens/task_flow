@@ -16,7 +16,7 @@
     <view class="item">
       <view class="title">截止日期{{taskFlowData.end_time}} 一共{{paneData.dateData.duration}} 还剩{{paneData.dateData.last}}天</view>
       <view class="bar-wrap">
-        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%"></view>
+        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.last?'#2967AF':'red'}}"></view>
       </view>
     </view>
     <view class="item">
