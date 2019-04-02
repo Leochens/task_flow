@@ -8,7 +8,7 @@
   border: 1rpx solid #eee;
   padding: 16rpx;
   border-radius: 20rpx;
-  font-size: 20rpx;
+  font-size: 25rpx;
   display: block;
   margin: 10rpx auto;
   color: #666;
@@ -108,7 +108,7 @@
 }
 .avatars .item{
   display: inline-block;
-  width: 30rpx;
-  height: 30rpx;
+  width: 35rpx;
+  height: 35rpx;
   border-radius: 8rpx;
 }
