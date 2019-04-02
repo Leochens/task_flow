@@ -1,24 +1,35 @@
-<!--pages/task_flow/create_task/create_task.wxml-->
-<nav-bar title="创建子任务"/>
-<view class='rh-form' style="margin-top:50rpx">
-<view class='rh-form-item'>
-  <label class='rh-lable'>子任务标题</label>
-  <input class='rh-input'></input>
-</view>
-<view class='rh-form-item'>
-  <label class='rh-lable'>子任务概述</label>
-  <textarea class='rh-textarea'></textarea>
-</view>
-<view class='rh-form-item'>
-  <label class='rh-lable'>开始时间</label>
-  <date-time-picker value="{{beginDate}}" bind:onChange='bindBeginDateChange'/>
-</view>
-<view class='rh-form-item'>
-  <label class='rh-lable'>结束时间</label>
-  <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange'/>
-</view>
-<view class='rh-form-item'>
-  <label class='rh-lable'>选择任务人</label>
-  <view class='rh-input'></view>
-</view>
-</view>
+<!-- pages/task_flow/create_task/create_task.wxml -->
+<nav-bar title="创建子任务" />
+<form class='rh-form' style="margin-top:50rpx"  report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
+  <view class='rh-form-item'>
+    <label class='rh-lable'>子任务标题</label>
+    <input name="t_name" class='rh-input'></input>
+  </view>
+  <view class='rh-form-item'>
+    <label class='rh-lable'>子任务概述</label>
+    <textarea name="t_describe" class='rh-textarea'></textarea>
+  </view>
+  <view class='rh-form-item'>
+    <label class='rh-lable'>开始时间</label>
+    <date-time-picker value="{{beginDate}}" bind:onChange='bindBeginDateChange' />
+  </view>
+  <view class='rh-form-item'>
+    <label class='rh-lable'>结束时间</label>
+    <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange' />
+  </view>
+  <view class='rh-form-item'>
+    <label class='rh-lable'>选择任务人</label>
+    <view class='rh-input'></view>
+  </view>
+  <view class='rh-form-item'>
+    <button form-type="submit" class='rh-submit-btn'>完成</button>
+  </view>
+</form>
+<!-- 完整内容	
+id
+t_name
+t_describe
+begin_time
+end_time
+is_completed
+tf_id -->

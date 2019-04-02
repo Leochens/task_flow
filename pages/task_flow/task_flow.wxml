@@ -46,22 +46,22 @@
     </view>
   </view>
   <view class='tabbar'>
-    <view class='tab-item'>
+    <view class='tab-item' bind:tap="addTask">
       <image src='../../assets/imgs/task_flow/add.svg' class='tab-item-icon'></image>
       <view class='text'>加子任务</view>
     </view>
-    <view class='tab-item'>
+    <view class='tab-item' bind:tap="addMember">
       <image src='../../assets/imgs/task_flow/add_member.svg' class='tab-item-icon'></image>
       <view class='text'>加新成员</view>
     </view>
-    <view class='tab-item'>
+    <view class='tab-item' bind:tap="addFavor">
       <image src='../../assets/imgs/task_flow/star.svg' class='tab-item-icon'></image>
       <view class='text'>加入星标</view>
     </view>
-    <view class='tab-item'>
+    <view class='tab-item' bind:tap="checkData">
       <image src='../../assets/imgs/task_flow/curve.svg' class='tab-item-icon'></image>
       <view class='text'>任务曲线</view>
     </view>
-    <view class='tab-item-important'>全部成员</view>
+    <view class='tab-item-important' bind:tap="allMembers">全部成员</view>
   </view>
 </view>

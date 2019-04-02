@@ -1,1 +1,43 @@
 /* pages/task_flow/create_task/create_task.wxss */
+
+.rh-form{
+    width: 70%;
+    display: block;
+    margin:auto;
+    color: #333;
+  }
+  .rh-form-item{
+  margin: 20rpx 0;
+  }
+  .rh-input{
+    font-size: 28rpx;
+    height: 65rpx;
+    border: 1rpx solid #ddd;
+    border-radius: 8rpx;
+    padding: 0 16rpx;
+    line-height: 65rpx;
+    color: #666;
+  }
+  .rh-textarea{
+    font-size: 28rpx;
+    height: 150rpx;
+    width: 100%;
+    border: 1rpx solid #ddd;
+    border-radius: 8rpx;
+    padding: 0 16rpx;
+    color: #666;
+  }
+  .rh-label{
+   font-size: 28rpx;
+    color: #666;
+  }
+  .rh-submit-btn{
+    background-color: #2665ae;
+    color: #fff;
+    font-size: 28rpx;
+    margin-top: 20rpx;
+    text-align: center;
+    height: 65rpx;
+    line-height: 65rpx;
+    border-radius: 8rpx;
+  }
