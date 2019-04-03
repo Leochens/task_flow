@@ -27,10 +27,16 @@ const formatDate = utcDate => {
 
 // 把对象中特定字段的的时间格式化
 const formatDateInObject = obj => {
+
   for(let id in obj){
-    const {begin_time,end_time } = obj[id];
-    obj[id].begin_time = formatDate(begin_time);
-    obj[id].end_time = formatDate(end_time);
+    const {begin_time,end_time,create_time } = obj[id];
+    if(begin_time&&end_time){
+
+      obj[id].begin_time = formatDate(begin_time);
+      obj[id].end_time = formatDate(end_time);
+    }else if(create_time){
+      obj[id].create_time = formatDate(create_time);
+    }else return;
   }
 }
 

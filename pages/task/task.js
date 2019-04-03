@@ -1,5 +1,9 @@
 // pages/task/task.js
-Page({
+import {
+  connect
+} from '../../libs/wechat-weapp-redux';
+import { fetchTaskMemberStatus } from '../../actions/index';
+const page = {
 
   /**
    * 页面的初始数据
@@ -12,7 +16,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // console.log(options);
+    const task = JSON.parse(options.task);
+    // 获得task后紧接着获得这个task的评论和人员的状态
+    const t_id = task.id;
+    const u_ids = task.members.map(mem=>mem.id);
+    console.log(u_ids);
+    this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
+    console.log(task);
+    this.setData({
+      task
+    })
   },
 
   /**
@@ -63,4 +77,15 @@ Page({
   onShareAppMessage: function () {
 
   }
+}
+
+const mapStateToData = state => {
+  
+  return {
+  };
+}
+const mapDispatchToPage = dispatch => ({
+  fetchTaskMemberStatus: (t_id,u_ids) => dispatch(fetchTaskMemberStatus(t_id,u_ids))
 })
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
+Page(_page);

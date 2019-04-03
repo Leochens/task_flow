@@ -15,13 +15,13 @@
   <view class='content'>
     <view class="child-task-list animated slideInDown">
       <view class="line "></view>
-      <view bind:tap="taskDetail" wx:for="{{tasks}}" wx:key="{{index}}" class="item animated slideInLeft" style="animation-delay:{{index*0.1}}s">
+      <view  wx:for="{{tasks}}" wx:key="{{index}}"  class="item animated slideInLeft" style="animation-delay:{{index*0.1}}s">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
           <view class="time">{{dateTimeSplit.timeSplit(item.begin_time)}}</view>
         </view>
-        <view class="task-card">
+        <view class="task-card" bind:tap="taskDetail" data-tid="{{item.id}}">
           <view class="task-title">
             <view class="title-wrap">
               <view class="task-name">{{item.t_name}}</view>

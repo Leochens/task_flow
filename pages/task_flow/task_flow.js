@@ -40,10 +40,8 @@ const page = {
     this.setData({
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
-      tasks:classfiedTasks
+      tasks: classfiedTasks
     })
-
-
   },
   classifyTask: function (t) {
     // 将子任务按照开始日期分类 同一天的放进一个数组里 还要排序 日期大类排序决定渲染顺序  
@@ -70,9 +68,12 @@ const page = {
     console.log(tasks.map(task => task.renderDot));
     return tasks;
   },
-  taskDetail:function(e){
+  taskDetail: function (e) {
+    console.log(e);
+    const tid = e.currentTarget.dataset.tid;
+    const task = this.data.tasks.filter(t=>t.id===tid)[0];
     wx.navigateTo({
-      url:'../task/task'
+      url: '../task/task?task='+JSON.stringify(task)
     })
   },
   // 加新的子任务
@@ -160,7 +161,7 @@ const page = {
   onShareAppMessage: function () {
 
   }
-};
+}
 
 const mapStateToData = state => {
   return {

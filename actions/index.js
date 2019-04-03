@@ -26,3 +26,8 @@ export const addTaskFlow = (u_id,tf) =>{
 export const addTask = (tf_id,task) =>{
     return crudCreate('tasks',{task},`task_flows/${tf_id}/tasks`);
 }
+
+
+export const fetchTaskMemberStatus = (t_id,u_ids) =>{
+    return crudCreate('status',{u_ids},`tasks/${t_id}/users/status`);
+}
