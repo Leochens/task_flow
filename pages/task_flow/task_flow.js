@@ -49,7 +49,7 @@ const page = {
       endDate:end_time
     }
     wx.navigateTo({
-      url: './create_task/create_task?time='+JSON.stringify(time)+"&tf_id="+this.data.id,
+      url: './create_task/create_task?time='+JSON.stringify(time)+"&tf_id="+this.data.id+"&members="+JSON.stringify(this.data.members),
     })
   },
   // 邀请新成员

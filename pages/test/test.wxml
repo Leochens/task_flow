@@ -1,3 +1,4 @@
 <!-- pages/test/test.wxml -->
 <nav-bar title="任务流详情"></nav-bar>
-<date-time-picker bind:onChange='onGetV'/>
+<!-- <date-time-picker bind:onChange='onGetV'/> -->
+<member-item avatarUrl="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132" nickName="Ryan" > </member-item>

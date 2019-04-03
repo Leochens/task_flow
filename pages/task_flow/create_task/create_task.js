@@ -12,15 +12,18 @@ const _page = {
    */
   data: {
     beginDate: formatTime(new Date()),
-    endDate: formatTime(new Date())
+    endDate: formatTime(new Date()),
+    members:[]
   },
   onLoad:function(op){
     const timeLimit = JSON.parse(op.time);
     const tf_id = op.tf_id || '123456';
+    const members = JSON.parse(op.members)||[];
     console.log(op);
     this.setData({
       timeLimit,
-      tf_id
+      tf_id,
+      members
     })
   },
   bindBeginDateChange: function (e) {
@@ -86,6 +89,12 @@ const _page = {
     this.setData({
       endDate
     })
+  },
+  selectMember:function(e){
+    // console.log()
+      wx.navigateTo({
+        url:'./select_member/select_member?tf_id='+this.data.tf_id+"&members="+JSON.stringify(this.data.members)
+      })
   },
   onSubmit:function(e){
     console.log(e);

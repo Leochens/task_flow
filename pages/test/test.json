@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "nav-bar":"../../common/nav_bar/nav_bar",
-    "date-time-picker":"../../components/date_time_picker/date_time_picker"
+    "date-time-picker":"../../components/date_time_picker/date_time_picker",
+    "member-item": "../../components/member_item/member_item"
+    
   },
   "navigationBarTextStyle": "black"
 }
