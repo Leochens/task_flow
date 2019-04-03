@@ -1,5 +1,6 @@
 @import "icon.wxss";
 @import "colorui.wxss";
+@import "animate.wxss";
  
 .cu-modal.show {
   z-index: 99999;

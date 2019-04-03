@@ -1,5 +1,5 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
-<view class="task-flow-card">
+<view class="task-flow-card animated slideInLeft">
   <view class="title-wrap">
     <view class="task-flow-title">{{taskFlowData.tf_name}}</view>
     <image src="../../assets/imgs/task_flow/check{{taskFlowData.is_completed?'_ok':''}}.svg" class="task-flow-status" />

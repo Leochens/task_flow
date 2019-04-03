@@ -1,2 +1,92 @@
-<!--pages/task/task.wxml-->
-<text>pages/task/task.wxml</text>
+<!-- pages/task/task.wxml -->
+<nav-bar title="子任务详情"></nav-bar>
+<view class="task-wrap">
+    <view class="title-wrap">
+        <view class="title">
+            组织公司女员工领取玫瑰花
+            <view>
+                <image class="people-count" src="../../assets/imgs/task_flow/member.svg" />
+                2
+            </view>
+        </view>
+        <view class="deadline">截止到2019-2-18 12:23:12</view>
+    </view>
+    <view class="main">
+        <view class="line">
+            <view class="dot"></view>
+        </view>
+        <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{false}}">
+            <swiper-item class="content">
+                <view class="begin-time">2019-2-1 14:35:44</view>
+                <view class="card">
+                    <view class="task-describe">
+                        <view class="describe-wrap">
+                            <label>内容:</label>
+                            <view class="status">
+                                <image class="is_completed " src="../../assets/imgs/task_flow/check.svg" />
+                                进行中
+                            </view>
+                        </view>
+                        <view class="describe-content">
+                            李刚在情人节当天，统计好各个部门的女性员工数量，分配好玫瑰花，组织大家到会议室开会，开会最后一项是赠送玫瑰花，届时由李刚主持送花大会。会议结束后及时在小程序上完成任务。
+                        </view>
+                    </view>
+                    <view class="task-exec-people">
+                        <label>执行人:</label>
+                        <view class="table">
+                            <view class="tr">
+                                <view class="th">人员</view>
+                                <view class="th">状态</view>
+                            </view>
+                            <view class="tr">
+                                <view class="td">张小三</view>
+                                <view class="td">正常</view>
+                            </view>
+                            <view class="tr">
+                                <view class="td">李大四</view>
+                                <view class="td text-red">请假</view>
+                            </view>
+                            <view class="tr">
+                                <view class="td">张小三</view>
+                                <view class="td">正常</view>
+                            </view>
+                        </view>
+                    </view>
+                    <view>
+                        <label>图片:</label>
+                        <view class="images">
+                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
+                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
+                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
+                        </view>
+                    </view>
+                </view>
+                <view class="tip-btn">左滑进入留言区 7</view>
+            </swiper-item>
+            <swiper-item class="content">
+                <view class="begin-time">2019-2-1 14:35:44</view>
+                <view class="card card-comment">
+                    <view class="comment-item" wx:for="{{7}}">
+                        <image class="avatar" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1493577052,2840165628&fm=200&gp=0.jpg" />
+                        <view class="comment">
+                            <view class="name-time">
+                                <text class="name">张小三</text>
+                                <text class="time">2019-2-12 18:22:12</text>
+                            </view>
+                            <view class="comment-content">
+                                我觉得时间可能不够用
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <form class="send-comment" bindsubmit="commentSubmit">
+                    <view class="input-comment">
+                        <input name="comment" />
+                    </view>
+                    <button form-type="submit" class="send-btn">留言</button>
+                </form>
+                <view class="tip-btn">右滑进入详情页</view>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>

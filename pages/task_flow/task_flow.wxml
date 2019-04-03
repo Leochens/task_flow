@@ -13,9 +13,9 @@
     </view>
   </view>
   <view class='content'>
-    <view class="child-task-list">
-      <view class="line"></view>
-      <view wx:for="{{tasks}}" wx:key="{{index}}" class="item">
+    <view class="child-task-list animated slideInDown">
+      <view class="line "></view>
+      <view wx:for="{{tasks}}" wx:key="{{index}}" class="item animated slideInLeft" style="animation-delay:{{index*0.1}}s">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>

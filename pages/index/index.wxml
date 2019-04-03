@@ -43,9 +43,9 @@
     </view>
   </view>
 </view>
-<view class='task-flows' style='margin-top:{{CustomBar}}px;'>
+<view class='task-flows ' style='margin-top:{{CustomBar}}px;'>
   <view wx:if="{{filterTaskFlowList.length || taskFlowList.length}}">
-    <task-flow-card wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+    <task-flow-card class="" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
   </view>
   <view wx:else>
     <view class="empty-list">暂无数据</view>
