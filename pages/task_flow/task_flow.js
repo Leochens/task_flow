@@ -70,6 +70,11 @@ const page = {
     console.log(tasks.map(task => task.renderDot));
     return tasks;
   },
+  taskDetail:function(e){
+    wx.navigateTo({
+      url:'../task/task'
+    })
+  },
   // 加新的子任务
   addTask: function () {
     const { begin_time, end_time } = this.data;

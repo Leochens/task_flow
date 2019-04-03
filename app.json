@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/task/task",
     "pages/index/index",
+    "pages/task/task",
     "pages/test/test",
     "pages/task_flow/create_task/create_task",
     "pages/create_task_flow/create_task_flow",

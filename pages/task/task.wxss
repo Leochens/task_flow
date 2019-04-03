@@ -30,7 +30,7 @@
 .main .swiper{
     /* height: 100%; */
     display: block;
-    flex: 5;
+    flex: 9;
     height: auto;
     width: auto;
 }
@@ -67,7 +67,7 @@
 }
 .main .content .begin-time{
     margin-top: -40rpx;
-    font-size: 30rpx;
+    font-size: 24rpx;
 
 }
 .card{
@@ -78,6 +78,7 @@
 }
 .card .task-describe{
     /* padding-right: 20rpx; */
+
 }
 
 .status{
@@ -95,7 +96,7 @@
 }
 .describe-content{
     font-size: 30rpx;
-    margin-top: 10rpx;
+    min-height: 200rpx;
 }
 image.is_completed{
     height: 28rpx;
@@ -118,6 +119,8 @@ image.is_completed{
 
 label{
     font-weight: bold;
+    margin-bottom: 20rpx;
+    font-size: 30rpx;
 }
 
 .text-red{
