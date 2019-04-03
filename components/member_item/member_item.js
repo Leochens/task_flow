@@ -27,7 +27,9 @@ Component({
 
         this.setData({
           isSelected:!this.data.isSelected
-        })
+        });
+
+        
     }
   }
 })

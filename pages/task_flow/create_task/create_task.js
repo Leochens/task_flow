@@ -13,7 +13,8 @@ const _page = {
   data: {
     beginDate: formatTime(new Date()),
     endDate: formatTime(new Date()),
-    members:[]
+    members:[],
+    selectedMembers:[]
   },
   onLoad:function(op){
     const timeLimit = JSON.parse(op.time);
@@ -93,7 +94,7 @@ const _page = {
   selectMember:function(e){
     // console.log()
       wx.navigateTo({
-        url:'./select_member/select_member?tf_id='+this.data.tf_id+"&members="+JSON.stringify(this.data.members)
+        url:'./select_member/select_member?members='+JSON.stringify(this.data.members)
       })
   },
   onSubmit:function(e){
@@ -113,7 +114,7 @@ const _page = {
       begin_time: this.data.beginDate,
       end_time: this.data.endDate,
       is_important:false,
-      members:[] // 第二次sql执行
+      members:this.data.selectedMembers // 第二次sql执行
     }
     this.addTask(this.data.tf_id,JSON.stringify(task));
 

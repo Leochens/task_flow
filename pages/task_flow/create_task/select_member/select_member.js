@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    members:[]
+    members:[],
+    currentSelected:[]
   },
 
   /**
@@ -18,55 +19,38 @@ Page({
     console.log(members);
     this.setData({
       members
-    })
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  selectMember:function(e){
+      console.log(e);
+      const uid = e.target.dataset.uid;
+      // 每点击一次就执行放入|移除操作 点击完成的时候就是要选择的人员集合
+      this._toggleSelectMember(uid);
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  _toggleSelectMember: function(uid){
+      const currentSelected = this.data.currentSelected.slice();
+      if(!Array.isArray(currentSelected) ||typeof uid != 'string') return;
+      if(currentSelected.includes(uid)){ // 有就删除
+        currentSelected.splice(currentSelected.indexOf(uid),1);
+      }else{  // 没有就添加
+        currentSelected.push(uid);
+      }
+      this.setData({
+        currentSelected
+      })
 
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onSelectCompleted: function(){
+    const pages = getCurrentPages();
+    const currentPage = pages[pages.length - 1];
+    const prevPage = pages[pages.length - 2];
+    // 向上一页赋值
+    prevPage.setData({
+      selectedMembers: this.data.currentSelected
+    });
+    wx.navigateBack();
   }
+
+  
 })
