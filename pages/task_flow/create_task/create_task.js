@@ -117,7 +117,7 @@ const _page = {
       members:this.data.selectedMembers // 第二次sql执行
     }
     this.addTask(this.data.tf_id,JSON.stringify(task));
-
+    
   }
 }
 const mapStateToData = state => {

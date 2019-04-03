@@ -22,6 +22,7 @@ const defaultState = {
 };
 const successFilter = (resource, payload) => {
     switch (resource) {
+        case 'tasks':
         case 'task_flows': {
             wx.showToast({
                 title: payload.msg || "成功"
@@ -36,10 +37,10 @@ const successFilter = (resource, payload) => {
 }
 const failureFilter = (resource, payload) => {
     switch (resource) {
+        case 'tasks':
         case 'task_flows': {
             wx.showToast({
                 title: payload.msg,
-                image: '../assets/imgs/app-icon.png'
             });
             setTimeout(
                 () => wx.navigateBack(),
