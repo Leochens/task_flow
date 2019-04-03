@@ -1,4 +1,5 @@
 <!-- pages/task_flow/task_flow.wxml -->
+<wxs module="dateTimeSplit" src="../wxs/dateTimeSplit.wxs"></wxs>
 <nav-bar title="任务流详情"></nav-bar>
 <view class='wrap'>
   <view class='task-flow-info'>
@@ -16,8 +17,9 @@
       <view class="line"></view>
       <view wx:for="{{tasks}}" wx:key="{{index}}" class="item">
         <view class="dot-wrap">
-          <view class="dot {{item.is_completed?'ok':''}}"></view>
-          <view class="date">{{item.begin_time}}</view>
+          <view class="{{item.renderDot?'dot ok':''}}"></view>
+          <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
+          <view class="time">{{dateTimeSplit.timeSplit(item.begin_time)}}</view>
         </view>
         <view class="task-card">
           <view class="task-title">
@@ -28,7 +30,7 @@
                 {{item.members.length}}
               </view>
             </view>
-            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.status?'_ok':''}}.svg" />
+            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed?'_ok':''}}.svg" />
           </view>
           <view class="task-info">
             <view class="exec-perple">

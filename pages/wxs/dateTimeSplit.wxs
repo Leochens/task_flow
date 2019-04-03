@@ -1,0 +1,14 @@
+var dateSplit = function(d){
+    if(typeof d != 'string') return '日期格式有误';
+    return d.split(' ')[0];
+}
+
+var timeSplit = function(d){
+    if(typeof d != 'string') return '日期格式有误';
+    return d.split(' ')[1];
+}
+
+module.exports = {
+    dateSplit:dateSplit,
+    timeSplit:timeSplit
+}

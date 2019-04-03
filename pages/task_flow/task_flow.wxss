@@ -69,19 +69,25 @@ page{
     top: 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
-.item .date{
+.item .dot-wrap .date{
     font-size: 20rpx;
     font-weight: 500;
     margin-left: 10rpx;
 }
-.item .dot{
+.item .dot-wrap .time{
+    font-size: 20rpx;
+    font-weight: 500;
+    margin-left: 25rpx;
+}
+.item .dot-wrap .dot{
     height: 28rpx;
     width: 28rpx;
     border-radius: 50%;
     background-color: #ddd;
 }
-.item .dot.ok{
+.item .dot-wrap .dot.ok{
     background-color: #2967AF;
     
 }
