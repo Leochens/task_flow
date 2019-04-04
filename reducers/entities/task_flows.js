@@ -5,7 +5,7 @@ import {
   CRUD_CREATE_LOADING,
   CRUD_CREATE_FAILURE
 } from '../../actions/dataActions';
-import {formatDateInObject} from '../../utils/util';
+import { formatDateInObject } from '../../utils/util';
 
 const range = ['task_flows'];
 
@@ -24,7 +24,10 @@ const task_flows = (state = {
     case CRUD_GET_LIST_SUCCESS:
       {
         if (!range.includes(meta.resource)) return state;
-        const {task_flows} = payload.entities;
+        if (!payload.entities) return state;
+
+        const { task_flows } = payload.entities;
+        if (!task_flows) return state;
         formatDateInObject(task_flows);
         const newState = {
           ...state,

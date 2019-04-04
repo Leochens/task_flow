@@ -35,6 +35,24 @@ const successFilter = (resource, payload) => {
         default: return;
     }
 }
+const loadingFilter = (resource) => {
+    switch (resource) {
+        case 'tasks':
+        case 'task_flows': {
+            wx.showLoading({
+                title: '加载中',
+            })
+            break;
+        }
+        case 'auth':{
+            wx.showLoading({
+                title: "登录中"
+            });
+            break;
+        }
+        default: return;
+    }
+}
 const failureFilter = (resource, error) => {
     switch (resource) {
         case 'tasks':
@@ -62,9 +80,7 @@ export default (state = defaultState, {
         case CRUD_DELETE_LOADING:
         case CRUD_UPDATE_LOADING:
             {
-                wx.showLoading({
-                    title: '加载中',
-                })
+                loadingFilter(meta.resource);
                 return state;
             }
         case CRUD_CREATE_SUCCESS:

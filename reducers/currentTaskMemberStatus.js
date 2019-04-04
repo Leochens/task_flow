@@ -7,6 +7,7 @@ const currentTaskMemberStatus = (state = [], action) => {
 
     switch (action.type) {
         case CRUD_CREATE_SUCCESS:
+            if(!action.payload) return state;
             return [
                 ...action.payload.data
             ];

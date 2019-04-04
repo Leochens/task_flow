@@ -16,9 +16,16 @@ Page({
   onLoad: function (options) {
     // console.log(options);
     const members = JSON.parse(options.members);
+    const selected_members = JSON.parse(options.selected_members);
     console.log(members);
+    members.forEach(mem=>{
+      if(selected_members.includes(mem.id)){
+        mem.is_selected = true;
+      }
+    })
     this.setData({
-      members
+      members,
+      currentSelected:selected_members
     });
   },
   selectMember:function(e){
@@ -42,12 +49,17 @@ Page({
 
   },
   onSelectCompleted: function(){
+    const {members,currentSelected} = this.data;
     const pages = getCurrentPages();
+
     const currentPage = pages[pages.length - 1];
     const prevPage = pages[pages.length - 2];
+    const _selectedMembers =members.filter(mem=>currentSelected.includes(mem.id));
+    const selectedMembers = _selectedMembers.map(mem=>mem.nick_name);
     // 向上一页赋值
     prevPage.setData({
-      selectedMembers: this.data.currentSelected
+      selectedMembers:currentSelected,
+      selectedMembersNames: selectedMembers
     });
     wx.navigateBack();
   }

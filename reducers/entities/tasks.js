@@ -9,7 +9,10 @@ const tasks = (state = {}, action) => {
     switch (type) {
         case CRUD_GET_LIST_SUCCESS: {
             if (!range.includes(meta.resource)) return state;
-            const {tasks} = payload.entities;
+            if (!payload.entities) return state;
+
+            const { tasks } = payload.entities;
+            if (!tasks) return state;
             formatDateInObject(tasks);
             return {
                 ...state,

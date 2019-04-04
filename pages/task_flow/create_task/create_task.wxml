@@ -3,11 +3,11 @@
 <form class='rh-form' style="margin-top:50rpx"  report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
   <view class='rh-form-item'>
     <label class='rh-lable'>子任务标题</label>
-    <input name="t_name" class='rh-input'></input>
+    <input name="t_name" class='rh-input' placeholder="必填"></input>
   </view>
   <view class='rh-form-item'>
     <label class='rh-lable'>子任务概述</label>
-    <textarea name="t_describe" class='rh-textarea'></textarea>
+    <textarea name="t_describe" class='rh-textarea' placeholder="必填"></textarea>
   </view>
   <view class='rh-form-item'>
     <label class='rh-lable'>开始时间</label>
@@ -20,7 +20,7 @@
   <view class='rh-form-item'>
     <label class='rh-lable'>选择任务人</label>
     <view class='rh-input' bind:tap="selectMember">
-      {{this.members||"点击我进行选择"}}
+      {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择[至少一个]"}}
     </view>
   </view>
   <view class='rh-form-item'>

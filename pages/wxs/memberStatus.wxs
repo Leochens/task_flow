@@ -1,0 +1,14 @@
+var memberStatus = function(member,status){
+    var state = 0;
+    for(var i = 0;i<status.length;i++){
+        if(member.id === status[i].u_id){
+            state = status[i].user_status;
+            break;
+        }
+    }
+    console.log("user_status",state);
+    return state;
+}
+
+
+module.exports = memberStatus;

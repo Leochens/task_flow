@@ -11,6 +11,13 @@ const auth = (state = {
 
   switch (action.type) {
     case CRUD_CREATE_SUCCESS:
+
+      const { payload:{
+        SID,
+        u_id
+      }} = action;
+      if(!SID||!u_id) return state;
+      
       wx.setStorageSync("SID", action.payload.SID);
       wx.setStorageSync("u_id", action.payload.u_id);
       wx.setStorageSync("SID_EXPIRATION", getExpiration()); // 设置过期时间
@@ -18,6 +25,7 @@ const auth = (state = {
         authenticated: true,
         ...action.payload
       };
+    
     default:
       return state
   }

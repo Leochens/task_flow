@@ -9,7 +9,10 @@ const comments = (state = {}, action) => {
     switch (type) {
         case CRUD_GET_LIST_SUCCESS: {
             if (!range.includes(meta.resource)) return state;
+            if(!payload.entities) return state;
+
             const {comments} = payload.entities;
+            if(!comments) return state;
             formatDateInObject(comments);
             return {
                 ...state,

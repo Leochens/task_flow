@@ -1,4 +1,5 @@
 <!-- pages/task/task.wxml -->
+<wxs module="memberStatus" src="../wxs/memberStatus.wxs"></wxs>
 <nav-bar title="子任务详情"></nav-bar>
 <view class="task-wrap">
     <view class="title-wrap">
@@ -40,7 +41,7 @@
                             </view>
                             <view class="tr" wx:for="{{task.members}}" wx:key="">
                                 <view class="td">{{item.nick_name}}</view>
-                                <view class="td {{item.user_status?'':'text-red'}}">{{item.user_status?'正常':'请假'}}</view>
+                                <view class="td {{memberStatus(item,status)?'':'text-red'}}">{{memberStatus(item,status)?'正常':'请假'}}</view>
                             </view>
                         </view>
                     </view>

@@ -48,7 +48,7 @@
     <task-flow-card class="" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
   </view>
   <view wx:else>
-    <view class="empty-list">暂无数据</view>
+    <view class="empty-list">还没有任务流呢,快点击上方的加号添加吧！</view>
   </view>
 </view>
 <!-- <view class='hover-btn'>

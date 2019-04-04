@@ -2,6 +2,7 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
+import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 const MENU = {
   NONE: 0,
   CLASSIFY: "1",
@@ -40,7 +41,6 @@ const page = {
   getUserInfo: function(e) {
     console.log(e)
     if(!e.detail.userInfo){
-      console.log("用户拒绝授权");
       return;
     }
     wx.setStorageSync('userInfo', e.detail.userInfo);
@@ -155,12 +155,9 @@ const page = {
       }
     })
   },
-  onShow: function() {
-    console.log(this.data)
 
-  },
   // 检测SID是否过期 过期后要重新登录
-  checkSID: function() {
+  checkSID: async function() {
     const SID = wx.getStorageSync('SID');
     const SID_EXPIRATION = wx.getStorageSync('SID_EXPIRATION')
     const now = Date.parse(new Date());
@@ -168,16 +165,18 @@ const page = {
       console.log("存在SID并且没有过期", SID,now);
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
-      this._login();
+      await this._login();
+      this.fetchTaskFlows(this.data.u_id)
+
       return;
     }
   },
-  _login: function() {
+  _login:async function() {
     const that = this;
-    wx.login({
-      success: function(res) {
+    await wx.login({
+      success: async function(res) {
         console.log(res)
-        that.login(res.code);
+        await that.login(res.code);
       },
       fail: function(err) {
         console.log(err);
@@ -199,10 +198,19 @@ const page = {
   onLoad: function() {
     this.checkSID(); 
     this.getUserInfoFromStorage();
-    // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
-    // this.fetchUsers();
-    this.fetchTaskFlows(this.data.u_id)
+    const SID = wx.getStorageSync('SID');
+    if(SID){
+      this.fetchTaskFlows(this.data.u_id)
+    }
 
+    // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
+    
+
+  },
+  onShow: function() {
+    console.log(this.data)
+    // if(this.data.auth){
+    // }
   },
   // 用户分享
   onShareAppMessage: function(res) {
@@ -246,7 +254,8 @@ const mapStateToData = (state, options) => {
   });
   return {
     taskFlowList,
-    u_id: wx.getStorageSync('u_id')
+    u_id: wx.getStorageSync('u_id') || "no_user_id",
+    auth: state.auth.authenticated
   };
 }
 const mapDispatchToPage = dispatch => ({

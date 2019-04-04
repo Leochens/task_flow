@@ -14,7 +14,8 @@ const _page = {
     beginDate: formatTime(new Date()),
     endDate: formatTime(new Date()),
     members:[],
-    selectedMembers:[]
+    selectedMembers:[],
+    selectedMembersNames:[]
   },
   onLoad:function(op){
     const timeLimit = JSON.parse(op.time);
@@ -94,7 +95,7 @@ const _page = {
   selectMember:function(e){
     // console.log()
       wx.navigateTo({
-        url:'./select_member/select_member?members='+JSON.stringify(this.data.members)
+        url:'./select_member/select_member?members='+JSON.stringify(this.data.members)+"&selected_members="+JSON.stringify(this.data.selectedMembers)
       })
   },
   onSubmit:function(e){
@@ -102,8 +103,18 @@ const _page = {
 
     const data = e.detail.value;
     if(!data.t_name || !data.t_describe){
+      wx.showModal({
+        title: '提示',
+        content: '请填写完整字段',
+      })
       return false;
-
+    }
+    if(!this.data.selectedMembers.length){
+      wx.showModal({
+        title:"提示",
+        content: "请至少选择一个任务人"
+      });
+      return false;
     }
     const {t_name,t_describe} = data;
 
