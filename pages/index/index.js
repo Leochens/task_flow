@@ -217,6 +217,11 @@ const page = {
 
       }
     }
+  },
+  onPullDownRefresh:function(){
+    wx.showNavigationBarLoading();
+    this.fetchTaskFlows(this.data.u_id)
+    wx.stopPullDownRefresh();
   }
 };
 

@@ -35,12 +35,12 @@ const successFilter = (resource, payload) => {
         default: return;
     }
 }
-const failureFilter = (resource, payload) => {
+const failureFilter = (resource, error) => {
     switch (resource) {
         case 'tasks':
         case 'task_flows': {
             wx.showToast({
-                title: payload.msg,
+                title: error || "失败",
             });
             setTimeout(
                 () => wx.navigateBack(),
@@ -53,7 +53,8 @@ const failureFilter = (resource, payload) => {
 export default (state = defaultState, {
     type,
     payload,
-    meta
+    meta,
+    error
 }) => {
     switch (type) {
         case CRUD_CREATE_LOADING:
@@ -80,7 +81,7 @@ export default (state = defaultState, {
         case CRUD_DELETE_FAILURE:
         case CRUD_UPDATE_FAILURE: {
             wx.hideLoading();
-            failureFilter(meta.resource, payload);
+            failureFilter(meta.resource, error);
             return state;
         }
         default:
