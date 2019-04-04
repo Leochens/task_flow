@@ -27,9 +27,12 @@
           </view>
         </view>
         <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
+          <button class="fack-btn" open-type="getUserInfo"  bindgetuserinfo="getUserInfo">
           <view class='icon-cu-image text-white text-bold'  bindtap='addNewTaskFlow'>
             <text class='icon-add '></text>
+
           </view>
+          </button>
         </view>
       </block>
       <!-- 样式2 -->

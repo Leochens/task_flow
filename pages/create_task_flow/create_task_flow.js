@@ -17,7 +17,6 @@ const _page = {
     endDate: formatTime(new Date()),
     leader:wx.getStorageSync('userInfo').nickName 
   },
-
   bindBeginDateChange: function (e) {
     const {
       beginDate: oldBegindate,
