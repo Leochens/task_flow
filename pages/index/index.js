@@ -238,6 +238,8 @@ const mapStateToData = (state, options) => {
   const entities = {...state.entities};
   // 组装一个完整的tf列表
   const _taskFlowList = ids.task_flows.map(id=>entities.task_flows[id]);
+  console.log(_taskFlowList);
+
   const taskFlowList = _taskFlowList.map(item=>{
     const {members,tasks} = item;
     let _item = {...item};

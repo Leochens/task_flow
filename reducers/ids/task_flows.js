@@ -9,7 +9,7 @@ const task_flows = (state = [], action) => {
         case CRUD_GET_LIST_SUCCESS: {
             if (!range.includes(meta.resource)) return state;
             return [
-                ...state,
+                // ...state,
                 ...payload.result
             ]
         }

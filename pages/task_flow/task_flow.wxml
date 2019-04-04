@@ -12,10 +12,33 @@
       <view class="task-flow-leader">负责人:{{leader.nick_name}}</view>
     </view>
   </view>
-  <view class='content' hidden="{{!ready}}">
+  <view class='content'>
     <view class="child-task-list animated slideInDown" style="animation-duration:{{tasks.length*0.3}}s">
       <view class="line "></view>
-      <view  wx:for="{{tasks}}" wx:key="{{index}}"  class="item animated slideInLeft" style="animation-delay:{{index*0.2}}s">
+      <view class="item animated slideInLeft">
+        <view class="dot-wrap">
+          <view class="dot" style="background-color:#1EA227"></view>
+          <view class="date">{{dateTimeSplit.dateSplit(begin_time)}}</view>
+          <view class="time">{{dateTimeSplit.timeSplit(begin_time)}}</view>
+        </view>
+        <view class="task-card">
+          <view class="task-info">
+            <view class="deadline-time" style="margin-left:0">
+              <text class="text-bold">任务流截止时间:</text>
+              {{end_time}}
+            </view>
+          </view>
+          <view class="task-describe">
+            <text class="text-bold">简介:</text>
+            {{tf_describe}}
+          </view>
+          <view class="task-describe" hidden="{{tasks.length}}">
+            <text class="text-bold">提示:</text>
+                <view>您还没有创建子任务,可以点击下方的<text class="text-info text-bold">加子任务</text>来添加一个子任务</view>
+          </view>
+        </view>
+      </view>
+      <view hidden="{{!ready}}" wx:for="{{tasks}}" wx:key="{{index}}" class="item animated slideInLeft" style="animation-delay:{{index*0}}s">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
@@ -35,10 +58,9 @@
           <view class="task-info">
             <view class="exec-perple">
               执行人:
-              <text wx:for="{{item.members}}" 
-              wx:for-item="it" 
-              wx:for-index="id" 
-              wx:key="id">{{it.nick_name}}</text>
+              <text wx:for="{{item.members}}" wx:for-item="it" wx:for-index="id" wx:key="id">
+                {{it.nick_name}}
+              </text>
             </view>
             <view class="deadline-time">截止到{{item.end_time}}</view>
           </view>

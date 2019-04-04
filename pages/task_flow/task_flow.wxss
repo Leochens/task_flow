@@ -65,7 +65,7 @@ page{
 
 .item .dot-wrap{
     position: absolute;
-    left: -28rpx;
+    left: -30rpx;
     top: 0;
     display: flex;
     align-items: center;
@@ -195,11 +195,9 @@ page{
 
 }
 
-
-@keyframes ani{
-    from{
-        left: -1000rpx;
-    }to{
-        left: 0;
-    }
+.text-bold{
+    font-weight: bold;
+}
+.text-info{
+    color: #2967AF;
 }
