@@ -12,10 +12,10 @@
       <view class="task-flow-leader">负责人:{{leader.nick_name}}</view>
     </view>
   </view>
-  <view class='content'>
-    <view class="child-task-list animated slideInDown">
+  <view class='content' hidden="{{!ready}}">
+    <view class="child-task-list animated slideInDown" style="animation-duration:{{tasks.length*0.3}}s">
       <view class="line "></view>
-      <view  wx:for="{{tasks}}" wx:key="{{index}}"  class="item animated slideInLeft" style="animation-delay:{{index*0.1}}s">
+      <view  wx:for="{{tasks}}" wx:key="{{index}}"  class="item animated slideInLeft" style="animation-delay:{{index*0.2}}s">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>

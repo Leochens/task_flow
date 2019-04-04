@@ -21,7 +21,7 @@ const page = {
     category: '',
     members: [],
     CustomBar: app.globalData.CustomBar,
-
+    ready:false
   },
 
   /**
@@ -40,8 +40,10 @@ const page = {
     this.setData({
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
-      tasks: classfiedTasks
-    })
+      tasks: classfiedTasks,
+      ready:true
+    });
+
   },
   classifyTask: function (t) {
     // 将子任务按照开始日期分类 同一天的放进一个数组里 还要排序 日期大类排序决定渲染顺序  

@@ -12,7 +12,7 @@
         <view class="deadline">截止到{{task.end_time}}</view>
     </view>
     <view class="main">
-        <view class="line">
+        <view class="line animated">
             <view class="dot"></view>
         </view>
         <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{false}}">
@@ -40,7 +40,7 @@
                             </view>
                             <view class="tr" wx:for="{{task.members}}" wx:key="">
                                 <view class="td">{{item.nick_name}}</view>
-                                <view class="td">{{item.status||'正常'}}</view>
+                                <view class="td {{item.user_status?'':'text-red'}}">{{item.user_status?'正常':'请假'}}</view>
                             </view>
                         </view>
                     </view>

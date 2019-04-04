@@ -9,7 +9,7 @@ const page = {
    * 页面的初始数据
    */
   data: {
-
+    task: []
   },
 
   /**
@@ -23,17 +23,29 @@ const page = {
     const u_ids = task.members.map(mem=>mem.id);
     console.log(u_ids);
     this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
-    console.log(task);
     this.setData({
-      task
+      task,
+      
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    const task = {...this.data.task};
+    const statusIds = this.data.status.map(st=>st.u_id);
+    console.log(statusIds);
+    task.members.forEach(mem=>{
+      if(statusIds.includes(mem.id)){
+        mem.user_status = this.data.status.filter(st=>mem.id === st.u_id)[0].user_status;
+      }
+    })
 
+    console.log(task);
+    this.setData({
+      task,
+      
+    })
   },
 
   /**
@@ -82,6 +94,7 @@ const page = {
 const mapStateToData = state => {
   
   return {
+    status: state.currentTaskMemberStatus
   };
 }
 const mapDispatchToPage = dispatch => ({
