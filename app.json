@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/invite/invite",
     "pages/task/task",
     "pages/test/test",
     "pages/task_flow/create_task/create_task",
@@ -10,7 +11,6 @@
     "pages/task_flow/add_member/add_member",
     "pages/task_flow/my_tasks/my_tasks",
     "pages/task_flow/all_members/all_members",
-    "pages/invite/invite",
     "pages/task_flow/task_flow",
     "pages/logs/logs",
     "pages/auth/auth",

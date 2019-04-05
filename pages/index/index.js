@@ -23,6 +23,7 @@ const app = getApp()
 const page = {
   data: {
     hasAuth: false,
+    showCom:true,
     currentIndex: 0,
     isClassify: false,
     isFilter: MENU.NONE,
@@ -157,7 +158,7 @@ const page = {
   },
 
   // 检测SID是否过期 过期后要重新登录
-  checkSID: async function() {
+  checkSID: function() {
     const SID = wx.getStorageSync('SID');
     const SID_EXPIRATION = wx.getStorageSync('SID_EXPIRATION')
     const now = Date.parse(new Date());
@@ -165,18 +166,18 @@ const page = {
       console.log("存在SID并且没有过期", SID,now);
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
-      await this._login();
+      this._login();
       this.fetchTaskFlows(this.data.u_id)
 
       return;
     }
   },
-  _login:async function() {
+  _login:function() {
     const that = this;
-    await wx.login({
-      success: async function(res) {
+    wx.login({
+      success: function(res) {
         console.log(res)
-        await that.login(res.code);
+        that.login(res.code);
       },
       fail: function(err) {
         console.log(err);
@@ -209,8 +210,6 @@ const page = {
   },
   onShow: function() {
     console.log(this.data)
-    // if(this.data.auth){
-    // }
   },
   // 用户分享
   onShareAppMessage: function(res) {

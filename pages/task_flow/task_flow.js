@@ -92,7 +92,7 @@ const page = {
   // 邀请新成员
   addMember: function () {
     wx.navigateTo({
-      url: './add_member/add_member',
+      url: './add_member/add_member?tf_id='+this.data.id+"&who="+this.data.leader.nick_name+"&tf_name="+this.data.tf_name+"&cnt="+this.data.members.length+"&avatar="+this.data.leader.avatar_url
     })
   },
   // 加入星标

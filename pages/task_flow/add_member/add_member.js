@@ -5,62 +5,38 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    tf_id: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const {tf_id,who,tf_name,cnt,avatar} = options;
+    this.setData({
+      tf_id,
+      who,
+      tf_name,
+      cnt,
+      avatar
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    console.log(e);
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+
+    return {
+      title: '任务流邀请',//分享内容
+      path: '/pages/invite/invite?tf_id='+this.data.tf_id+"&who="+this.data.who+"&tf_name="+this.data.tf_name+"&cnt="+this.data.cnt+"&avatar="+this.data.avatar,//分享地址
+    }
 
   }
+
 })

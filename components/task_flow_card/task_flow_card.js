@@ -5,16 +5,44 @@ Component({
    */
   properties: {
     taskFlowData: {
-      type: Object
+      type: Object,
+      observer:function(newVal,oldVal,changedPath){
+        //更新数据
+        this.setData({
+          tfData:newVal
+        })
+      }
     }
   },
-
+  observers:{
+    'taskFlowData':function(taskFlowData){
+      const tf = taskFlowData;
+      // console.log(tf);
+      const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
+      const { begin_time, end_time, tasks,members } = tf;
+      const _tasks = [...tasks];
+      const dateData = this.calculateDate(begin_time, end_time);
+      const taskData = this.calculateTask(_tasks);
+  
+      this.setData({
+        count: tf.members.length,
+        paneData: {
+          dateData,
+          taskData
+        },
+        leader,
+        members,
+        tfData:tf
+      })
+    }
+  },
   /**
    * 组件的初始数据
    */
   data: {
     count: 0,
-    isProcessPaneActive: false
+    isProcessPaneActive: false,
+    tfData:{}
   },
 
   ready: function () {
@@ -22,8 +50,9 @@ Component({
     // console.log(tf);
     const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
     const { begin_time, end_time, tasks,members } = tf;
+    const _tasks = [...tasks];
     const dateData = this.calculateDate(begin_time, end_time);
-    const taskData = this.calculateTask(tasks);
+    const taskData = this.calculateTask(_tasks);
 
     this.setData({
       count: tf.members.length,
@@ -32,10 +61,10 @@ Component({
         taskData
       },
       leader,
-      members
+      members,
+      tfData:tf
     })
   },
-
   /**
    * 组件的方法列表
    */

@@ -8,6 +8,12 @@ const store = configureStore();
 App(Provider(store)({
   onLaunch: function(options) {
     console.log("opts", options);
+    if(options.shareTicket){
+      wx.showModal({
+        title:'test',
+        content:JSON.stringify(options.shareTicket)
+      })
+    }
     const that = this;
     wx.getSystemInfo({
       success: function(e) {

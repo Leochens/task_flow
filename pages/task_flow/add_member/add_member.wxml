@@ -3,7 +3,10 @@
 <view class="main">
     <view class="tip">开始召集伙伴</view>
     <image src="../../../assets/imgs/task_flow/add.svg" class="add"/>
-    <view class="tip">点我分享给微信好友或微信群添加伙伴</view>
+    <view class="tip">点我分享给微信好友或微信群添加伙伴
+        <button open-type="share">来吧</button>
+
+    </view>
 </view>
 
 <view class="ok-btn">查看成员</view>

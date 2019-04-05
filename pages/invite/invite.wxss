@@ -44,7 +44,7 @@
 }
 .member-count{
   text-align: center;
-  font-size: 20rpx;
+  font-size: 24rpx;
   margin-top: 32rpx;
 }
 .btn-group{
@@ -73,7 +73,9 @@
   display: flex;
   justify-content: center;
   align-self:flex-end;
-  margin-top: 330rpx;
+  position: absolute;
+  bottom: 100rpx;
+
 }
 .copyright image{
   height: 54rpx;

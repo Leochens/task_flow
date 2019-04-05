@@ -1,10 +1,10 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
 <view class="task-flow-card animated slideInLeft">
   <view class="title-wrap">
-    <view class="task-flow-title">{{taskFlowData.tf_name}}</view>
-    <image src="../../assets/imgs/task_flow/check{{taskFlowData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+    <view class="task-flow-title">{{tfData.tf_name}}</view>
+    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
   </view>
-  <view class="task-flow-date-limit">{{taskFlowData.begin_time}}~{{taskFlowData.end_time}}</view>
+  <view class="task-flow-date-limit">{{tfData.begin_time}}~{{tfData.end_time}}</view>
   <view class="task-flow-member-count">参与人员:{{count}}人
     <view class="avatars">
       <image class="item"  wx:for="{{members}}" wx:key src="{{item.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
@@ -15,14 +15,14 @@
 
   </view>
   <view class="task-flow-leader">负责人: {{leader.nick_name}}</view>
-  <view class="task-flow-describe">任务概要: {{taskFlowData.tf_describe}}
+  <view class="task-flow-describe">任务概要: {{tfData.tf_describe}}
 
     <image class="toggle" style="transform: rotate({{isProcessPaneActive?180:0}}deg);" catch:tap="toggle" src="../../assets/imgs/index/arrow.svg"></image>
   </view>
   
   <view class="process-pane" style="max-height:{{isProcessPaneActive?'':0}};transform:translateX({{isProcessPaneActive?0:-1000}}rpx)" >
     <view class="item">
-      <view class="title">截止日期{{taskFlowData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天</view>
+      <view class="title">截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天</view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.last?'#2967AF':'red'}}"></view>
       </view>
