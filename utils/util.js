@@ -30,12 +30,15 @@ const formatDateInObject = obj => {
 
   for(let id in obj){
     const {begin_time,end_time,create_time } = obj[id];
-    if(begin_time&&end_time){
 
-      obj[id].begin_time = formatDate(begin_time);
-      obj[id].end_time = formatDate(end_time);
+    if(begin_time&&end_time){
+      const bt = new Date(begin_time);
+      const et = new Date(end_time);
+      obj[id].begin_time = formatTime(bt);
+      obj[id].end_time = formatTime(et);
     }else if(create_time){
-      obj[id].create_time = formatDate(create_time);
+      const ct = new Date(create_time);
+      obj[id].create_time = formatTime(ct);
     }else return;
   }
 }

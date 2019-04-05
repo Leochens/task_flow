@@ -24,9 +24,11 @@ const successFilter = (resource, payload) => {
     switch (resource) {
         case 'tasks':
         case 'task_flows': {
-            wx.showToast({
-                title: payload.msg || "成功"
-            });
+            if (payload.msg) {
+                wx.showToast({
+                    title: payload.msg
+                });
+            }
             setTimeout(
                 () => wx.navigateBack(),
                 1000);
@@ -44,7 +46,7 @@ const loadingFilter = (resource) => {
             })
             break;
         }
-        case 'auth':{
+        case 'auth': {
             wx.showLoading({
                 title: "登录中"
             });

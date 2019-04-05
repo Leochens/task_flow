@@ -101,9 +101,10 @@ const page = {
   toTaskFlowDetail: function(e) {
     // console.log(e);
     const tf_id = e.target.dataset.tfid;
-    const tf=this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
+    // const tf=this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
     wx.navigateTo({
-      url: '../task_flow/task_flow?tf='+JSON.stringify(tf),
+      // url: '../task_flow/task_flow?tf='+JSON.stringify(tf),
+      url: '../task_flow/task_flow?tf_id='+tf_id,
       
       success: function(res) {
         console.log(res);
@@ -164,6 +165,10 @@ const page = {
     const now = Date.parse(new Date());
     if (SID && SID_EXPIRATION > now) { //存在SID并且没有过期
       console.log("存在SID并且没有过期", SID,now);
+      app.globalData.SID = SID;
+      app.globalData.u_id = this.data.u_id;
+      
+
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
       this._login();
@@ -204,12 +209,14 @@ const page = {
       this.fetchTaskFlows(this.data.u_id)
     }
 
+
     // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
     
 
   },
-  onShow: function() {
-    console.log(this.data)
+  onShow: function(e) {
+    console.log(e);
+    // this.onPullDownRefresh();
   },
   // 用户分享
   onShareAppMessage: function(res) {

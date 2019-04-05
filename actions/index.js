@@ -23,8 +23,14 @@ export const addTaskFlow = (u_id,tf) =>{
     return crudCreate('task_flows',{tf},`users/${u_id}/task_flows`);
 }
 
-export const addTask = (tf_id,task) =>{
-    return crudCreate('tasks',{task},`task_flows/${tf_id}/tasks`);
+export const addTask = (tf_id,task,members) =>{
+    const normalizeFunc = response => {
+        console.log("待nomalize==>",response);
+        const task = normalize(response.data, Schemas.task);
+        console.log("nomalize后==>",task);
+        return task;
+    }
+    return crudCreate('tasks',{task},`task_flows/${tf_id}/tasks`,{members,normalizeFunc});
 }
 
 

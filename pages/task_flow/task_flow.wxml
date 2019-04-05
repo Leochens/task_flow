@@ -5,7 +5,7 @@
   <view class='task-flow-info'>
     <view class="task-flow-name">
       {{tf_name}}
-      <image src="../../assets/imgs/task_flow/edit.svg" />
+      <image hidden="{{!is_leader}}" src="../../assets/imgs/task_flow/edit.svg" />
     </view>
     <view class="else">
       <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
@@ -13,9 +13,9 @@
     </view>
   </view>
   <view class='content'>
-    <view class="child-task-list animated slideInDown" style="animation-duration:{{tasks.length*0.3}}s">
+    <view class="child-task-list">
       <view class="line "></view>
-      <view class="item animated slideInLeft">
+      <view class="item">
         <view class="dot-wrap">
           <view class="dot" style="background-color:#1EA227"></view>
           <view class="date">{{dateTimeSplit.dateSplit(begin_time)}}</view>
@@ -34,11 +34,15 @@
           </view>
           <view class="task-describe" hidden="{{tasks.length}}">
             <text class="text-bold">提示:</text>
-                <view>您还没有创建子任务,可以点击下方的<text class="text-info text-bold">加子任务</text>来添加一个子任务</view>
+            <view>
+              您还没有创建子任务,可以点击下方的
+              <text class="text-info text-bold">加子任务</text>
+              来添加一个子任务
+            </view>
           </view>
         </view>
       </view>
-      <view hidden="{{!ready}}" wx:for="{{tasks}}" wx:key="{{index}}" class="item animated slideInLeft" style="animation-delay:{{index*0}}s">
+      <view hidden="{{!ready}}" wx:for="{{tasks}}" wx:key="{{index}}" class="item">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
@@ -56,11 +60,11 @@
             <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed?'_ok':''}}.svg" />
           </view>
           <view class="task-info">
-            <view class="exec-perple">
+            <view>
               执行人:
-              <text wx:for="{{item.members}}" wx:for-item="it" wx:for-index="id" wx:key="id">
+              <view class="exec-people" wx:for="{{item.members}}" wx:for-item="it" wx:for-index="id" wx:key="id">
                 {{it.nick_name}}
-              </text>
+              </view>
             </view>
             <view class="deadline-time">截止到{{item.end_time}}</view>
           </view>
@@ -70,21 +74,25 @@
     </view>
   </view>
   <view class='tabbar'>
-    <view class='tab-item' bind:tap="addTask">
+    <view class='tab-item' bind:tap="addTask" hidden="{{!is_leader}}">
       <image src='../../assets/imgs/task_flow/add.svg' class='tab-item-icon'></image>
       <view class='text'>加子任务</view>
     </view>
-    <view class='tab-item' bind:tap="addMember">
+    <view class='tab-item' bind:tap="addMember" hidden="{{!is_leader}}">
       <image src='../../assets/imgs/task_flow/add_member.svg' class='tab-item-icon'></image>
       <view class='text'>加新成员</view>
     </view>
-    <view class='tab-item' bind:tap="addFavor">
+    <!-- <view class='tab-item' bind:tap="addFavor">
       <image src='../../assets/imgs/task_flow/star.svg' class='tab-item-icon'></image>
       <view class='text'>加入星标</view>
-    </view>
+    </view> -->
     <view class='tab-item' bind:tap="checkData">
       <image src='../../assets/imgs/task_flow/curve.svg' class='tab-item-icon'></image>
       <view class='text'>任务曲线</view>
+    </view>
+    <view class='tab-item' bind:tap="myTasks">
+      <image src='../../assets/imgs/task_flow/my_task.svg' class='tab-item-icon' ></image>
+      <view class='text'>我的任务</view>
     </view>
     <view class='tab-item-important' bind:tap="allMembers">全部成员</view>
   </view>

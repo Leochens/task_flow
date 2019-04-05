@@ -58,8 +58,9 @@ Page({
     const selectedMembers = _selectedMembers.map(mem=>mem.nick_name);
     // 向上一页赋值
     prevPage.setData({
-      selectedMembers:currentSelected,
-      selectedMembersNames: selectedMembers
+      selectedMembersIds:currentSelected,
+      selectedMembersNames: selectedMembers,
+      selectedMembers:_selectedMembers
     });
     wx.navigateBack();
   }

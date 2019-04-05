@@ -1,5 +1,5 @@
 // import { } from '../../actions/fetchActions';
-import { CRUD_GET_LIST_SUCCESS } from '../../actions/dataActions';
+import { CRUD_GET_LIST_SUCCESS,CRUD_CREATE_SUCCESS,CRUD_CREATE } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 
 const range = ['task_flows'];
@@ -18,6 +18,20 @@ const tasks = (state = {}, action) => {
                 ...state,
                 ...tasks
             }
+        }
+        case CRUD_CREATE_SUCCESS:{
+            if(meta.resource === 'tasks'){
+                const { task } = payload.entities;
+                // const _task = JSON.parse(task);
+                // const {members} = meta;
+                // _task.members = members;
+                // console.log('即时添加',_task);
+                return{
+                    ...state,
+                    ...task
+                }
+            }
+            return state;
         }
         default: return state;
     }

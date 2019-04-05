@@ -21,27 +21,36 @@ const page = {
     category: '',
     members: [],
     CustomBar: app.globalData.CustomBar,
-    ready:false
+    ready: false,
+    is_leader:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  /**
+ * 生命周期函数--监听页面显示
+ */
+  onShow: function () {
+
+  },
   onLoad: function (options) {
     wx.hideTabBar({});
-    const tf = options.tf;
-    if (!tf) return;
-    const _tf = JSON.parse(options.tf);
-    console.log(_tf);
-    const { id, tf_name, tf_describe, leader_id, is_completed, tasks, members, begin_time, end_time,
-      category } = _tf;
 
+    const tf_id = options.tf_id;
+    if (!tf_id) return;
+    console.log(tf_id);
+    const task_flow = this.data.getTaskFlow(tf_id);
+    console.log(task_flow);
+    const { tasks, id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
     const classfiedTasks = this.classifyTask(tasks);
     this.setData({
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      ready:true
+      tf_id,
+      ready:true,
+      is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
     });
 
   },
@@ -73,9 +82,9 @@ const page = {
   taskDetail: function (e) {
     console.log(e);
     const tid = e.currentTarget.dataset.tid;
-    const task = this.data.tasks.filter(t=>t.id===tid)[0];
+    const task = this.data.tasks.filter(t => t.id === tid)[0];
     wx.navigateTo({
-      url: '../task/task?task='+JSON.stringify(task)
+      url: '../task/task?task=' + JSON.stringify(task)
     })
   },
   // 加新的子任务
@@ -92,7 +101,7 @@ const page = {
   // 邀请新成员
   addMember: function () {
     wx.navigateTo({
-      url: './add_member/add_member?tf_id='+this.data.id+"&who="+this.data.leader.nick_name+"&tf_name="+this.data.tf_name+"&cnt="+this.data.members.length+"&avatar="+this.data.leader.avatar_url
+      url: './add_member/add_member?tf_id=' + this.data.id + "&who=" + this.data.leader.nick_name + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.members.length + "&avatar=" + this.data.leader.avatar_url
     })
   },
   // 加入星标
@@ -122,12 +131,7 @@ const page = {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
 
-  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -148,26 +152,31 @@ const page = {
    */
   onPullDownRefresh: function () {
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 }
 
 const mapStateToData = state => {
-  return {
+  const { task_flows, tasks: _tasks, members: _members } = state.entities;
+  console.log("检测state是否变化", state);
+  const getTaskFlow = function (tf_id) {
+    const item = task_flows[tf_id];
+    const { members, tasks } = item;
 
+    let _item = { ...item };
+    _item.members = members.map(mid => _members[mid]);
+    _item.tasks = tasks.map(tid => _tasks[tid]);
+    _item.tasks = _item.tasks.map(t => {
+      const _t = { ...t };
+      const memIds = _t.members;
+      const mems = memIds.map(mid => _members[mid]);
+      _t.members = mems;
+      return _t;
+    });
+    return _item;
+  }
+
+  return {
+    getTaskFlow
   }
 }
 

@@ -35,6 +35,23 @@ const task_flows = (state = {
         };
         return newState;
       }
+    case CRUD_CREATE_SUCCESS: {
+      if(meta.resource === 'tasks'){
+        const _state = {...state}
+        const { entities:{task},result } = payload;
+        const tf_id = task.tf_id;
+        const prevTasks = _state[task[result].tf_id].tasks.slice();
+        prevTasks.push(task.result);
+        return{
+            ...state,
+            [tf_id]:{
+              ...state[tf_id],
+              tasks: prevTasks
+            }
+        }
+    }
+    return state;
+    }
     default:
       return state;
   }
