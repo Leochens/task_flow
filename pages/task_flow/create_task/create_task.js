@@ -16,7 +16,8 @@ const _page = {
     members:[],
     selectedMembersIds:[],
     selectedMembersNames:[],
-    selectedMembers:[]
+    selectedMembers:[],
+    tf_id:''
   },
   onLoad:function(op){
     const timeLimit = JSON.parse(op.time);
@@ -117,7 +118,7 @@ const _page = {
       });
       return false;
     }
-    const {t_name,t_describe} = data;
+    const {t_name,t_describe,tf_id} = data;
 
     const task = {
       t_name,
@@ -126,7 +127,8 @@ const _page = {
       begin_time: this.data.beginDate,
       end_time: this.data.endDate,
       is_important:false,
-      members:this.data.selectedMembers // 第二次sql执行
+      members:this.data.selectedMembers, // 第二次sql执行,
+      tf_id
     }
     this.addTask(this.data.tf_id,JSON.stringify(task),this.data.selectedMembers);
     

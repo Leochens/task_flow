@@ -22,7 +22,7 @@ const defaultState = {
 };
 const successFilter = (resource, payload) => {
     switch (resource) {
-        case 'tasks':
+        case 'tasks': { }
         case 'task_flows': {
             if (payload.msg) {
                 wx.showToast({
@@ -85,8 +85,13 @@ export default (state = defaultState, {
                 loadingFilter(meta.resource);
                 return state;
             }
+        case CRUD_GET_LIST_SUCCESS: {
+            if (meta.resource === 'tasks') {
+                wx.hideLoading();
+                return state;
+            }
+        }
         case CRUD_CREATE_SUCCESS:
-        case CRUD_GET_LIST_SUCCESS:
         case CRUD_DELETE_SUCCESS:
         case CRUD_UPDATE_SUCCESS:
             {

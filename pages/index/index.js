@@ -209,7 +209,7 @@ const page = {
       this.fetchTaskFlows(this.data.u_id)
     }
 
-
+    console.log("执行index的onLoad")
     // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
     
 

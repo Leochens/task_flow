@@ -38,10 +38,13 @@ const task_flows = (state = {
     case CRUD_CREATE_SUCCESS: {
       if(meta.resource === 'tasks'){
         const _state = {...state}
+        console.log("得到的到底是什么",action)
         const { entities:{task},result } = payload;
-        const tf_id = task.tf_id;
-        const prevTasks = _state[task[result].tf_id].tasks.slice();
-        prevTasks.push(task.result);
+        console.log("得到的到底是什么task",task,result)
+
+        const tf_id = task[result].tf_id;
+        const prevTasks = _state[tf_id].tasks.slice();
+        prevTasks.push(result);
         return{
             ...state,
             [tf_id]:{
