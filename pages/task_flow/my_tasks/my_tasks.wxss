@@ -59,6 +59,12 @@
 }
 .tasks .item .b2 .exec-people{
     margin-right: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.tasks .item .b2 .exec-people view{
+    min-width: 40rpx;
 }
 .tasks .item .t-describe{
     margin: 20rpx 0;

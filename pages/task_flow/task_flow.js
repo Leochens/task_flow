@@ -133,9 +133,9 @@ const page = {
       url: './task_flow_data/task_flow_data',
     })
   },
-  my_tasks: function () {
+  myTasks: function () {
     wx.navigateTo({
-      url: './my_tasks/my_tasks',
+      url: './my_tasks/my_tasks?tf_id='+this.data.id+"&tasks="+JSON.stringify(this.data.tasks)+"&tf_name="+this.data.tf_name,
     })
   },
   // 查看全部成员

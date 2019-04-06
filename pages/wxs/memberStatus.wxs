@@ -1,8 +1,13 @@
 var memberStatus = function(member,status){
-    var state = 0;
+    var state = "任务中";
     for(var i = 0;i<status.length;i++){
         if(member.id === status[i].u_id){
-            state = status[i].user_status;
+            st = status[i].user_status;
+            if(st === 0){
+                state = "已请假";
+            }else if(st===2){
+                state = "已完成"
+            }else {}
             break;
         }
     }

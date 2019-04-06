@@ -22,63 +22,21 @@ const page = {
     const t_id = task.id;
     const u_ids = task.members.map(mem=>mem.id);
     console.log(u_ids);
-    this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
     this.setData({
       task,
     });
-    
+    this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
+
 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onShow: function () {
     const status = [...this.data.status];
     this.setData({
       status
     });
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   }
 }
 

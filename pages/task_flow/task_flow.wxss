@@ -138,11 +138,11 @@ page{
 }
 .task-card .task-info{
     font-size: 24rpx;
-    display: flex;
-    align-items: center;
+    /* display: flex; */
+    /* align-items: center; */
 }
 .task-card .task-info .deadline-time{
-    margin-left: 20rpx;
+    /* margin-left: 20rpx; */
 }
 .task-card .task-describe{
     font-size: 24rpx;

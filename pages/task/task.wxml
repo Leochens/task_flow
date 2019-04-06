@@ -41,7 +41,7 @@
                             </view>
                             <view class="tr" wx:for="{{task.members}}" wx:key="">
                                 <view class="td">{{item.nick_name}}</view>
-                                <view class="td {{memberStatus(item,status)?'':'text-red'}}">{{memberStatus(item,status)?'正常':'请假'}}</view>
+                                <view class="td {{memberStatus(item,status)?'':'text-red'}}">{{memberStatus(item,status)}}</view>
                             </view>
                         </view>
                     </view>
