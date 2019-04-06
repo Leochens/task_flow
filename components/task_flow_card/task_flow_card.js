@@ -92,7 +92,7 @@ Component({
       return {
         duration: durationD,
         last,
-        percent
+        percent:percent||100
       }
     },
     calculateTask: function(tasks){

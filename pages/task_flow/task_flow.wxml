@@ -42,7 +42,7 @@
           </view>
         </view>
       </view>
-      <view hidden="{{!ready}}" wx:for="{{tasks}}" wx:key="{{index}}" class="item">
+      <view wx:for="{{tasks}}" wx:key="{{index}}" class="item">
         <view class="dot-wrap">
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>

@@ -12,6 +12,9 @@ Component({
     },
     isSelected: {
       type: Boolean
+    },
+    disableSelect: {
+      type:Boolean
     }
   },
 
@@ -31,7 +34,7 @@ Component({
    */
   methods: {
     toggleSelect: function (e) {
-
+      if(this.data.disableSelect) return;
       this.setData({
         flag: !this.data.flag
       });

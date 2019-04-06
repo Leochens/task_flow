@@ -2,6 +2,8 @@
   "usingComponents": {
     "nav-bar": "../../common/nav_bar/nav_bar"
   },
-  "backgroundColor": "#000"
+  "backgroundColor": "#000",
+  "enablePullDownRefresh": true
+    
  
 }

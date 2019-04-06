@@ -2,7 +2,6 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { apiBaseUrl} from '../../appConfig.js'
 const app = getApp();
 import {
   fetchTasks
@@ -25,7 +24,6 @@ const page = {
     category: '',
     members: [],
     CustomBar: app.globalData.CustomBar,
-    ready: false,
     is_leader:false
   },
 
@@ -40,6 +38,7 @@ const page = {
   },
   onShow: function () {
     const tf_id = this.data.id;
+    wx.showLoading();
     this.fetchTasks(tf_id);    
     const task_flow = this.data.taskFlowList.filter(tf=>tf.id ===tf_id)[0];
     console.log(task_flow);
@@ -49,10 +48,10 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      tf_id,
-      ready:true,
       is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
     });
+    wx.hideLoading();
+
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -68,8 +67,6 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      tf_id,
-      ready:true,
       is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
     });
 
@@ -143,20 +140,20 @@ const page = {
   },
   // 查看全部成员
   allMembers: function () {
-
+    wx.navigateTo({
+      url: './all_members/all_members?tf_id='+this.data.id+"&members="+JSON.stringify(this.data.members)
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
     // 下拉刷新任务
+    wx.showNavigationBarLoading();
+    this.fetchTasks(this.data.id);
+    wx.stopPullDownRefresh();
+
   }
 }
 

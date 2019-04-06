@@ -5,30 +5,35 @@
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
   </view>
   <view class="task-flow-date-limit">{{tfData.begin_time}}~{{tfData.end_time}}</view>
-  <view class="task-flow-member-count">参与人员:{{count}}人
+  <view class="task-flow-member-count">
+    参与人员:{{count}}人
     <view class="avatars">
-      <image class="item"  wx:for="{{members}}" wx:key src="{{item.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
+      <image class="avatar-item" wx:for="{{members}}" wx:key src="{{item.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
       <!-- <image class="item" wx:for="{{15}}" hidden="{{index>2}}" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132" /> -->
-
-     
     </view>
-
   </view>
-  <view class="task-flow-leader">负责人: {{leader.nick_name}}</view>
-  <view class="task-flow-describe">任务概要: {{tfData.tf_describe}}
-
+  <view class="task-flow-leader">
+    负责人:
+    <image class="avatar-item" src="{{leader.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
+    {{leader.nick_name}}
+  </view>
+  <view class="task-flow-describe">
+    任务概要: {{tfData.tf_describe}}
     <image class="toggle" style="transform: rotate({{isProcessPaneActive?180:0}}deg);" catch:tap="toggle" src="../../assets/imgs/index/arrow.svg"></image>
   </view>
-  
-  <view class="process-pane" style="max-height:{{isProcessPaneActive?'':0}};transform:translateX({{isProcessPaneActive?0:-1000}}rpx)" >
+  <view class="process-pane" style="max-height:{{isProcessPaneActive?'':0}};transform:translateX({{isProcessPaneActive?0:-1000}}rpx)">
     <view class="item">
-      <view class="title">截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天</view>
+      <view class="title">
+        截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天
+      </view>
       <view class="bar-wrap">
-        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.last?'#2967AF':'red'}}"></view>
+        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.percent<80?'#2967AF':paneData.dateData.percent>=100?'#ddd':'#A80000'}};"></view>
       </view>
     </view>
     <view class="item">
-      <view class="title">任务完成进度: {{paneData.taskData.completedCount}}/{{paneData.taskData.count}}</view>
+      <view class="title">
+        任务完成进度: {{paneData.taskData.completedCount}}/{{paneData.taskData.count}}
+      </view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.taskData.percent}}%"></view>
       </view>

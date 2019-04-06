@@ -28,6 +28,8 @@
 
 .task-flow-leader{
   margin: 10rpx 0;
+  display: flex;
+  align-items: center;
 }
 .task-flow-date-limit{
   font-size: 20rpx;
@@ -106,11 +108,12 @@
   text-overflow:ellipsis;
   white-space:nowrap;
 }
-.avatars .item{
+.avatar-item{
   display: inline-block;
   width: 35rpx;
   height: 35rpx;
   border-radius: 8rpx;
+  vertical-align: middle;
 }
 
 

@@ -21,6 +21,9 @@
   .member-name {
     margin-top: 10rpx;
     text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   .member-item.selected{
     color: #2665AE;
