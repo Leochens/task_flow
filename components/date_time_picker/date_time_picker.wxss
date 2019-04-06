@@ -1,10 +1,10 @@
 /* components/date_time_picker/date_time_picker.wxss */
 .picker{
-  font-size: 28rpx;
-  height: 65rpx;
+  font-size: 35rpx;
+  height: 80rpx;
   border: 1rpx solid #ddd;
   border-radius: 8rpx;
   padding: 0 16rpx;
-  line-height: 65rpx;
+  line-height: 80rpx;
   color: #666;
 }

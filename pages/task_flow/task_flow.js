@@ -24,7 +24,8 @@ const page = {
     category: '',
     members: [],
     CustomBar: app.globalData.CustomBar,
-    is_leader:false
+    is_leader:false,
+    ready:false
   },
 
   /**
@@ -46,7 +47,8 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
+      is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
+
     });
     console.log("此时set Data")
     wx.hideLoading();
@@ -71,7 +73,9 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
+      is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
+      ready:true
+
     });
 
 

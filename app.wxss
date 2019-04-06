@@ -171,3 +171,24 @@
 
 
 
+
+.hover-effect{
+  background-color: #eee;
+  transition: all .2s ease-in-out;
+}
+
+@keyframes slideInUp{
+  from{
+      transform: translateY(200rpx);
+  }
+}
+@keyframes slideInDown{
+  from{
+      transform: translateY(-400rpx);
+  }
+}
+@keyframes slideInLeft{
+  from{
+      transform: translateX(-1000rpx);
+  }
+}

@@ -237,3 +237,11 @@ padding: 10rpx 0;
     font-size: 24rpx;
     width: 20%;
 }
+
+
+
+.empty-comment{
+    font-size: 30rpx;
+    font-weight: bold;
+    text-align: center;
+}

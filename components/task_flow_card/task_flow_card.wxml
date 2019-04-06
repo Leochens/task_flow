@@ -1,5 +1,5 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
-<view class="task-flow-card animated slideInLeft">
+<view class="task-flow-card">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
@@ -27,7 +27,7 @@
         截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天
       </view>
       <view class="bar-wrap">
-        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.percent<80?'#2967AF':paneData.dateData.percent>=100?'#ddd':'#A80000'}};"></view>
+        <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.percent<80?'#2967AF':paneData.dateData.percent>=100?'#eee':'#A80000'}};"></view>
       </view>
     </view>
     <view class="item">

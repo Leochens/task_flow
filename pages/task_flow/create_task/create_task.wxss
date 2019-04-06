@@ -1,7 +1,7 @@
 /* pages/task_flow/create_task/create_task.wxss */
 
 .rh-form{
-    width: 70%;
+    width: 80%;
     display: block;
     margin:auto;
     color: #333;
@@ -10,16 +10,16 @@
   margin: 20rpx 0;
   }
   .rh-input{
-    font-size: 28rpx;
-    height: 65rpx;
+    font-size: 35rpx;
+    height: 80rpx;
     border: 1rpx solid #ddd;
     border-radius: 8rpx;
     padding: 0 16rpx;
-    line-height: 65rpx;
+    line-height: 80rpx;
     color: #666;
   }
   .rh-textarea{
-    font-size: 28rpx;
+    font-size: 35rpx;
     height: 150rpx;
     width: 100%;
     border: 1rpx solid #ddd;
@@ -27,17 +27,19 @@
     padding: 0 16rpx;
     color: #666;
   }
-  .rh-label{
-   font-size: 28rpx;
+  .rh-lable{
+   font-size: 35rpx;
     color: #666;
   }
   .rh-submit-btn{
     background-color: #2665ae;
     color: #fff;
-    font-size: 28rpx;
-    margin-top: 20rpx;
+    font-size: 35rpx;
     text-align: center;
     height: 65rpx;
     line-height: 65rpx;
     border-radius: 8rpx;
+    position: absolute;
+    bottom: 30rpx;
+    width: 80%;
   }

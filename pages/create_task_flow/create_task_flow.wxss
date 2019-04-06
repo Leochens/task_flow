@@ -5,7 +5,7 @@
 }
 
 .blanks {
-  width: 70%;
+  width: 80%;
   margin: auto;
 }
 
@@ -14,12 +14,12 @@
 }
 
 .task-item .tips {
-  font-size: 28rpx;
+  font-size: 35rpx;
   color: #666;
 }
 
 /* .task-item picker {
-  font-size: 28rpx;
+  font-size: 35rpx;
   height: 65rpx;
   border: 1rpx solid #ddd;
   border-radius: 8rpx;
@@ -29,12 +29,12 @@
 } */
 
 .task-item input {
-  font-size: 28rpx;
-  height: 65rpx;
+  font-size: 35rpx;
+  height: 80rpx;
   border: 1rpx solid #ddd;
   border-radius: 8rpx;
   padding: 0 16rpx;
-  line-height: 65rpx;
+  line-height: 80rpx;
   color: #666;
 
 }
@@ -45,14 +45,16 @@
   padding: 8rpx;
   width: 100%;
   height: 250rpx;
-  font-size: 28rpx;
+  font-size: 35rpx;
   color: #666;
 }
 
 .complete {
-  width: 70%;
+  width: 80%;
   background-color: #2665ae;
   color: #fff;
-  font-size: 28rpx;
-  margin-top: 20rpx;
+  font-size: 35rpx;
+  position: absolute;
+  bottom: 30rpx;
+  margin-left: 10%;
 }

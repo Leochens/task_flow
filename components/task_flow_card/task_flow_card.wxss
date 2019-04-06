@@ -12,9 +12,8 @@
   display: block;
   margin: 10rpx auto;
   color: #666;
-  transition: height .3s ease-in-out;
   padding-bottom: 0;
-
+  animation: slideInLeft .3s ease-in-out;
 }
 
 .title-wrap{
@@ -83,7 +82,6 @@
   border-top: 1rpx solid #eee;
   overflow: hidden;
   transition: transform .3s ease-in-out;
-  
 }
 .process-pane .title{
   font-size: 20rpx;
@@ -99,6 +97,13 @@
   height: 100%;
   background-color: #2967AF;
   border-radius: 10rpx;
+  animation: bar .3s ease-in-out ;
+
+}
+@keyframes bar{
+  from{
+    width: 0%;
+  }
 }
 
 .avatars{
@@ -117,4 +122,13 @@
 }
 
 
+.hover-effect{
+  background-color: #eee;
+}
 
+
+@keyframes slideInLeft{
+  from{
+      transform: translateX(-1000rpx);
+  }
+}
