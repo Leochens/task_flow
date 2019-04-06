@@ -1,5 +1,5 @@
 //app.js
-wx.cloud.init();
+// console.log = ()=>{};
 import {
   Provider
 } from './libs/wechat-weapp-redux';

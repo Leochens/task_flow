@@ -4,6 +4,8 @@ const appConfig = {
   apiBaseUrl: 'https://api.mokis.top',
   expiration: 1000 * 60 * 60, //设置SID过期时间 1个小时
 };
+// const env = 'prod'
+const env = 'dev'
 
 
 export default appConfig;   

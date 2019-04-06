@@ -2,16 +2,28 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-// import { fetchTaskMemberStatus } from '../../actions/index';
+import { addComment } from '../../actions/index';
+import { formatTime } from '../../utils/util';
 const page = {
 
   /**
    * 页面的初始数据
    */
   data: {
-    task: []
+    task: {},
+    content: ""
   },
 
+  extendComment: function(cmt){
+    const { u_id } = cmt;
+    const members = this.data.members;
+    const author = members[u_id];
+    return {
+      ...cmt,
+      nick_name: author.nick_name,
+      avatar_url: author.avatar_url
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -19,35 +31,57 @@ const page = {
     // console.log(options);
     const task = JSON.parse(options.task);
     // 获得task后紧接着获得这个task的评论和人员的状态
-    const t_id = task.id;
-    const u_ids = task.members.map(mem=>{mem.id});
-    console.log(u_ids);
+    const comments = task.comments.map(cmt => this.extendComment(cmt));
+    console.log(task);
+    task.comments = comments;
     this.setData({
       task,
     });
-    // this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
-
 
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onShow: function () {
-    const status = [...this.data.status];
+  },
+  commentSubmit: function (e) {
+    console.log(e);
+    const content = e.detail.value.comment;
+    if (!content) {
+      wx.showToast({
+        title: "留言不能为空",
+      });
+      return;
+    }
+    const t_id = this.data.task.id;
+    const cmt = {
+      comment_type: 0,
+      content: content,
+      create_time: formatTime(new Date()),
+      u_id: wx.getStorageSync('u_id'),
+      t_id
+    }
+    this.addComment(t_id, JSON.stringify(cmt));
+    const comments = [...this.data.task.comments];
+    comments.push(this.extendComment(cmt));
     this.setData({
-      status
-    });
+      content: "",
+      task: {
+        ...this.data.task,
+        comments: comments
+      }
+    })
   }
 }
 
 const mapStateToData = state => {
-  
+
   return {
-    status: state.currentTaskMemberStatus
+    members: state.entities.members
   };
 }
 const mapDispatchToPage = dispatch => ({
-  // fetchTaskMemberStatus: (t_id,u_ids) => dispatch(fetchTaskMemberStatus(t_id,u_ids))
+  addComment: (t_id, cmt) => dispatch(addComment(t_id, cmt))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

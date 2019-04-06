@@ -2,7 +2,7 @@
 import { CRUD_GET_LIST_SUCCESS } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 
-const range = ['task_flows'];
+const range = ['task_flows','tasks'];
 const comments = (state = {}, action) => {
     const { type, payload, requestPayload, meta } = action;
 

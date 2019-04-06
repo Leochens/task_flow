@@ -30,24 +30,15 @@ export const fetchTasks = (tf_id) => {
 export const addTaskFlow = (u_id,tf) =>{
     return crudCreate('task_flows',{tf},`users/${u_id}/task_flows`);
 }
-
-export const addTask = (tf_id,task,members) =>{
-    const normalizeFunc = response => {
-        console.log("待nomalize==>",response);
-        const task = normalize(response.data, Schemas.task);
-        console.log("nomalize后==>",task);
-        return task;
-    }
-    return crudCreate('tasks',{task},`task_flows/${tf_id}/tasks`,{members,normalizeFunc});
-}
-
-
 export const fetchTaskMemberStatus = (t_id,u_ids) =>{
     return crudCreate('status',{u_ids},`tasks/${t_id}/users/status`);
 }
-
+export const addTask = (tf_id,task,members) =>{
+    return crudCreate('tasks',{task},`task_flows/${tf_id}/tasks`,{members});
+}
 export const addNewTaskFlowMember = (tf_id,u_id) => {
-    //  /task_flows/:tf_id/users
     return crudCreate('users',{u_id},`task_flows/${tf_id}/users`);
-    
+}
+export const addComment = (t_id,cmt) =>{
+    return crudCreate('comments',{cmt},`tasks/${t_id}/comments`,{t_id,cmt});
 }

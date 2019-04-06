@@ -59,22 +59,22 @@
             <swiper-item class="content">
                 <view class="begin-time">2019-2-1 14:35:44</view>
                 <view class="card card-comment">
-                    <view class="comment-item" wx:for="{{7}}" wx:key>
-                        <image class="avatar" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1493577052,2840165628&fm=200&gp=0.jpg" />
+                    <view class="comment-item" wx:for="{{task.comments}}" wx:key>
+                        <image class="avatar" src="{{item.avatar_url}}" />
                         <view class="comment">
                             <view class="name-time">
-                                <text class="name">张小三</text>
-                                <text class="time">2019-2-12 18:22:12</text>
+                                <text class="name">{{item.nick_name}}</text>
+                                <text class="time">{{item.create_time}}</text>
                             </view>
                             <view class="comment-content">
-                                我觉得时间可能不够用
+                                {{item.content}}
                             </view>
                         </view>
                     </view>
                 </view>
                 <form class="send-comment" bindsubmit="commentSubmit">
                     <view class="input-comment">
-                        <input name="comment" />
+                        <input name="comment" value="{{content}}"/>
                     </view>
                     <button form-type="submit" class="send-btn">留言</button>
                 </form>

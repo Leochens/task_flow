@@ -10,7 +10,7 @@ export const CRUD_GET_LIST = 'CRUD_GET_LIST';
 export const CRUD_GET_LIST_LOADING = 'CRUD_GET_LIST_LOADING';
 export const CRUD_GET_LIST_FAILURE = 'CRUD_GET_LIST_FAILURE';
 export const CRUD_GET_LIST_SUCCESS = 'CRUD_GET_LIST_SUCCESS';
-// 加入了 normalizeFunc
+
 export const crudGetList = (resource, pagination, sort, filter, basePath, meta) => ({
     type: CRUD_GET_LIST,
     payload: { pagination, sort, filter, basePath },

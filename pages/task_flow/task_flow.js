@@ -55,7 +55,7 @@ const page = {
     wx.showLoading();
     const tf_id = this.data.id;
     this.fetchTasks(tf_id);
-    setTimeout(this.setFunc,100);
+    setTimeout(this.setFunc,1000);
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -180,8 +180,11 @@ const mapStateToData = _state => {
     _item.tasks = _item.tasks.map(t=>{
       const _t = {...t};
       const memIds = _t.members; 
+      const cmtIds = _t.comments; 
       const mems = memIds.map(mid => entities.members[mid]);
+      const cmts = cmtIds.map(cid => entities.comments[cid]);
       _t.members = mems;
+      _t.comments = cmts;
       return _t;
     })
     return _item;
