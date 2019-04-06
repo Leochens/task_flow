@@ -1,5 +1,6 @@
 var memberStatus = function(member,status){
     var state = "任务中";
+
     for(var i = 0;i<status.length;i++){
         if(member.id === status[i].u_id){
             st = status[i].user_status;
@@ -11,7 +12,7 @@ var memberStatus = function(member,status){
             break;
         }
     }
-    console.log("user_status",state);
+    // console.log("user_status",state);
     return state;
 }
 

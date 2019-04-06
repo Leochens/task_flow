@@ -36,10 +36,8 @@ const page = {
   update: function(tf_id){
 
   },
-  onShow: function () {
+  setFunc: function(){
     const tf_id = this.data.id;
-    wx.showLoading();
-    this.fetchTasks(tf_id);    
     const task_flow = this.data.taskFlowList.filter(tf=>tf.id ===tf_id)[0];
     console.log(task_flow);
     const { tasks, id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
@@ -50,8 +48,14 @@ const page = {
       tasks: classfiedTasks,
       is_leader: wx.getStorageSync('u_id') === leader_id // 判断是否是leader
     });
+    console.log("此时set Data")
     wx.hideLoading();
-
+  },
+  onShow: function () {
+    wx.showLoading();
+    const tf_id = this.data.id;
+    this.fetchTasks(tf_id);
+    setTimeout(this.setFunc,100);
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -151,13 +155,15 @@ const page = {
   onPullDownRefresh: function () {
     // 下拉刷新任务
     wx.showNavigationBarLoading();
-    this.fetchTasks(this.data.id);
+    this.fetchTasks(this.data.id,this.setFunc);
+    this.onShow();
     wx.stopPullDownRefresh();
 
   }
 }
 
-const mapStateToData = state => {
+const mapStateToData = _state => {
+  const state = {..._state};
   const ids = {...state.ids};
   const entities = {...state.entities};
   // 组装一个完整的tf列表
@@ -167,8 +173,10 @@ const mapStateToData = state => {
   const taskFlowList = _taskFlowList.map(item=>{
     const {members,tasks} = item;
     let _item = {...item};
-    _item.members = members.map(mid=>entities.members[mid]);
-    _item.tasks = tasks.map(tid=>entities.tasks[tid]);
+    const _members = [...members];
+    const _tasks = [...tasks];
+    _item.members = _members.map(mid=>entities.members[mid]);
+    _item.tasks = _tasks.map(tid=>entities.tasks[tid]);
     _item.tasks = _item.tasks.map(t=>{
       const _t = {...t};
       const memIds = _t.members; 
@@ -185,7 +193,7 @@ const mapStateToData = state => {
 
 const mapDispatchToPage = dispatch => {
   return {
-    fetchTasks:tf_id=>dispatch(fetchTasks(tf_id))
+    fetchTasks:(tf_id)=>dispatch(fetchTasks(tf_id))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

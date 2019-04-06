@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { fetchTaskMemberStatus } from '../../actions/index';
+// import { fetchTaskMemberStatus } from '../../actions/index';
 const page = {
 
   /**
@@ -20,12 +20,12 @@ const page = {
     const task = JSON.parse(options.task);
     // 获得task后紧接着获得这个task的评论和人员的状态
     const t_id = task.id;
-    const u_ids = task.members.map(mem=>mem.id);
+    const u_ids = task.members.map(mem=>{mem.id});
     console.log(u_ids);
     this.setData({
       task,
     });
-    this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
+    // this.fetchTaskMemberStatus(t_id,JSON.stringify(u_ids));
 
 
   },
@@ -47,7 +47,7 @@ const mapStateToData = state => {
   };
 }
 const mapDispatchToPage = dispatch => ({
-  fetchTaskMemberStatus: (t_id,u_ids) => dispatch(fetchTaskMemberStatus(t_id,u_ids))
+  // fetchTaskMemberStatus: (t_id,u_ids) => dispatch(fetchTaskMemberStatus(t_id,u_ids))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

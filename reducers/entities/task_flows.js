@@ -23,38 +23,33 @@ const task_flows = (state = {
   switch (type) {
     case CRUD_GET_LIST_SUCCESS:
       {
-        if (!range.includes(meta.resource)) return state;
         if (!payload.entities) return state;
-
-        const { task_flows } = payload.entities;
-        if (!task_flows) return state;
-        formatDateInObject(task_flows);
-        const newState = {
-          ...state,
-          ...task_flows
-        };
-        return newState;
-      }
-    case CRUD_CREATE_SUCCESS: {
-      if(meta.resource === 'tasks'){
-        const _state = {...state}
-        console.log("得到的到底是什么",action)
-        const { entities:{task},result } = payload;
-        console.log("得到的到底是什么task",task,result)
-
-        const tf_id = task[result].tf_id;
-        const prevTasks = _state[tf_id].tasks.slice();
-        prevTasks.push(result);
-        return{
+        if (meta.resource === 'task_flows') {
+          const { task_flows } = payload.entities;
+          if (!task_flows) return state;
+          formatDateInObject(task_flows);
+          const newState = {
             ...state,
-            [tf_id]:{
-              ...state[tf_id],
-              tasks: prevTasks
-            }
+            ...task_flows
+          };
+          return newState;
         }
-    }
-    return state;
-    }
+        if (meta.resource === 'tasks') {
+          const { tf_id } = meta;
+          const { result } = payload;
+          const newState = {
+            ...state,
+            [tf_id]: {
+              ...state[tf_id],
+              tasks: [...result]
+            }
+          };
+          console.log("fetch Task结束")
+          return newState;
+        }
+        return state;
+      }
+
     default:
       return state;
   }
