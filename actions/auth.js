@@ -4,5 +4,5 @@ export function login(code) {
   return crudCreate('auth', {code})
 }
 export function gotUserInfo(id,userInfo){
-  return crudUpdate('profile',id,{userInfo});
+  return crudUpdate('profile',id,{userInfo},`profile/${id}`);
 }
