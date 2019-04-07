@@ -26,7 +26,7 @@ const pinTopList = (state = [], action) => {
             wx.setStorageSync('pin_top_list', pinTopList);
 
             const _state = state.slice();
-            _state.splice(pinTopList.indexOf(tf_id), 1);
+            _state.splice(_state.indexOf(tf_id), 1);
             return _state;
         }
         default: return state;
