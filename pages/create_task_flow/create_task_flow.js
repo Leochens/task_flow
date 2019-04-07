@@ -74,7 +74,8 @@ const _page = {
       return false;
     }
     this.setData({
-      endDate
+      endDate,
+      end_time:endDate
     })
   },
   onSubmit: function (e) {
@@ -96,15 +97,15 @@ const _page = {
         end_time,
         leader_id: u_id
       }));
-      // 更新前一页
-      const pages = getCurrentPages();
-      const len = pages.length;
-      const prevPage = pages[len -2];
-      prevPage.setData({
-        tf_name,
-        tf_describe,
-        end_time
-      })
+      // // 更新前一页
+      // const pages = getCurrentPages();
+      // const len = pages.length;
+      // const prevPage = pages[len -2];
+      // prevPage.setData({
+      //   tf_name,
+      //   tf_describe,
+      //   end_time
+      // })
     } else {
       this.addTaskFlow(u_id, JSON.stringify({
         tf_name,

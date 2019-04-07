@@ -85,13 +85,13 @@ Component({
       const dayUnit = 1000 * 60 * 60 * 24;
       const duration = ed.getTime() - bd.getTime();
       const now = (new Date());
-      let last = parseInt((ed.getTime() - now.getTime()) / dayUnit);
+      let last = ((ed.getTime() - now.getTime()) / dayUnit).toFixed(0);
       last = last >= 0 ? last : 0;
-      const durationD = parseInt(duration / dayUnit);
+      const durationD = ((duration / dayUnit)+1).toFixed(0);
       const percent = ((durationD - last) / durationD).toFixed(4) * 100;
       return {
         duration: durationD,
-        last,
+        last:last<0?0:last,
         percent:percent||100
       }
     },

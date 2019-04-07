@@ -3,7 +3,8 @@ import {
   CRUD_GET_LIST_SUCCESS,
   CRUD_CREATE_SUCCESS,
   CRUD_CREATE_LOADING,
-  CRUD_CREATE_FAILURE
+  CRUD_CREATE_FAILURE,
+  CRUD_UPDATE_SUCCESS
 } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 
@@ -49,6 +50,20 @@ const task_flows = (state = {
         }
         return state;
       }
+    case CRUD_UPDATE_SUCCESS:{
+        const {tf,tf_id} = requestPayload.data;
+        const _tf = JSON.parse(tf);
+        const {tf_name,tf_describe,end_time} = _tf;
+        return {
+          ...state,
+          [tf_id]:{
+            ...state[tf_id],
+            tf_name,
+            tf_describe,
+            end_time
+          }
+        }
+    }
 
     default:
       return state;
