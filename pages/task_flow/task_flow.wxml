@@ -22,6 +22,7 @@
           <view class="time">{{dateTimeSplit.timeSplit(begin_time)}}</view>
         </view>
         <view class="task-card">
+        <view class="border"></view>
           <view class="task-info">
             <view class="deadline-time" style="margin-left:0">
               <text class="text-bold">任务流截止时间:</text>
@@ -49,6 +50,8 @@
           <view class="time">{{dateTimeSplit.timeSplit(item.begin_time)}}</view>
         </view>
         <view class="task-card" hover-class="hover-effect" bind:tap="taskDetail" data-tid="{{item.id}}">
+        <view class="border" hidden="{{!item.is_completed}}" style="{{item.is_completed === 2?'background-color:#DA2037':''}}"></view>
+
           <view class="task-title">
             <view class="title-wrap">
               <view class="task-name">{{item.t_name}}</view>
@@ -57,7 +60,7 @@
                 {{item.members.length}}
               </view>
             </view>
-            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed?'_ok':''}}.svg" />
+            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed && item.is_completed != 2 ?'_ok':''}}.svg" />
           </view>
           <view class="task-info">
             <view>

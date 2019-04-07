@@ -59,6 +59,15 @@ page{
     top: 0;
     bottom: 0;
 }
+.child-task-list .line::after{
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    width: 8rpx;
+    background-color: #7E96B2;
+    height: 100rpx;
+}
 .item{
     margin: 20rpx;
     position: relative;
@@ -74,6 +83,7 @@ page{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1;
 }
 .item .dot-wrap .date{
     font-size: 20rpx;
@@ -102,8 +112,29 @@ page{
     border-radius: 16rpx;
     margin-top: 20rpx;
     padding: 20rpx;
+    position: relative;
 }
 
+.task-card .border{
+    position: absolute;
+    top: -45rpx;
+    bottom: -20rpx;
+    width: 8rpx;
+    background-color: #7E96B2;
+    left: -22rpx;
+    /* animation: flowDown .5s ease-in-out .3s; */
+}
+
+@keyframes flowDown{
+    from{
+        bottom: 100%;
+    }
+}
+@keyframes flowDown2{
+    from{
+        height: 0;
+    }
+}
 .task-card .task-title{
     display: flex;
     align-items: center;
