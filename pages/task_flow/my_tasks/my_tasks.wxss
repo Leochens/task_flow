@@ -63,8 +63,9 @@
     align-items: center;
     justify-content: flex-start;
 }
-.tasks .item .b2 .exec-people view{
-    min-width: 40rpx;
+.tasks .item .b2 .exec-people text{
+    line-height: 10rpx;
+    display: inline-block;
 }
 .tasks .item .t-describe{
     margin: 20rpx 0;
@@ -124,4 +125,11 @@
 .break-reason input:hover{
     border-color: #2967AF;
     border-width: 2rpx;
+}
+
+.empty-task-show{
+    text-align:center;
+    margin-top:100rpx;
+    font-size:35rpx;
+    color:#666;
 }

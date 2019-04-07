@@ -61,7 +61,15 @@ const page = {
     this.setData({
       showInputIndex: index
     })
-  }
+  },
+  taskDetail: function (e) {
+    console.log(e);
+    const tid = e.currentTarget.dataset.tid;
+    const task = this.data.tasks.filter(t => t.id === tid)[0];
+    wx.navigateTo({
+      url: '../../task/task?task=' + JSON.stringify(task)
+    })
+  },
 }
 
 

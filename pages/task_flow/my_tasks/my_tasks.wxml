@@ -10,8 +10,8 @@
             <view class="person">任务人:{{u_name}}</view>
         </view>
     </view>
-    <view class="tasks">
-        <view class="item" wx:for="{{myTasks}}" wx:key>
+    <view wx:if="{{myTasks.length}}" class="tasks">
+        <view class="item" wx:for="{{myTasks}}" wx:key bind:tap="taskDetail" data-tid="{{item.id}}">
             <view class="b1">
                 <view class="name">{{item.t_name}}</view>
                 <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
@@ -20,22 +20,35 @@
             <view class="b2">
                 <view class="exec-people">
                     执行人:
-                    <text space="ensp" wx:for="{{item.members}}" wx:key wx:for-item="it">{{it.nick_name}} </text>
+                    <text wx:for="{{item.members}}" wx:key wx:for-item="it">
+                        {{it.nick_name}}
+                    </text>
                 </view>
             </view>
             <view class="deadline">截止到:{{item.end_time}}</view>
             <view class="t-describe">{{item.t_describe}}</view>
             <view class="btn-group">
-                <view class="btn" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" >完成</view>
-                <view class="btn break" wx:if="{{item.myStatus === 1 && index != showInputIndex}}"  bind:tap="applyBreak" data-idx="{{index}}" >请假</view>
-                <view class="btn finished" wx:if="{{item.myStatus === 2 && index != showInputIndex}}" >已完成</view>
-                <view class="btn finished" wx:if="{{item.myStatus === 3 && index != showInputIndex}}" >请假中</view>
-                <view class="btn breaked" wx:if="{{item.myStatus === 0 && index != showInputIndex}}" >已请假</view>
+                <view class="btn" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="completeTask">
+                    完成
+                </view>
+                <view class="btn break" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="applyBreak" data-idx="{{index}}">
+                    请假
+                </view>
+                <view class="btn finished" wx:if="{{item.myStatus === 2 && index != showInputIndex}}">
+                    已完成
+                </view>
+                <view class="btn finished" wx:if="{{item.myStatus === 3 && index != showInputIndex}}">
+                    请假中
+                </view>
+                <view class="btn breaked" wx:if="{{item.myStatus === 0 && index != showInputIndex}}">
+                    已请假
+                </view>
                 <view class="break-reason" wx:if="{{index === showInputIndex}}">
                     <input placeholder="请输入请假理由" />
-                    <view class="btn">申请</view>
+                    <view class="btn" catch:tap="sendApply">申请</view>
                 </view>
             </view>
         </view>
     </view>
+    <view wx:else class="empty-task-show">您还没有任务</view>
 </view>
