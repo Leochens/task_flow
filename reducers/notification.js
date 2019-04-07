@@ -16,6 +16,7 @@ import {
     CRUD_DELETE_FAILURE,
     CRUD_DELETE_SUCCESS
 } from '../actions/dataActions'
+import {PIN_TOP_TASK_FLOW,CANCEL_PIN_TOP_TASK_FLOW}from '../actions/index';
 const defaultState = {
     text: '',
     type: 'info', // one of 'info', 'confirm', 'warning'
@@ -105,6 +106,18 @@ export default (state = defaultState, {
         case CRUD_UPDATE_FAILURE: {
             wx.hideLoading();
             failureFilter(meta.resource, error);
+            return state;
+        }
+        case PIN_TOP_TASK_FLOW:{
+            wx.showToast({
+                title:"置顶成功"
+            });
+            return state;
+        }
+        case CANCEL_PIN_TOP_TASK_FLOW:{
+            wx.showToast({
+                title:"取消置顶成功"
+            });
             return state;
         }
         default:

@@ -19,20 +19,6 @@ const tasks = (state = {}, action) => {
                 ...tasks
             }
         }
-        // case CRUD_CREATE_SUCCESS:{
-        //     if(meta.resource === 'tasks'){
-        //         const { task } = payload.entities;
-        //         // const _task = JSON.parse(task);
-        //         // const {members} = meta;
-        //         // _task.members = members;
-        //         // console.log('即时添加',_task);
-        //         return{
-        //             ...state,
-        //             ...task
-        //         }
-        //     }
-        //     return state;
-        // }
         default: return state;
     }
 }

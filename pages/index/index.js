@@ -12,7 +12,10 @@ const MENU = {
 import {
   fetchUsers,
   fetchTasks,
-  fetchTaskFlows
+  fetchTaskFlows,
+  getPinTopTaskFlow,
+  pinTopTaskFlow,
+  cancelPinTopTaskFlow
 } from '../../actions/index';
 import {
   login,
@@ -23,7 +26,7 @@ const app = getApp()
 const page = {
   data: {
     hasAuth: false,
-    showCom:true,
+    showCom: true,
     currentIndex: 0,
     isClassify: false,
     isFilter: MENU.NONE,
@@ -36,12 +39,13 @@ const page = {
     scrollLeft: 0,
     height: app.globalData.height * 6,
     filterTaskFlowList: [],
-    taskFlowList: []
+    taskFlowList: [],
+    pinTopTaskFlowList: []
   },
 
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     console.log(e)
-    if(!e.detail.userInfo){
+    if (!e.detail.userInfo) {
       return;
     }
     wx.setStorageSync('userInfo', e.detail.userInfo);
@@ -53,8 +57,15 @@ const page = {
     // 向后端发送userInfo
     this.gotUserInfo(this.data.u_id, e.detail.userInfo);
   },
+  pinTopTf: function (e) {
+    const tf_id = e.currentTarget.dataset.tfid;
+    this.pinTopTaskFlow(tf_id);
+  },
+  cancelPinTopTf: function (e) {
+    const tf_id = e.currentTarget.dataset.tfid;
+    this.cancelPinTopTaskFlow(tf_id);
+  },
   menuTabSelect(e) {
-
     const which = e.currentTarget.dataset.id;
     console.log(which);
     switch (which) {
@@ -98,76 +109,47 @@ const page = {
       isClassify: which == 0 ? false : true
     })
   },
-  toTaskFlowDetail: function(e) {
-    // console.log(e);
+
+  handleTouchStart: function (e) {
+    this.startTime = e.timeStamp;
+  },
+
+  //手指离开
+  handleTouchEnd: function (e) {
+    this.endTime = e.timeStamp;
+  },
+
+  toTaskFlowDetail: function (e) {
+    if (this.endTime - this.startTime >= 350) return;
     const tf_id = e.target.dataset.tfid;
-    // const tf=this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
     wx.navigateTo({
-      // url: '../task_flow/task_flow?tf='+JSON.stringify(tf),
-      url: '../task_flow/task_flow?tf_id='+tf_id,
-      
-      success: function(res) {
-        console.log(res);
-      },
-      fail: function(err) {
-        console.log(err);
-      }
+      url: '../task_flow/task_flow?tf_id=' + tf_id
     })
   },
-  addNewTaskFlow: function() {
+  addNewTaskFlow: function () {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow'
     })
   },
   //用户点击tab时调用
-  titleClick: function(e) {
+  titleClick: function (e) {
     let currentPageIndex =
       this.setData({
         //拿到当前索引并动态改变
         currentIndex: e.currentTarget.dataset.idx
       })
   },
-  getSetting: function() {
-    const that = this;
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          that.setData({
-            hasAuth: true
-          })
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              app.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          })
-        } else {
-          that.setData({
-            hasAuth: false
-          })
-        }
-      }
-    })
-  },
 
   // 检测SID是否过期 过期后要重新登录
-  checkSID: function() {
+  checkSID: function () {
     const SID = wx.getStorageSync('SID');
     const SID_EXPIRATION = wx.getStorageSync('SID_EXPIRATION')
     const now = Date.parse(new Date());
     if (SID && SID_EXPIRATION > now) { //存在SID并且没有过期
-      console.log("存在SID并且没有过期", SID,now);
+      console.log("存在SID并且没有过期", SID, now);
       app.globalData.SID = SID;
       app.globalData.u_id = this.data.u_id;
-      
+
 
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
@@ -177,93 +159,104 @@ const page = {
       return;
     }
   },
-  _login:function() {
+  _login: function () {
     const that = this;
     wx.login({
-      success: function(res) {
+      success: function (res) {
         console.log(res)
         that.login(res.code);
       },
-      fail: function(err) {
+      fail: function (err) {
         console.log(err);
       }
     })
   },
-  getUserInfoFromStorage: function(){
+  getUserInfoFromStorage: function () {
     const userInfo = wx.getStorageSync('userInfo');
-    if(userInfo){
-      console.log("get ",userInfo);
+    if (userInfo) {
+      console.log("get ", userInfo);
       this.setData({
         userInfo,
-        hasUserInfo:true
+        hasUserInfo: true
       })
     }
 
   },
   //事件处理函数
-  onLoad: function() {
-    this.checkSID(); 
+  onLoad: function () {
+    this.checkSID();
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
-    if(SID){
-      this.fetchTaskFlows(this.data.u_id)
-    }
+    if (SID) {
+      this.fetchTaskFlows(this.data.u_id);
+      this.getPinTopTaskFlow();
 
+    }
     console.log("执行index的onLoad")
     // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
-    
+
 
   },
-  onShow: function(e) {
+  onShow: function (e) {
     console.log(e);
     // this.onPullDownRefresh();
+
   },
   // 用户分享
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     return {
       title: '任务流邀请',
       path: '/pages/test/test?taskID=t000223',
-      success: function(res) {
+      success: function (res) {
         console.log("suc", res);
       },
-      fail: function(res) {
+      fail: function (res) {
         console.log("fai", res);
 
       }
     }
   },
-  onPullDownRefresh:function(){
+  onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
     this.fetchTaskFlows(this.data.u_id)
+
     wx.stopPullDownRefresh();
   }
 };
 
-const mapStateToData = (state, options) => {
-  const ids = {...state.ids};
-  const entities = {...state.entities};
-  // 组装一个完整的tf列表
-  const _taskFlowList = ids.task_flows.map(id=>entities.task_flows[id]);
-  console.log(_taskFlowList);
 
-  const taskFlowList = _taskFlowList.map(item=>{
-    const {members,tasks} = item;
-    let _item = {...item};
-    _item.members = members.map(mid=>entities.members[mid]);
-    _item.tasks = tasks.map(tid=>entities.tasks[tid]);
-    _item.tasks = _item.tasks.map(t=>{
-      const _t = {...t};
-      const memIds = _t.members; 
+const mapStateToData = (state, options) => {
+  const ids = { ...state.ids };
+  const entities = { ...state.entities };
+  const inPinTopList = function (tf_id) {
+    const pinTopList = state.pinTopList;
+    return (Array.isArray(pinTopList) && pinTopList.includes(tf_id))
+  }
+  const wrapTaskFlow = item => {
+    const { members, tasks } = item;
+    let _item = { ...item };
+    _item.members = members.map(mid => entities.members[mid]);
+    _item.tasks = tasks.map(tid => entities.tasks[tid]);
+    _item.tasks = _item.tasks.map(t => {
+      const _t = { ...t };
+      const memIds = _t.members;
       const mems = memIds.map(mid => entities.members[mid]);
       _t.members = mems;
       return _t;
     })
     return _item;
-  });
+  }
+  const pinTopIds = ids.task_flows.filter(inPinTopList);
+  // 组装一个完整的tf列表
+  const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
+  const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
+  const taskFlowList = _taskFlowList.map(wrapTaskFlow);
+  const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",
-    auth: state.auth.authenticated
+    auth: state.auth.authenticated,
+    pinTopTaskFlowList
   };
 }
 const mapDispatchToPage = dispatch => ({
@@ -271,7 +264,10 @@ const mapDispatchToPage = dispatch => ({
   fetchUsers: () => dispatch(fetchUsers()),
   fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),
   fetchTaskFlows: uid => dispatch(fetchTaskFlows(uid)),
-  gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo))
+  gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
+  getPinTopTaskFlow: () => dispatch(getPinTopTaskFlow()),
+  pinTopTaskFlow: tf_id => dispatch(pinTopTaskFlow(tf_id)),
+  cancelPinTopTaskFlow: tf_id => dispatch(cancelPinTopTaskFlow(tf_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

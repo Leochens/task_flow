@@ -9,7 +9,7 @@
           <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})" data-target="viewModal"></view>
         </block>
       </view>
-      <!-- 样式1 -->
+      <!-- 主菜单 -->
       <block wx:if="{{!isClassify?'cur':''}}">
         <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
           <view class='icon-cu-image text-white'>
@@ -27,15 +27,14 @@
           </view>
         </view>
         <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
-          <button class="fack-btn" open-type="getUserInfo"  bindgetuserinfo="getUserInfo">
-          <view class='icon-cu-image text-white text-bold'  bindtap='addNewTaskFlow'>
-            <text class='icon-add '></text>
-
-          </view>
+          <button class="fack-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
+              <text class='icon-add '></text>
+            </view>
           </button>
         </view>
       </block>
-      <!-- 样式2 -->
+      <!-- 分类菜单 -->
       <block wx:if="{{isClassify?'cur':''}}">
         <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
           <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{7}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
@@ -47,13 +46,11 @@
   </view>
 </view>
 <view class='task-flows ' style='margin-top:{{CustomBar}}px;'>
+  <task-flow-card isPinTop="{{true}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
   <view wx:if="{{filterTaskFlowList.length || taskFlowList.length}}">
-    <task-flow-card wx:if="{{showCom}}" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+    <task-flow-card bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
   </view>
   <view wx:else>
     <view class="empty-list">还没有任务流呢,快点击上方的加号添加吧！</view>
   </view>
 </view>
-<!-- <view class='hover-btn'>
-  <image src='../../assets/imgs/index/add_task.png'></image>
-</view> -->

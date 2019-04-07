@@ -132,3 +132,7 @@
       transform: translateX(-1000rpx);
   }
 }
+
+.pin{
+  padding: 16rpx;
+}

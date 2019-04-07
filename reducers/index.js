@@ -4,12 +4,14 @@ import entities from './entities/index';
 import ids from './ids/index';
 import notification from './notification'
 import currentTaskMemberStatus from './currentTaskMemberStatus';
+import pinTopList from './pinTopList';
 export default () => {
   return combineReducers({
     entities,
     auth,
     ids,
     notification,
-    currentTaskMemberStatus
+    currentTaskMemberStatus,
+    pinTopList
   });
 };

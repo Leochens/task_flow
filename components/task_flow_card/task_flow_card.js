@@ -12,6 +12,9 @@ Component({
           tfData:newVal
         })
       }
+    },
+    isPinTop:{
+      type: Boolean
     }
   },
   observers:{

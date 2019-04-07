@@ -1,5 +1,11 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
-<view class="task-flow-card">
+<view wx:if="{{isPinTop}}" class="task-flow-card pin">
+  <view class="title-wrap">
+    <view class="task-flow-title">{{tfData.tf_name}}</view>
+    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+  </view>
+</view>
+<view wx:else class="task-flow-card">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
@@ -9,7 +15,6 @@
     参与人员:{{count}}人
     <view class="avatars">
       <image class="avatar-item" wx:for="{{members}}" wx:key src="{{item.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
-      <!-- <image class="item" wx:for="{{15}}" hidden="{{index>2}}" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132" /> -->
     </view>
   </view>
   <view class="task-flow-leader">
@@ -24,7 +29,7 @@
   <view class="process-pane" style="max-height:{{isProcessPaneActive?'':0}};transform:translateX({{isProcessPaneActive?0:-1000}}rpx)">
     <view class="item">
       <view class="title">
-        截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天
+        截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天 {{paneData.dateData.last?'':'已结束'}}
       </view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.dateData.percent}}%;background-color:{{paneData.dateData.percent<80?'#2967AF':paneData.dateData.percent>=100?'#eee':'#A80000'}};"></view>

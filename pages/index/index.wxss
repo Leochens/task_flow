@@ -208,3 +208,7 @@ page {
   background-color: transparent;
   display: inline;
 }
+
+.pin-top{
+  border: 1px solid yellow;
+}
