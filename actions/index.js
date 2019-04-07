@@ -42,3 +42,7 @@ export const addNewTaskFlowMember = (tf_id,u_id) => {
 export const addComment = (t_id,cmt) =>{
     return crudCreate('comments',{cmt},`tasks/${t_id}/comments`,{t_id,cmt});
 }
+
+export const updateTaskFlow = (u_id,tf_id,tf) => {
+    return crudUpdate('task_flows',tf_id,{tf,tf_id},`users/${u_id}/task_flows/`)
+}

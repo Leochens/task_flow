@@ -3,23 +3,23 @@
     <view  class="blanks">
         <view class="task-item">
             <label class='tips'>任务流标题</label>
-            <input name="tf_name" type='text'></input>
+            <input name="tf_name" type='text' value="{{tf_name}}"></input>
         </view>
-        <view class="task-item">
+        <view class="task-item" hidden="{{isUpdate}}">
             <label class="tips">开始时间</label>
             <date-time-picker value='{{beginDate}}' bind:onChange="bindBeginDateChange"/>
         </view>
         <view class="task-item">
             <label class="tips">结束时间</label>
-            <date-time-picker value="{{endDate}}" bind:onChange="bindEndDateChange"/>
+            <date-time-picker value="{{end_time ||endDate }}" bind:onChange="bindEndDateChange"/>
         </view>
-        <view class="task-item">
+        <view class="task-item" hidden="{{isUpdate}}">
             <label class='tips'>负责人</label>
             <input type='text'  disabled="{{true}}" value="{{leader}}"></input>
         </view>
         <view class="task-item">
             <label class='tips'>任务概要</label>
-            <textarea value="" name="tf_describe"></textarea>
+            <textarea value="" name="tf_describe" value="{{tf_describe}}"></textarea>
         </view>
     </view>
     <button class='complete' form-type="submit">完成</button>

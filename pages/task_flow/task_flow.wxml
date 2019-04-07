@@ -5,7 +5,7 @@
   <view class='task-flow-info'>
     <view class="task-flow-name">
       {{tf_name}}
-      <image hidden="{{!is_leader}}" src="../../assets/imgs/task_flow/edit.svg" />
+      <image hidden="{{!is_leader}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" />
     </view>
     <view class="else">
       <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
@@ -16,7 +16,7 @@
     <view class="child-task-list">
       <view class="line "></view>
       <view class="item">
-        <view class="dot-wrap" >
+        <view class="dot-wrap">
           <view class="dot" style="background-color:#1EA227"></view>
           <view class="date">{{dateTimeSplit.dateSplit(begin_time)}}</view>
           <view class="time">{{dateTimeSplit.timeSplit(begin_time)}}</view>
@@ -91,7 +91,7 @@
       <view class='text'>任务曲线</view>
     </view>
     <view class='tab-item' bind:tap="allMembers">
-      <image src='../../assets/imgs/task_flow/all_members.svg' class='tab-item-icon' ></image>
+      <image src='../../assets/imgs/task_flow/all_members.svg' class='tab-item-icon'></image>
       <view class='text'>全部人员</view>
     </view>
     <view class='tab-item-important' bind:tap="myTasks">我的任务</view>

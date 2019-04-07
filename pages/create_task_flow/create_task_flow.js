@@ -4,8 +4,11 @@ import {
   compareDate,
   formatTime
 } from '../../utils/util';
-import {connect} from '../../libs/wechat-weapp-redux';
-import {addTaskFlow} from '../../actions/index';
+import { connect } from '../../libs/wechat-weapp-redux';
+import {
+  addTaskFlow,
+  updateTaskFlow
+} from '../../actions/index';
 const _page = {
 
   /**
@@ -15,10 +18,22 @@ const _page = {
     CustomBar: app.globalData.CustomBar,
     beginDate: formatTime(new Date()),
     endDate: formatTime(new Date()),
-    leader:wx.getStorageSync('userInfo').nickName 
+    leader: wx.getStorageSync('userInfo').nickName,
+    isUpdate: false
   },
-  onLoad:function(e) {
-    // const nickName
+  onLoad: function (options) {
+    if (!options) return;
+    const { flag,tf_id,tf_name,tf_describe,end_time } = options;
+    console.log(options);
+    if (tf_id&&flag && flag === 'update') {
+      this.setData({
+        isUpdate: true,
+        tf_id,
+        tf_name,
+        tf_describe,
+        end_time
+      })
+    }
   },
   bindBeginDateChange: function (e) {
     const {
@@ -62,26 +77,45 @@ const _page = {
       endDate
     })
   },
-  onSubmit:function(e){
+  onSubmit: function (e) {
 
-    console.log("表单提交事件",e);
-    const {tf_name,tf_describe} = e.detail.value;
-    if(!tf_name || !tf_describe){
+    console.log("表单提交事件", e);
+    const { tf_name, tf_describe } = e.detail.value;
+    if (!tf_name || !tf_describe) {
 
-      return ;
+      return;
     }
 
-    const {beginDate:begin_time,endDate:end_time} = this.data;
-    console.log(this.addTaskFlow)
+    const { beginDate: begin_time, endDate: end_time, isUpdate } = this.data;
     const u_id = wx.getStorageSync('u_id');
-    this.addTaskFlow(u_id,JSON.stringify({
+    if (isUpdate) {
+      this.updateTaskFlow(u_id, this.data.tf_id, JSON.stringify({
+        tf_name,
+        tf_describe,
+        begin_time:begin_time,
+        end_time,
+        leader_id: u_id
+      }));
+      // 更新前一页
+      const pages = getCurrentPages();
+      const len = pages.length;
+      const prevPage = pages[len -2];
+      prevPage.setData({
+        tf_name,
+        tf_describe,
+        end_time
+      })
+    } else {
+      this.addTaskFlow(u_id, JSON.stringify({
         tf_name,
         tf_describe,
         begin_time,
         end_time,
         leader_id: u_id
-    }));
-    
+      }));
+    }
+
+
   }
 };
 const mapStateToData = state => {
@@ -90,10 +124,12 @@ const mapStateToData = state => {
   }
 }
 const mapDispatchToPage = dispatch => {
-    return {
-      addTaskFlow: (u_id,tf) => dispatch(addTaskFlow(u_id,tf))
-    }
+  return {
+    addTaskFlow: (u_id, tf) => dispatch(addTaskFlow(u_id, tf)),
+    updateTaskFlow: (u_id, tf_id, tf) => dispatch(updateTaskFlow(u_id, tf_id, tf))
+
+  }
 }
 
-const page = connect(mapStateToData,mapDispatchToPage)(_page);
+const page = connect(mapStateToData, mapDispatchToPage)(_page);
 Page(page)

@@ -52,11 +52,12 @@ page{
     position: relative;
 }
 .child-task-list .line{
-    height: 100%;
     position: absolute;
     width: 8rpx;
     background-color: #ddd;
     left: 60rpx;
+    top: 0;
+    bottom: 0;
 }
 .item{
     margin: 20rpx;

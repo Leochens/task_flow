@@ -24,7 +24,7 @@ export default (apiUrl, httpClient = fetchJson) => {
         url = `${apiUrl}/${resource}/${params.id}`;
         break;
       case UPDATE:
-        url = `${apiUrl}/${resource}/${params.id}`;
+        url = `${apiUrl}/${basePath ? basePath : resource}`;
         options.method = 'PUT';
         options.data = JSON.stringify(params.data);
         break;
@@ -34,7 +34,7 @@ export default (apiUrl, httpClient = fetchJson) => {
         options.data = JSON.stringify(params.data);
         break;
       case DELETE:
-        url = `${apiUrl}/${resource}/${params.id}`;
+        url = `${apiUrl}/${basePath ? basePath : resource}`;
         options.method = 'DELETE';
         break;
       default:

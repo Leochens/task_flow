@@ -4,8 +4,9 @@ import {
 } from '../../libs/wechat-weapp-redux';
 const app = getApp();
 import {
-  fetchTasks
-}from '../../actions/index'
+  fetchTasks,
+  updateTaskFlow
+} from '../../actions/index'
 import { compareDate } from '../../utils/util';
 const page = {
 
@@ -24,8 +25,9 @@ const page = {
     category: '',
     members: [],
     CustomBar: app.globalData.CustomBar,
-    is_leader:false,
-    ready:false
+    is_leader: false,
+    ready: false,
+    showModal: false
   },
 
   /**
@@ -34,12 +36,14 @@ const page = {
   /**
  * 生命周期函数--监听页面显示
  */
-  update: function(tf_id){
-
+  editInfo: function () {
+    wx.navigateTo({
+      url:'../create_task_flow/create_task_flow?flag=update&tf_id='+this.data.id+"&tf_name="+this.data.tf_name+"&tf_describe="+this.data.tf_describe+"&end_time="+this.data.end_time
+    })
   },
-  setFunc: function(){
+  setFunc: function () {
     const tf_id = this.data.id;
-    const task_flow = this.data.taskFlowList.filter(tf=>tf.id ===tf_id)[0];
+    const task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     console.log(task_flow);
     const { tasks, id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
     const classfiedTasks = this.classifyTask(tasks);
@@ -57,7 +61,7 @@ const page = {
     wx.showLoading();
     const tf_id = this.data.id;
     this.fetchTasks(tf_id);
-    setTimeout(this.setFunc,1000);
+    setTimeout(this.setFunc, 1000);
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -65,7 +69,7 @@ const page = {
     const tf_id = options.tf_id;
     if (!tf_id) return;
     console.log(tf_id);
-    const task_flow = this.data.taskFlowList.filter(tf=>tf.id ===tf_id)[0];
+    const task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     console.log(task_flow);
     const { tasks, id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
     const classfiedTasks = this.classifyTask(tasks);
@@ -74,7 +78,7 @@ const page = {
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
-      ready:true
+      ready: true
 
     });
 
@@ -131,10 +135,6 @@ const page = {
       url: './add_member/add_member?tf_id=' + this.data.id + "&who=" + this.data.leader.nick_name + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.members.length + "&avatar=" + this.data.leader.avatar_url
     })
   },
-  // 加入星标
-  addFavor: function () {
-    console.log("加入星标");
-  },
   // 任务数据
   checkData: function () {
     wx.navigateTo({
@@ -143,13 +143,13 @@ const page = {
   },
   myTasks: function () {
     wx.navigateTo({
-      url: './my_tasks/my_tasks?tf_id='+this.data.id+"&tasks="+JSON.stringify(this.data.tasks)+"&tf_name="+this.data.tf_name,
+      url: './my_tasks/my_tasks?tf_id=' + this.data.id + "&tasks=" + JSON.stringify(this.data.tasks) + "&tf_name=" + this.data.tf_name,
     })
   },
   // 查看全部成员
   allMembers: function () {
     wx.navigateTo({
-      url: './all_members/all_members?tf_id='+this.data.id+"&members="+JSON.stringify(this.data.members)
+      url: './all_members/all_members?tf_id=' + this.data.id + "&members=" + JSON.stringify(this.data.members)
     })
   },
 
@@ -159,7 +159,7 @@ const page = {
   onPullDownRefresh: function () {
     // 下拉刷新任务
     wx.showNavigationBarLoading();
-    this.fetchTasks(this.data.id,this.setFunc);
+    this.fetchTasks(this.data.id, this.setFunc);
     this.onShow();
     wx.stopPullDownRefresh();
 
@@ -167,24 +167,24 @@ const page = {
 }
 
 const mapStateToData = _state => {
-  const state = {..._state};
-  const ids = {...state.ids};
-  const entities = {...state.entities};
+  const state = { ..._state };
+  const ids = { ...state.ids };
+  const entities = { ...state.entities };
   // 组装一个完整的tf列表
-  const _taskFlowList = ids.task_flows.map(id=>entities.task_flows[id]);
+  const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
   console.log(_taskFlowList);
 
-  const taskFlowList = _taskFlowList.map(item=>{
-    const {members,tasks} = item;
-    let _item = {...item};
+  const taskFlowList = _taskFlowList.map(item => {
+    const { members, tasks } = item;
+    let _item = { ...item };
     const _members = [...members];
     const _tasks = [...tasks];
-    _item.members = _members.map(mid=>entities.members[mid]);
-    _item.tasks = _tasks.map(tid=>entities.tasks[tid]);
-    _item.tasks = _item.tasks.map(t=>{
-      const _t = {...t};
-      const memIds = _t.members; 
-      const cmtIds = _t.comments; 
+    _item.members = _members.map(mid => entities.members[mid]);
+    _item.tasks = _tasks.map(tid => entities.tasks[tid]);
+    _item.tasks = _item.tasks.map(t => {
+      const _t = { ...t };
+      const memIds = _t.members;
+      const cmtIds = _t.comments;
       const mems = memIds.map(mid => entities.members[mid]);
       const cmts = cmtIds.map(cid => entities.comments[cid]);
       _t.members = mems;
@@ -200,7 +200,8 @@ const mapStateToData = _state => {
 
 const mapDispatchToPage = dispatch => {
   return {
-    fetchTasks:(tf_id)=>dispatch(fetchTasks(tf_id))
+    fetchTasks: (tf_id) => dispatch(fetchTasks(tf_id)),
+    updateTaskFlow: (u_id,tf_id,tf) => dispatch(updateTaskFlow(u_id,tf_id,tf))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

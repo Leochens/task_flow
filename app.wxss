@@ -192,3 +192,42 @@
       transform: translateX(-1000rpx);
   }
 }
+
+
+/*******创建和修改任务流的布局******/
+
+.blanks {
+  width: 80%;
+  margin: auto;
+}
+
+.blanks .task-item {
+  margin: 20rpx 0;
+}
+
+.blanks .task-item .tips {
+  font-size: 35rpx;
+  color: #666;
+}
+
+.blanks .task-item input {
+  font-size: 35rpx;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  line-height: 80rpx;
+  color: #666;
+
+}
+
+.blanks .task-item textarea {
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 8rpx;
+  width: 100%;
+  height: 250rpx;
+  font-size: 35rpx;
+  color: #666;
+}
+
