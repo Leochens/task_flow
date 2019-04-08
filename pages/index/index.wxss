@@ -212,3 +212,19 @@ page {
 .pin-top{
   border: 1px solid yellow;
 }
+
+.clear-search-btn{
+  background-color:#2967AF;
+  width:90%;
+  margin:auto;
+  color:#fff;
+  height: 65rpx;
+  font-size: 30rpx;
+  line-height: 65rpx;
+  animation: csb .3s ease-in-out    ;
+}
+@keyframes csb{
+  from{
+    height: 0;
+  }
+}

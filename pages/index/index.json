@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "task-flow-card":"../../components/task_flow_card/task_flow_card",
-    "nav-bar": "/components/nav_bar/nav_bar"
+    "nav-bar": "/components/nav_bar/nav_bar",
+    "search-bar": "/components/search_bar/search_bar"
   },
     "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true,

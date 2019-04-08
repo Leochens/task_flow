@@ -1,0 +1,7 @@
+<!-- components/search_bar/search_bar.wxml -->
+<form class='search-bar-wrap' bindsubmit="onSubmit" report-submit="true">
+  <input name="keyword" placeholder="请输入关键词" value="{{keyword}}" bindinput="onkeywordChange" style="{{keyword.length?'width:90%':''}}"></input>
+  <button form-type="submit" plain="{{true}}" style="{{keyword.length?'width:10%':''}}">
+        <image src='./search.svg'></image>
+  </button>
+</form>

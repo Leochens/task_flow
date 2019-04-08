@@ -40,9 +40,25 @@ const page = {
     height: app.globalData.height * 6,
     filterTaskFlowList: [],
     taskFlowList: [],
-    pinTopTaskFlowList: []
+    pinTopTaskFlowList: [],
+    searchResultList: [],
+    searchKeyword: ''
   },
-
+  onSearch: function (e) {
+    const keyword = e.detail;
+    console.log(keyword);
+    const { taskFlowList } = this.data;
+    const searchResultList = taskFlowList.filter(tf => tf.tf_name.indexOf(keyword) > -1 || tf.tf_describe.indexOf(keyword) > -1);
+    this.setData({
+      searchResultList,
+      searchKeyword:keyword
+    })
+  },
+  clearSearch: function () {
+    this.setData({
+      searchResultList: []
+    })
+  },
   getUserInfo: function (e) {
     console.log(e)
     if (!e.detail.userInfo) {

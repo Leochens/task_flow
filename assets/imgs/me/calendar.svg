@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="23px" viewBox="0 0 26 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>日历</title>
+    <desc>Created with Sketch.</desc>
+    <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的" transform="translate(-172.000000, -242.000000)" fill="#4A4A4A" fill-rule="nonzero">
+            <g id="chart-copy" transform="translate(157.000000, 242.000000)">
+                <g id="item">
+                    <g id="日历" transform="translate(15.000000, 0.000000)">
+                        <path d="M8.125,1.60617762 L17.875,1.60617762 L17.875,0 L21.125,0 L21.125,1.60617762 L26,1.60617762 L26,22.4864865 L0,22.4864865 L0,1.60617762 L4.875,1.60617762 L4.875,0 L8.125,0 L8.125,1.60617762 Z M3.24999999,4.81853281 L3.24999999,19.2741313 L22.75,19.2741313 L22.75,4.81853281 L3.24999999,4.81853281 Z M9.75000001,6.42471043 L9.75000001,9.63706563 L4.875,9.63706563 L4.875,6.42471043 L9.75000001,6.42471043 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
