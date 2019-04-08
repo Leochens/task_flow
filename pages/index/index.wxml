@@ -37,8 +37,8 @@
       <!-- 分类菜单 -->
       <block wx:if="{{isClassify?'cur':''}}">
         <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
-          <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{7}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
-            {{index>0?"Tab"+index:"返回"}}
+          <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{categories}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
+            {{index>0?item:"返回"}}
           </view>
         </scroll-view>
       </block>

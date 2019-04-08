@@ -51,7 +51,7 @@ const page = {
     const searchResultList = taskFlowList.filter(tf => tf.tf_name.indexOf(keyword) > -1 || tf.tf_describe.indexOf(keyword) > -1);
     this.setData({
       searchResultList,
-      searchKeyword:keyword
+      searchKeyword: keyword
     })
   },
   clearSearch: function () {
@@ -240,7 +240,15 @@ const page = {
   }
 };
 
-
+const getCategory = (task_flows) => {
+  const cats = ['']; // 兼容返回按钮
+  for(let i = 0;i<task_flows.length;i++){
+    const { category } = task_flows[i];
+    if(!cats.includes(category)) 
+      cats.push(category); 
+  }
+  return cats;
+}
 const mapStateToData = (state, options) => {
   const ids = { ...state.ids };
   const entities = { ...state.entities };
@@ -267,12 +275,14 @@ const mapStateToData = (state, options) => {
   const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
   const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
   const taskFlowList = _taskFlowList.map(wrapTaskFlow);
+  const categories = getCategory(taskFlowList);
   const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",
     auth: state.auth.authenticated,
-    pinTopTaskFlowList
+    pinTopTaskFlowList,
+    categories
   };
 }
 const mapDispatchToPage = dispatch => ({
