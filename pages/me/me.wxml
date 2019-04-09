@@ -1,21 +1,40 @@
-<!--pages/me/me.wxml-->
-<view class="bgc">
-
-</view>
+<!-- pages/me/me.wxml -->
+<view class="bgc"></view>
 <view class="profile-card">
     <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132"></image>
     <view class="nick-name">RyanHardy</view>
     <view class="others">
         <view class="location">
-            <!-- <image src="" class="location-icon" /> -->
+            <image src="../../assets/imgs/me/location.svg" class="location-icon" />
             河北 保定
         </view>
         <view class="gender">男</view>
     </view>
+    <view class="tf-cnts">
+        <view>全部:{{taskFlowsCnt}}</view>
+        <view>负责:{{myTaskFlowsCnt}}</view>
+        <view>完成:{{finishedCnt}}</view>
+    </view>
 </view>
 <view class="menus">
-    <view wx:for="{{9}}" wx:key class="item">
-        <view class="icon"></view>
+    <view class="item">
+        <image src="../../assets/imgs/me/setting.svg" class="icon"></image>
         <view class="name">设置</view>
+    </view>
+    <view class="item">
+        <image src="../../assets/imgs/me/calendar.svg" class="icon"></image>
+        <view class="name">日历</view>
+    </view>
+    <view class="item">
+        <image src="../../assets/imgs/me/about.svg" class="icon"></image>
+        <view class="name">关于</view>
+    </view>
+    <view class="item">
+        <image src="../../assets/imgs/me/data.svg" class="icon"></image>
+        <view class="name">数据</view>
+    </view>
+    <view class="item">
+        <image src="../../assets/imgs/me/template.svg" class="icon"></image>
+        <view class="name">模板</view>
     </view>
 </view>

@@ -1,11 +1,19 @@
 // pages/me/me.js
-Page({
+import {
+  connect
+} from '../../libs/wechat-weapp-redux';
+import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
+
+
+const page = {
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    taskFlowsCnt:0,
+    myTaskFlowsCnt:0,
+    finishedCnt:0
   },
 
   /**
@@ -14,53 +22,33 @@ Page({
   onLoad: function (options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  toSettings: function(){
 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  toCategory:function(){
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+  toAbout:function(){
 
   }
-})
+};
+const mapStateToData = state => {
+  const ids = { ...state.ids };
+  const entities = {...state.entities};
+  const u_id = wx.getStorageSync('u_id');
+  const taskFlowsCnt = ids.task_flows.length;
+  const tfs = ids.task_flows.map(tf_id => entities.task_flows[tf_id]);
+  const finishedCnt = tfs.filter(tf=>tf.is_completed).length;
+  const myTaskFlowsCnt = tfs.filter(tf=>tf.leader_id === u_id).length;
+
+  return {
+    taskFlowsCnt,
+    myTaskFlowsCnt,
+    finishedCnt
+  }
+}
+const mapDispatchToPage = dispatch => ({
+  
+});
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
+Page(_page);

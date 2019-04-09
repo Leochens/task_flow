@@ -37,26 +37,45 @@
 }
 
 .menus{
-    /* width: 80%;
-    margin: 30rpx auto; */
-    margin-top: 10%;
+    width: 90%;
+    margin: 100rpx auto;
+
 }
-
-
+.location{
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+.location-icon{
+    height: 30rpx;
+    width: 30rpx;
+    margin-right: 20rpx;
+}
 .menus .item{
     width: 33.33%;
     padding: 10rpx;
     display: inline-block;
+    text-align: center;
 }
 
 .menus .item .icon{
-    height: 100rpx;
-    width: 100rpx;
-    background-color: #eee;
-    margin: auto;
+    height: 50rpx;
+    width: 50rpx;
+    /* background-color: #eee; */
+    margin: 20rpx auto;
 }
 .menus .item .name{
     margin-top: 10rpx;
     text-align: center;
     font-size: 30rpx;
+}
+
+
+.tf-cnts{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 30rpx;
+    font-weight: bold;
+    margin-top: 30rpx;
 }

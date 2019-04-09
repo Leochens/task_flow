@@ -117,8 +117,8 @@ page{
 
 .task-card .border{
     position: absolute;
-    top: -45rpx;
-    bottom: -20rpx;
+    top: -42rpx;
+    bottom: -22rpx;
     width: 8rpx;
     background-color: #7E96B2;
     left: -22rpx;

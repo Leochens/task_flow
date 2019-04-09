@@ -48,6 +48,10 @@ const page = {
     console.log(keyword);
     const { taskFlowList } = this.data;
     const searchResultList = taskFlowList.filter(tf => tf.tf_name.indexOf(keyword) > -1 || tf.tf_describe.indexOf(keyword) > -1);
+    const len = searchResultList.length;
+    wx.showToast({
+      title: len ? `找到${len}条` : "未找到"
+    })
     this.setData({
       searchResultList,
       searchKeyword: keyword
@@ -58,28 +62,26 @@ const page = {
       searchResultList: []
     })
   },
-  onDeleteTaskFlow:function(e){
-    console.log("fff",e);
+  onDeleteTaskFlow: function (e) {
+    console.log("fff", e);
     const tf_id = e.currentTarget.dataset.tfid;
 
-    const tf = this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
-    if(!tf.is_completed){
+    const tf = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
+    if (!tf.is_completed) {
       wx.showModal({
-        title:"删除失败",
+        title: "删除失败",
         content: `想要删除任务流"${tf.tf_name}"您必须先结束它`
       });
       return;
     }
     wx.showModal({
-      title:"删除提醒",
-      content:`您确定删除任务流"${tf.tf_name}"吗`,
-      success:function(e){
+      title: "删除提醒",
+      content: `您确定删除任务流"${tf.tf_name}"吗`,
+      success: function (e) {
         console.log("确定")
       },
-      completed:function(){
+      completed: function () {
       }
-
-
     });
   },
   getUserInfo: function (e) {
@@ -157,7 +159,7 @@ const page = {
   },
 
   toTaskFlowDetail: function (e) {
-    if (this.endTime - this.startTime >= 350 || this.data.tfCardType != 'default' ) return;
+    if (this.endTime - this.startTime >= 350 || this.data.tfCardType != 'default') return;
     const tf_id = e.target.dataset.tfid;
     wx.navigateTo({
       url: '../task_flow/task_flow?tf_id=' + tf_id
@@ -214,17 +216,15 @@ const page = {
     if (SID) {
       this.fetchTaskFlows(this.data.u_id);
       this.getPinTopTaskFlow();
-
     }
-    console.log("执行index的onLoad")
   },
   onShow: function (e) {
     console.log(e);
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
-    this.fetchTaskFlows(this.data.u_id)
-
+    this.fetchTaskFlows(this.data.u_id);
+    this.getPinTopTaskFlow();
     wx.stopPullDownRefresh();
   }
 };
