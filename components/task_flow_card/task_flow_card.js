@@ -15,6 +15,9 @@ Component({
     },
     isPinTop:{
       type: Boolean
+    },
+    tfCardType: {
+      type: String
     }
   },
   observers:{
@@ -80,6 +83,10 @@ Component({
       this.setData({
         isProcessPaneActive: !this.data.isProcessPaneActive
       })
+    },
+    delete:function(e){
+      console.log("task_flow_card")
+      this.triggerEvent('onDeleteTaskFlow');
     },
     calculateDate: function (beginDate, endDate) {
       // 正则表达式匹配时间格式

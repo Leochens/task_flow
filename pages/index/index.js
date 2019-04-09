@@ -6,8 +6,8 @@ import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 const MENU = {
   NONE: 0,
   CLASSIFY: "1",
-  FAVOR: "2",
-  COMPLETED: "3"
+  COMPLETED: "2",
+  DELETE: "3"
 }
 import {
   fetchUsers,
@@ -33,8 +33,6 @@ const page = {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     TabCur: 1,
     scrollLeft: 0,
     height: app.globalData.height * 6,
@@ -42,7 +40,8 @@ const page = {
     taskFlowList: [],
     pinTopTaskFlowList: [],
     searchResultList: [],
-    searchKeyword: ''
+    searchKeyword: '',
+    tfCardType: 'default'
   },
   onSearch: function (e) {
     const keyword = e.detail;
@@ -58,6 +57,30 @@ const page = {
     this.setData({
       searchResultList: []
     })
+  },
+  onDeleteTaskFlow:function(e){
+    console.log("fff",e);
+    const tf_id = e.currentTarget.dataset.tfid;
+
+    const tf = this.data.taskFlowList.filter(tf=>tf.id === tf_id)[0];
+    if(!tf.is_completed){
+      wx.showModal({
+        title:"删除失败",
+        content: `想要删除任务流"${tf.tf_name}"您必须先结束它`
+      });
+      return;
+    }
+    wx.showModal({
+      title:"删除提醒",
+      content:`您确定删除任务流"${tf.tf_name}"吗`,
+      success:function(e){
+        console.log("确定")
+      },
+      completed:function(){
+      }
+
+
+    });
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -83,7 +106,7 @@ const page = {
   },
   menuTabSelect(e) {
     const which = e.currentTarget.dataset.id;
-    console.log(which);
+    let tfCardType = 'default';
     switch (which) {
       case MENU.COMPLETED:
         {
@@ -91,38 +114,36 @@ const page = {
           console.log("切换已完成");
           this.setData({
             isFilter: this.data.isFilter ? MENU.NONE : MENU.COMPLETED,
-            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed)
+            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed),
           });
           break;
         }
-      case MENU.FAVOR:
-        {
-          console.log("切换星标");
-          this.setData({
-            isFilter: this.data.isFilter ? MENU.NONE : MENU.FAVOR,
-            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed)
-          });
-          break;
-        }
-      default:
-        {
-          console.log("???")
-        }
+      case MENU.DELETE: {
+        tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
+        break;
+      }
+      default: break;
     }
     this.setData({
       TabCur: which,
       scrollLeft: (which - 1) * 60,
-      isClassify: which == 1 ? true : false
+      isClassify: which == 1 ? true : false,
+      tfCardType
     })
   },
-  classTabSelect(e) {
+  classTabSelect(e) { // 按照分类筛选tf
     console.log(e.currentTarget.dataset);
+    const { categories, taskFlowList } = this.data;
     const which = e.currentTarget.dataset.id;
-
+    let isBack = false;
+    if (which === 0) isBack = true;
+    const curCat = categories[which]; // 获得当前选择的分类
+    const currentCategoryTaskFlowList = taskFlowList.filter(tf => tf.category === curCat);
     this.setData({
       TabCur: which,
       scrollLeft: (which - 1) * 60,
-      isClassify: which == 0 ? false : true
+      isClassify: !isBack,
+      currentCategoryTaskFlowList
     })
   },
 
@@ -136,7 +157,7 @@ const page = {
   },
 
   toTaskFlowDetail: function (e) {
-    if (this.endTime - this.startTime >= 350) return;
+    if (this.endTime - this.startTime >= 350 || this.data.tfCardType != 'default' ) return;
     const tf_id = e.target.dataset.tfid;
     wx.navigateTo({
       url: '../task_flow/task_flow?tf_id=' + tf_id
@@ -146,14 +167,6 @@ const page = {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow'
     })
-  },
-  //用户点击tab时调用
-  titleClick: function (e) {
-    let currentPageIndex =
-      this.setData({
-        //拿到当前索引并动态改变
-        currentIndex: e.currentTarget.dataset.idx
-      })
   },
 
   // 检测SID是否过期 过期后要重新登录
@@ -165,13 +178,10 @@ const page = {
       console.log("存在SID并且没有过期", SID, now);
       app.globalData.SID = SID;
       app.globalData.u_id = this.data.u_id;
-
-
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
       this._login();
       this.fetchTaskFlows(this.data.u_id)
-
       return;
     }
   },
@@ -193,10 +203,8 @@ const page = {
       console.log("get ", userInfo);
       this.setData({
         userInfo,
-        hasUserInfo: true
       })
     }
-
   },
   //事件处理函数
   onLoad: function () {
@@ -209,28 +217,9 @@ const page = {
 
     }
     console.log("执行index的onLoad")
-    // this._login(); //此处为测试 使得每次刷新都会登录 记得改回上面的checkSID
-
-
   },
   onShow: function (e) {
     console.log(e);
-    // this.onPullDownRefresh();
-
-  },
-  // 用户分享
-  onShareAppMessage: function (res) {
-    return {
-      title: '任务流邀请',
-      path: '/pages/test/test?taskID=t000223',
-      success: function (res) {
-        console.log("suc", res);
-      },
-      fail: function (res) {
-        console.log("fai", res);
-
-      }
-    }
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
@@ -242,10 +231,10 @@ const page = {
 
 const getCategory = (task_flows) => {
   const cats = ['']; // 兼容返回按钮
-  for(let i = 0;i<task_flows.length;i++){
+  for (let i = 0; i < task_flows.length; i++) {
     const { category } = task_flows[i];
-    if(!cats.includes(category)) 
-      cats.push(category); 
+    if (!cats.includes(category))
+      cats.push(category);
   }
   return cats;
 }
@@ -275,8 +264,8 @@ const mapStateToData = (state, options) => {
   const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
   const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
   const taskFlowList = _taskFlowList.map(wrapTaskFlow);
-  const categories = getCategory(taskFlowList);
   const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
+  const categories = getCategory(taskFlowList);
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",

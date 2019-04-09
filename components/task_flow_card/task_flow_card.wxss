@@ -14,6 +14,7 @@
   color: #666;
   padding-bottom: 0;
   animation: slideInLeft .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
 }
 
 .title-wrap{
@@ -135,4 +136,31 @@
 
 .pin{
   padding: 16rpx;
+}
+
+
+
+.del-btn{
+  position: absolute;
+  top: -10rpx;
+  left: -10rpx;
+  
+  height: 36rpx;
+  width: 36rpx;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36rpx;
+  color: #fff;
+  padding: 10rpx;
+  transform: scale(0);
+  transition: transform .3s ease-in-out;
+}
+
+.del-btn.show{
+  transform: scale(1);
+}
+
+.mask{
+  background-color: #E8F0F9;
 }

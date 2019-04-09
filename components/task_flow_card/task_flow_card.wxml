@@ -2,10 +2,13 @@
 <view wx:if="{{isPinTop}}" class="task-flow-card pin">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
-    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+    <image  src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
   </view>
 </view>
-<view wx:else class="task-flow-card">
+<view wx:else class="task-flow-card {{tfCardType === 'delete'?'mask':''}}">
+  <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}">
+
+  </image>
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
