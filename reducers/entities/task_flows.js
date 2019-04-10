@@ -51,6 +51,7 @@ const task_flows = (state = {
         return state;
       }
     case CRUD_UPDATE_SUCCESS:{
+      if(meta.resource != 'task_flow') return state;
         const {tf,tf_id} = requestPayload.data;
         const _tf = JSON.parse(tf);
         const {tf_name,tf_describe,end_time} = _tf;

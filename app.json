@@ -16,10 +16,11 @@
     "pages/auth/auth",
     "pages/task_flow/task_flow_data/task_flow_data",
     "pages/message/message",
-    "pages/task/comments/comments",
     "pages/settings/settings",
-    "pages/task_calendar/task_calendar",
-    "pages/about/about"
+    "pages/about/about",
+    "pages/calendar/calendar",
+    "pages/category/category",
+    "pages/data/data"
   ],
   "tabBar": {
     "color": "#666",

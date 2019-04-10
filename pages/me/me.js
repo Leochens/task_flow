@@ -23,13 +23,34 @@ const page = {
 
   },
   toSettings: function(){
-
+    wx.navigateTo({
+      url:'../settings/settings'
+    })
   },
   toCategory:function(){
-
+    wx.navigateTo({
+      url:'../category/category'
+    })
   },
   toAbout:function(){
-
+    wx.navigateTo({
+      url:'../about/about'
+    })
+  },
+  toData:function(){
+    wx.navigateTo({
+      url:'../data/data'
+    })
+  },
+  toTemplate:function(){
+    wx.navigateTo({
+      url:'../task_flow_template/task_flow_template'
+    })
+  },
+  toCalendar:function(){
+    wx.navigateTo({
+      url:'../calendar/calendar'
+    })
   }
 };
 const mapStateToData = state => {

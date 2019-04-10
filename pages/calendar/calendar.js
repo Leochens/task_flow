@@ -1,4 +1,4 @@
-// pages/task/comments/comments.js
+// pages/calendar/calendar.js
 Page({
 
   /**

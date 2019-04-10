@@ -37,4 +37,8 @@
         <image src="../../assets/imgs/me/template.svg" class="icon"></image>
         <view class="name">模板</view>
     </view>
+        <view class="item">
+        <image src="../../assets/imgs/me/category.svg" class="icon"></image>
+        <view class="name">分类</view>
+    </view>
 </view>

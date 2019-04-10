@@ -28,6 +28,7 @@ const page = {
     hasAuth: false,
     showCom: true,
     currentIndex: 0,
+    canIUse:wx.canIUse('button.open-type.getUserInfo'),
     isClassify: false,
     isFilter: MENU.NONE,
     StatusBar: app.globalData.StatusBar,
@@ -41,7 +42,8 @@ const page = {
     pinTopTaskFlowList: [],
     searchResultList: [],
     searchKeyword: '',
-    tfCardType: 'default'
+    tfCardType: 'default',
+    hasUserInfo:false
   },
   onSearch: function (e) {
     const keyword = e.detail;
@@ -205,6 +207,7 @@ const page = {
       console.log("get ", userInfo);
       this.setData({
         userInfo,
+        hasUserInfo:true
       })
     }
   },
