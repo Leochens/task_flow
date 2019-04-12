@@ -19,21 +19,44 @@ const _page = {
     beginDate: formatTime(new Date()),
     endDate: formatTime(new Date()),
     leader: wx.getStorageSync('userInfo').nickName,
-    isUpdate: false
+    isUpdate: false,
+    curCate: '默认分类',
+    index: 0,
+    categories: []
+  },
+  getCategories: function () {
+    const categories = app.globalData.categories;
+    this.setData({
+      categories,
+      index: 0
+    })
+  },
+  bindPickerChange: function (e) {
+    console.log(e);
+    const index = e.detail.value;
+    this.setData({
+      index,
+      curCate: this.data.categories[index]
+    })
+
   },
   onLoad: function (options) {
     if (!options) return;
-    const { flag,tf_id,tf_name,tf_describe,end_time } = options;
+    const { flag, tf_id, tf_name, tf_describe, end_time } = options;
     console.log(options);
-    if (tf_id&&flag && flag === 'update') {
+    this.getCategories();
+    if (tf_id && flag && flag === 'update') {
       this.setData({
         isUpdate: true,
         tf_id,
         tf_name,
         tf_describe,
-        end_time
+        end_time,
+        categories
       })
     }
+
+
   },
   bindBeginDateChange: function (e) {
     const {
@@ -75,7 +98,7 @@ const _page = {
     }
     this.setData({
       endDate,
-      end_time:endDate
+      end_time: endDate
     })
   },
   onSubmit: function (e) {
@@ -87,32 +110,25 @@ const _page = {
       return;
     }
 
-    const { beginDate: begin_time, endDate: end_time, isUpdate } = this.data;
+    const { beginDate: begin_time, endDate: end_time, isUpdate, curCate } = this.data;
     const u_id = wx.getStorageSync('u_id');
     if (isUpdate) {
       this.updateTaskFlow(u_id, this.data.tf_id, JSON.stringify({
         tf_name,
         tf_describe,
-        begin_time:begin_time,
+        begin_time: begin_time,
         end_time,
-        leader_id: u_id
+        leader_id: u_id,
+        category: curCate
       }));
-      // // 更新前一页
-      // const pages = getCurrentPages();
-      // const len = pages.length;
-      // const prevPage = pages[len -2];
-      // prevPage.setData({
-      //   tf_name,
-      //   tf_describe,
-      //   end_time
-      // })
     } else {
       this.addTaskFlow(u_id, JSON.stringify({
         tf_name,
         tf_describe,
         begin_time,
         end_time,
-        leader_id: u_id
+        leader_id: u_id,
+        category: curCate
       }));
     }
 
@@ -128,7 +144,6 @@ const mapDispatchToPage = dispatch => {
   return {
     addTaskFlow: (u_id, tf) => dispatch(addTaskFlow(u_id, tf)),
     updateTaskFlow: (u_id, tf_id, tf) => dispatch(updateTaskFlow(u_id, tf_id, tf))
-
   }
 }
 

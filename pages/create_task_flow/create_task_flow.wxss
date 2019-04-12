@@ -13,3 +13,13 @@
   bottom: 30rpx;
   margin-left: 10%;
 }
+
+.picker{
+  font-size: 35rpx;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 8rpx;
+  padding: 0 16rpx;
+  line-height: 80rpx;
+  color: #666;
+}

@@ -47,7 +47,7 @@ const mapStateToData = state => {
   const _messages = { ...state.entities.messages };
   const messages = m_ids.map(m_id => _messages[m_id]);
   const sortby = (t1, t2) => {
-    return compareDate(t1.create_time, t2.create_time);
+    return compareDate(t2.create_time, t1.create_time);
   }
   messages.sort(sortby);
   return {
