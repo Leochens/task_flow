@@ -1,2 +1,10 @@
-<!--pages/message/message.wxml-->
-<text>pages/message/message.wxml</text>
+<!-- pages/message/message.wxml -->
+<nav-bar blank="true" title="消息">
+
+</nav-bar>
+<view class="messages-wrap">
+    <view class="msg-item {{item.is_read?'is-read':'' }}" wx:for="{{messages}}" wx:key>
+        <view class="content">{{item.content}}</view>
+        <view class="time">{{item.create_time}}</view>
+    </view>
+</view>

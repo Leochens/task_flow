@@ -220,6 +220,7 @@ const page = {
       this.fetchTaskFlows(this.data.u_id);
       this.getPinTopTaskFlow();
     }
+    console.log(app.globalData);
   },
   onShow: function (e) {
     console.log(e);
@@ -269,6 +270,9 @@ const mapStateToData = (state, options) => {
   const taskFlowList = _taskFlowList.map(wrapTaskFlow);
   const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
   const categories = getCategory(taskFlowList);
+
+  app.globalData.categories = categories.slice(1,categories.length); // 将分类存到全局变量中
+
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",

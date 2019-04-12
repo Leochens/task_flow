@@ -8,4 +8,4 @@ const appConfig = {
 const env = 'dev'
 
 const allowTaskFlowPinToTop = true; // 允许任务置顶
-export default appConfig;   
+export default appConfig;

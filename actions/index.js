@@ -19,6 +19,19 @@ export const fetchTasks = (tf_id) => {
     }
     return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id });
 };
+export const fetchMessages = (u_id) => {
+    const normalizeFunc = response => {
+        console.log("待nomalize==>", response);
+        const messages = normalize(response.data, Schemas.messages);
+        console.log("nomalize后==>", messages);
+        return messages;
+    }
+    return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc });
+};
+
+export const setMessageRead = u_id => {
+    return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages/`)
+}
 export const addTaskFlow = (u_id, tf) => {
     return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`);
 }

@@ -4,11 +4,13 @@ import members from './members';
 import tasks from './tasks';
 import comments from './comments';
 import images from './images';
+import messages from './messages';
 export default combineReducers({
 
     task_flows,
     members,
     tasks,
     comments,
-    images
+    images,
+    messages
 });

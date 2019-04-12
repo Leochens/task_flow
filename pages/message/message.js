@@ -1,66 +1,66 @@
 // pages/message/message.js
-Page({
+import { connect } from '../../libs/wechat-weapp-redux';
+import {
+  fetchMessages,
+  setMessageRead
+} from '../../actions/index';
+import { compareDate } from '../../utils/util';
+const app = getApp();
+
+const page = {
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    messages: []
   },
 
+
+  setRead: function (u_id) {
+    this.setMessageRead(u_id);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const u_id = wx.getStorageSync('u_id');
+    this.fetchMessages(u_id);
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh: function () {
-
+    const u_id = wx.getStorageSync('u_id');
+    wx.showNavigationBarLoading();
+    this.fetchMessages(u_id);
+    wx.stopPullDownRefresh();
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onHide: function () {
+    const u_id = wx.getStorageSync('u_id');
+    this.setRead(u_id);
   }
-})
+}
+
+const mapStateToData = state => {
+  const m_ids = [...state.ids.messages];
+  const _messages = { ...state.entities.messages };
+  const messages = m_ids.map(m_id => _messages[m_id]);
+  const sortby = (t1, t2) => {
+    return compareDate(t1.create_time, t2.create_time);
+  }
+  messages.sort(sortby);
+  return {
+    messages
+  }
+}
+const mapDispatchToPage = dispatch => {
+  return {
+    fetchMessages: u_id => dispatch(fetchMessages(u_id)),
+    setMessageRead: u_id => dispatch(setMessageRead(u_id))
+  }
+}
+
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
+Page(_page)
+
