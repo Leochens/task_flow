@@ -38,7 +38,6 @@ const _page = {
       index,
       curCate: this.data.categories[index]
     })
-
   },
   onLoad: function (options) {
     if (!options) return;
@@ -51,8 +50,7 @@ const _page = {
         tf_id,
         tf_name,
         tf_describe,
-        end_time,
-        categories
+        end_time
       })
     }
 

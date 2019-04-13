@@ -7,6 +7,7 @@
 .msg-item{
     font-size: 30rpx;
     margin-bottom: 20rpx;
+    padding: 10rpx;
 }
 
 .content{
