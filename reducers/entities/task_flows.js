@@ -55,7 +55,6 @@ const task_flows = (state = {
         const {tf,tf_id} = requestPayload.data;
         const _tf = JSON.parse(tf);
         const {tf_name,tf_describe,end_time} = _tf;
-        console.log("_tf=>",_tf,tf_id);
         return {
           ...state,
           [tf_id]:{
