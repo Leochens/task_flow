@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
-// import { fetchTaskMemberStatus } from '../../../actions/index';
+import { applyTakeBreak, completeTask } from '../../../actions/index';
 const page = {
 
   /**
@@ -12,10 +12,11 @@ const page = {
     tf_id: '',
     tf_name: '',
     tasks: [],
-    u_id: wx.getStorageSync('u_id'),
     u_name: wx.getStorageSync('userInfo').nickName,
     myTasks: [],
-    showInputIndex: -1
+    showInputIndex: -1,
+    breakTaskId: '',
+    break_reason: ''
   },
 
   /**
@@ -41,7 +42,8 @@ const page = {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const { tf_id, tasks, u_id, status } = this.data;
+    const { tf_id, tasks, status } = this.data;
+    const u_id = wx.getStorageSync('u_id');
 
     const myTasks = this._taskFilter(tf_id, u_id, tasks);
     myTasks.forEach(task => {
@@ -55,12 +57,43 @@ const page = {
     });
 
   },
+
+  completeTask: function (e) {
+    console.log(e);
+    const t_id = e.currentTarget.dataset.tid;
+    const u_id = wx.getStorageSync('u_id');
+
+    this._completeTask(t_id, u_id);
+    // 后端请求完成任务的api
+
+  },
   applyBreak: function (e) {
+    console.log("e=>", e);
     const index = e.target.dataset.idx;
-    console.log("操作哪个?", index);
     this.setData({
-      showInputIndex: index
+      showInputIndex: index,
+      breakTaskId: e.target.dataset.tid
+    });
+  },
+  inputChange: function (e) {
+    const break_reason = e.detail.value;
+    console.log(break_reason);
+    this.setData({
+      break_reason
     })
+  },
+  sendApply: function () {
+    console.log("准备发射请求");
+    const { breakTaskId, break_reason } = this.data;
+    const u_id = wx.getStorageSync('u_id');
+
+    this.applyTakeBreak(breakTaskId, u_id, break_reason);
+
+    this.setData({
+      showInputIndex: -1,
+    })
+
+    wx.navigateBack();
   },
   taskDetail: function (e) {
     console.log(e);
@@ -80,7 +113,8 @@ const mapStateToData = state => {
   };
 }
 const mapDispatchToPage = dispatch => ({
-  // fetchTaskMemberStatus: (t_id,u_ids) => dispatch(fetchTaskMemberStatus(t_id,u_ids))
+  applyTakeBreak: (t_id, u_id, break_reason) => dispatch(applyTakeBreak(t_id, u_id, break_reason)),
+  _completeTask: (t_id, u_id) => dispatch(completeTask(t_id, u_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

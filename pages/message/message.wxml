@@ -1,10 +1,24 @@
 <!-- pages/message/message.wxml -->
-<nav-bar blank="true" title="消息">
-
-</nav-bar>
+<nav-bar blank="true" title="消息"></nav-bar>
 <view class="messages-wrap">
     <view class="msg-item {{item.is_read?'is-read':'' }}" wx:for="{{messages}}" wx:key>
-        <view class="content">{{item.content}}</view>
+        <view class="content important">{{item.content}}</view>
+        <view class="content" wx:if="{{item.t_name}}">
+            <view class="lable">所属子任务:</view>
+            {{item.t_name}}
+        </view>
+        <view class="content" wx:if="{{item.tf_name}}">
+            <view class="lable">所属任务流:</view>
+            {{item.tf_name}}
+        </view>
+        <view class="content" wx:if="{{item.t_end_time}}">
+            <view class="lable">子任务截止日期:</view>
+            {{item.t_end_time}}
+        </view>
+        <view class="content" wx:if="{{item.tf_end_time}}">
+            <view class="lable">任务流截止日期:</view>
+            {{item.tf_end_time}}
+        </view>
         <view class="time">{{item.create_time}}</view>
     </view>
 </view>

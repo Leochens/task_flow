@@ -1,8 +1,8 @@
 // import { } from '../../actions/fetchActions';
-import { CRUD_GET_LIST_SUCCESS,CRUD_CREATE_SUCCESS,CRUD_CREATE } from '../../actions/dataActions';
+import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 
-const range = ['task_flows','tasks'];
+const range = ['task_flows', 'tasks'];
 const tasks = (state = {}, action) => {
     const { type, payload, requestPayload, meta } = action;
 
@@ -18,6 +18,29 @@ const tasks = (state = {}, action) => {
                 ...state,
                 ...tasks
             }
+        }
+        case CRUD_CREATE_SUCCESS: {
+            if (meta.resource === 'break') {
+                const { t_id, u_id, break_reason } = meta;
+                const _state = { ...state };
+                const task = { ..._state[t_id] };
+                const statusMap = [...task.status_map];
+                statusMap.forEach(sm => {
+                    if (sm.u_id === u_id) {
+                        sm.user_status = 3;// 请假中
+                        sm.break_reason = break_reason;
+                    }
+                })
+                return {
+                    ...state,
+                    [t_id]: {
+                        ...state[t_id],
+                        status_map: statusMap
+                    }
+                };
+            }
+
+            return state;
         }
         default: return state;
     }
