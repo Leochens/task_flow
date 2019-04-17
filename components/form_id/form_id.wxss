@@ -1,0 +1,13 @@
+/* components/form_id/form_id.wxss */
+.formid{
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+    text-align: left;
+}
+.formid::after{
+    border: none;
+    
+}

@@ -94,3 +94,9 @@ export const refuseTakeBreak = (t_id, u_id, refuse_reason) => {
 
     return crudUpdate('breaks', t_id, { u_id, refuse_reason }, `tasks/${t_id}/break`);
 }
+
+
+export const postFormId = (formId) => {
+
+    return crudCreate('formId', { formId }, `formid`, { formId });
+}

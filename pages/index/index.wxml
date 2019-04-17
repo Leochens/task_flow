@@ -45,24 +45,34 @@
 </view>
 <view class='task-flows ' style='margin-top:{{CustomBar}}px;'>
   <view wx:if="{{currentCategoryTaskFlowList.length}}">
-    <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" wx:if="{{showCom}}" wx:for="{{currentCategoryTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+    <form-id>
+      <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" wx:if="{{showCom}}" wx:for="{{currentCategoryTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+    </form-id>
   </view>
   <view wx:else>
     <search-bar bind:onSearch='onSearch'></search-bar>
     <view wx:if="{{!searchResultList.length && tfCardType === 'default'}}">
-      <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" isPinTop="{{true}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+      <form-id>
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" isPinTop="{{true}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+      </form-id>
     </view>
     <view wx:if="{{filterTaskFlowList.length || taskFlowList.length}}">
       <view wx:if="{{searchResultList.length}}">
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{searchResultList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
-        <button bind:tap="clearSearch" class="clear-search-btn">清空搜索 {{searchKeyword}}</button>
+        <form-id>
+          <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{searchResultList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+          <button bind:tap="clearSearch" class="clear-search-btn">清空搜索 {{searchKeyword}}</button>
+        </form-id>
       </view>
       <view wx:else>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        <form-id>
+          <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        </form-id>
       </view>
     </view>
     <view wx:else>
-      <view class="empty-list">还没有任务流呢,快点击上方的加号添加吧！</view>
+      <form-id>
+        <view class="empty-list">还没有任务流呢,快点击上方的加号添加吧！</view>
+      </form-id>
     </view>
   </view>
 </view>

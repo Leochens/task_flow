@@ -1,0 +1,8 @@
+<!-- components/form_id/form_id.wxml -->
+<!-- 获取formId的组件 -->
+<form bindsubmit="formSubmit" report-submit='true'>
+    <label for="btn">
+        <slot></slot>
+    </label>
+    <button id="btn" name="btn" form-type="submit" class='formid'></button>
+</form>
