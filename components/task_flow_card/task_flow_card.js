@@ -108,7 +108,7 @@ Component({
     calculateTask: function(tasks){
         if(!Array.isArray(tasks)) return {};
         const all = tasks.length;
-        const completedTasks = tasks.filter(task=>task.is_completed);
+        const completedTasks = tasks.filter(task=>task.is_completed == 1); // 1 完成 2 延期 0 进行中
         const ctLen = completedTasks.length;
         return {
           count: all,

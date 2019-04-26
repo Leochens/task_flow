@@ -96,7 +96,7 @@ export const refuseTakeBreak = (t_id, u_id, refuse_reason) => {
 }
 
 
-export const postFormId = (formId) => {
+// export const postFormId = (formId,u_id) => {
 
-    return crudCreate('formId', { formId }, `formid`, { formId });
-}
+//     return crudCreate('formId', { formId,u_id }, `formid`, { formId });
+// }

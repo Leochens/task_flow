@@ -23,10 +23,11 @@ Component({
     formSubmit: function (e) {
       console.log(e.detail.formId);
       const formid = e.detail.formId;
+      const u_id = wx.getStorageSync('u_id');
       wx.request({
         method: "POST",
         url: apiBaseUrl + '/formid',
-        data: JSON.stringify({ formid: formid }),
+        data: JSON.stringify({ formid: formid, u_id: u_id }),
         success: function (res) {
           console.log(res);
         },
