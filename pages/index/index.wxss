@@ -228,3 +228,21 @@ page {
     height: 0;
   }
 }
+
+
+.cur-op{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  justify-self: self-start;
+  color: #fff;
+}
+
+.pin-left{
+  margin-right: 40rpx;
+}
+.back-menu-btn{
+  font-weight: bold;
+  font-size: 24rpx;
+  margin-left: 40rpx;
+}

@@ -34,7 +34,7 @@ export default (apiUrl, httpClient = fetchJson) => {
         options.data = JSON.stringify(params.data);
         break;
       case DELETE:
-        url = `${apiUrl}/${basePath ? basePath : resource}`;
+        url = `${apiUrl}/${basePath ? basePath : resource}/${params.id}`;
         options.method = 'DELETE';
         break;
       default:

@@ -4,11 +4,11 @@ import {
   CRUD_CREATE_SUCCESS,
   CRUD_CREATE_LOADING,
   CRUD_CREATE_FAILURE,
-  CRUD_UPDATE_SUCCESS
+  CRUD_UPDATE_SUCCESS,
+  CRUD_DELETE_SUCCESS
 } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 
-const range = ['task_flows'];
 
 
 const task_flows = (state = {
@@ -50,21 +50,22 @@ const task_flows = (state = {
         }
         return state;
       }
-    case CRUD_UPDATE_SUCCESS:{
-      if(meta.resource != 'task_flows') return state;
-        const {tf,tf_id} = requestPayload.data;
-        const _tf = JSON.parse(tf);
-        const {tf_name,tf_describe,end_time} = _tf;
-        return {
-          ...state,
-          [tf_id]:{
-            ...state[tf_id],
-            tf_name,
-            tf_describe,
-            end_time
-          }
+    case CRUD_UPDATE_SUCCESS: {
+      if (meta.resource != 'task_flows') return state;
+      const { tf, tf_id } = requestPayload.data;
+      const _tf = JSON.parse(tf);
+      const { tf_name, tf_describe, end_time } = _tf;
+      return {
+        ...state,
+        [tf_id]: {
+          ...state[tf_id],
+          tf_name,
+          tf_describe,
+          end_time
         }
+      }
     }
+
 
     default:
       return state;

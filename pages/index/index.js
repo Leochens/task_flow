@@ -15,7 +15,8 @@ import {
   fetchTaskFlows,
   getPinTopTaskFlow,
   pinTopTaskFlow,
-  cancelPinTopTaskFlow
+  cancelPinTopTaskFlow,
+  deleteTaskFlow
 } from '../../actions/index';
 import {
   login,
@@ -28,7 +29,7 @@ const page = {
     hasAuth: false,
     showCom: true,
     currentIndex: 0,
-    canIUse:wx.canIUse('button.open-type.getUserInfo'),
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isClassify: false,
     isFilter: MENU.NONE,
     StatusBar: app.globalData.StatusBar,
@@ -41,9 +42,53 @@ const page = {
     taskFlowList: [],
     pinTopTaskFlowList: [],
     searchResultList: [],
+    currentCategoryTaskFlowList: [],
     searchKeyword: '',
     tfCardType: 'default',
-    hasUserInfo:false
+    hasUserInfo: false,
+    curOperation: MENU.NONE,
+    curOperationText: '',
+  },
+  menuTabSelect(e) {
+    const which = e.currentTarget.dataset.id;
+    let tfCardType = 'default';
+    switch (which) {
+      case MENU.COMPLETED: // 查看已完成的任务流
+        {
+          const filterTaskFlowList = this.data.taskFlowList.filter(item => item.is_completed);
+
+          this.setData({
+            curOperation: MENU.COMPLETED,
+            curOperationText: "已完成任务流数: " + filterTaskFlowList.length,
+            filterTaskFlowList
+          });
+          break;
+        }
+      case MENU.DELETE: {
+        tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
+        this.setData({
+          curOperation: MENU.DELETE,
+          curOperationText: "选择一个任务流删除"
+        });
+        break;
+      }
+      default: break;
+    }
+    this.setData({
+      TabCur: which,
+      scrollLeft: (which - 1) * 60,
+      isClassify: which == 1 ? true : false,
+      tfCardType
+    })
+  },
+  backToMenu: function () {
+    this.setData({
+      curOperation: MENU.NONE,
+      filterTaskFlowList: [],
+      searchResultList: [],
+      searchKeyword: '',
+      tfCardType: 'default',
+    })
   },
   onSearch: function (e) {
     const keyword = e.detail;
@@ -76,13 +121,27 @@ const page = {
       });
       return;
     }
+    const that = this;
     wx.showModal({
       title: "删除提醒",
       content: `您确定删除任务流"${tf.tf_name}"吗`,
       success: function (e) {
-        console.log("确定")
+        if (e.confirm) {
+          console.log("确定");
+          // 删除任务流api
+          const u_id = that.data.u_id;
+          that.deleteTaskFlow(u_id, tf_id);
+          that.setData({
+            tfCardType: 'default',
+            curOperation: MENU.NONE
+          })
+        }
       },
+
       completed: function () {
+        that.setData({
+          tfCardType: 'default'
+        })
       }
     });
   },
@@ -108,33 +167,7 @@ const page = {
     const tf_id = e.currentTarget.dataset.tfid;
     this.cancelPinTopTaskFlow(tf_id);
   },
-  menuTabSelect(e) {
-    const which = e.currentTarget.dataset.id;
-    let tfCardType = 'default';
-    switch (which) {
-      case MENU.COMPLETED:
-        {
 
-          console.log("切换已完成");
-          this.setData({
-            isFilter: this.data.isFilter ? MENU.NONE : MENU.COMPLETED,
-            filterTaskFlowList: this.data.taskFlowList.filter(item => item.is_completed),
-          });
-          break;
-        }
-      case MENU.DELETE: {
-        tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
-        break;
-      }
-      default: break;
-    }
-    this.setData({
-      TabCur: which,
-      scrollLeft: (which - 1) * 60,
-      isClassify: which == 1 ? true : false,
-      tfCardType
-    })
-  },
   classTabSelect(e) { // 按照分类筛选tf
     console.log(e.currentTarget.dataset);
     const { categories, taskFlowList } = this.data;
@@ -207,7 +240,7 @@ const page = {
       console.log("get ", userInfo);
       this.setData({
         userInfo,
-        hasUserInfo:true
+        hasUserInfo: true
       })
     }
   },
@@ -271,7 +304,7 @@ const mapStateToData = (state, options) => {
   const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
   const categories = getCategory(taskFlowList);
 
-  app.globalData.categories = categories.slice(1,categories.length); // 将分类存到全局变量中
+  app.globalData.categories = categories.slice(1, categories.length); // 将分类存到全局变量中
 
   return {
     taskFlowList,
@@ -289,7 +322,8 @@ const mapDispatchToPage = dispatch => ({
   gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
   getPinTopTaskFlow: () => dispatch(getPinTopTaskFlow()),
   pinTopTaskFlow: tf_id => dispatch(pinTopTaskFlow(tf_id)),
-  cancelPinTopTaskFlow: tf_id => dispatch(cancelPinTopTaskFlow(tf_id))
+  cancelPinTopTaskFlow: tf_id => dispatch(cancelPinTopTaskFlow(tf_id)),
+  deleteTaskFlow: (u_id, tf_id) => dispatch(deleteTaskFlow(u_id, tf_id)),
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

@@ -47,7 +47,7 @@ export const CRUD_UPDATE_SUCCESS = 'CRUD_UPDATE_SUCCESS';
 export const crudUpdate = (resource, id, data, basePath) => ({
     type: CRUD_UPDATE,
     payload: { id, data, basePath },
-    meta: { resource,id, fetch: UPDATE, cancelPrevious: false },
+    meta: { resource, id, fetch: UPDATE, cancelPrevious: false },
 });
 
 export const CRUD_DELETE = 'CRUD_DELETE';

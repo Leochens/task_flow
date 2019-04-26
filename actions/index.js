@@ -1,4 +1,4 @@
-import { crudCreate, crudGetList, crudUpdate } from './dataActions'
+import { crudCreate, crudGetList, crudUpdate, crudDelete } from './dataActions'
 import Schemas from '../schemas/index';
 import { normalize } from '../libs/normalizr';
 export const fetchTaskFlows = u_id => {
@@ -30,7 +30,7 @@ export const fetchMessages = (u_id) => {
 };
 
 export const setMessageRead = u_id => {
-    return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages/`)
+    return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages`)
 }
 export const addTaskFlow = (u_id, tf) => {
     return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`);
@@ -52,7 +52,10 @@ export const addComment = (t_id, cmt) => {
 }
 
 export const updateTaskFlow = (u_id, tf_id, tf) => {
-    return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows/`)
+    return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`)
+}
+export const deleteTaskFlow = (u_id, tf_id) => {
+    return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
 
 

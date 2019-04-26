@@ -10,30 +10,41 @@
         </block>
       </view>
       <!-- 主菜单 -->
-      <block wx:if="{{!isClassify?'cur':''}}">
-        <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
-          <view class='icon-cu-image text-white'>
-            <text class="icon-apps  margin-0"></text>
+      <block wx:if="{{!isClassify}}">
+        <block wx:if="{{curOperation}}">
+          <view class="cur-op">
+            <view class='icon-cu-image text-white'>
+              <text class="pin-left icon-{{curOperation === 2?'roundcheck':'delete'}}fill  margin-0"></text>
+            </view>
+            <text>{{curOperationText}}</text>
+            <view class="back-menu-btn" bindtap='backToMenu'>返回</view>
           </view>
-        </view>
-        <view class="action" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="2">
-          <view class='icon-cu-image text-white'>
-            <text class="icon-roundcheck{{2==TabCur && 2==isFilter?'fill':''}}  margin-0"></text>
+        </block>
+        <block wx:else>
+          <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
+            <view class='icon-cu-image text-white'>
+              <text class="icon-apps  margin-0"></text>
+            </view>
           </view>
-        </view>
-        <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
-          <view class='icon-cu-image text-white'>
-            <text class="icon-delete{{3==TabCur && 3==isFilter?'fill':''}}  margin-0"></text>
+          <view class="action" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="2">
+            <view class='icon-cu-image text-white'>
+              <text class="icon-roundcheck{{2==TabCur && 2==isFilter?'fill':''}}  margin-0"></text>
+            </view>
           </view>
-        </view>
-        <view class="action {{4==TabCur?'cur':''}}" bindtap='tabSelect' data-id="4">
-          <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
-            <text class='icon-add '></text>
+          <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
+            <view class='icon-cu-image text-white'>
+              <text class="icon-delete{{3==TabCur && 3==isFilter?'fill':''}}  margin-0"></text>
+            </view>
           </view>
-        </view>
+          <view class="action {{4==TabCur?'cur':''}}" data-id="4">
+            <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
+              <text class='icon-add '></text>
+            </view>
+          </view>
+        </block>
       </block>
       <!-- 分类菜单 -->
-      <block wx:if="{{isClassify?'cur':''}}">
+      <block wx:else>
         <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
           <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{categories}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
             {{index>0?item:"返回"}}
@@ -65,7 +76,7 @@
       </view>
       <view wx:else>
         <form-id>
-          <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{isFilter!='0'?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+          <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
         </form-id>
       </view>
     </view>

@@ -10,7 +10,7 @@ Component({
     },
     onBack: {
       type: Function,
-      value: ()=>{console.log("hello?");wx.navigateBack()}
+      value: () => { wx.navigateBack() }
     },
     blank: {
       type: Boolean
@@ -30,8 +30,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    back: function(){
-      console.log("back")
+    back: function () {
       this.properties.onBack();
     }
   }
