@@ -22,7 +22,9 @@ const _page = {
     isUpdate: false,
     curCate: '默认分类',
     index: 0,
-    categories: []
+    categories: [],
+    hideModal: true,
+    newCateName: ''
   },
   getCategories: function () {
     const categories = app.globalData.categories;
@@ -32,7 +34,6 @@ const _page = {
     })
   },
   bindPickerChange: function (e) {
-    console.log(e);
     const index = e.detail.value;
     this.setData({
       index,
@@ -40,9 +41,9 @@ const _page = {
     })
   },
   onLoad: function (options) {
+    console.log("options",options);
     if (!options) return;
     const { flag, tf_id, tf_name, tf_describe, end_time } = options;
-    console.log(options);
     this.getCategories();
     if (tf_id && flag && flag === 'update') {
       this.setData({
@@ -53,8 +54,6 @@ const _page = {
         end_time
       })
     }
-
-
   },
   bindBeginDateChange: function (e) {
     const {
@@ -62,7 +61,6 @@ const _page = {
       endDate
     } = this.data;
     const beginDate = e.detail;
-    console.log("beginDate", e.detail);
     if (compareDate(beginDate, endDate)) {
       wx.showModal({
         title: '日期选择有误',
@@ -83,7 +81,6 @@ const _page = {
       endDate: oldEndDate,
       beginDate
     } = this.data;
-    console.log("endDate", e.detail);
     if (compareDate(beginDate, endDate)) {
       wx.showModal({
         title: '日期选择有误',
@@ -100,17 +97,19 @@ const _page = {
     })
   },
   onSubmit: function (e) {
-
-    console.log("表单提交事件", e);
     const { tf_name, tf_describe } = e.detail.value;
+    console.log(e,this.data);
     if (!tf_name || !tf_describe) {
-
+      wx.showToast({
+        title: "请填写必填字段"
+      })
       return;
     }
 
     const { beginDate: begin_time, endDate: end_time, isUpdate, curCate } = this.data;
     const u_id = wx.getStorageSync('u_id');
     if (isUpdate) {
+      console.log("开始更新")
       this.updateTaskFlow(u_id, this.data.tf_id, JSON.stringify({
         tf_name,
         tf_describe,
@@ -129,8 +128,47 @@ const _page = {
         category: curCate
       }));
     }
+  },
+  addCate: function () {
+    this.setData({
+      hideModal: false
+    })
+  },
+  cancelM: function () {
+    this.setData({
+      hideModal: true,
+      newCateName: ''
+    })
+  },
+  confirmM: function () {
+    // 将新的分类添加到data中并选择它
+    const { newCateName } = this.data;
+    const categories = this.data.categories.slice();
 
+    if (!newCateName) {
+      this.setData({
+        hideModal: true
+      });
+      return;
+    }
 
+    categories.push(newCateName);
+    app.globalData.categories = categories;
+    this.setData({
+      categories,
+      newCateName: '',
+      index: categories.length - 1,
+      hideModal: true,
+      curCate: newCateName
+    })
+
+  },
+  inputCategory: function (e) {
+    console.log(e);
+    const newCateName = e.detail.value;
+    this.setData({
+      newCateName
+    })
   }
 };
 const mapStateToData = state => {

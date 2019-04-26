@@ -23,6 +23,7 @@
         </view>
         <view class="task-item">
             <label class='tips'>分类</label>
+            <view class="add-cate" bind:tap="addCate">添加分类</view>
             <picker bindchange="bindPickerChange" value="{{index}}" range="{{categories}}">
                 <view class="picker">当前选择：{{categories[index]}}</view>
             </picker>
@@ -30,6 +31,9 @@
     </view>
     <button class='complete' form-type="submit">完成</button>
 </form>
+<modal hidden="{{hideModal}}" title="添加分类" confirm-text="完成" cancel-text="取消" bindcancel="cancelM" bindconfirm="confirmM">
+    <input bindinput='inputCategory' type='text' placeholder="请输入新的分类..." auto-focus value="{{newCateName}}" />
+</modal>
 <!-- id
 tf_name
 tf_describe

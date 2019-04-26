@@ -23,3 +23,12 @@
   line-height: 80rpx;
   color: #666;
 }
+.add-cate{
+  color: #2665ae;
+  font-weight: bold;
+  font-size: 24rpx;
+  display: inline-block;
+  margin-left: 30rpx;
+  line-height: 80rpx;
+
+}
