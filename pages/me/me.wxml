@@ -18,7 +18,7 @@
 </view>
 <view class="menus">
     <view class="item">
-        <image src="../../assets/imgs/me/setting.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/setting.svg" bind:tap="toSettings" class="icon"></image>
         <view class="name">设置</view>
     </view>
     <view class="item">

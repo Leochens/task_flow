@@ -11,9 +11,9 @@ const page = {
    * 页面的初始数据
    */
   data: {
-    taskFlowsCnt:0,
-    myTaskFlowsCnt:0,
-    finishedCnt:0
+    taskFlowsCnt: 0,
+    myTaskFlowsCnt: 0,
+    finishedCnt: 0
   },
 
   /**
@@ -22,45 +22,47 @@ const page = {
   onLoad: function (options) {
 
   },
-  toSettings: function(){
+
+  toSettings: function () {
+
+    // wx.navigateTo({
+    //   url:'../settings/settings'
+    // })
+  },
+  toCategory: function () {
     wx.navigateTo({
-      url:'../settings/settings'
+      url: '../category/category'
     })
   },
-  toCategory:function(){
+  toAbout: function () {
     wx.navigateTo({
-      url:'../category/category'
+      url: '../about/about'
     })
   },
-  toAbout:function(){
+  toData: function () {
     wx.navigateTo({
-      url:'../about/about'
+      url: '../data/data'
     })
   },
-  toData:function(){
+  toTemplate: function () {
     wx.navigateTo({
-      url:'../data/data'
+      url: '../task_flow_template/task_flow_template'
     })
   },
-  toTemplate:function(){
+  toCalendar: function () {
     wx.navigateTo({
-      url:'../task_flow_template/task_flow_template'
-    })
-  },
-  toCalendar:function(){
-    wx.navigateTo({
-      url:'../calendar/calendar'
+      url: '../calendar/calendar'
     })
   }
 };
 const mapStateToData = state => {
   const ids = { ...state.ids };
-  const entities = {...state.entities};
+  const entities = { ...state.entities };
   const u_id = wx.getStorageSync('u_id');
   const taskFlowsCnt = ids.task_flows.length;
   const tfs = ids.task_flows.map(tf_id => entities.task_flows[tf_id]);
-  const finishedCnt = tfs.filter(tf=>tf.is_completed).length;
-  const myTaskFlowsCnt = tfs.filter(tf=>tf.leader_id === u_id).length;
+  const finishedCnt = tfs.filter(tf => tf.is_completed).length;
+  const myTaskFlowsCnt = tfs.filter(tf => tf.leader_id === u_id).length;
 
   return {
     taskFlowsCnt,
@@ -69,7 +71,7 @@ const mapStateToData = state => {
   }
 }
 const mapDispatchToPage = dispatch => ({
-  
+
 });
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

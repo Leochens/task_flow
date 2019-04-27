@@ -58,6 +58,12 @@ export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
 
+export const addImage = (img) => {
+    return crudCreate('images', { img }, `images`, { img });
+}
+
+
+
 
 export const PIN_TOP_TASK_FLOW = 'PIN_TOP_TASK_FLOW';
 export const GET_PIN_TOP_TASK_FLOW = 'GET_PIN_TOP_TASK_FLOW';
@@ -97,9 +103,3 @@ export const refuseTakeBreak = (t_id, u_id, refuse_reason) => {
 
     return crudUpdate('breaks', t_id, { u_id, refuse_reason }, `tasks/${t_id}/break`);
 }
-
-
-// export const postFormId = (formId,u_id) => {
-
-//     return crudCreate('formId', { formId,u_id }, `formid`, { formId });
-// }

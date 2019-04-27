@@ -46,11 +46,9 @@
                         </view>
                     </view>
                     <view>
-                        <label>图片:</label>
+                        <label bind:tap="bindChooiceImage">图片:</label>
                         <view class="images">
-                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
-                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
-                            <image src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1215621289,300803728&fm=200&gp=0.jpg" />
+                            <image wx:for="{{imgs}}" wx:key src="{{item.url}}" />
                         </view>
                     </view>
                 </view>

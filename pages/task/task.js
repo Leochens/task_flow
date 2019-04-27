@@ -2,8 +2,10 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { addComment } from '../../actions/index';
+import { addComment, addImage } from '../../actions/index';
 import { formatTime } from '../../utils/util';
+import APP from '../../appConfig';
+
 const page = {
 
   /**
@@ -11,10 +13,65 @@ const page = {
    */
   data: {
     task: {},
-    content: ""
+    content: "",
+    imgs: []
   },
+  bindChooiceImage: function () {
+    const u_id = wx.getStorageSync('u_id');
+    const t_id = this.data.task.id;
+    const that = this;
+    wx.chooseImage({
+      count: 3,  //最多可以选择的图片总数  
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
+        var tempFilePaths = res.tempFilePaths;
+        //启动上传等待中...  
+        wx.showToast({
+          title: '正在上传...',
+          icon: 'loading',
+          mask: true,
+          duration: 20000
+        })
+        var uploadImgCount = 0;
 
-  extendComment: function(cmt){
+        for (var i = 0, h = tempFilePaths.length; i < h; i++) {
+
+          wx.uploadFile({
+            url: APP.apiBaseUrl + '/images',
+            filePath: tempFilePaths[i],
+            name: 'image',
+            header: {
+              'content-type': 'multipart/form-data'
+            },
+            formData: {
+              u_id, t_id
+            },
+            success: function (res) {
+              console.log("上传成功=>", res);
+              wx.hideToast();
+              wx.showToast({
+                title: '上传成功',
+                mask: true
+              });
+              uploadImgCount++;
+            },
+            fail: function (res) {
+              wx.hideToast();
+              wx.showModal({
+                title: '错误提示',
+                content: '上传图片失败',
+                showCancel: false,
+                success: function (res) { }
+              })
+            }
+          });
+        }
+      }
+    })
+  },
+  extendComment: function (cmt) {
     const { u_id } = cmt;
     const members = this.data.members;
     const author = members[u_id];
@@ -36,6 +93,7 @@ const page = {
     task.comments = comments;
     this.setData({
       task,
+      imgs: task.images
     });
 
   },
@@ -81,7 +139,8 @@ const mapStateToData = state => {
   };
 }
 const mapDispatchToPage = dispatch => ({
-  addComment: (t_id, cmt) => dispatch(addComment(t_id, cmt))
+  addComment: (t_id, cmt) => dispatch(addComment(t_id, cmt)),
+  addImage: (img) => dispatch(addImage(img)),
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

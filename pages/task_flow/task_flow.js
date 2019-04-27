@@ -38,7 +38,7 @@ const page = {
  */
   editInfo: function () {
     wx.navigateTo({
-      url:'../create_task_flow/create_task_flow?flag=update&tf_id='+this.data.id+"&tf_name="+this.data.tf_name+"&tf_describe="+this.data.tf_describe+"&end_time="+this.data.end_time
+      url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time
     })
   },
   setFunc: function () {
@@ -175,7 +175,7 @@ const mapStateToData = _state => {
   console.log(_taskFlowList);
 
   const taskFlowList = _taskFlowList.map(item => {
-    const { members, tasks } = item;
+    const { members, tasks, images } = item;
     let _item = { ...item };
     const _members = [...members];
     const _tasks = [...tasks];
@@ -185,10 +185,14 @@ const mapStateToData = _state => {
       const _t = { ...t };
       const memIds = _t.members;
       const cmtIds = _t.comments;
+      const imgIds = _t.images;
       const mems = memIds.map(mid => entities.members[mid]);
       const cmts = cmtIds.map(cid => entities.comments[cid]);
+      const imgs = imgIds.map(iid => entities.images[iid]);
       _t.members = mems;
       _t.comments = cmts;
+      _t.images = imgs;
+
       return _t;
     })
     return _item;
@@ -201,7 +205,7 @@ const mapStateToData = _state => {
 const mapDispatchToPage = dispatch => {
   return {
     fetchTasks: (tf_id) => dispatch(fetchTasks(tf_id)),
-    updateTaskFlow: (u_id,tf_id,tf) => dispatch(updateTaskFlow(u_id,tf_id,tf))
+    updateTaskFlow: (u_id, tf_id, tf) => dispatch(updateTaskFlow(u_id, tf_id, tf))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

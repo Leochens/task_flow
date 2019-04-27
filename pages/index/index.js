@@ -49,6 +49,7 @@ const page = {
     curOperation: MENU.NONE,
     curOperationText: '',
   },
+
   menuTabSelect(e) {
     const which = e.currentTarget.dataset.id;
     let tfCardType = 'default';
@@ -133,7 +134,9 @@ const page = {
           that.deleteTaskFlow(u_id, tf_id);
           that.setData({
             tfCardType: 'default',
-            curOperation: MENU.NONE
+            curOperation: MENU.NONE,
+            searchResultList: [],
+            searchKeyword: ''
           })
         }
       },
@@ -257,6 +260,14 @@ const page = {
   },
   onShow: function (e) {
     console.log(e);
+    this.setData({
+      searchKeyword:'',
+      searchResultList:[],
+      filterTaskFlowList:[],
+      tfCardType: 'default',
+      curOperation: MENU.NONE,
+      curOperationText: '',
+    })
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
