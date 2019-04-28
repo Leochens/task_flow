@@ -22,23 +22,23 @@
         <view class="name">设置</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/calendar.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/calendar.svg"  bind:tap="toCalendar" class="icon"></image>
         <view class="name">日历</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/about.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/about.svg"  bind:tap="toAbout" class="icon"></image>
         <view class="name">关于</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/data.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/data.svg"  bind:tap="toData" class="icon"></image>
         <view class="name">数据</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/template.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/template.svg"  bind:tap="toTemplate" class="icon"></image>
         <view class="name">模板</view>
     </view>
         <view class="item">
-        <image src="../../assets/imgs/me/category.svg" class="icon"></image>
+        <image src="../../assets/imgs/me/category.svg" bind:tap="toCategory" class="icon"></image>
         <view class="name">分类</view>
     </view>
 </view>

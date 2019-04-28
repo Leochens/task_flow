@@ -1,6 +1,7 @@
 // import { } from '../../actions/fetchActions';
 import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
+import { ADD_IMG } from '../../actions/index';
 
 const range = ['task_flows', 'tasks'];
 const tasks = (state = {}, action) => {
@@ -41,6 +42,21 @@ const tasks = (state = {}, action) => {
             }
 
             return state;
+        }
+        case ADD_IMG: {
+            const { img: {
+                id, t_id
+            } } = action;
+            return {
+                ...state,
+                [t_id]: {
+                    ...state[t_id],
+                    images: [
+                        ...state[t_id].images,
+                        id
+                    ]
+                }
+            }
         }
         default: return state;
     }

@@ -45,9 +45,9 @@ const page = {
     })
   },
   toTemplate: function () {
-    wx.navigateTo({
-      url: '../task_flow_template/task_flow_template'
-    })
+    // wx.navigateTo({
+    //   url: '../task_flow_template/task_flow_template'
+    // })
   },
   toCalendar: function () {
     wx.navigateTo({

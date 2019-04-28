@@ -46,7 +46,7 @@
                         </view>
                     </view>
                     <view>
-                        <label bind:tap="bindChooiceImage">图片:</label>
+                        <label bind:tap="bindChooiceImage" class="upload-pic">上传图片</label>
                         <view class="images">
                             <image wx:for="{{imgs}}" wx:key src="{{item.url}}" />
                         </view>

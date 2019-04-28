@@ -111,12 +111,18 @@ image.is_completed{
 }
 .images image{
     display: inline-block;
-    width: 140rpx;
-    height: 180rpx;
+    width: 170rpx;
+    height: 240rpx;
     margin-right: 20rpx;
+    border-radius: 8rpx;
 
 }
-
+.upload-pic{
+    border-radius: 8rpx;
+    border: 1rpx solid #2967AF;
+    color: #2967AF;
+    font-weight: bold;
+}
 label{
     font-weight: bold;
     margin-bottom: 20rpx;

@@ -44,12 +44,15 @@ const loadingFilter = (resource) => {
         case 'task_flows': {
             wx.showLoading({
                 title: '加载中',
+                mask:true
+
             })
             break;
         }
         case 'auth': {
             wx.showLoading({
-                title: "登录中"
+                title: "登录中",
+                mask:true
             });
             break;
         }

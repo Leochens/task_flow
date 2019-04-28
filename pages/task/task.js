@@ -14,7 +14,8 @@ const page = {
   data: {
     task: {},
     content: "",
-    imgs: []
+    imgs: [],
+    t_id: ''
   },
   bindChooiceImage: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -49,12 +50,17 @@ const page = {
               u_id, t_id
             },
             success: function (res) {
-              console.log("上传成功=>", res);
+              console.log("上传成功 res=>", res);
+              const json = JSON.parse(res.data);
+              console.log("上传成功=>", json);
+              const img = json.img;
+              that.addImage(img);
               wx.hideToast();
               wx.showToast({
                 title: '上传成功',
                 mask: true
               });
+              wx.navigateBack();
               uploadImgCount++;
             },
             fail: function (res) {
@@ -86,7 +92,18 @@ const page = {
    */
   onLoad: function (options) {
     // console.log(options);
-    const task = JSON.parse(options.task);
+    const t_id = JSON.parse(options.task).id;
+    this.setData({
+      t_id
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onShow: function () {
+    // 筛选出t_id指向的task
+    const t_id = this.data.t_id;
+    const task = JSON.parse(JSON.stringify(this.data.getTask(t_id)));
     // 获得task后紧接着获得这个task的评论和人员的状态
     const comments = task.comments.map(cmt => this.extendComment(cmt));
     console.log(task);
@@ -96,11 +113,6 @@ const page = {
       imgs: task.images
     });
 
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onShow: function () {
   },
   commentSubmit: function (e) {
     console.log(e);
@@ -134,8 +146,22 @@ const page = {
 
 const mapStateToData = state => {
 
+  const { members, tasks, images, comments } = state.entities;
+  const _tasks = { ...tasks };
+
+  // 筛选函数
+  const getTask = t_id => {
+    const t = _tasks[t_id];
+    const { members: m, images: i, comments: c } = t;
+    t.members = m.map(mid => members[mid]);
+    t.comments = c.map(cid => comments[cid]);
+    t.images = i.map(iid => images[iid]);
+    return t;
+  }
   return {
-    members: state.entities.members
+    members: state.entities.members,
+    tasks: _tasks,
+    getTask
   };
 }
 const mapDispatchToPage = dispatch => ({

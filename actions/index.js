@@ -57,9 +57,12 @@ export const updateTaskFlow = (u_id, tf_id, tf) => {
 export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
-
+export const ADD_IMG = 'ADD_IMG';
 export const addImage = (img) => {
-    return crudCreate('images', { img }, `images`, { img });
+    return {
+        type: ADD_IMG,
+        img
+    }
 }
 
 
