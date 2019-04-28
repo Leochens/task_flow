@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/calendar/calendar",
     "pages/index/index",
     "pages/invite/invite",
     "pages/task/task",
@@ -18,7 +19,6 @@
     "pages/message/message",
     "pages/settings/settings",
     "pages/about/about",
-    "pages/calendar/calendar",
     "pages/category/category",
     "pages/data/data"
   ],

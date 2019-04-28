@@ -41,6 +41,12 @@
 .pink-color {
   color: #ff629a;
 }
+.main-color {
+  color: #2967AF;
+}
+.sub-color{
+  color: #9BB5D3
+}
 
 .white-color {
   color: #fff;
@@ -104,7 +110,7 @@
 }
 
 .normal-day-color {
-  color: #88d2ac;
+  color: #2665AE;
 }
 
 .day-choosed-color {
@@ -116,21 +122,40 @@
   width: 10rpx;
   height: 10rpx;
   border-radius: 50%;
-  background-color: #cc5226;
+  background-color: red;
 }
 
 .todo-text {
   font-size: 22rpx;
-  color: #c2c2c2;
+  color: red;
   position: absolute;
+  font-weight: bold;
 }
 
 .todo-text-bottom {
-  bottom: -8rpx;
+  top: 0rpx;
+  right: 0rpx;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  width:24rpx;
+  height:24rpx;
+  text-align:center;
+  line-height: 24rpx;
+
 }
 
 .todo-text-top {
-  top: -8rpx;
+  top: 0rpx;
+  right: 0rpx;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  width:24rpx;
+  height:24rpx;
+  text-align:center;
+  line-height: 24rpx;
+
 }
 
 .dot-day-height {
@@ -151,7 +176,7 @@
 
 /* 日期圆圈标记 */
 .day-circle {
-  border: 1rpx solid #88d2ac;
+  border: 1rpx dashed red;
   box-sizing: border-box;
 }
 
@@ -164,7 +189,7 @@
 
 /* 日期选中 */
 .day-choosed-bg {
-  background-color: #ff629a;
+  background-color: #2967AF;
   transition: all 0.3s;
   animation-name: choosed;
   animation-duration: 0.5s;

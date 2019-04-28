@@ -1,1 +1,8 @@
 /* pages/calendar/calendar.wxss */
+
+.bottom{
+    position: absolute;
+    bottom: 0;
+    padding: 20rpx 0;
+    border-top: 1rpx solid rgb(226, 233, 241);
+}

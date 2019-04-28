@@ -1,5 +1,5 @@
 <view class="flex b tb ac" wx:if="{{calendar}}">
-  <view class="calendar pink-color b tb">
+  <view class="calendar main-color b tb">
     <view class="top-handle fs28 b lr ac pc">
       <view class="prev fs36">
         <text class="prev-handle iconfont icon-doubleleft" bindtap="chooseDate" data-type="prev_year"></text>
@@ -32,11 +32,11 @@
           data-idx="{{index}}"
           bindtap="tapDayItem">
             <view wx:if="{{!calendar.todoLabelCircle}}" class="dot-day-height b tb ac pc">
-              <view class="day border-radius {{(item.week === 0 || item.week === 6) ? 'pink-color' : ''}} {{item.choosed ? 'day-choosed-color day-choosed-bg' : ''}} {{ item.disable ? 'disable-day-color disable-day-bg' : '' }} b ac pc">{{item.day}}</view>
+              <view class="day border-radius {{(item.week === 0 || item.week === 6) ? 'sub-color' : ''}} {{item.choosed ? 'day-choosed-color day-choosed-bg' : ''}} {{ item.disable ? 'disable-day-color disable-day-bg' : '' }} b ac pc">{{item.day}}</view>
               <view wx:if="{{item.showTodoLabel}}" class="{{item.todoText ? 'todo-text' : 'todo-dot'}} {{calendar.todoLabelPos === 'bottom' ? 'todo-text-bottom' : 'todo-text-top'}}" style="background-color: {{calendar.todoLabelColor}};">{{item.todoText}}</view>
             </view>
             <view wx:else class="dot-day-height b tb ac pc">
-              <view class="day border-radius {{(item.week === 0 || item.week === 6) ? 'pink-color' : ''}} {{item.showTodoLabel ? 'day-circle' : '' }} {{item.choosed ? 'day-choosed-color day-choosed-bg' : ''}} {{ item.disable ? 'disable-day-color disable-day-bg' : '' }} b ac pc">{{item.day}}</view>
+              <view class="day border-radius {{(item.week === 0 || item.week === 6) ? 'sub-color' : ''}} {{item.showTodoLabel ? 'day-circle' : '' }} {{item.choosed ? 'day-choosed-color day-choosed-bg' : ''}} {{ item.disable ? 'disable-day-color disable-day-bg' : '' }} b ac pc">{{item.day}}</view>
             </view>
         </view>
         <view class="grid disable-day-color b ac pc"

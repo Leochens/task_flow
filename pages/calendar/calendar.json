@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "calendar":"../../components/calendar/index",
+    "nav-bar":"../../common/nav_bar/nav_bar"
+  }
 }
