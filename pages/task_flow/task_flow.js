@@ -115,7 +115,7 @@ const page = {
     const tid = e.currentTarget.dataset.tid;
     const task = this.data.tasks.filter(t => t.id === tid)[0];
     wx.navigateTo({
-      url: '../task/task?task=' + JSON.stringify(task)
+      url: '../task/task?t_id=' + task.id
     })
   },
   // 加新的子任务

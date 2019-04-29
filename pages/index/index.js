@@ -253,7 +253,8 @@ const page = {
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
     if (SID) {
-      this.fetchTaskFlows(this.data.u_id);
+      const u_id = wx.getStorageSync('u_id');
+      this.fetchTaskFlows(u_id);
       this.getPinTopTaskFlow();
     }
     console.log(app.globalData);

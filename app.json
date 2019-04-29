@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/calendar/calendar",
     "pages/index/index",
+    "pages/calendar/calendar",
     "pages/invite/invite",
     "pages/task/task",
     "pages/test/test",

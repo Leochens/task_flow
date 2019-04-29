@@ -24,8 +24,8 @@
                         <view class="describe-wrap">
                             <label>内容:</label>
                             <view class="status">
-                                <image class="is_completed" src="../../assets/imgs/task_flow/check{{task.is_completed?'_ok':''}}.svg" />
-                                {{task.is_completed?'已完成':'进行中'}}
+                                <image class="is_completed" src="../../assets/imgs/task_flow/check{{task.is_completed === 1 ?'_ok':''}}.svg" />
+                                {{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}
                             </view>
                         </view>
                         <view class="describe-content">{{task.t_describe}}</view>

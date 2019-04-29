@@ -1,8 +1,56 @@
 /* pages/calendar/calendar.wxss */
+.wrap{
 
+}
+
+.top{
+    margin: 20rpx;
+    /* max-height: 800rpx; */
+    overflow: auto;
+}
 .bottom{
     position: absolute;
     bottom: 0;
     padding: 20rpx 0;
     border-top: 1rpx solid rgb(226, 233, 241);
+    background-color: #fff; 
+
+}
+.task-card{
+    padding: 20rpx;
+    border-radius: 8rpx;
+    border: 1rpx solid #eee;
+    margin: 20rpx 0;
+    position: relative;
+    padding-right: 90rpx;
+    box-sizing: border-box;
+}
+.text{
+    color: #666;
+    font-size: 30rpx;
+}  
+.text-sm{
+    font-size: 24rpx;
+} 
+.text-bold{
+    font-weight: bold;
+}
+.text-red{
+    color: red;
+}
+
+.text-blue{
+    color: #2665AE;
+}
+
+.flag{
+    position: absolute;
+    /* right: 10rpx; */
+    padding: 10rpx;
+    border: 1rpx solid #2665AE;
+    border-radius: 8rpx;
+    right: 0;
+    top: 0;
+    font-size: 20rpx;
+
 }

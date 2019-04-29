@@ -6,39 +6,39 @@ Component({
   properties: {
     taskFlowData: {
       type: Object,
-      observer:function(newVal,oldVal,changedPath){
+      observer: function (newVal, oldVal, changedPath) {
         //更新数据
         this.setData({
-          tfData:newVal
+          tfData: newVal
         })
       }
     },
-    isPinTop:{
+    isPinTop: {
       type: Boolean
     },
     tfCardType: {
       type: String
     }
   },
-  observers:{
-    'taskFlowData':function(taskFlowData){
+  observers: {
+    'taskFlowData': function (taskFlowData) {
       const tf = taskFlowData;
       // console.log(tf);
       const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
-      const { begin_time, end_time, tasks,members } = tf;
+      const { begin_time, end_time, tasks, members } = tf;
       const _tasks = [...tasks];
       const dateData = this.calculateDate(begin_time, end_time);
       const taskData = this.calculateTask(_tasks);
-  
+
       this.setData({
         count: tf.members.length,
         paneData: {
           dateData,
           taskData
         },
-        leader,
+        leader:leader || {},
         members,
-        tfData:tf
+        tfData: tf
       })
     }
   },
@@ -48,14 +48,14 @@ Component({
   data: {
     count: 0,
     isProcessPaneActive: false,
-    tfData:{}
+    tfData: {}
   },
 
   ready: function () {
     const tf = this.properties.taskFlowData;
     // console.log(tf);
     const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
-    const { begin_time, end_time, tasks,members } = tf;
+    const { begin_time, end_time, tasks, members } = tf;
     const _tasks = [...tasks];
     const dateData = this.calculateDate(begin_time, end_time);
     const taskData = this.calculateTask(_tasks);
@@ -66,9 +66,9 @@ Component({
         dateData,
         taskData
       },
-      leader,
+      leader: leader || {},
       members,
-      tfData:tf
+      tfData: tf
     })
   },
   /**
@@ -84,7 +84,7 @@ Component({
         isProcessPaneActive: !this.data.isProcessPaneActive
       })
     },
-    delete:function(e){
+    delete: function (e) {
       console.log("task_flow_card")
       this.triggerEvent('onDeleteTaskFlow');
     },
@@ -97,24 +97,24 @@ Component({
       const now = (new Date());
       let last = ((ed.getTime() - now.getTime()) / dayUnit).toFixed(0);
       last = last >= 0 ? last : 0;
-      const durationD = ((duration / dayUnit)+1).toFixed(0);
+      const durationD = ((duration / dayUnit) + 1).toFixed(0);
       const percent = ((durationD - last) / durationD).toFixed(4) * 100;
       return {
         duration: durationD,
-        last:last<0?0:last,
-        percent:percent||100
+        last: last < 0 ? 0 : last,
+        percent: percent || 100
       }
     },
-    calculateTask: function(tasks){
-        if(!Array.isArray(tasks)) return {};
-        const all = tasks.length;
-        const completedTasks = tasks.filter(task=>task.is_completed == 1); // 1 完成 2 延期 0 进行中
-        const ctLen = completedTasks.length;
-        return {
-          count: all,
-          completedCount: ctLen,
-          percent: (ctLen/(all||1)).toFixed(4)*100
-        }
+    calculateTask: function (tasks) {
+      if (!Array.isArray(tasks)) return {};
+      const all = tasks.length;
+      const completedTasks = tasks.filter(task => task.is_completed == 1); // 1 完成 2 延期 0 进行中
+      const ctLen = completedTasks.length;
+      return {
+        count: all,
+        completedCount: ctLen,
+        percent: (ctLen / (all || 1)).toFixed(4) * 100
+      }
     }
   }
 })

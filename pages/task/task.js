@@ -91,8 +91,8 @@ const page = {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(options);
-    const t_id = JSON.parse(options.task).id;
+    console.log(options);
+    const t_id = options.t_id;
     this.setData({
       t_id
     })
@@ -103,11 +103,14 @@ const page = {
   onShow: function () {
     // 筛选出t_id指向的task
     const t_id = this.data.t_id;
-    const task = JSON.parse(JSON.stringify(this.data.getTask(t_id)));
+    console.log(t_id);
+
+    const task = this.data.tasks[t_id];
     // 获得task后紧接着获得这个task的评论和人员的状态
     const comments = task.comments.map(cmt => this.extendComment(cmt));
     console.log(task);
     task.comments = comments;
+
     this.setData({
       task,
       imgs: task.images
@@ -148,20 +151,26 @@ const mapStateToData = state => {
 
   const { members, tasks, images, comments } = state.entities;
   const _tasks = { ...tasks };
+  const _members = { ...members };
+  const _images = { ...images };
+  const _comments = { ...comments };
+  for (let t_id in _tasks) {
+    const t = JSON.parse(JSON.stringify(tasks[t_id]));
 
-  // 筛选函数
-  const getTask = t_id => {
-    const t = _tasks[t_id];
-    const { members: m, images: i, comments: c } = t;
-    t.members = m.map(mid => members[mid]);
-    t.comments = c.map(cid => comments[cid]);
-    t.images = i.map(iid => images[iid]);
-    return t;
+    const { members: _m, images: _i, comments: _c } = t;
+    const m = [..._m];
+    const i = [..._i];
+    const c = [..._c];
+
+    t.members = m.map(mid => _members[mid]);
+    t.comments = c.map(cid => _comments[cid]);
+    t.images = i.map(iid => _images[iid]);
+    _tasks[t_id] = t;
   }
+
   return {
     members: state.entities.members,
-    tasks: _tasks,
-    getTask
+    tasks: _tasks
   };
 }
 const mapDispatchToPage = dispatch => ({

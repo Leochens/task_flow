@@ -6,6 +6,5 @@ const Tasks = new schema.Entity('tasks',{
     members,
     comments,
     images
-
 },{idAttribute:'id'});
 export default [Tasks];

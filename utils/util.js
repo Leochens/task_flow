@@ -23,6 +23,10 @@ const formatTime = date => {
   // return dynamicDate(res);
   return res;
 }
+const getNowDate = () => {
+  const date = new Date();
+  return formatTime(date).split(' ')[0];
+}
 
 
 const dynamicDate = date => {
@@ -85,6 +89,10 @@ const compareDate = (date1, date2) => {
   return ((new Date(date1.replace(/-/g, "\/"))) > (new Date(date2.replace(/-/g, "\/"))));
 }
 
+const compareDate2 = (date1, date2) => {
+
+  return ((new Date(date1.replace(/-/g, "\/"))) >= (new Date(date2.replace(/-/g, "\/"))));
+}
 
 
 
@@ -93,5 +101,7 @@ module.exports = {
   getExpiration,
   S2I,
   compareDate,
-  formatDateInObject
+  compareDate2,
+  formatDateInObject,
+  getNowDate
 }

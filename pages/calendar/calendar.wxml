@@ -1,5 +1,31 @@
 <!-- pages/calendar/calendar.wxml -->
 <nav-bar title="任务日历"></nav-bar>
-<view class="bottom">
-    <calendar calendar="{{calendar}}" gesture="{{gesture}}"></calendar>
+<view class="wrap">
+    <view class="top" style="max-height:{{Height - 350}}px">
+        <view class="text" wx:if="{{todayTasks.length}}">
+            今天与我相关任务数:
+            <text class="text-red text-bold">{{todayTasks.length}}</text>
+        </view>
+        <view class="text" wx:else>今天无与我相关任务</view>
+        <view class="" wx:for="{{todayTasks}}" wx:key>
+            <view class="task-card" bind:tap="toTaskDetail" data-tid="{{item.id}}">
+                <view class="text text-sm">
+                    任务名:
+                    <text class="text-bold">{{item.t_name}}</text>
+                </view>
+                <view class="text text-sm">
+                    任务内容:
+                    <text class="text-bold">{{item.t_describe}}</text>
+                </view>
+                <view class="text text-sm">
+                    所属任务流:
+                    <text class="text-bold">{{item.tf_name}}</text>
+                </view>
+                <view class="flag text-blue text-bold">{{item.flag}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bottom">
+        <calendar calendar="{{calendar}}" gesture="{{gesture}}"></calendar>
+    </view>
 </view>
