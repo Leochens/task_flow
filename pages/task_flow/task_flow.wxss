@@ -244,3 +244,14 @@ page{
 }
 
 
+
+
+.spot{
+    display: inline-block;
+    margin: 0 10rpx;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: #eee;
+    border-radius: 50%;
+
+}

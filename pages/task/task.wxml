@@ -13,8 +13,8 @@
         <view class="deadline">截止到{{task.end_time}}</view>
     </view>
     <view class="main">
-        <view class="line animated">
-            <view class="dot"></view>
+        <view class="line" style="border-color:{{task.is_completed === 1? '#2665AE':task.is_completed === 0 ?'':'red'}}">
+            <view class="dot" style="background-color:{{task.is_completed === 1? '#2665AE':task.is_completed === 0 ?'':'red'}}"></view>
         </view>
         <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{false}}">
             <swiper-item class="content">
