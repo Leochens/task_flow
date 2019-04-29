@@ -3,12 +3,16 @@
 <view class="wrap">
     <view class="top" style="max-height:{{Height - 350}}px">
         <view class="text" wx:if="{{todayTasks.length}}">
-            今天与我相关任务数:
+            {{calendar.selectedDay[0].year}}-{{calendar.selectedDay[0].month}}-{{calendar.selectedDay[0].day}}
+            日与我相关任务数:
             <text class="text-red text-bold">{{todayTasks.length}}</text>
         </view>
-        <view class="text" wx:else>今天无与我相关任务</view>
+        <view class="text" wx:else>
+            {{calendar.selectedDay[0].year}}-{{calendar.selectedDay[0].month}}-{{calendar.selectedDay[0].day}}
+            日无与我相关任务
+        </view>
         <view class="" wx:for="{{todayTasks}}" wx:key>
-            <view class="task-card" bind:tap="toTaskDetail" data-tid="{{item.id}}">
+            <view class="task-card {{item.isDelay?'bgc-grey':''}}" bind:tap="toTaskDetail" data-tid="{{item.id}}">
                 <view class="text text-sm">
                     任务名:
                     <text class="text-bold">{{item.t_name}}</text>
@@ -21,7 +25,7 @@
                     所属任务流:
                     <text class="text-bold">{{item.tf_name}}</text>
                 </view>
-                <view class="flag text-blue text-bold">{{item.flag}}</view>
+                <view class="flag text-blue text-bold ">{{item.flag}}</view>
             </view>
         </view>
     </view>

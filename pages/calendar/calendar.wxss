@@ -42,7 +42,9 @@
 .text-blue{
     color: #2665AE;
 }
-
+.bgc-grey{
+    background-color: #eee;
+}
 .flag{
     position: absolute;
     /* right: 10rpx; */

@@ -4,7 +4,7 @@ import { setTodoLabels, switchView, jump, getSelectedDay } from '../../component
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { compareDate2, getNowDate } from '../../utils/util';
+import { compareDate2, compareDate3, getNowDate } from '../../utils/util';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 
 const _page = {
@@ -24,11 +24,18 @@ const _page = {
       const todayTasks = tasks.filter(t => {
         const isMyTask = t.members.includes(u_id);
         const notComplete = t.is_completed != 1;
+        const isDelay = t.is_completed === 2;
         const beginDate = t.begin_time.split(' ')[0];
         const endDate = t.end_time.split(' ')[0];
         const isContinue = compareDate2(nowDate, beginDate) && compareDate2(endDate, nowDate); // 在开始与结束日期之间
-        if (nowDate === beginDate) t.flag = '开始';
-        else if (nowDate === endDate) t.flag = '截止';
+        const todayIsEnd = compareDate3(nowDate, endDate);
+        const todayIsBegin = compareDate3(nowDate, beginDate);
+        if (isDelay) {
+          t.flag = '已逾期';
+          t.isDelay = true;
+        }
+        else if (todayIsBegin) t.flag = '开始';
+        else if (todayIsEnd) t.flag = '截止';
         else if (isContinue) t.flag = '进行中';
         else { };
         return isContinue && notComplete && isMyTask;
@@ -60,7 +67,7 @@ const _page = {
     }
     const that = this;
     const conf = {
-
+      // disablePastDay: true,
       afterTapDay: (currentSelect, allSelectedDays) => {
         console.log(currentSelect);
         const todayTasks = getPerDayTasks(currentSelect);
@@ -91,11 +98,11 @@ const _page = {
   set: function (data) {
     this.setData(data);
   },
-  toTaskDetail:function(e){
+  toTaskDetail: function (e) {
 
     const tid = e.currentTarget.dataset.tid;
     wx.navigateTo({
-      url:'../task/task?t_id='+tid
+      url: '../task/task?t_id=' + tid
     })
   },
   onShow: function (options) {

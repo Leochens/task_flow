@@ -94,6 +94,10 @@ const compareDate2 = (date1, date2) => {
   return ((new Date(date1.replace(/-/g, "\/"))) >= (new Date(date2.replace(/-/g, "\/"))));
 }
 
+const compareDate3 = (date1, date2) => {
+
+  return ((new Date(date1.replace(/-/g, "\/"))) - (new Date(date2.replace(/-/g, "\/"))) === 0);
+}
 
 
 module.exports = {
@@ -102,6 +106,7 @@ module.exports = {
   S2I,
   compareDate,
   compareDate2,
+  compareDate3,
   formatDateInObject,
   getNowDate
 }
