@@ -82,8 +82,8 @@ page{
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     z-index: 1;
+    right: 50rpx;
 }
 .item .dot-wrap .date{
     font-size: 20rpx;
@@ -245,7 +245,10 @@ page{
 
 
 
-
+.dots{
+    position: absolute;
+    right: 0;
+}
 .spot{
     display: inline-block;
     margin: 0 10rpx;

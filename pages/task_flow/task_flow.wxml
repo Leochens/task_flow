@@ -48,7 +48,9 @@
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
           <view class="time">{{dateTimeSplit.timeSplit(item.begin_time)}}</view>
-          <view class="time">
+          <view class="time">评论:{{item.comments.length}} </view>
+          <view class="time">图片:{{item.images.length}} </view>
+          <view class="dots">
             <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':'#eee'}}"></view>
           </view>
         </view>

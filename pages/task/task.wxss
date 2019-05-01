@@ -33,6 +33,7 @@
     flex: 9;
     height: auto;
     width: auto;
+    overflow: auto;
 }
 .main .line{
     flex: 1;
