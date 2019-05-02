@@ -1,2 +1,4 @@
 <!--pages/data/data.wxml-->
-<text>pages/data/data.wxml</text>
+<nav-bar title="任务流数据分析"></nav-bar>
+
+功能待实现

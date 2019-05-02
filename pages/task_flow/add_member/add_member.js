@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const {tf_id,who,tf_name,cnt,avatar} = options;
+    const { tf_id, who, tf_name, cnt, avatar } = options;
     this.setData({
       tf_id,
       who,
@@ -21,7 +21,6 @@ Page({
       avatar
     })
   },
-
 
   /**
    * 用户点击右上角分享
@@ -34,7 +33,7 @@ Page({
 
     return {
       title: '任务流邀请',//分享内容
-      path: '/pages/invite/invite?tf_id='+this.data.tf_id+"&who="+this.data.who+"&tf_name="+this.data.tf_name+"&cnt="+this.data.cnt+"&avatar="+this.data.avatar,//分享地址
+      path: '/pages/invite/invite?tf_id=' + this.data.tf_id + "&who=" + this.data.who + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.cnt + "&avatar=" + this.data.avatar,//分享地址
     }
 
   }

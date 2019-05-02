@@ -1,2 +1,6 @@
 <!--pages/task_flow/task_flow_data/task_flow_data.wxml-->
-<text>pages/task_flow/task_flow_data/task_flow_data.wxml</text>
+<nav-bar title="任务流数据分析"></nav-bar>
+
+
+
+hello world

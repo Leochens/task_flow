@@ -26,10 +26,12 @@ const page = {
     const tf_id = options.tf_id;
     const tasks = JSON.parse(options.tasks);
     const tf_name = options.tf_name
+    const tf_status = options.tf_status
     this.setData({
       tf_id,
       tasks,
-      tf_name
+      tf_name,
+      tf_status
     })
   },
   _taskFilter: function (tf_id, u_id, tasks) {

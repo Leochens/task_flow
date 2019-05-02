@@ -144,7 +144,7 @@ const page = {
   },
   myTasks: function () {
     wx.navigateTo({
-      url: './my_tasks/my_tasks?tf_id=' + this.data.id + "&tasks=" + JSON.stringify(this.data.tasks) + "&tf_name=" + this.data.tf_name,
+      url: './my_tasks/my_tasks?tf_id=' + this.data.id + "&tasks=" + JSON.stringify(this.data.tasks) + "&tf_name=" + this.data.tf_name+"&tf_status="+this.data.is_completed,
     })
   },
   // 查看全部成员

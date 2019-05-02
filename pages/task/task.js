@@ -77,6 +77,15 @@ const page = {
       }
     })
   },
+  previewImg: function (e) {
+    const id = e.currentTarget.dataset.id;
+    const { imgs } = this.data;
+    const urls = imgs.map(img => img.url);
+    wx.previewImage({
+      current: urls[id], // 当前显示图片的http链接
+      urls // 需要预览的图片http链接列表
+    })
+  },
   extendComment: function (cmt) {
     const { u_id } = cmt;
     const members = this.data.members;

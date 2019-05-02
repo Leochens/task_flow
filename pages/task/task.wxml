@@ -46,9 +46,11 @@
                         </view>
                     </view>
                     <view>
-                        <label bind:tap="bindChooiceImage" class="upload-pic">上传图片</label>
+                        <label bind:tap="bindChooiceImage" wx:if="{{task.is_completed != 1}}" class="upload-pic">
+                            上传图片
+                        </label>
                         <view class="images">
-                            <image wx:for="{{imgs}}" wx:key src="{{item.url}}" />
+                            <image wx:for="{{imgs}}" wx:key src="{{item.url}}" bind:tap="previewImg" data-id="{{index}}" />
                         </view>
                     </view>
                 </view>
@@ -71,7 +73,7 @@
                     </view>
                     <view wx:else class="empty-comment">没有评论,快来添加一条吧</view>
                 </view>
-                <form class="send-comment" bindsubmit="commentSubmit">
+                <form wx:if="{{task.is_completed != 1}}" class="send-comment" bindsubmit="commentSubmit">
                     <view class="input-comment">
                         <input name="comment" value="{{content}}" />
                     </view>

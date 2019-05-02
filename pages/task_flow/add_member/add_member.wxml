@@ -1,12 +1,10 @@
-<!--pages/task_flow/add_member/add_member.wxml-->
-<nav-bar title="邀请新成员"/>
+<!-- pages/task_flow/add_member/add_member.wxml -->
+<nav-bar title="邀请新成员" />
 <view class="main">
     <view class="tip">开始召集伙伴</view>
-    <image src="../../../assets/imgs/task_flow/add.svg" class="add"/>
-    <view class="tip">点我分享给微信好友或微信群添加伙伴
-        <button open-type="share">来吧</button>
-
+    <image src="../../../assets/imgs/task_flow/add.svg" class="add" />
+    <view class="tip">
+        点我分享给微信好友或微信群添加伙伴
+        <button plain="{{true}}" open-type="share">分享</button>
     </view>
 </view>
-
-<view class="ok-btn">查看成员</view>

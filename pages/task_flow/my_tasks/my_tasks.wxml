@@ -29,7 +29,7 @@
                 <view class="deadline">截止到:{{item.end_time}}</view>
                 <view class="t-describe">{{item.t_describe}}</view>
             </view>
-            <view class="btn-group" >
+            <view wx:if="{{tf_status!=1}}" class="btn-group" >
                 <view class="btn" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="completeTask" data-tid="{{item.id}}">
                     完成
                 </view>
