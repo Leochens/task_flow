@@ -38,7 +38,7 @@ const page = {
  */
   editInfo: function () {
     wx.navigateTo({
-      url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time
+      url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time+"&begin_time="+this.data.begin_time
     })
   },
   setFunc: function () {

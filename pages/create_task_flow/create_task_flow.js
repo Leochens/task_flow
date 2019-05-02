@@ -41,9 +41,9 @@ const _page = {
     })
   },
   onLoad: function (options) {
-    console.log("options",options);
+    console.log("options", options);
     if (!options) return;
-    const { flag, tf_id, tf_name, tf_describe, end_time } = options;
+    const { flag, tf_id, tf_name, tf_describe, end_time, begin_time } = options;
     this.getCategories();
     if (tf_id && flag && flag === 'update') {
       this.setData({
@@ -51,7 +51,10 @@ const _page = {
         tf_id,
         tf_name,
         tf_describe,
-        end_time
+        endDate: end_time,
+        beginDate: begin_time,
+        end_time,
+        begin_time
       })
     }
   },
@@ -98,7 +101,7 @@ const _page = {
   },
   onSubmit: function (e) {
     const { tf_name, tf_describe } = e.detail.value;
-    console.log(e,this.data);
+    console.log(e, this.data);
     if (!tf_name || !tf_describe) {
       wx.showToast({
         title: "请填写必填字段"
