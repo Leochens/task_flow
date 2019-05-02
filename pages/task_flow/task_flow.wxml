@@ -5,7 +5,7 @@
   <view class='task-flow-info'>
     <view class="task-flow-name">
       {{tf_name}}
-      <image hidden="{{!is_leader}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" />
+      <image wx:if="{{editable}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" />
     </view>
     <view class="else">
       <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>

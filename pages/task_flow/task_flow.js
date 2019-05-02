@@ -7,7 +7,7 @@ import {
   fetchTasks,
   updateTaskFlow
 } from '../../actions/index'
-import { compareDate } from '../../utils/util';
+import { compareDate, formatTime } from '../../utils/util';
 const page = {
 
   /**
@@ -27,7 +27,8 @@ const page = {
     CustomBar: app.globalData.CustomBar,
     is_leader: false,
     ready: false,
-    showModal: false
+    showModal: false,
+    editable:false
   },
 
   /**
@@ -51,7 +52,7 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
+      editable: wx.getStorageSync('u_id') === leader_id && compareDate(end_time,formatTime(new Date())), // 判断是否可以进行更改
 
     });
     console.log("此时set Data")

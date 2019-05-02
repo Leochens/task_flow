@@ -14,6 +14,9 @@ Component({
     },
     blank: {
       type: Boolean
+    },
+    operation: {
+      type: Boolean
     }
   },
 

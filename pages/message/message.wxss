@@ -40,3 +40,23 @@
     color: #2967AF;
 
 }
+.clear-msg{
+    margin-left:40rpx;
+    background-color:#2665AE;
+    color:#fff;
+    padding:6rpx;
+    line-height:40rpx;
+    border-radius:8rpx;
+    font-size:30rpx;
+}
+.hover{
+    background-color:rgb(174, 207, 245);
+
+}
+.empty{
+    text-align: center;
+    font-weight: bold;
+    font-size: 30rpx;
+    margin-top: 50rpx;
+    
+}

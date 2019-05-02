@@ -39,6 +39,11 @@ const page = {
   onHide: function () {
     const u_id = wx.getStorageSync('u_id');
     this.setRead(u_id);
+  },
+  clearMsg: function () {
+    wx.setStorageSync('messages_entities', {});
+    wx.setStorageSync('messages_ids', []);
+    this.onPullDownRefresh();
   }
 }
 

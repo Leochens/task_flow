@@ -1,5 +1,11 @@
-<!--common/nav_bar/nav_bar.wxml-->
+<!-- common/nav_bar/nav_bar.wxml -->
 <view style='height:{{CustomBar}}px'></view>
 <view wx:if="{{!blank}}" class='wrap' style='height:{{CustomBar}}px;padding-top:{{StatusBar}}px;line-height: {{CustomBar-StatusBar}}px'>
-    <image  bindtap='back' class='back_icon' style="height:{{CustomBar-StatusBar}}px;width:30px;"  src='./back.svg'/>{{title}}
+    <view wx:if="{{!operation}}" style="display:flex">
+        <image bindtap='back' class='back_icon' style="height:{{CustomBar-StatusBar}}px;width:30px;" src='./back.svg' />
+        {{title}}
+    </view>
+    <view wx:else style="display:flex">
+        <slot></slot>
+    </view>
 </view>
