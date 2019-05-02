@@ -42,7 +42,7 @@ export const addTask = (tf_id, task, members) => {
     return crudCreate('tasks', { task }, `task_flows/${tf_id}/tasks`, { members });
 }
 export const completeTask = (t_id, u_id) => {
-    return crudCreate('complete_task', { u_id }, `tasks/${t_id}/complete`, { u_id, t_id });
+    return crudCreate('completation', { u_id }, `tasks/${t_id}/complete`, { u_id, t_id });
 }
 export const addNewTaskFlowMember = (tf_id, u_id) => {
     return crudCreate('users', { u_id }, `task_flows/${tf_id}/users`);
@@ -97,12 +97,10 @@ export const applyTakeBreak = (t_id, u_id, break_reason) => {
 }
 // 同意请假
 export const allowTakeBreak = (t_id, u_id) => {
-
     return crudUpdate('breaks', t_id, { u_id }, `tasks/${t_id}/break`);
 }
 
 // 拒绝请假
 export const refuseTakeBreak = (t_id, u_id, refuse_reason) => {
-
     return crudUpdate('breaks', t_id, { u_id, refuse_reason }, `tasks/${t_id}/break`);
 }

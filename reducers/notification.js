@@ -17,13 +17,11 @@ import {
     CRUD_DELETE_SUCCESS
 } from '../actions/dataActions'
 import { PIN_TOP_TASK_FLOW, CANCEL_PIN_TOP_TASK_FLOW } from '../actions/index';
-const defaultState = {
-    text: '',
-    type: 'info', // one of 'info', 'confirm', 'warning'
-};
 const successFilter = (resource, payload) => {
     switch (resource) {
-        case 'tasks': { }
+        case 'tasks': 
+        case 'breaks':
+        case 'completation':
         case 'task_flows': {
             if (payload.msg) {
                 wx.showToast({
@@ -41,6 +39,8 @@ const successFilter = (resource, payload) => {
 const loadingFilter = (resource) => {
     switch (resource) {
         case 'tasks':
+        case 'breaks':
+        case 'completation':        
         case 'task_flows': {
             wx.showLoading({
                 title: '加载中',
@@ -62,6 +62,8 @@ const loadingFilter = (resource) => {
 const failureFilter = (resource, error) => {
     switch (resource) {
         case 'tasks':
+        case 'breaks':
+        case 'completation':
         case 'task_flows': {
             wx.showToast({
                 title: error || "失败",
@@ -74,7 +76,7 @@ const failureFilter = (resource, error) => {
         default: return;
     }
 }
-export default (state = defaultState, {
+export default (state = {}, {
     type,
     payload,
     meta,

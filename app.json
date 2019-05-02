@@ -53,5 +53,6 @@
     "navigationBarTitleText": "任务流",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

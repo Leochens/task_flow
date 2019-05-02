@@ -93,14 +93,18 @@ const page = {
       showInputIndex: -1,
     })
 
-    wx.navigateBack();
+  },
+  cancelApply:function(){
+    this.setData({
+      showInputIndex: -1,
+      breakTaskId: '',
+      break_reason: ''
+    })
   },
   taskDetail: function (e) {
-    console.log(e);
     const tid = e.currentTarget.dataset.tid;
-    const task = this.data.tasks.filter(t => t.id === tid)[0];
     wx.navigateTo({
-      url: '../../task/task?task=' + JSON.stringify(task)
+      url: '../../task/task?t_id=' + tid
     })
   },
 }
