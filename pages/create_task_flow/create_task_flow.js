@@ -21,6 +21,9 @@ const _page = {
     leader: wx.getStorageSync('userInfo').nickName,
     isUpdate: false,
     curCate: '默认分类',
+    tf_id: "",
+    tf_name: "",
+    tf_describe: "",
     index: 0,
     categories: [],
     hideModal: true,
@@ -93,6 +96,20 @@ const _page = {
         endDate: oldEndDate
       })
       return false;
+    }
+    if (this.data.isUpdate) {
+      const { testDate, tf_id } = this.data;
+      const flag = testDate(tf_id, endDate);
+      if(!flag){
+        wx.showModal({
+          title: '日期选择有误',
+          content: "结束日期应比所有子任务的结束日期大",
+        })
+        this.setData({
+          endDate: oldEndDate
+        })
+        return false;
+      }
     }
     this.setData({
       endDate,
@@ -175,8 +192,17 @@ const _page = {
   }
 };
 const mapStateToData = state => {
+  const tasks = { ...state.entities.tasks };
+  const testDate = (tf_id, end_time) => {
+    for (let t_id in tasks) {
+      if (tasks[t_id].tf_id === tf_id && compareDate(tasks[t_id].end_time, end_time)) {
+        return false;
+      }
+    }
+    return true;
+  }
   return {
-
+    testDate
   }
 }
 const mapDispatchToPage = dispatch => {
