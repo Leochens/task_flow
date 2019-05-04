@@ -19,7 +19,7 @@ import {
 import { PIN_TOP_TASK_FLOW, CANCEL_PIN_TOP_TASK_FLOW } from '../actions/index';
 const successFilter = (resource, payload) => {
     switch (resource) {
-        case 'tasks': 
+        case 'tasks':
         case 'breaks':
         case 'completation':
         case 'task_flows': {
@@ -40,11 +40,12 @@ const loadingFilter = (resource) => {
     switch (resource) {
         case 'tasks':
         case 'breaks':
-        case 'completation':        
+        case 'completation':
+        case 'reviews':
         case 'task_flows': {
             wx.showLoading({
                 title: '加载中',
-                mask:true
+                mask: true
 
             })
             break;
@@ -52,7 +53,7 @@ const loadingFilter = (resource) => {
         case 'auth': {
             wx.showLoading({
                 title: "登录中",
-                mask:true
+                mask: true
             });
             break;
         }
@@ -64,6 +65,7 @@ const failureFilter = (resource, error) => {
         case 'tasks':
         case 'breaks':
         case 'completation':
+        case 'reviews':
         case 'task_flows': {
             wx.showToast({
                 title: error || "失败",

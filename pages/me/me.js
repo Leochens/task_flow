@@ -53,6 +53,11 @@ const page = {
     wx.navigateTo({
       url: '../calendar/calendar'
     })
+  },
+  toReview: function () {
+    wx.navigateTo({
+      url: '../review/review'
+    })
   }
 };
 const mapStateToData = state => {

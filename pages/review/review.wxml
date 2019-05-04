@@ -1,0 +1,8 @@
+<!-- pages/review/review.wxml -->
+<nav-bar title="人事审核"></nav-bar>
+<view wx:for="{{reviews}}" wx:key>
+    <view>请假人:{{item.apply_user_name}}</view>
+    <view>请假原因:{{item.break_reason}}</view>
+    <view>所属子任务:{{item.t_name}}</view>
+    <view>所属任务流:{{item.tf_name}}</view>
+</view>

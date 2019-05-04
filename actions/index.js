@@ -29,6 +29,11 @@ export const fetchMessages = (u_id) => {
     return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc });
 };
 
+export const fetchReviewList = u_id => {
+
+    return crudGetList('reviews', null, null, null, `users/${u_id}/reviews`, {  });
+}
+
 export const setMessageRead = u_id => {
     return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages`)
 }
@@ -41,8 +46,8 @@ export const fetchTaskMemberStatus = (t_id, u_ids) => {
 export const addTask = (tf_id, task, members) => {
     return crudCreate('tasks', { task }, `task_flows/${tf_id}/tasks`, { members });
 }
-export const updateTask = (tf_id, task, members,u_id) => {
-    return crudUpdate('tasks', task.id, { task, members,u_id }, `task_flows/${tf_id}/tasks`);
+export const updateTask = (tf_id, task, members, u_id) => {
+    return crudUpdate('tasks', task.id, { task, members, u_id }, `task_flows/${tf_id}/tasks`);
 }
 
 export const completeTask = (t_id, u_id) => {
