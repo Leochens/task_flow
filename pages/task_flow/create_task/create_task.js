@@ -51,7 +51,11 @@ const _page = {
       beginDate: tf.begin_time,
       endDate: tf.end_time
     }
-    const members = tf.members || [];
+    let members = tf.members || [];
+    if (t_id) { // 有t_id说明是更新模式 那么选择任务人的时候要剔除掉已有的任务人
+      const t_members = task.members;
+      members = tf.members.filter(m => !t_members.includes(m.id));
+    }
     this.setData({
       timeLimit,
       tf_id,
@@ -142,7 +146,7 @@ const _page = {
       })
       return false;
     }
-    if (!this.data.selectedMembers.length) {
+    if (!this.data.selectedMembers.length && !this.data.isUpdate) {
       wx.showModal({
         title: "提示",
         content: "请至少选择一个任务人"
