@@ -15,7 +15,8 @@ const page = {
     task: {},
     content: "",
     imgs: [],
-    t_id: ''
+    t_id: '',
+    editable: false
   },
   bindChooiceImage: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -128,7 +129,7 @@ const page = {
     const comments = task.comments.map(cmt => this.extendComment(cmt));
     console.log(task);
     task.comments = comments;
-    const editable = this.data.isLeader(task.tf_id, this.data.u_id);
+    const editable = this.data.isLeader(task.tf_id, this.data.u_id) && task.is_completed === 0;
 
     this.setData({
       task,
