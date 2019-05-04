@@ -33,7 +33,6 @@ Page({
       const uid = e.target.dataset.uid;
       // 每点击一次就执行放入|移除操作 点击完成的时候就是要选择的人员集合
       this._toggleSelectMember(uid);
-
   },
   _toggleSelectMember: function(uid){
       const currentSelected = this.data.currentSelected.slice();

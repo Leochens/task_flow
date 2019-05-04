@@ -1,5 +1,5 @@
 // import { } from '../../actions/fetchActions';
-import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE } from '../../actions/dataActions';
+import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE, CRUD_UPDATE_SUCCESS } from '../../actions/dataActions';
 import { formatDateInObject } from '../../utils/util';
 import { ADD_IMG } from '../../actions/index';
 
@@ -8,10 +8,26 @@ const tasks = (state = {}, action) => {
     const { type, payload, requestPayload, meta } = action;
 
     switch (type) {
+        case CRUD_UPDATE_SUCCESS: {
+            if (meta.resource === 'tasks') { // 后端更新task成功后在前端更新
+                const { data: { task } } = requestPayload;
+                const { id, t_name, t_describe } = JSON.parse(task);
+                console.log("更新task成功", task);
+                return {
+                    ...state,
+                    [id]: {
+                        ...state[id],
+                        t_name,
+                        t_describe
+                    }
+                }
+            }
+
+            return state;
+        }
         case CRUD_GET_LIST_SUCCESS: {
             if (!range.includes(meta.resource)) return state;
             if (!payload.entities) return state;
-
             const { tasks } = payload.entities;
             if (!tasks) return state;
             formatDateInObject(tasks);
