@@ -252,3 +252,9 @@ padding: 10rpx 0;
     font-weight: bold;
     text-align: center;
 }
+
+.edit{
+    width: 36rpx;
+    height: 36rpx;
+
+}

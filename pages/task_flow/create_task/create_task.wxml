@@ -1,13 +1,13 @@
 <!-- pages/task_flow/create_task/create_task.wxml -->
 <nav-bar title="创建子任务" />
-<form class='rh-form' style="margin-top:50rpx"  report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
+<form class='rh-form' style="margin-top:50rpx" report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
   <view class='rh-form-item'>
     <label class='rh-lable'>子任务标题</label>
-    <input name="t_name" class='rh-input' placeholder="必填"></input>
+    <input name="t_name" class='rh-input' placeholder="必填" value="{{task.t_name}}"></input>
   </view>
   <view class='rh-form-item'>
     <label class='rh-lable'>子任务概述</label>
-    <textarea name="t_describe" class='rh-textarea' placeholder="必填"></textarea>
+    <textarea name="t_describe" class='rh-textarea' placeholder="必填" value="{{task.t_describe}}"></textarea>
   </view>
   <view class='rh-form-item'>
     <label class='rh-lable'>开始时间</label>
@@ -17,10 +17,16 @@
     <label class='rh-lable'>结束时间</label>
     <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange' />
   </view>
-  <view class='rh-form-item'>
+  <view class='rh-form-item' wx:if="{{!isUpdate}}">
     <label class='rh-lable'>选择任务人</label>
     <view class='rh-input' bind:tap="selectMember">
       {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择[至少一个]"}}
+    </view>
+  </view>
+  <view class='rh-form-item' wx:else>
+    <label class='rh-lable'>新增任务人</label>
+    <view class='rh-input' bind:tap="selectMember">
+      {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择"}}
     </view>
   </view>
   <view class='rh-form-item'>

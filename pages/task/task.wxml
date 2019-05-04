@@ -5,6 +5,7 @@
     <view class="title-wrap">
         <view class="title">
             {{task.t_name}}
+            <image class="edit" wx:if="{{editable}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" />
             <view>
                 <image class="people-count" src="../../assets/imgs/task_flow/member.svg" />
                 {{task.members.length}}

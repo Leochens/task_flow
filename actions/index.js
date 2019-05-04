@@ -41,6 +41,10 @@ export const fetchTaskMemberStatus = (t_id, u_ids) => {
 export const addTask = (tf_id, task, members) => {
     return crudCreate('tasks', { task }, `task_flows/${tf_id}/tasks`, { members });
 }
+export const updateTask = (tf_id, task, members,u_id) => {
+    return crudUpdate('tasks', task.id, { task, members,u_id }, `task_flows/${tf_id}/tasks`);
+}
+
 export const completeTask = (t_id, u_id) => {
     return crudCreate('completation', { u_id }, `tasks/${t_id}/complete`, { u_id, t_id });
 }

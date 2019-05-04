@@ -3,8 +3,8 @@ import {
   compareDate,
   formatTime
 } from '../../../utils/util';
-import {connect} from '../../../libs/wechat-weapp-redux';
-import {addTask} from '../../../actions/index';
+import { connect } from '../../../libs/wechat-weapp-redux';
+import { addTask, updateTask } from '../../../actions/index';
 const _page = {
 
   /**
@@ -13,21 +13,52 @@ const _page = {
   data: {
     beginDate: formatTime(new Date()),
     endDate: formatTime(new Date()),
-    members:[],
-    selectedMembersIds:[],
-    selectedMembersNames:[],
-    selectedMembers:[],
-    tf_id:''
+    members: [],
+    selectedMembersIds: [],
+    selectedMembersNames: [],
+    selectedMembers: [],
+    tf_id: '',
+    isUpdate: false,
+    task: {},
+    timeLimit: {},
+    t_name: '',
+    t_describe: '',
+    u_id: wx.getStorageSync('u_id'),
+    t_id: null
   },
-  onLoad:function(op){
-    const timeLimit = JSON.parse(op.time);
-    const tf_id = op.tf_id || '123456';
-    const members = JSON.parse(op.members)||[];
+  _setTaskInfo: function (task) {
+    const { begin_time, end_time, t_name, t_describe } = task;
+    if (begin_time && end_time) {
+      this.setData({
+        beginDate: begin_time,
+        endDate: end_time,
+        t_describe,
+        t_name
+      })
+    }
+  },
+  onLoad: function (op) {
     console.log(op);
+    const tf_id = op.tf_id || '123456';
+    const tf = this.data.getTaskFlow(tf_id);
+    const t_id = op.t_id || null;
+    const task = this.data.getTask(t_id) || {}; // 得到旧的task来显示 
+    if (Object.keys(task).length) {
+      this._setTaskInfo(task);
+    }
+
+    const timeLimit = {
+      beginDate: tf.begin_time,
+      endDate: tf.end_time
+    }
+    const members = tf.members || [];
     this.setData({
       timeLimit,
       tf_id,
-      members
+      members,
+      isUpdate: t_id ? true : false, // 是否是处于更新任务状态
+      task,
+      t_id
     })
   },
   bindBeginDateChange: function (e) {
@@ -70,7 +101,7 @@ const _page = {
       timeLimit
     } = this.data;
     console.log("endDate", e.detail);
-    if (compareDate(endDate,timeLimit.endDate)) {
+    if (compareDate(endDate, timeLimit.endDate)) {
       wx.showModal({
         title: '日期选择有误',
         content: '结束日期不能比任务流结束日期大',
@@ -94,57 +125,74 @@ const _page = {
       endDate
     })
   },
-  selectMember:function(e){
+  selectMember: function (e) {
     // console.log()
-      wx.navigateTo({
-        url:'./select_member/select_member?members='+JSON.stringify(this.data.members)+"&selected_members="+JSON.stringify(this.data.selectedMembersIds)
-      })
+    wx.navigateTo({
+      url: './select_member/select_member?members=' + JSON.stringify(this.data.members) + "&selected_members=" + JSON.stringify(this.data.selectedMembersIds)
+    })
   },
-  onSubmit:function(e){
+  onSubmit: function (e) {
     console.log(e);
 
     const data = e.detail.value;
-    if(!data.t_name || !data.t_describe){
+    if (!data.t_name || !data.t_describe) {
       wx.showModal({
         title: '提示',
         content: '请填写完整字段',
       })
       return false;
     }
-    if(!this.data.selectedMembers.length){
+    if (!this.data.selectedMembers.length) {
       wx.showModal({
-        title:"提示",
+        title: "提示",
         content: "请至少选择一个任务人"
       });
       return false;
     }
-    const {t_name,t_describe,tf_id} = data;
+    const { t_name, t_describe } = data;
 
     const task = {
       t_name,
       t_describe,
-      is_completed:false,
+      is_completed: false,
       begin_time: this.data.beginDate,
       end_time: this.data.endDate,
-      is_important:false,
-      members:this.data.selectedMembers, // 第二次sql执行,
-      tf_id
+      is_important: false,
+      members: this.data.selectedMembers, // 第二次sql执行,
+      tf_id: this.data.tf_id,
+      id: this.data.t_id
     }
-    this.addTask(this.data.tf_id,JSON.stringify(task),this.data.selectedMembers);
-    
+    if (this.data.isUpdate) {
+      this.updateTask(this.data.tf_id, JSON.stringify(task), this.data.selectedMembers, this.data.u_id);
+    } else {
+      this.addTask(this.data.tf_id, JSON.stringify(task), this.data.selectedMembers);
+    }
+
   }
 }
 const mapStateToData = state => {
+  const task_flows = { ...state.entities.task_flows };
+  const members = { ...state.entities.members };
+  const tasks = { ...state.entities.tasks };
+  const getTaskFlow = tf_id => {
+    const tf = { ...task_flows[tf_id] };
+    const mems = tf.members.slice();
+    tf.members = mems.map(m => members[m]);
+    return tf;
+  };
+  const getTask = t_id => ({ ...tasks[t_id] });
   return {
-
+    getTaskFlow,
+    getTask
   }
 }
 const mapDispatchToPage = dispatch => {
-    return {
-      addTask: (tf_id,task,members) => dispatch(addTask(tf_id,task,members))
-    }
+  return {
+    addTask: (tf_id, task, members) => dispatch(addTask(tf_id, task, members)),
+    updateTask: (tf_id, task, members, u_id) => dispatch(updateTask(tf_id, task, members, u_id))
+  }
 }
 
-const page = connect(mapStateToData,mapDispatchToPage)(_page);
+const page = connect(mapStateToData, mapDispatchToPage)(_page);
 
 Page(page)

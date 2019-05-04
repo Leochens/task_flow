@@ -96,14 +96,23 @@ const page = {
       avatar_url: author.avatar_url
     }
   },
+  editInfo: function () {
+    const { tf_id, id: t_id } = this.data.task;
+    wx.navigateTo({
+      url: '../task_flow/create_task/create_task?tf_id=' + tf_id + "&t_id=" + t_id
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(options);
     const t_id = options.t_id;
+    const u_id = wx.getStorageSync('u_id');
+
     this.setData({
-      t_id
+      t_id,
+      u_id
     })
   },
   /**
@@ -119,10 +128,12 @@ const page = {
     const comments = task.comments.map(cmt => this.extendComment(cmt));
     console.log(task);
     task.comments = comments;
+    const editable = this.data.isLeader(task.tf_id, this.data.u_id);
 
     this.setData({
       task,
-      imgs: task.images
+      imgs: task.images,
+      editable
     });
 
   },
@@ -140,7 +151,7 @@ const page = {
       comment_type: 0,
       content: content,
       create_time: formatTime(new Date()),
-      u_id: wx.getStorageSync('u_id'),
+      u_id: this.data.u_id,
       t_id
     }
     this.addComment(t_id, JSON.stringify(cmt));
@@ -158,7 +169,7 @@ const page = {
 
 const mapStateToData = state => {
 
-  const { members, tasks, images, comments } = state.entities;
+  const { members, tasks, images, comments, task_flows } = state.entities;
   const _tasks = { ...tasks };
   const _members = { ...members };
   const _images = { ...images };
@@ -177,9 +188,13 @@ const mapStateToData = state => {
     _tasks[t_id] = t;
   }
 
+  const isLeader = (tf_id, u_id) => {
+    return task_flows[tf_id].leader_id === u_id;
+  }
   return {
     members: state.entities.members,
-    tasks: _tasks
+    tasks: _tasks,
+    isLeader
   };
 }
 const mapDispatchToPage = dispatch => ({

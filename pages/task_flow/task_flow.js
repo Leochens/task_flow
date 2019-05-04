@@ -28,7 +28,7 @@ const page = {
     is_leader: false,
     ready: false,
     showModal: false,
-    editable:false
+    editable: false
   },
 
   /**
@@ -39,7 +39,7 @@ const page = {
  */
   editInfo: function () {
     wx.navigateTo({
-      url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time+"&begin_time="+this.data.begin_time
+      url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time + "&begin_time=" + this.data.begin_time
     })
   },
   setFunc: function () {
@@ -52,7 +52,7 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      editable: wx.getStorageSync('u_id') === leader_id && compareDate(end_time,formatTime(new Date())), // 判断是否可以进行更改
+      editable: wx.getStorageSync('u_id') === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
 
     });
     console.log("此时set Data")
@@ -122,12 +122,8 @@ const page = {
   // 加新的子任务
   addTask: function () {
     const { begin_time, end_time } = this.data;
-    const time = {
-      beginDate: begin_time,
-      endDate: end_time
-    }
     wx.navigateTo({
-      url: './create_task/create_task?time=' + JSON.stringify(time) + "&tf_id=" + this.data.id + "&members=" + JSON.stringify(this.data.members),
+      url: './create_task/create_task?tf_id=' + this.data.id
     })
   },
   // 邀请新成员
@@ -144,7 +140,7 @@ const page = {
   },
   myTasks: function () {
     wx.navigateTo({
-      url: './my_tasks/my_tasks?tf_id=' + this.data.id + "&tasks=" + JSON.stringify(this.data.tasks) + "&tf_name=" + this.data.tf_name+"&tf_status="+this.data.is_completed,
+      url: './my_tasks/my_tasks?tf_id=' + this.data.id + "&tasks=" + JSON.stringify(this.data.tasks) + "&tf_name=" + this.data.tf_name + "&tf_status=" + this.data.is_completed,
     })
   },
   // 查看全部成员
