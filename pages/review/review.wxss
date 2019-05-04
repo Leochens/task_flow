@@ -1,1 +1,44 @@
 /* pages/review/review.wxss */
+.wrap{
+    width: 90%;
+    margin: 0 auto;
+
+}
+.info{
+    border: 1rpx solid #eee;
+    border-radius: 8rpx;
+    padding: 8rpx;
+
+}
+.text{
+    font-size: 24rpx;
+    color: #666;
+}
+
+.operations{
+    border-top: 1rpx solid #eee;
+    padding: 8rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btn{
+    display: inline-block;
+    border-radius: 8rpx;
+    flex: 1;
+    margin: 8rpx;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30rpx;
+    color: #2665AE;
+    border:1rpx solid #2665AE;
+    margin-bottom: 0;
+}
+
+.red{
+    border-color: rgb(199, 27, 27);
+    color: rgb(199, 27, 27);
+}
+
