@@ -7,8 +7,12 @@
         <view class="text">所属子任务:{{item.t_name}}</view>
         <view class="text">所属任务流:{{item.tf_name}}</view>
         <view class="operations">
-            <view class="btn">同意</view>
-            <view class="btn red">拒绝</view>
+            <view class="btn" bind:tap="allow" data-tid="{{item.t_id}}">同意</view>
+            <view class="btn red" bind:tap="reject" data-tid="{{item.t_id}}">拒绝</view>
         </view>
     </view>
 </view>
+<view wx:if="{{!reviews.length}}">当前没有人事审核</view>
+<modal hidden="{{hideModal}}" title="拒绝请假理由" confirm-text="完成" cancel-text="取消" bindcancel="cancelM" bindconfirm="confirmM">
+    <input bindinput='inputRefuseReason' type='text' placeholder="请输入拒绝的理由..." auto-focus value="{{reason}}" />
+</modal>

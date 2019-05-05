@@ -8,7 +8,7 @@
     border: 1rpx solid #eee;
     border-radius: 8rpx;
     padding: 8rpx;
-
+    margin: 16rpx 0;
 }
 .text{
     font-size: 24rpx;
@@ -31,14 +31,13 @@
     margin: 8rpx;
     text-align: center;
     font-weight: bold;
-    font-size: 30rpx;
+    font-size: 24rpx;
     color: #2665AE;
-    border:1rpx solid #2665AE;
     margin-bottom: 0;
 }
 
+
 .red{
-    border-color: rgb(199, 27, 27);
     color: rgb(199, 27, 27);
 }
 
