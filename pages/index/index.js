@@ -301,7 +301,7 @@ const mapStateToData = (state, options) => {
     _item.tasks = tasks.map(tid => entities.tasks[tid]);
     _item.tasks = _item.tasks.map(t => {
       const _t = { ...t };
-      const memIds = _t.members;
+      const memIds = _t.members || [];
       const mems = memIds.map(mid => entities.members[mid]);
       _t.members = mems;
       return _t;

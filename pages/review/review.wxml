@@ -1,14 +1,14 @@
 <!-- pages/review/review.wxml -->
 <nav-bar title="人事审核"></nav-bar>
 <view class="wrap" wx:for="{{reviews}}" wx:key>
-    <view class="info">
+    <view class="info" bind:tap="toDetail" data-tid="{{item.t_id}}">
         <view class="text">请假人:{{item.apply_user_name}}</view>
         <view class="text">请假原因:{{item.break_reason}}</view>
         <view class="text">所属子任务:{{item.t_name}}</view>
         <view class="text">所属任务流:{{item.tf_name}}</view>
         <view class="operations">
-            <view class="btn" bind:tap="allow" data-tid="{{item.t_id}}">同意</view>
-            <view class="btn red" bind:tap="reject" data-tid="{{item.t_id}}">拒绝</view>
+            <view class="btn" catch:tap="allow" data-tid="{{item.t_id}}">同意</view>
+            <view class="btn red" catch:tap="reject" data-tid="{{item.t_id}}">拒绝</view>
         </view>
     </view>
 </view>

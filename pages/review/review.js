@@ -30,6 +30,12 @@ const page = {
   onShow: function () {
 
   },
+  toDetail: function (e) {
+    const t_id = e.currentTarget.dataset.tid;
+    wx.navigateTo({
+      url: '../task/task?t_id=' + t_id
+    })
+  },
   inputRefuseReason: function (e) {
     // console.log(e);
     const reason = e.detail.value;
@@ -44,12 +50,13 @@ const page = {
     })
   },
   confirmM: function () { // 发送拒绝请求
-    const {reason,curTid,u_id} = this.data;
-    this.refuseTakeBreak(curTid,u_id,reason); // api
+    const { reason, curTid, u_id } = this.data;
+    this.refuseTakeBreak(curTid, u_id, reason); // api
     this.setData({
       hideModal: true,
       reason: ''
-    })
+    });
+    this.onPullDownRefresh();
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -64,6 +71,8 @@ const page = {
     console.log(e);
     const t_id = e.currentTarget.dataset.tid;
     this.allowTakeBreak(t_id, this.data.u_id);
+    this.onPullDownRefresh();
+
   },
   reject: function (e) {
     const t_id = e.currentTarget.dataset.tid;
@@ -85,7 +94,7 @@ const mapStateToData = (state) => {
 const mapDispatchToPage = dispatch => ({
   fetchReviewList: u_id => dispatch(fetchReviewList(u_id)),
   allowTakeBreak: (t_id, u_id) => dispatch(allowTakeBreak(t_id, u_id)),
-  refuseTakeBreak: (t_id, u_id,refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id,refuse_reason))
+  refuseTakeBreak: (t_id, u_id, refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id, refuse_reason))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

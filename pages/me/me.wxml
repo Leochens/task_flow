@@ -42,7 +42,7 @@
         <view class="name">分类</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/category.svg" bind:tap="toReview" class="icon"></image>
+        <image src="../../assets/imgs/me/review.svg" bind:tap="toReview" class="icon"></image>
         <view class="name">审核</view>
     </view>
 </view>

@@ -19,8 +19,15 @@ import {
 import { PIN_TOP_TASK_FLOW, CANCEL_PIN_TOP_TASK_FLOW } from '../actions/index';
 const successFilter = (resource, payload) => {
     switch (resource) {
+        case 'breaks': {
+            if (payload.msg) {
+                wx.showToast({
+                    title: payload.msg
+                });
+            }
+            break;
+        }
         case 'tasks':
-        case 'breaks':
         case 'completation':
         case 'task_flows': {
             if (payload.msg) {

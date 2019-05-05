@@ -66,7 +66,6 @@ const page = {
   },
   onLoad: function (options) {
     wx.hideTabBar({});
-
     const tf_id = options.tf_id;
     if (!tf_id) return;
     console.log(tf_id);
@@ -80,11 +79,7 @@ const page = {
       tasks: classfiedTasks,
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
       ready: true
-
     });
-
-
-
   },
   classifyTask: function (t) {
     // 将子任务按照开始日期分类 同一天的放进一个数组里 还要排序 日期大类排序决定渲染顺序  
@@ -180,9 +175,9 @@ const mapStateToData = _state => {
     _item.tasks = _tasks.map(tid => entities.tasks[tid]);
     _item.tasks = _item.tasks.map(t => {
       const _t = { ...t };
-      const memIds = _t.members;
-      const cmtIds = _t.comments;
-      const imgIds = _t.images;
+      const memIds = _t.members || [];
+      const cmtIds = _t.comments || [];
+      const imgIds = _t.images || [];
       const mems = memIds.map(mid => entities.members[mid]);
       const cmts = cmtIds.map(cid => entities.comments[cid]);
       const imgs = imgIds.map(iid => entities.images[iid]);
