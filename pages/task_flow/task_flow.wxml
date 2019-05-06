@@ -1,6 +1,10 @@
 <!-- pages/task_flow/task_flow.wxml -->
 <wxs module="dateTimeSplit" src="../wxs/dateTimeSplit.wxs"></wxs>
-<nav-bar title="任务流详情"></nav-bar>
+<category-selector isActive="{{cateSelectorIsActive}}" curCate="{{category}}" bind:onSelect="handelSelectCate" bind:onCancel="handelCancelSelectCate"/>
+
+<nav-bar title="任务流详情" operation="true">
+  <view bind:tap="onSelectCate">改变分类</view>
+</nav-bar>
 <view class='wrap'>
   <view class='task-flow-info'>
     <view class="task-flow-name">

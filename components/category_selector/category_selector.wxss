@@ -1,0 +1,10 @@
+/* components/category_selector/category_selector.wxss */
+.add-cate{
+    color: #2665ae;
+    font-weight: bold;
+    font-size: 24rpx;
+    display: inline-block;
+    border-radius: 8rpx;
+    border: 1rpx solid #2665ae;
+    margin-top: 10rpx;
+}

@@ -1,0 +1,11 @@
+<!-- components/category_selector/category_selector.wxml -->
+<modal hidden="{{!isActive}}" title="选择分类" confirm-text="完成" cancel-text="取消" bindcancel="selectCancel" bindconfirm="selectConfirm">
+    <picker bindchange="bindPickerChange" value="{{curIndex}}" range="{{categories}}">
+        <view class="picker">选择分类：{{categories[curIndex]}}</view>
+    </picker>
+    <view class="add-cate" bind:tap="addCate">添加分类</view>
+
+</modal>
+<modal hidden="{{!showAddModal}}" title="添加分类" confirm-text="完成" cancel-text="取消" bindcancel="addCancel" bindconfirm="addConfirm">
+    <input bindinput='inputCategory' type='text' placeholder="请输入新的分类..." auto-focus value="{{newCateName}}" />
+</modal>

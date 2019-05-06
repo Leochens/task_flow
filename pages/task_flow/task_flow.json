@@ -2,7 +2,8 @@
   "usingComponents": {
     "nav-bar": "../../common/nav_bar/nav_bar",
     "modal": "../../components/modal/modal",
-    "date-time-picker": "../../components/date_time_picker/date_time_picker"
+    "date-time-picker": "../../components/date_time_picker/date_time_picker",
+    "category-selector": "../../components/category_selector/category_selector"
   },
   "backgroundColor": "#000",
   "enablePullDownRefresh": true,

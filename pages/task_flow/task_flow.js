@@ -28,15 +28,10 @@ const page = {
     is_leader: false,
     ready: false,
     showModal: false,
-    editable: false
+    editable: false,
+    cateSelectorIsActive: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  /**
- * 生命周期函数--监听页面显示
- */
   editInfo: function () {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time + "&begin_time=" + this.data.begin_time
@@ -154,7 +149,32 @@ const page = {
     this.fetchTasks(this.data.id, this.setFunc);
     this.onShow();
     wx.stopPullDownRefresh();
+  },
+  onSelectCate: function () {
+    this.setData({
+      cateSelectorIsActive: true
+    })
+  },
+  handelSelectCate: function (e) {
+    const newCate = e.detail.newCateName;
 
+    console.log("得到新的分类", newCate);
+    if (newCate) {
+      // 请求后端api更新分类
+
+    } else {
+      console.log("分类未更改，啥也不做");
+    }
+    this.setData({
+      cateSelectorIsActive: false
+    })
+  },
+  handelCancelSelectCate: function () {
+    console.log("取消分类");
+
+    this.setData({
+      cateSelectorIsActive: false
+    })
   }
 }
 
