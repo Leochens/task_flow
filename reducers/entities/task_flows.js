@@ -51,19 +51,31 @@ const task_flows = (state = {
         return state;
       }
     case CRUD_UPDATE_SUCCESS: {
-      if (meta.resource != 'task_flows') return state;
-      const { tf, tf_id } = requestPayload.data;
-      const _tf = JSON.parse(tf);
-      const { tf_name, tf_describe, end_time } = _tf;
-      return {
-        ...state,
-        [tf_id]: {
-          ...state[tf_id],
-          tf_name,
-          tf_describe,
-          end_time
+      if (meta.resource === 'task_flows') {
+        const { tf, tf_id } = requestPayload.data;
+        const _tf = JSON.parse(tf);
+        const { tf_name, tf_describe, end_time, category } = _tf;
+        return {
+          ...state,
+          [tf_id]: {
+            ...state[tf_id],
+            tf_name,
+            tf_describe,
+            end_time,
+            category
+          }
         }
-      }
+      } else if (meta.resource === 'categories') {
+        const { tf_id, category } = requestPayload.data;
+        return {
+          ...state,
+          [tf_id]: {
+            ...state[tf_id],
+            category
+          }
+        }
+      } else return state;
+
     }
 
 

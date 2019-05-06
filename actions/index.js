@@ -63,6 +63,9 @@ export const addComment = (t_id, cmt) => {
 export const updateTaskFlow = (u_id, tf_id, tf) => {
     return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`)
 }
+export const updateTaskFlowCate = (u_id, tf_id, category) => {
+    return crudUpdate('categories', tf_id, { category, tf_id,u_id }, `categories`)
+}
 export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }

@@ -11,8 +11,23 @@ page{
     padding: 20rpx;
     border-bottom: 1rpx solid #ddd;
     animation: slideInDown .5s ease-in-out;
-
-
+    position: relative;
+}
+.change-cate{
+    position: absolute;
+    top: 30rpx;
+    right: 50rpx;
+    font-size: 24rpx;
+    color: #666;
+    display: flex;
+}
+.cate{
+}
+.change{
+    color: #2665AE;
+    border: 1rpx solid #2665AE;
+    border-radius: 8rpx;
+    margin-left: 10rpx;
 }
 .task-flow-name{
     font-size: 40rpx;
@@ -256,5 +271,4 @@ page{
     height: 16rpx;
     background-color: #eee;
     border-radius: 50%;
-
 }

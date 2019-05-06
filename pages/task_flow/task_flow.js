@@ -5,7 +5,7 @@ import {
 const app = getApp();
 import {
   fetchTasks,
-  updateTaskFlow
+  updateTaskFlowCate
 } from '../../actions/index'
 import { compareDate, formatTime } from '../../utils/util';
 const page = {
@@ -48,7 +48,6 @@ const page = {
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
       editable: wx.getStorageSync('u_id') === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
-
     });
     console.log("此时set Data")
     wx.hideLoading();
@@ -147,7 +146,6 @@ const page = {
     // 下拉刷新任务
     wx.showNavigationBarLoading();
     this.fetchTasks(this.data.id, this.setFunc);
-    this.onShow();
     wx.stopPullDownRefresh();
   },
   onSelectCate: function () {
@@ -161,7 +159,11 @@ const page = {
     console.log("得到新的分类", newCate);
     if (newCate) {
       // 请求后端api更新分类
-
+      const u_id = app.globalData.u_id;
+      const { id: tf_id, tf_name, tf_describe, begin_time, end_time } = this.data;
+      this.updateTaskFlowCate(u_id, tf_id,newCate);
+      setTimeout(this.setFunc, 1000);
+      console.log("更新成功");
     } else {
       console.log("分类未更改，啥也不做");
     }
@@ -217,7 +219,7 @@ const mapStateToData = _state => {
 const mapDispatchToPage = dispatch => {
   return {
     fetchTasks: (tf_id) => dispatch(fetchTasks(tf_id)),
-    updateTaskFlow: (u_id, tf_id, tf) => dispatch(updateTaskFlow(u_id, tf_id, tf))
+    updateTaskFlowCate: (u_id, tf_id, category) => dispatch(updateTaskFlowCate(u_id, tf_id, category)),
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

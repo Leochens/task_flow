@@ -40,6 +40,7 @@ const successFilter = (resource, payload) => {
                 1000);
             break;
         }
+
         default: return;
     }
 }
