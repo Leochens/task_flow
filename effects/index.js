@@ -33,7 +33,7 @@ function* handleFetch(action) {
   try {
     const auth = yield select(state => state.auth);
     response = yield call(restClient, restType, meta.resource, payload, auth);
-    response = JSON.parse(replaceNULL(JSON.stringify(response)));
+    // response = JSON.parse(replaceNULL(JSON.stringify(response)));
 
     yield put({
       type: `${type}_SUCCESS`,

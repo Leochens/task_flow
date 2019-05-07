@@ -44,10 +44,10 @@ const page = {
     const { tasks, id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
     const classfiedTasks = this.classifyTask(tasks);
     this.setData({
-      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,
+      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members,leader_id,
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
-      editable: wx.getStorageSync('u_id') === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
+      editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
     });
     console.log("此时set Data")
     wx.hideLoading();
@@ -71,7 +71,9 @@ const page = {
       leader: members.filter(mem => mem.id === leader_id)[0],
       tasks: classfiedTasks,
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
-      ready: true
+      ready: true,
+      editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
+
     });
   },
   classifyTask: function (t) {

@@ -44,10 +44,10 @@ export const CRUD_UPDATE_LOADING = 'CRUD_UPDATE_LOADING';
 export const CRUD_UPDATE_FAILURE = 'CRUD_UPDATE_FAILURE';
 export const CRUD_UPDATE_SUCCESS = 'CRUD_UPDATE_SUCCESS';
 
-export const crudUpdate = (resource, id, data, basePath) => ({
+export const crudUpdate = (resource, id, data, basePath,callback) => ({
     type: CRUD_UPDATE,
     payload: { id, data, basePath },
-    meta: { resource, id, fetch: UPDATE, cancelPrevious: false },
+    meta: { resource, id, fetch: UPDATE, cancelPrevious: false,callback },
 });
 
 export const CRUD_DELETE = 'CRUD_DELETE';
