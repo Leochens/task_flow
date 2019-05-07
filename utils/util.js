@@ -30,7 +30,7 @@ const getNowDate = () => {
 
 
 const dynamicDate = date => {
-  const [ d, t ] = date.split(' ')
+  const [d, t] = date.split(' ')
   let res = date;
   const _date = Date.parse(date); // 获取目标时间戳
   const now = new Date();   // 获取当前时间戳
@@ -100,6 +100,11 @@ const compareDate3 = (date1, date2) => {
 }
 
 
+const replaceNULL = str => {
+  if (typeof str != 'string') return '';
+  return str.replace('NULL', '?');
+}
+
 module.exports = {
   formatTime: formatTime,
   getExpiration,
@@ -108,5 +113,6 @@ module.exports = {
   compareDate2,
   compareDate3,
   formatDateInObject,
-  getNowDate
+  getNowDate,
+  replaceNULL
 }

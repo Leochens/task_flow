@@ -51,11 +51,14 @@
                             上传图片
                         </label>
                         <view class="images">
-                            <image wx:for="{{imgs}}" wx:key src="{{item.url}}" bind:tap="previewImg" data-id="{{index}}" />
+                            <view class="item" wx:for="{{imgs}}" wx:key>
+                                <image src="{{item.url}}" bind:tap="previewImg" data-id="{{index}}" />
+                                <view class="text">{{item.nick_name}}</view>
+                            </view>
                         </view>
                     </view>
                 </view>
-                <view class="tip-btn">左滑进入留言区 7</view>
+                <view class="tip-btn">左滑进入留言区</view>
             </swiper-item>
             <swiper-item class="content">
                 <view class="begin-time">2019-2-1 14:35:44</view>

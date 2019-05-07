@@ -31,7 +31,7 @@ export const fetchMessages = (u_id) => {
 
 export const fetchReviewList = u_id => {
 
-    return crudGetList('reviews', null, null, null, `users/${u_id}/reviews`, {  });
+    return crudGetList('reviews', null, null, null, `users/${u_id}/reviews`, {});
 }
 
 export const setMessageRead = u_id => {
@@ -64,7 +64,7 @@ export const updateTaskFlow = (u_id, tf_id, tf) => {
     return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`)
 }
 export const updateTaskFlowCate = (u_id, tf_id, category) => {
-    return crudUpdate('categories', tf_id, { category, tf_id,u_id }, `categories`)
+    return crudUpdate('categories', tf_id, { category, tf_id, u_id }, `categories`)
 }
 export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);

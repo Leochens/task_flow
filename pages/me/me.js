@@ -25,13 +25,8 @@ const page = {
 
   toSettings: function () {
 
-    // wx.navigateTo({
-    //   url:'../settings/settings'
-    // })
-  },
-  toCategory: function () {
     wx.navigateTo({
-      url: '../category/category'
+      url:'../settings/settings'
     })
   },
   toAbout: function () {
@@ -43,11 +38,6 @@ const page = {
     wx.navigateTo({
       url: '../data/data'
     })
-  },
-  toTemplate: function () {
-    // wx.navigateTo({
-    //   url: '../task_flow_template/task_flow_template'
-    // })
   },
   toCalendar: function () {
     wx.navigateTo({

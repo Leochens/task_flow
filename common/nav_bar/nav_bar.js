@@ -17,8 +17,7 @@ Component({
     },
     operation: {
       type: Boolean
-    },
-    noBack:Boolean
+    }
   },
 
   /**

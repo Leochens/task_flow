@@ -1,2 +1,3 @@
 <!--pages/settings/settings.wxml-->
-<text>pages/settings/settings.wxml</text>
+<nav-bar title="设置"></nav-bar>
+<view class="wrap">功能待开发</view>

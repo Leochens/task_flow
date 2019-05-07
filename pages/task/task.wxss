@@ -110,13 +110,28 @@ image.is_completed{
 .images{
     padding-top: 10rpx;
 }
-.images image{
+.images .item{
+    width: 170rpx;
+    height: 270rpx;
+    margin-right: 20rpx;
     display: inline-block;
+
+}
+.images .text{
+    font-size: 24rpx;
+    text-align: center;
+    color: #999;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    
+}
+.images image{
     width: 170rpx;
     height: 240rpx;
-    margin-right: 20rpx;
     border-radius: 8rpx;
-
+    
 }
 .upload-pic{
     border-radius: 8rpx;

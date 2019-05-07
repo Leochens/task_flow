@@ -97,6 +97,15 @@ const page = {
       avatar_url: author.avatar_url
     }
   },
+  extendImage:function(img){
+    const { u_id } = img;
+    const members = this.data.members;
+    const author = members[u_id];
+    return {
+      ...img,
+      nick_name: author.nick_name
+    }
+  },
   editInfo: function () {
     const { tf_id, id: t_id } = this.data.task;
     wx.navigateTo({
@@ -127,13 +136,16 @@ const page = {
     const task = this.data.tasks[t_id];
     // 获得task后紧接着获得这个task的评论和人员的状态
     const comments = task.comments.map(cmt => this.extendComment(cmt));
-    console.log(task);
+    const imgs = task.images.map(img=>this.extendImage(img));
+
     task.comments = comments;
+    task.imgs = imgs;
     const editable = this.data.isLeader(task.tf_id, this.data.u_id) && task.is_completed === 0;
+    console.log(task);
 
     this.setData({
       task,
-      imgs: task.images,
+      imgs,
       editable
     });
 

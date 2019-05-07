@@ -3,6 +3,7 @@ import { effects, delay } from '../libs/redux-saga';
 import appConfig from '../appConfig';
 import regeneratorRuntime from '../libs/regenerator-runtime/runtime';
 import { SHOW_NOTIFICATION, hideNotification } from '../actions/notificationActions'
+import { replaceNULL } from '../utils/util';
 
 import simpleRestClient from '../rest/simple';
 import successSideEffects from './successSideEffects';
@@ -18,6 +19,7 @@ import {
 const { takeEvery, takeLatest, put, call, cancelled, select } = effects;
 const restClient = simpleRestClient(appConfig.apiBaseUrl)
 const failureSideEffects = failure;
+
 function* handleFetch(action) {
   const { type, payload, meta } = action;
   const restType = meta.fetch;
@@ -31,6 +33,8 @@ function* handleFetch(action) {
   try {
     const auth = yield select(state => state.auth);
     response = yield call(restClient, restType, meta.resource, payload, auth);
+    response = JSON.parse(replaceNULL(JSON.stringify(response)));
+
     yield put({
       type: `${type}_SUCCESS`,
       payload: meta.normalizeFunc ? meta.normalizeFunc(response) : response,

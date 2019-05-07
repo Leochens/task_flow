@@ -34,14 +34,6 @@
         <view class="name">数据</view>
     </view>
     <view class="item">
-        <image src="../../assets/imgs/me/template.svg" bind:tap="toTemplate" class="icon"></image>
-        <view class="name">模板</view>
-    </view>
-    <view class="item">
-        <image src="../../assets/imgs/me/category.svg" bind:tap="toCategory" class="icon"></image>
-        <view class="name">分类</view>
-    </view>
-    <view class="item">
         <image src="../../assets/imgs/me/review.svg" bind:tap="toReview" class="icon"></image>
         <view class="name">审核</view>
     </view>
