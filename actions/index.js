@@ -1,32 +1,32 @@
 import { crudCreate, crudGetList, crudUpdate, crudDelete } from './dataActions'
 import Schemas from '../schemas/index';
 import { normalize } from '../libs/normalizr';
-export const fetchTaskFlows = u_id => {
+export const fetchTaskFlows = (u_id,callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
         const task_flows = normalize(response.data, Schemas.taskFlows);
         console.log("nomalize后==>", task_flows);
         return task_flows;
     }
-    return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows`, { normalizeFunc });
+    return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows`, { normalizeFunc,callback });
 };
-export const fetchTasks = (tf_id) => {
+export const fetchTasks = (tf_id,callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
         const tasks = normalize(response.data, Schemas.tasks);
         console.log("nomalize后==>", tasks);
         return tasks;
     }
-    return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id });
+    return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id,callback });
 };
-export const fetchMessages = (u_id) => {
+export const fetchMessages = (u_id,callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
         const messages = normalize(response.data, Schemas.messages);
         console.log("nomalize后==>", messages);
         return messages;
     }
-    return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc });
+    return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc,callback });
 };
 
 export const fetchReviewList = u_id => {

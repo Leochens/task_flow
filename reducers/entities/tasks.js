@@ -30,7 +30,9 @@ const tasks = (state = {}, action) => {
             if (!payload.entities) return state;
             const { tasks } = payload.entities;
             if (!tasks) return state;
+
             formatDateInObject(tasks);
+            meta.callback && setTimeout(meta.callback, 500)
             return {
                 ...state,
                 ...tasks
@@ -76,5 +78,6 @@ const tasks = (state = {}, action) => {
         }
         default: return state;
     }
+
 }
 export default tasks;

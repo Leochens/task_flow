@@ -55,8 +55,7 @@ const page = {
   onShow: function () {
     wx.showLoading();
     const tf_id = this.data.id;
-    this.fetchTasks(tf_id);
-    setTimeout(this.setFunc, 1000);
+    this.fetchTasks(tf_id, this.setFunc);
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -82,7 +81,7 @@ const page = {
     // 2019-3-20 12:34:21
     // const dateTimes = tasks.map(task=>task.begin_time);
     const sortby = (t1, t2) => {
-      return compareDate(t1.begin_time, t2.begin_time);
+      return t1.begin_time > t2.begin_time ? 1 : -1;
     }
     tasks.sort(sortby);
     const splitDate = d => d.split(' ')[0];
@@ -161,7 +160,7 @@ const page = {
       // 请求后端api更新分类
       const u_id = app.globalData.u_id;
       const { id: tf_id, tf_name, tf_describe, begin_time, end_time } = this.data;
-      this.updateTaskFlowCate(u_id, tf_id,newCate);
+      this.updateTaskFlowCate(u_id, tf_id, newCate);
       setTimeout(this.setFunc, 1000);
       console.log("更新成功");
     } else {
@@ -218,7 +217,7 @@ const mapStateToData = _state => {
 
 const mapDispatchToPage = dispatch => {
   return {
-    fetchTasks: (tf_id) => dispatch(fetchTasks(tf_id)),
+    fetchTasks: (tf_id, callback) => dispatch(fetchTasks(tf_id, callback)),
     updateTaskFlowCate: (u_id, tf_id, category) => dispatch(updateTaskFlowCate(u_id, tf_id, category)),
   }
 }
