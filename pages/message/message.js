@@ -4,7 +4,7 @@ import {
   fetchMessages,
   setMessageRead
 } from '../../actions/index';
-import { compareDate } from '../../utils/util';
+import { compareDate2, formatTime } from '../../utils/util';
 const app = getApp();
 
 const page = {
@@ -50,9 +50,19 @@ const page = {
 const mapStateToData = state => {
   const m_ids = [...state.ids.messages];
   const _messages = { ...state.entities.messages };
-  const messages = m_ids.map(m_id => _messages[m_id]);
+  const messages = m_ids.map(m_id => {
+    const msg = _messages[m_id];
+    if (msg.tf_end_time) {
+      msg.tf_end_time = formatTime(new Date(msg.tf_end_time));
+    }
+    if (msg.t_end_time) {
+      msg.t_end_time = formatTime(new Date(msg.t_end_time));
+    }
+    return msg;
+  }
+  );
   const sortby = (t1, t2) => {
-    return compareDate(t2.create_time, t1.create_time);
+    return t2.create_time > t1.create_time ? 1 : -1;
   }
   messages.sort(sortby);
   return {
