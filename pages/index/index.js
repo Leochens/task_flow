@@ -297,17 +297,9 @@ const mapStateToData = (state, options) => {
     return (Array.isArray(pinTopList) && pinTopList.includes(tf_id))
   }
   const wrapTaskFlow = item => {
-    const { members, tasks } = item;
+    const { members } = item;
     let _item = { ...item };
     _item.members = members.map(mid => entities.members[mid]);
-    _item.tasks = tasks.map(tid => entities.tasks[tid]);
-    _item.tasks = _item.tasks.map(t => {
-      const _t = { ...t };
-      const memIds = _t.members || [];
-      const mems = memIds.map(mid => entities.members[mid]);
-      _t.members = mems;
-      return _t;
-    })
     return _item;
   }
   const pinTopIds = ids.task_flows.filter(inPinTopList);

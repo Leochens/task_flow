@@ -23,12 +23,10 @@ Component({
   observers: {
     'taskFlowData': function (taskFlowData) {
       const tf = taskFlowData;
-      // console.log(tf);
       const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
-      const { begin_time, end_time, tasks, members } = tf;
-      const _tasks = [...tasks];
+      const { begin_time, end_time, members, taskStatus: taskData } = tf;
       const dateData = this.calculateDate(begin_time, end_time);
-      const taskData = this.calculateTask(_tasks);
+      taskData.percent = (taskData.complete / (taskData.all || 1)).toFixed(4) * 100;
 
       this.setData({
         count: tf.members.length,
@@ -36,7 +34,7 @@ Component({
           dateData,
           taskData
         },
-        leader:leader || {},
+        leader: leader || {},
         members,
         tfData: tf
       })
@@ -55,10 +53,9 @@ Component({
     const tf = this.properties.taskFlowData;
     // console.log(tf);
     const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
-    const { begin_time, end_time, tasks, members } = tf;
-    const _tasks = [...tasks];
+    const { begin_time, end_time, members, taskStatus: taskData } = tf;
     const dateData = this.calculateDate(begin_time, end_time);
-    const taskData = this.calculateTask(_tasks);
+    taskData.percent = (taskData.complete / (taskData.all || 1)).toFixed(4) * 100;
 
     this.setData({
       count: tf.members.length,

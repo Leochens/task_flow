@@ -40,7 +40,7 @@
     </view>
     <view class="item">
       <view class="title">
-        任务完成进度: {{paneData.taskData.completedCount}}/{{paneData.taskData.count}}
+        任务完成进度: {{paneData.taskData.complete}}/{{paneData.taskData.all}}
       </view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.taskData.percent}}%"></view>

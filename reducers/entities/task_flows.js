@@ -38,6 +38,8 @@ const task_flows = (state = {
         if (meta.resource === 'tasks') {
           const { tf_id } = meta;
           const { result } = payload;
+          meta.callback && setTimeout(meta.callback, 500)
+
           const newState = {
             ...state,
             [tf_id]: {
