@@ -48,6 +48,7 @@
                 <view class="break-reason" wx:if="{{index === showInputIndex}}">
                     <input placeholder="请输入请假理由" bindinput="inputChange"/>
                     <view class="btn" catch:tap="sendApply">申请</view>
+                    <view class="btn" catch:tap="cancelApply">取消</view>
                 </view>
             </view>
         </view>

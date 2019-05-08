@@ -37,8 +37,8 @@ const page = {
       url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time + "&begin_time=" + this.data.begin_time
     })
   },
-  setFunc: function () {
-    const tf_id = this.data.id;
+  setFunc: function (id) {
+    const tf_id = this.data.id || id;
     const _task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     const task_flow = { ..._task_flow };
     const { tasks } = task_flow;
@@ -47,7 +47,7 @@ const page = {
       tasks: classfiedTasks
     });
     console.log("此时set Data")
-    wx.hideLoading();
+    // wx.hideLoading();
   },
   setTaskFlowInfo: function () {
     const tf_id = this.data.id;
@@ -63,7 +63,7 @@ const page = {
     });
   },
   onShow: function () {
-    wx.showLoading();
+    // wx.showLoading();
     const tf_id = this.data.id;
     this.setTaskFlowInfo();
     this.fetchTasks(tf_id, this.setFunc);
@@ -72,6 +72,7 @@ const page = {
     wx.hideTabBar({});
     const tf_id = options.tf_id;
     if (!tf_id) return;
+    this.setFunc(tf_id);
     this.setData({
       id: tf_id
     })

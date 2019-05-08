@@ -221,7 +221,6 @@ const page = {
       return;
     } else { // 不存在SID或SID已经过期 那么需要登录
       this._login(); // 登录成功后要拉取数据
-      // this.fetchTaskFlows(this.data.u_id)
       return;
     }
   },
@@ -233,7 +232,7 @@ const page = {
     wx.login({
       success: function (res) {
         console.log(res)
-        that.login(res.code,that._fetchTaskFlows);
+        that.login(res.code, that._fetchTaskFlows);
       },
       fail: function (err) {
         console.log(err);
@@ -248,6 +247,14 @@ const page = {
         userInfo,
         hasUserInfo: true
       })
+    }
+  },
+  fetchTasksByTfIds: function () {
+    const { taskFlowList } = this.data;
+    const tf_ids = taskFlowList.map(tf => tf.id);
+    for (let tf_id of tf_ids) {
+      this.fetchTasks(tf_id);
+      console.log("获取task成功");
     }
   },
   //事件处理函数
@@ -321,10 +328,10 @@ const mapStateToData = (state, options) => {
   };
 }
 const mapDispatchToPage = dispatch => ({
-  login: (code,callback) => dispatch(login(code,callback)),
+  login: (code, callback) => dispatch(login(code, callback)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),
-  fetchTaskFlows: uid => dispatch(fetchTaskFlows(uid)),
+  fetchTaskFlows: (uid,callback) => dispatch(fetchTaskFlows(uid,callback)),
   gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
   getPinTopTaskFlow: () => dispatch(getPinTopTaskFlow()),
   pinTopTaskFlow: tf_id => dispatch(pinTopTaskFlow(tf_id)),

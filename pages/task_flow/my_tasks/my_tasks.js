@@ -90,7 +90,7 @@ const page = {
     const u_id = wx.getStorageSync('u_id');
 
     this.applyTakeBreak(breakTaskId, u_id, break_reason);
-
+    setTimeout(wx.navigateBack,300);
     this.setData({
       showInputIndex: -1,
     })

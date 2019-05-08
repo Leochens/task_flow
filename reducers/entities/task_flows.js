@@ -33,12 +33,14 @@ const task_flows = (state = {
             ...state,
             ...task_flows
           };
+          meta.callback && setTimeout(meta.callback, 100)
+
           return newState;
         }
         if (meta.resource === 'tasks') {
           const { tf_id } = meta;
           const { result } = payload;
-          meta.callback && setTimeout(meta.callback, 500)
+          meta.callback && setTimeout(meta.callback, 100)
 
           const newState = {
             ...state,
