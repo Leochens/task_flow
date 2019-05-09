@@ -3225,6 +3225,10 @@ scroll-view.cu-steps .cu-item {
   color: #fff;
 }
 
+.bg-main {
+  background-color: #2665AE;
+  color: #fff;
+}
 .bg-orange {
   background-color: #f37b1d;
   color: #fff;

@@ -14,12 +14,11 @@ page{
     position: relative;
 }
 .change-cate{
-    position: absolute;
-    top: 30rpx;
-    right: 50rpx;
+
     font-size: 24rpx;
     color: #666;
-    display: flex;
+    display: inline-block;
+
 }
 .cate{
 }
@@ -28,6 +27,7 @@ page{
     border: 1rpx solid #2665AE;
     border-radius: 8rpx;
     margin-left: 10rpx;
+    display: inline-block;
 }
 .task-flow-name{
     font-size: 40rpx;
@@ -40,7 +40,7 @@ page{
     height: 36rpx;
 
 }
-.task-flow-info .else{
+.task-flow-info .task-flow-date{
     font-size: 24rpx;
     display: flex;
     justify-content: space-between;

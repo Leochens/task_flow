@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { addComment, addImage,fetchSingleTask } from '../../actions/index';
+import { addComment, addImage, fetchSingleTask } from '../../actions/index';
 import { formatTime } from '../../utils/util';
 import APP from '../../appConfig';
 const app = getApp();
@@ -143,7 +143,7 @@ const page = {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    console.log("task options", options);
     const t_id = options.t_id;
     const u_id = app.globalData.u_id;
     const isFetch = options.isFetch ? true : false;
@@ -206,9 +206,9 @@ const mapStateToData = state => {
     const t = JSON.parse(JSON.stringify(tasks[t_id]));
 
     const { members: _m, images: _i, comments: _c } = t;
-    const m = [..._m];
-    const i = [..._i];
-    const c = [..._c];
+    const m = [..._m || []];
+    const i = [..._i || []];
+    const c = [..._c || []];
 
     t.members = m.map(mid => _members[mid]);
     t.comments = c.map(cid => _comments[cid]);

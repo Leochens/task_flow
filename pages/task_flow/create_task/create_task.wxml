@@ -1,36 +1,37 @@
 <!-- pages/task_flow/create_task/create_task.wxml -->
 <nav-bar title="创建子任务" />
-<form class='rh-form' style="margin-top:50rpx" report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
-  <view class='rh-form-item'>
-    <label class='rh-lable'>子任务标题</label>
-    <input name="t_name" class='rh-input' placeholder="必填" value="{{task.t_name}}"></input>
+<form report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
+  <view class="cu-form-group margin-top">
+    <view class="title">子任务标题</view>
+    <input name="t_name" placeholder="请输入子任务标题" selection-start="-1" selection-end="-1" cursor="-1" value="{{task.t_name}}"></input>
+    <view class="cu-tag line-orange">必填</view>
   </view>
-  <view class='rh-form-item'>
-    <label class='rh-lable'>子任务概述</label>
-    <textarea name="t_describe" class='rh-textarea' placeholder="必填" value="{{task.t_describe}}"></textarea>
+  <view class="cu-form-group" hidden="{{isUpdate}}">
+    <view class="title">开始时间</view>
+    <date-time-picker value='{{beginDate}}' bind:onChange="bindBeginDateChange" />
   </view>
-  <view class='rh-form-item'>
-    <label class='rh-lable'>开始时间</label>
-    <date-time-picker value="{{beginDate}}" bind:onChange='bindBeginDateChange' />
-  </view>
-  <view class='rh-form-item'>
-    <label class='rh-lable'>结束时间</label>
+  <view class="cu-form-group">
+    <view class="title">结束时间</view>
     <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange' />
   </view>
-  <view class='rh-form-item' wx:if="{{!isUpdate}}">
-    <label class='rh-lable'>选择任务人</label>
-    <view class='rh-input' bind:tap="selectMember">
+  <view class='cu-form-group' wx:if="{{!isUpdate}}">
+    <label class='title'>选择任务人</label>
+    <view class='text text-main' bind:tap="selectMember">
       {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择[至少一个]"}}
     </view>
   </view>
-  <view class='rh-form-item' wx:else>
-    <label class='rh-lable'>新增任务人</label>
-    <view class='rh-input' bind:tap="selectMember">
+  <view class='cu-form-group' wx:else>
+    <label class='title'>新增任务人</label>
+    <view class='text text-main' bind:tap="selectMember">
       {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择"}}
     </view>
   </view>
-  <view class='rh-form-item'>
-    <button form-type="submit" class='rh-submit-btn'>完成</button>
+  <view class="cu-form-group">
+    <textarea placeholder="请输入子任务概述" name="t_describe" value="{{task.t_describe}}"></textarea>
+    <view class="cu-tag line-orange">必填</view>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class='cu-btn bg-main lg' form-type="submit">完成</button>
   </view>
 </form>
 <!-- 完整内容	

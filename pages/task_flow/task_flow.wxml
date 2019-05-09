@@ -4,18 +4,11 @@
 <nav-bar title="任务流详情"></nav-bar>
 <view class='wrap'>
   <view class='task-flow-info'>
-    <view class="change-cate" bind:tap="onSelectCate">
-      <view class="cate">当前分类:{{category}}</view>
-      <view class="change">修改</view>
-    </view>
     <view class="task-flow-name">
       {{tf_name}}
-      <image wx:if="{{editable}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" />
+      <text wx:if="{{editable}}" class="icon-edit text-main"  bind:tap="editInfo"></text>
     </view>
-    <view class="else">
-      <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
-      <view class="task-flow-leader">负责人:{{leader.nick_name}}</view>
-    </view>
+    <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
   </view>
   <view class='content'>
     <view class="child-task-list">
@@ -32,6 +25,17 @@
             <view class="deadline-time" style="margin-left:0">
               <text class="text-bold">任务流截止时间:</text>
               {{end_time}}
+            </view>
+          </view>
+          <view class="task-describe">
+            <text class="text-bold">负责人:</text>
+            {{leader.nick_name}}
+          </view>
+          <view class="task-describe">
+            <text class="text-bold">分类:</text>
+            <view class="change-cate" bind:tap="onSelectCate">
+              <text class="cate">{{category}}</text>
+              <view class="change">修改</view>
             </view>
           </view>
           <view class="task-describe">

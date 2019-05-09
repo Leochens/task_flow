@@ -13,7 +13,7 @@
   bottom: 30rpx;
   margin-left: 10%;
 }
-
+/* 
 .picker{
   font-size: 35rpx;
   height: 80rpx;
@@ -22,7 +22,7 @@
   padding: 0 16rpx;
   line-height: 80rpx;
   color: #666;
-}
+} */
 .add-cate{
   color: #2665ae;
   font-weight: bold;

@@ -26,7 +26,6 @@ const page = {
     members: [],
     CustomBar: app.globalData.CustomBar,
     is_leader: false,
-    ready: false,
     showModal: false,
     editable: false,
     cateSelectorIsActive: false
