@@ -26,9 +26,9 @@
               <text class="icon-apps  margin-0"></text>
             </view>
           </view>
-          <view class="action" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="2">
+          <view class="action" bind:tap="toHelp" data-id="2">
             <view class='icon-cu-image text-white'>
-              <text class="icon-roundcheck{{2==TabCur && 2==isFilter?'fill':''}}  margin-0"></text>
+              <text class="icon-question margin-0"></text>
             </view>
           </view>
           <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
@@ -62,14 +62,25 @@
   </view>
   <view wx:else>
     <view wx:if="{{filterTaskFlowList.length || taskFlowList.length}}">
-      <view class="op-bar">
-        <view class="left">
-          任务流数量:{{filterTaskFlowList.length?filterTaskFlowList.length:taskFlowList.length}}
+      <view class="cu-bar bg-white">
+        <view class="action">
+          <view class="cu-tag line-main">
+            总数:{{filterTaskFlowList.length?filterTaskFlowList.length:taskFlowList.length}}
+          </view>
         </view>
-        <view class="right">
-          <text bind:tap="toSearch">搜索</text>
-          |
-          <text>筛选</text>
+        <view class="action">
+          <view class="cu-capsule round">
+            <view class="cu-tag">
+              <view class="cu-icon-image text-xl">
+                <view class="icon-search" bind:tap="toSearch"></view>
+              </view>
+            </view>
+            <view class="cu-tag">
+              <view class="cu-icon-image text-xl">
+                <view class="icon-filter" bind:tap="toFilter"></view>
+              </view>
+            </view>
+          </view>
         </view>
       </view>
       <form-id>

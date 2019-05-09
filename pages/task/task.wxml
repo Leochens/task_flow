@@ -50,13 +50,13 @@
                         </view>
                     </view>
                     <view>
-                        <label bind:tap="bindChooiceImage" wx:if="{{task.is_completed != 1}}" class="upload-pic">
-                            上传图片
-                        </label>
-                        <view class="images">
-                            <view class="item" wx:for="{{imgs}}" wx:key>
-                                <image src="{{item.url}}" bind:tap="previewImg" data-id="{{index}}" />
-                                <view class="text">{{item.nick_name}}</view>
+                        <view class="images" class="grid col-3 grid-square flex-sub">
+                            <view class="bg-img" wx:for="{{imgs}}" wx:key>
+                                <image src="{{item.url}}" mode="aspectFill" bind:tap="previewImg" data-id="{{index}}" />
+                                <view class="cu-tag bg-grey light">{{item.nick_name}}</view>
+                            </view>
+                            <view bind:tap="bindChooiceImage" wx:if="{{task.is_completed != 1}}" class="solids">
+                                <text class="icon-cameraadd"></text>
                             </view>
                         </view>
                     </view>
@@ -65,16 +65,15 @@
             </swiper-item>
             <swiper-item class="content">
                 <view class="begin-time">2019-2-1 14:35:44</view>
-                <view class="card card-comment">
+                <view class="cu-chat">
                     <view wx:if="{{task.comments.length}}">
-                        <view class="comment-item" wx:for="{{task.comments}}" wx:key>
-                            <image class="avatar" src="{{item.avatar_url}}" />
-                            <view class="comment">
-                                <view class="name-time">
-                                    <text class="name">{{item.nick_name}}</text>
-                                    <text class="time">{{item.create_time}}</text>
+                        <view class="cu-item" wx:for="{{task.comments}}" wx:key>
+                            <view class="cu-avatar radius" style="background-image:url({{item.avatar_url}});"></view>
+                            <view class="main">
+                                <view class="date">{{item.nick_name}} {{item.create_time}}</view>
+                                <view class="content shadow">
+                                    <text>{{item.content}}</text>
                                 </view>
-                                <view class="comment-content">{{item.content}}</view>
                             </view>
                         </view>
                     </view>

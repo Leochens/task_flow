@@ -41,9 +41,24 @@ const page = {
     this.setRead(u_id);
   },
   clearMsg: function () {
-    wx.setStorageSync('messages_entities', {});
-    wx.setStorageSync('messages_ids', []);
-    this.onPullDownRefresh();
+    const that = this;
+    wx.showModal({
+      title: "三思后行",
+      content: "确认清空全部消息记录吗",
+      success: function (res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        } else {
+          //点击确定
+          wx.setStorageSync('messages_entities', {});
+          wx.setStorageSync('messages_ids', []);
+          that.onPullDownRefresh();
+        }
+      },
+      fail: function (res) { },//接口调用失败的回调函数
+      complete: function (res) { },//接口调用结束的回调函数（调用成功、失败都会执行）
+    })
+
   }
 }
 
