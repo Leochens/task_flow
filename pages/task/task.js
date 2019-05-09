@@ -2,10 +2,10 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { addComment, addImage } from '../../actions/index';
+import { addComment, addImage,fetchSingleTask } from '../../actions/index';
 import { formatTime } from '../../utils/util';
 import APP from '../../appConfig';
-
+const app = getApp();
 const page = {
 
   /**
@@ -15,6 +15,7 @@ const page = {
     task: {},
     content: "",
     imgs: [],
+    isFetch: false, // 是否从网络上请求
     t_id: '',
     editable: false
   },
@@ -97,7 +98,7 @@ const page = {
       avatar_url: author.avatar_url
     }
   },
-  extendImage:function(img){
+  extendImage: function (img) {
     const { u_id } = img;
     const members = this.data.members;
     const author = members[u_id];
@@ -112,31 +113,20 @@ const page = {
       url: '../task_flow/create_task/create_task?tf_id=' + tf_id + "&t_id=" + t_id
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options);
-    const t_id = options.t_id;
-    const u_id = wx.getStorageSync('u_id');
+  initFromApi: function () {
+    const { t_id, u_id } = this.data;
+    this.fetchSingleTask(u_id, t_id, this.init); // 拉取单一的子任务的详情
+    console.log("api拉取子任务详情")
 
-    this.setData({
-      t_id,
-      u_id
-    })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onShow: function () {
+  init: function () {
     // 筛选出t_id指向的task
     const t_id = this.data.t_id;
     console.log(t_id);
-
     const task = this.data.tasks[t_id];
     // 获得task后紧接着获得这个task的评论和人员的状态
     const comments = task.comments.map(cmt => this.extendComment(cmt));
-    const imgs = task.images.map(img=>this.extendImage(img));
+    const imgs = task.images.map(img => this.extendImage(img));
 
     task.comments = comments;
     task.imgs = imgs;
@@ -148,7 +138,32 @@ const page = {
       imgs,
       editable
     });
-
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    console.log(options);
+    const t_id = options.t_id;
+    const u_id = app.globalData.u_id;
+    const isFetch = options.isFetch ? true : false;
+    this.setData({
+      t_id,
+      u_id,
+      isFetch
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onShow: function () {
+    const isFetch = this.data.isFetch;
+    isFetch ? this.initFromApi() : this.init();
+  },
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading();
+    this.initFromApi();
+    wx.stopPullDownRefresh();
   },
   commentSubmit: function (e) {
     console.log(e);
@@ -213,6 +228,7 @@ const mapStateToData = state => {
 const mapDispatchToPage = dispatch => ({
   addComment: (t_id, cmt) => dispatch(addComment(t_id, cmt)),
   addImage: (img) => dispatch(addImage(img)),
+  fetchSingleTask: (u_id, t_id, callback) => dispatch(fetchSingleTask(u_id, t_id, callback))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

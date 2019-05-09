@@ -37,6 +37,9 @@ const page = {
   },
   toTaskDetail: function (e) {
     const t_id = e.currentTarget.dataset.tid;
+    wx.navigateTo({
+      url: '../task/task?t_id=' + t_id + "&isFetch=true"
+    })
   }
 };
 

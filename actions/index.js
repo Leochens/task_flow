@@ -28,6 +28,15 @@ export const fetchTasks = (tf_id, callback) => {
     }
     return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id, callback });
 };
+export const fetchSingleTask = (u_id, t_id, callback) => {
+    const normalizeFunc = response => {
+        console.log("待nomalize==>", response);
+        const tasks = normalize(response.data, Schemas.tasks);
+        console.log("nomalize后==>", tasks);
+        return tasks;
+    }
+    return crudGetList('tasks', null, null, null, `tasks/${t_id}`, { normalizeFunc, t_id, callback });
+}
 export const fetchMessages = (u_id, callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
