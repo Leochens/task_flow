@@ -225,7 +225,7 @@ const page = {
     }
   },
   _fetchTaskFlows: function () {
-    this.fetchTaskFlows(this.data.u_id)
+    this.fetchTaskFlows(this.data.u_id,this.setTfIds)
   },
   _login: function () {
     const that = this;
@@ -249,13 +249,14 @@ const page = {
       })
     }
   },
-  fetchTasksByTfIds: function () {
+  setTfIds: function () {
     const { taskFlowList } = this.data;
     const tf_ids = taskFlowList.map(tf => tf.id);
-    for (let tf_id of tf_ids) {
-      this.fetchTasks(tf_id);
-      console.log("获取task成功");
-    }
+    app.globalData.tf_ids = tf_ids;
+    // for (let tf_id of tf_ids) {
+    //   this.fetchTasks(tf_id);
+    //   console.log("获取task成功");
+    // }
   },
   //事件处理函数
   onLoad: function () {
@@ -264,7 +265,7 @@ const page = {
     const SID = wx.getStorageSync('SID');
     if (SID) {
       const u_id = wx.getStorageSync('u_id');
-      this.fetchTaskFlows(u_id);
+      this.fetchTaskFlows(u_id,this.setTfIds);
       this.getPinTopTaskFlow();
     }
     console.log("globalData=>", app.globalData);
@@ -281,7 +282,7 @@ const page = {
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
-    this.fetchTaskFlows(this.data.u_id);
+    this.fetchTaskFlows(this.data.u_id,this.setTfIds);
     this.getPinTopTaskFlow();
     wx.stopPullDownRefresh();
   }
@@ -331,7 +332,7 @@ const mapDispatchToPage = dispatch => ({
   login: (code, callback) => dispatch(login(code, callback)),
   fetchUsers: () => dispatch(fetchUsers()),
   fetchTasks: taskFlowId => dispatch(fetchTasks(taskFlowId)),
-  fetchTaskFlows: (uid,callback) => dispatch(fetchTaskFlows(uid,callback)),
+  fetchTaskFlows: (uid, callback) => dispatch(fetchTaskFlows(uid, callback)),
   gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
   getPinTopTaskFlow: () => dispatch(getPinTopTaskFlow()),
   pinTopTaskFlow: tf_id => dispatch(pinTopTaskFlow(tf_id)),

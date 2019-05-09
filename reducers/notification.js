@@ -19,27 +19,29 @@ import {
 import { PIN_TOP_TASK_FLOW, CANCEL_PIN_TOP_TASK_FLOW } from '../actions/index';
 const successFilter = (resource, payload) => {
     switch (resource) {
-        case 'breaks': {
-            if (payload.msg) {
-                wx.showToast({
-                    title: payload.msg
-                });
+        case 'breaks':
+        case 'task_flows':
+            {
+                if (payload.msg) {
+                    wx.showToast({
+                        title: payload.msg
+                    });
+                }
+                break;
             }
-            break;
-        }
         case 'tasks':
         case 'completation':
-        case 'task_flows': {
-            if (payload.msg) {
-                wx.showToast({
-                    title: payload.msg
-                });
+            {
+                if (payload.msg) {
+                    wx.showToast({
+                        title: payload.msg
+                    });
+                }
+                setTimeout(
+                    () => wx.navigateBack(),
+                    1000);
+                break;
             }
-            setTimeout(
-                () => wx.navigateBack(),
-                1000);
-            break;
-        }
 
         default: return;
     }

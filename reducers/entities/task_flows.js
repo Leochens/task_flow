@@ -11,9 +11,8 @@ import { formatDateInObject } from '../../utils/util';
 
 
 
-const task_flows = (state = {
-
-}, action) => {
+const st_task_flows = wx.getStorageSync('task_flows') || {};
+const task_flows = (state = st_task_flows, action) => {
   const {
     type,
     payload,
@@ -34,7 +33,7 @@ const task_flows = (state = {
             ...task_flows
           };
           meta.callback && setTimeout(meta.callback, 100)
-
+          wx.setStorageSync('st_task_flows', newState);
           return newState;
         }
         if (meta.resource === 'tasks') {
@@ -48,9 +47,15 @@ const task_flows = (state = {
               ...state[tf_id],
               tasks: [...result]
             }
+
           };
+          wx.setStorageSync('st_task_flows', newState);
+
           console.log("fetch Task结束")
           return newState;
+        }
+        if (meta.resource === 'all_tasks') {
+
         }
         return state;
       }
@@ -59,7 +64,7 @@ const task_flows = (state = {
         const { tf, tf_id } = requestPayload.data;
         const _tf = JSON.parse(tf);
         const { tf_name, tf_describe, end_time, category } = _tf;
-        return {
+        const newState = {
           ...state,
           [tf_id]: {
             ...state[tf_id],
@@ -69,15 +74,19 @@ const task_flows = (state = {
             category
           }
         }
+        wx.setStorageSync('st_task_flows', newState);
+        return newState;
       } else if (meta.resource === 'categories') {
         const { tf_id, category } = requestPayload.data;
-        return {
+        const newState = {
           ...state,
           [tf_id]: {
             ...state[tf_id],
             category
           }
         }
+        wx.setStorageSync('st_task_flows', newState);
+        return newState;
       } else return state;
 
     }

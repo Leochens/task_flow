@@ -5,6 +5,7 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import { compareDate2, compareDate3, getNowDate } from '../../utils/util';
+import { fetchTaskFlowsAll } from '../../actions/index';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 
 const _page = {
@@ -14,6 +15,9 @@ const _page = {
    */
   data: {
 
+  },
+  asyncTasks: function (u_id) {
+    this.fetchTaskFlowsAll(u_id);
   },
   onLoad: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -93,6 +97,7 @@ const _page = {
     }
 
     initCalendar(conf);
+    this.asyncTasks(u_id);
     deal();
   },
   set: function (data) {
@@ -127,7 +132,9 @@ const mapStateToData = state => {
   }
 }
 const mapDispatchToPage = dispatch => {
-
+  return {
+    fetchTaskFlowsAll:(u_id)=> dispatch(fetchTaskFlowsAll(u_id))
+  }
 }
 const page = connect(mapStateToData, mapDispatchToPage)(_page);
 Page(page)
