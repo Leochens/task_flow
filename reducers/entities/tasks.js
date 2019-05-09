@@ -3,7 +3,7 @@ import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE, CRUD_UPDATE_SU
 import { formatDateInObject } from '../../utils/util';
 import { ADD_IMG } from '../../actions/index';
 
-const range = ['task_flows', 'tasks'];
+const range = ['task_flows', 'tasks','all_tasks'];
 const tasks = (state = {}, action) => {
     const { type, payload, requestPayload, meta } = action;
 

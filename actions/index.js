@@ -10,14 +10,14 @@ export const fetchTaskFlows = (u_id, callback) => {
     }
     return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows/simple`, { normalizeFunc, callback });
 };
-export const fetchTaskFlowsAll = (u_id, callback) => {
+export const fetchTasksAll = (u_id, callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
-        const task_flows = normalize(response.data, Schemas.taskFlows);
-        console.log("nomalize后==>", task_flows);
-        return task_flows;
+        const tasks = normalize(response.data, Schemas.tasks);
+        console.log("nomalize后==>", tasks);
+        return tasks;
     }
-    return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows`, { normalizeFunc, callback });
+    return crudGetList('all_tasks', null, null, null, `users/${u_id}/tasks`, { normalizeFunc, callback });
 };
 export const fetchTasks = (tf_id, callback) => {
     const normalizeFunc = response => {

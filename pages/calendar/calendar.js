@@ -5,7 +5,7 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import { compareDate2, compareDate3, getNowDate } from '../../utils/util';
-import { fetchTaskFlowsAll } from '../../actions/index';
+import { fetchTasksAll } from '../../actions/index';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 
 const _page = {
@@ -16,8 +16,8 @@ const _page = {
   data: {
 
   },
-  asyncTasks: function (u_id) {
-    this.fetchTaskFlowsAll(u_id);
+  asyncTasks: function (u_id, callback) {
+    this.fetchTasksAll(u_id, callback);
   },
   onLoad: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -26,7 +26,7 @@ const _page = {
       const nowDate = `${year}-${month}-${day}`;
       const tasks = this.data.tasks;
       const todayTasks = tasks.filter(t => {
-        const isMyTask = t.members.includes(u_id);
+        // const isMyTask = t.members.includes(u_id);
         const notComplete = t.is_completed != 1;
         const isDelay = t.is_completed === 2;
         const beginDate = t.begin_time.split(' ')[0];
@@ -42,7 +42,7 @@ const _page = {
         else if (todayIsEnd) t.flag = '截止';
         else if (isContinue) t.flag = '进行中';
         else { };
-        return isContinue && notComplete && isMyTask;
+        return isContinue && notComplete;
       });
       return todayTasks;
     }
@@ -92,13 +92,21 @@ const _page = {
         console.log("today", today, todayTasks);
         ctx.setData({
           todayTasks
-        })
+        });
       },
     }
 
     initCalendar(conf);
-    this.asyncTasks(u_id);
-    deal();
+
+    this.asyncTasks(u_id, function () {
+      deal();
+      const today = that.data.calendar.selectedDay.pop();
+      console.log(today);
+      that.setData({
+        todayTasks: getPerDayTasks(today)
+      })
+
+    });
   },
   set: function (data) {
     this.setData(data);
@@ -107,7 +115,7 @@ const _page = {
 
     const tid = e.currentTarget.dataset.tid;
     wx.navigateTo({
-      url: '../task/task?t_id=' + tid
+      url: '../task/task?t_id=' + tid + "&isFetch=true"
     })
   },
   onShow: function (options) {
@@ -123,6 +131,8 @@ const mapStateToData = state => {
   const tasks = state.entities.tasks;
   const taskFlows = state.entities.task_flows;
   const _tasks = [];
+  console.log(tasks);
+
   for (let key in tasks) {
     tasks[key].tf_name = taskFlows[tasks[key].tf_id].tf_name;
     _tasks.push(tasks[key]);
@@ -133,7 +143,7 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => {
   return {
-    fetchTaskFlowsAll:(u_id)=> dispatch(fetchTaskFlowsAll(u_id))
+    fetchTasksAll: (u_id, callback) => dispatch(fetchTasksAll(u_id, callback))
   }
 }
 const page = connect(mapStateToData, mapDispatchToPage)(_page);
