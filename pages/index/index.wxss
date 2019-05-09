@@ -246,3 +246,10 @@ page {
   font-size: 24rpx;
   margin-left: 40rpx;
 }
+
+
+.op-bar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

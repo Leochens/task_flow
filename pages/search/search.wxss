@@ -1,0 +1,37 @@
+/* pages/search/search.wxss */
+.wrap{
+    width: 90%;
+    margin: 20rpx auto;
+}
+.text{
+    font-size: 35rpx;
+    font-weight: bold;
+    color: #666;
+
+}
+
+.task-flow-item,
+.task-item{
+    border-radius: 16rpx;
+    font-size: 24rpx;
+    border: 1rpx solid #ddd;
+    padding: 8rpx;
+    color: #666;
+    margin: 20rpx 0;
+}
+.name{
+    font-size: 30rpx;
+    font-weight: bold;
+}
+.describe{
+    color: #999;
+    margin-top: 16rpx;
+}
+.task-item{
+    border: none;
+    border-bottom: 1rpx solid #ddd;
+    border-radius: 0;
+}
+.hover{
+    opacity: 0.5;
+}

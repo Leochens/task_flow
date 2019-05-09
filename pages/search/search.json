@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "search-bar": "../../components/search_bar/search_bar",
+    "task-flow-card": "../../components/task_flow_card/task_flow_card"
+  }
+}

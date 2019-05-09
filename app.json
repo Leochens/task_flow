@@ -20,7 +20,8 @@
     "pages/settings/settings",
     "pages/about/about",
     "pages/data/data",
-    "pages/review/review"
+    "pages/review/review",
+    "pages/search/search"
   ],
   "tabBar": {
     "color": "#666",
@@ -53,6 +54,9 @@
     "navigationBarTitleText": "任务流",
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
+  },
+  "usingComponents":{
+    "nav-bar":"./common/nav_bar/nav_bar"
   },
   "sitemapLocation": "sitemap.json"
 }

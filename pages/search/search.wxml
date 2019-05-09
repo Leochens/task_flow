@@ -1,0 +1,17 @@
+<!-- pages/search/search.wxml -->
+<nav-bar title="全局搜索"></nav-bar>
+<search-bar bind:onSearch='onSearch'></search-bar>
+<view class="wrap" wx:if="{{task_flows.length}}">
+    <view class="text">任务流</view>
+    <view class="task-flow-item" hover-class="hover"  wx:for="{{task_flows}}" wx:key data-tfid="{{item.id}}" bind:tap="toTaskFlowDetail">
+        <view class="name">{{item.tf_name}}</view>
+        <view class="describe">{{item.tf_describe}}</view>
+    </view>
+</view>
+<view class="wrap" wx:if="{{tasks.length}}">
+    <view class="text">子任务</view>
+    <view class="task-item"  hover-class="hover" wx:for="{{tasks}}" wx:key data-tid="{{item.id}}" bind:tap="toTaskDetail">
+        <view class="name">{{item.t_name}}</view>
+        <view class="describe">{{item.t_describe}}</view>
+    </view>
+</view>

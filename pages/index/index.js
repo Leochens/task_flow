@@ -86,28 +86,8 @@ const page = {
     this.setData({
       curOperation: MENU.NONE,
       filterTaskFlowList: [],
-      searchResultList: [],
       searchKeyword: '',
       tfCardType: 'default',
-    })
-  },
-  onSearch: function (e) {
-    const keyword = e.detail;
-    console.log(keyword);
-    const { taskFlowList } = this.data;
-    const searchResultList = taskFlowList.filter(tf => tf.tf_name.indexOf(keyword) > -1 || tf.tf_describe.indexOf(keyword) > -1);
-    const len = searchResultList.length;
-    wx.showToast({
-      title: len ? `找到${len}条` : "未找到"
-    })
-    this.setData({
-      searchResultList,
-      searchKeyword: keyword
-    })
-  },
-  clearSearch: function () {
-    this.setData({
-      searchResultList: []
     })
   },
   onDeleteTaskFlow: function (e) {
@@ -203,6 +183,11 @@ const page = {
       url: '../task_flow/task_flow?tf_id=' + tf_id
     })
   },
+  toSearch: function (e) {
+    wx.navigateTo({
+      url: '../search/search'
+    })
+  },
   addNewTaskFlow: function () {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow'
@@ -225,7 +210,7 @@ const page = {
     }
   },
   _fetchTaskFlows: function () {
-    this.fetchTaskFlows(this.data.u_id,this.setTfIds)
+    this.fetchTaskFlows(this.data.u_id, this.setTfIds)
   },
   _login: function () {
     const that = this;
@@ -253,10 +238,6 @@ const page = {
     const { taskFlowList } = this.data;
     const tf_ids = taskFlowList.map(tf => tf.id);
     app.globalData.tf_ids = tf_ids;
-    // for (let tf_id of tf_ids) {
-    //   this.fetchTasks(tf_id);
-    //   console.log("获取task成功");
-    // }
   },
   //事件处理函数
   onLoad: function () {
@@ -265,7 +246,7 @@ const page = {
     const SID = wx.getStorageSync('SID');
     if (SID) {
       const u_id = wx.getStorageSync('u_id');
-      this.fetchTaskFlows(u_id,this.setTfIds);
+      this.fetchTaskFlows(u_id, this.setTfIds);
       this.getPinTopTaskFlow();
     }
     console.log("globalData=>", app.globalData);
@@ -282,7 +263,7 @@ const page = {
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
-    this.fetchTaskFlows(this.data.u_id,this.setTfIds);
+    this.fetchTaskFlows(this.data.u_id, this.setTfIds);
     this.getPinTopTaskFlow();
     wx.stopPullDownRefresh();
   }

@@ -29,9 +29,7 @@ Component({
       // console.log(e);
       const { keyword }= this.data;
       this.triggerEvent('onSearch', keyword);
-      this.setData({
-        keyword: '',
-      })
+
     },
   }
 })
