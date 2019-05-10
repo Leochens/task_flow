@@ -139,6 +139,11 @@ const page = {
       url: './all_members/all_members?tf_id=' + this.data.id + "&members=" + JSON.stringify(this.data.members)
     })
   },
+  toTaskFlowSettings: function () {
+    wx.navigateTo({
+      url: './tf_settings/tf_settings?tf_id=' + this.data.id + "&is_leader=" + this.data.is_leader
+    })
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

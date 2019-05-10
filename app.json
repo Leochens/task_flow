@@ -23,7 +23,8 @@
     "pages/review/review",
     "pages/search/search",
     "pages/feedback/feedback",
-    "pages/help/help"
+    "pages/help/help",
+    "pages/task_flow/tf_settings/tf_settings"
   ],
   "tabBar": {
     "color": "#666",

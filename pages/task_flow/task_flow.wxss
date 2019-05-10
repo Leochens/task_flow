@@ -12,6 +12,8 @@ page{
     border-bottom: 1rpx solid #ddd;
     animation: slideInDown .5s ease-in-out;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 .change-cate{
 
