@@ -1,6 +1,10 @@
 <!-- pages/task/task.wxml -->
 <wxs module="memberStatus" src="../wxs/memberStatus.wxs"></wxs>
-<nav-bar title="子任务详情"></nav-bar>
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">子任务详情</view>
+</nav-bar>
 <view class="task-wrap">
     <view class="title-wrap">
         <view class="title">

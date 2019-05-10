@@ -1,5 +1,8 @@
 <!--pages/task_flow/all_members/all_members.wxml-->
-<nav-bar title="全部成员"/>
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">全部成员</view>
+</nav-bar>
 <view class="members">
     <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true"/>
 </view>

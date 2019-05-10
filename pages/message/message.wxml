@@ -1,37 +1,36 @@
 <!-- pages/message/message.wxml -->
-<nav-bar operation="true">
-    <view class="cu-btn bg-main margin-left-xl round df" bind:tap="clearMsg">清空消息</view>
-</nav-bar>
+
+<view class="cu-btn bg-main round margin-top-xl margin-left sm" bind:tap="clearMsg">清空消息 </view>
 
 <view wx:if="{{messages.length}}" class="cu-timeline">
-    <view class="cu-item" wx:for="{{messages}}" wx:key>
-        <view class="content {{item.is_read?'':'bg-white'}}">
-            <view>
-                <view class="text-main text-df">{{item.content}}</view>
-                <view wx:if="{{item.t_name}}">
-                    <view class="lable">所属子任务:</view>
-                    {{item.t_name}}
-                </view>
-                <view wx:if="{{item.tf_name}}">
-                    <view class="lable">所属任务流:</view>
-                    {{item.tf_name}}
-                </view>
-                <view wx:if="{{item.t_end_time}}">
-                    <view class="lable">子任务截止日期:</view>
-                    {{item.t_end_time}}
-                </view>
-                <view wx:if="{{item.tf_end_time}}">
-                    <view class="lable">任务流截止日期:</view>
-                    {{item.tf_end_time}}
-                </view>
-            </view>
-            <view class="cu-capsule radius">
-                <view class="cu-tag line-main">{{item.create_time}}</view>
-                <view class="cu-tag bg-main" hidden="{{!item.is_read}}">已读</view>
-            </view>
+  <view class="cu-item" wx:for="{{messages}}" wx:key>
+    <view class="content {{item.is_read?'':'bg-white'}}">
+      <view>
+        <view class="text-main text-df">{{item.content}}</view>
+        <view wx:if="{{item.t_name}}">
+          <view class="lable">所属子任务:</view>
+          {{item.t_name}}
         </view>
+        <view wx:if="{{item.tf_name}}">
+          <view class="lable">所属任务流:</view>
+          {{item.tf_name}}
+        </view>
+        <view wx:if="{{item.t_end_time}}">
+          <view class="lable">子任务截止日期:</view>
+          {{item.t_end_time}}
+        </view>
+        <view wx:if="{{item.tf_end_time}}">
+          <view class="lable">任务流截止日期:</view>
+          {{item.tf_end_time}}
+        </view>
+      </view>
+      <view class="cu-capsule radius">
+        <view class="cu-tag line-main">{{item.create_time}}</view>
+        <view class="cu-tag bg-main" hidden="{{!item.is_read}}">已读</view>
+      </view>
     </view>
+  </view>
 </view>
 <view wx:else class="margin-top-xl text text-bold text-center">
-    暂时还没有新消息
+  暂时还没有新消息
 </view>

@@ -1,5 +1,8 @@
 <!-- pages/task_flow/create_task/create_task.wxml -->
-<nav-bar title="创建子任务" />
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">创建子任务</view>
+</nav-bar>
 <form report-submit="true" bindsubmit="onSubmit" bindreset="onReset">
   <view class="cu-form-group margin-top">
     <view class="title">子任务标题</view>

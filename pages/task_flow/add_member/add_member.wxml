@@ -1,5 +1,9 @@
 <!-- pages/task_flow/add_member/add_member.wxml -->
-<nav-bar title="邀请新成员" />
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">邀请新成员</view>
+</nav-bar>
 <view class="main">
     <view class="tip">开始召集伙伴</view>
     <image src="../../../assets/imgs/task_flow/add.svg" class="add" />

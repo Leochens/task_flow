@@ -1,3 +1,6 @@
 <!--pages/settings/settings.wxml-->
-<nav-bar title="设置"></nav-bar>
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">设置</view>
+</nav-bar>
 <view class="wrap">功能待开发</view>

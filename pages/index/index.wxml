@@ -1,7 +1,6 @@
-<import src="../template/notification.wxml" />
 <template is="notification" />
 <view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
-  <view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class=" cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
       <view class="action text-center" style='width: 100rpx'>
         <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" bindtap='getUserInfo' class='cu-btn icon-my icon bg-green shadow'></button>
@@ -54,7 +53,10 @@
     </view>
   </view>
 </view>
-<view class='task-flows ' style='margin-top:{{CustomBar}}px;'>
+<view class='task-flows' style='margin-top:{{CustomBar}}px;'>
+  <view class="UCenter-bg bg-main">
+    <image class="gif-wave" mode="scaleToFill" src="https://image.weilanwl.com/gif/wave.gif"></image>
+  </view>
   <view wx:if="{{currentCategoryTaskFlowList.length}}">
     <form-id>
       <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" wx:if="{{showCom}}" wx:for="{{currentCategoryTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />

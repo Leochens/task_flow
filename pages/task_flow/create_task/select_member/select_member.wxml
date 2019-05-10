@@ -1,5 +1,9 @@
 <!-- pages/task_flow/create_task/select_member/select_member.wxml -->
-<nav-bar title="选择任务人"></nav-bar>
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">选择任务人</view>
+</nav-bar>
 <view class="members">
     <member-item wx:for="{{members}}" wx:key data-uid="{{item.id}}" avatarUrl="{{item.avatar_url}}" nickName="{{item.nickName}}" isSelected="{{item.is_selected}}" bind:tap="selectMember" />
     <view wx:if="{{!members.length}}">无剩余任务人可选</view>

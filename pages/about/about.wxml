@@ -1,2 +1,6 @@
 <!--pages/about/about.wxml-->
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">关于我们</view>
+</nav-bar>
 <text>pages/about/about.wxml</text>

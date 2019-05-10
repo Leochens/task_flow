@@ -1,4 +1,5 @@
 <!--pages/auth/auth.wxml-->
+
 <view class="icon-text">
     <view>
       <image class="app-icon" src="/assets/imgs/app-icon.png" />

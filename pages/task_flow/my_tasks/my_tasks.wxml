@@ -1,5 +1,9 @@
 <!-- pages/task_flow/my_tasks/my_tasks.wxml -->
-<nav-bar title="我的任务" />
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">我的任务</view>
+</nav-bar>
 <view class="wrap">
     <view class="title-wrap">
         <view class="block"></view>

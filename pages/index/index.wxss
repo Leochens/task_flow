@@ -67,7 +67,7 @@
   margin-top: 30rpx;
   overflow: auto;
   font-size: 20rpx;
-  padding: 10rpx;
+  /* padding: 10rpx; */
   position: fixed;
 }
 
@@ -252,4 +252,30 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.UCenter-bg {
+  /* background-image: url(https://image.weilanwl.com/color2.0/index.jpg); */
+  background-size: cover;
+  /* height: 550rpx; */
+  display: flex;
+  justify-content: center;
+  padding-top: 40rpx;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.UCenter-bg .gif-wave{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  /* z-index: 99; */
+  mix-blend-mode: screen;  
+  height: 100rpx;   
 }

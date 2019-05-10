@@ -1,5 +1,9 @@
 <!-- pages/calendar/calendar.wxml -->
-<nav-bar title="任务日历"></nav-bar>
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">任务日历</view>
+</nav-bar>
 <view class="wrap">
     <view class="top" style="max-height:{{Height - 350}}px">
         <view class="text" wx:if="{{todayTasks.length}}">

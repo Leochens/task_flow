@@ -1,5 +1,9 @@
 <!-- pages/search/search.wxml -->
-<nav-bar title="全局搜索"></nav-bar>
+
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">全局搜索</view>
+</nav-bar>
 <search-bar bind:onSearch='onSearch'></search-bar>
 <view class="wrap" wx:if="{{task_flows.length}}">
     <view class="text">任务流</view>

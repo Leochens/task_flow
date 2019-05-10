@@ -1,12 +1,16 @@
 <!-- pages/task_flow/task_flow.wxml -->
 <wxs module="dateTimeSplit" src="../wxs/dateTimeSplit.wxs"></wxs>
 <category-selector isActive="{{cateSelectorIsActive}}" curCate="{{category}}" bind:onSelect="handelSelectCate" bind:onCancel="handelCancelSelectCate" />
-<nav-bar title="任务流详情"></nav-bar>
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">任务流详情</view>
+</nav-bar>
+
 <view class='wrap'>
   <view class='task-flow-info'>
     <view class="task-flow-name">
       {{tf_name}}
-      <text wx:if="{{editable}}" class="icon-edit text-main"  bind:tap="editInfo"></text>
+      <text wx:if="{{editable}}" class="icon-edit text-main" bind:tap="editInfo"></text>
     </view>
     <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
   </view>
@@ -23,13 +27,11 @@
           <view class="border"></view>
           <view class="task-info">
             <view class="deadline-time" style="margin-left:0">
-              <text class="text-bold">任务流截止时间:</text>
-              {{end_time}}
+              <text class="text-bold">任务流截止时间:</text> {{end_time}}
             </view>
           </view>
           <view class="task-describe">
-            <text class="text-bold">负责人:</text>
-            {{leader.nick_name}}
+            <text class="text-bold">负责人:</text> {{leader.nick_name}}
           </view>
           <view class="task-describe">
             <text class="text-bold">分类:</text>
@@ -39,15 +41,13 @@
             </view>
           </view>
           <view class="task-describe">
-            <text class="text-bold">简介:</text>
-            {{tf_describe}}
+            <text class="text-bold">简介:</text> {{tf_describe}}
           </view>
           <view class="task-describe" hidden="{{tasks.length}}">
             <text class="text-bold">提示:</text>
             <view>
               您还没有创建子任务,可以点击下方的
-              <text class="text-info text-bold">加子任务</text>
-              来添加一个子任务
+              <text class="text-info text-bold">加子任务</text> 来添加一个子任务
             </view>
           </view>
         </view>
@@ -69,8 +69,7 @@
             <view class="title-wrap">
               <view class="task-name">{{item.t_name}}</view>
               <view class="task-member-count">
-                <image src="../../assets/imgs/task_flow/member.svg" />
-                {{item.members.length}}
+                <image src="../../assets/imgs/task_flow/member.svg" /> {{item.members.length}}
               </view>
             </view>
             <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed && item.is_completed != 2 ?'_ok':''}}.svg" />
