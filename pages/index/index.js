@@ -321,7 +321,6 @@ const page = {
       curOperation: MENU.NONE,
       curOperationText: '',
       filter:false,
-      filterTaskFlowList: [],
       filterItems: [
         {
           which: CONTINUE,

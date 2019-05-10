@@ -1,4 +1,4 @@
-<template is="notification" />
+
 <view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
   <view class=" cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
