@@ -12,7 +12,16 @@ const MENU = {
 const COMPLETE = '已完成';
 const CONTINUE = '进行中';
 // const RECENT = '近7天截止';
-
+const initFilterItems = [
+  {
+    which: CONTINUE,
+    active: false
+  },
+  {
+    which: COMPLETE,
+    active: false
+  }
+];
 import {
   fetchUsers,
   fetchTasks,
@@ -54,15 +63,7 @@ const page = {
     curOperationText: '',
     isPinTop: true,
     filter: false, // 是否进入筛选模式
-    filterItems: [
-      {
-        which: CONTINUE,
-        active: false
-      },
-      {
-        which: COMPLETE,
-        active: false
-      }],
+    filterItems: initFilterItems,
     isPinTaskFlowFold: false, // 是否折叠置顶的
     isTaskFlowFold: false // 是否折叠其他的
   },
@@ -72,15 +73,7 @@ const page = {
     this.setData({
       filter: !this.data.filter,
       filterTaskFlowList: [],
-      filterItems: [
-        {
-          which: CONTINUE,
-          active: false
-        },
-        {
-          which: COMPLETE,
-          active: false
-        }]
+      filterItems: initFilterItems
     })
   },
   toggleFoldPinTaskFlow: function () {
@@ -320,16 +313,8 @@ const page = {
       tfCardType: 'default',
       curOperation: MENU.NONE,
       curOperationText: '',
-      filter:false,
-      filterItems: [
-        {
-          which: CONTINUE,
-          active: false
-        },
-        {
-          which: COMPLETE,
-          active: false
-        }]
+      filter: false,
+      filterItems: initFilterItems
     })
   },
   onPullDownRefresh: function () {

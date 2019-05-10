@@ -1,7 +1,6 @@
 /* pages/me/me.wxss */
 .bgc{
     height: 10vh;
-
 }
 
 .profile-card{

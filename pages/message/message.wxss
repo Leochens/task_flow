@@ -60,3 +60,6 @@
     margin-top: 50rpx;
     
 }
+.bgc{
+    height: 10vh;
+}

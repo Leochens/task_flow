@@ -1,7 +1,11 @@
 <!-- pages/message/message.wxml -->
-
-<view class="cu-btn bg-main round margin-top-xl margin-left sm" bind:tap="clearMsg">清空消息 </view>
-
+<view class="UCenter-bg bgc bg-main">
+  <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
+</view>
+<view class="cu-capsule margin-top-xl margin-left margin-bottom sm round">
+  <view class="cu-tag bg-main" bind:tap="clearMsg">清空消息</view>
+  <view class="cu-tag line-main">{{messages.length}}</view>
+</view>
 <view wx:if="{{messages.length}}" class="cu-timeline">
   <view class="cu-item" wx:for="{{messages}}" wx:key>
     <view class="content {{item.is_read?'':'bg-white'}}">
@@ -31,6 +35,4 @@
     </view>
   </view>
 </view>
-<view wx:else class="margin-top-xl text text-bold text-center">
-  暂时还没有新消息
-</view>
+<view wx:else class="margin-top-xl text text-bold text-center">暂时还没有新消息</view>
