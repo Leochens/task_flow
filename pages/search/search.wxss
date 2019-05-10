@@ -14,7 +14,7 @@
 .task-item{
     border-radius: 16rpx;
     font-size: 24rpx;
-    border: 1rpx solid #ddd;
+    border: 1rpx solid #eee;
     padding: 8rpx;
     color: #666;
     margin: 20rpx 0;

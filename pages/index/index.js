@@ -9,6 +9,10 @@ const MENU = {
   COMPLETED: "2",
   DELETE: "3"
 }
+const COMPLETE = '已完成';
+const CONTINUE = '进行中';
+// const RECENT = '近7天截止';
+
 import {
   fetchUsers,
   fetchTasks,
@@ -48,22 +52,80 @@ const page = {
     hasUserInfo: false,
     curOperation: MENU.NONE,
     curOperationText: '',
+
+    filter: false, // 是否进入筛选模式
+    filterItems: [
+      {
+        which: CONTINUE,
+        active: false
+      },
+      {
+        which: COMPLETE,
+        active: false
+      }],
+    isPinTaskFlowFold: false, // 是否折叠置顶的
+    isTaskFlowFold: false // 是否折叠其他的
   },
 
+  toggleFilter: function () {
+
+    this.setData({
+      filter: !this.data.filter,
+      filterTaskFlowList: [],
+      filterItems: [
+        {
+          which: CONTINUE,
+          active: false
+        },
+        {
+          which: COMPLETE,
+          active: false
+        }]
+    })
+  },
+  toggleFoldPinTaskFlow: function () {
+    this.setData({
+      isPinTaskFlowFold: !this.data.isPinTaskFlowFold
+    })
+  },
+  toggleFoldTaskFlow: function () {
+    this.setData({
+      isTaskFlowFold: !this.data.isTaskFlowFold
+    })
+  },
+  onFilter: function (e) {
+    console.log(e);
+    const filterItemIndex = e.currentTarget.dataset.id;
+    console.log(filterItemIndex)
+    const filterItems = this.data.filterItems.slice();
+
+    filterItems[filterItemIndex].active = !filterItems[filterItemIndex].active;
+    // 开始筛选
+    const filterContinueTaskFlows = filterItems[0].active;
+    const filterCompleteTaskFlows = filterItems[1].active;
+    const taskFlowList = this.data.taskFlowList.slice();
+    const pinTopTaskFlowList = this.data.pinTopTaskFlowList.slice();
+
+    // 因为所有任务流和置顶任务流是分开的 但是筛选是在一起筛选的 所以此处要合并一下
+    const filterTaskFlowList = pinTopTaskFlowList.concat(taskFlowList).filter(tf => { 
+      if (filterCompleteTaskFlows && filterContinueTaskFlows) return true;
+      if (filterContinueTaskFlows) return !tf.is_completed;
+      if (filterCompleteTaskFlows) return tf.is_completed;
+      return true;
+    })
+    this.setData({
+      filterItems,
+      filterTaskFlowList
+    })
+
+  },
   menuTabSelect(e) {
     const which = e.currentTarget.dataset.id;
     let tfCardType = 'default';
     switch (which) {
       case MENU.COMPLETED: // 查看已完成的任务流
         {
-          const filterTaskFlowList = this.data.taskFlowList.filter(item => item.is_completed);
 
-          this.setData({
-            curOperation: MENU.COMPLETED,
-            curOperationText: "已完成任务流数: " + filterTaskFlowList.length,
-            filterTaskFlowList
-          });
-          break;
         }
       case MENU.DELETE: {
         tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
@@ -82,6 +144,7 @@ const page = {
       tfCardType
     })
   },
+
   backToMenu: function () {
     this.setData({
       curOperation: MENU.NONE,
@@ -295,8 +358,10 @@ const mapStateToData = (state, options) => {
   // 组装一个完整的tf列表
   const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
   const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
-  const taskFlowList = _taskFlowList.map(wrapTaskFlow);
   const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
+  const pinIds = pinTopTaskFlowList.map(ptf => ptf.id);
+  const allTaskFlowList = _taskFlowList.map(wrapTaskFlow);
+  const taskFlowList = allTaskFlowList.filter(tf => !pinIds.includes(tf.id)); // 筛选出不是置顶的tf
   const categories = getCategory(taskFlowList);
 
   app.globalData.categories = categories.slice(1, categories.length); // 将分类存到全局变量中

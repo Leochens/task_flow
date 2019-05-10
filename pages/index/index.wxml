@@ -65,7 +65,12 @@
       <view class="cu-bar bg-white">
         <view class="action">
           <view class="cu-tag line-main">
-            总数:{{filterTaskFlowList.length?filterTaskFlowList.length:taskFlowList.length}}
+            总数:{{filterTaskFlowList.length?filterTaskFlowList.length:taskFlowList.length+pinTopTaskFlowList.length}}
+          </view>
+        </view>
+        <view style="display:flex" wx:if="{{filter}}">
+          <view class="cu-tag line-{{item.active?'orange':'grey'}}" wx:for="{{filterItems}}" wx:key data-id="{{index}}" bind:tap="onFilter">
+            {{item.which}}
           </view>
         </view>
         <view class="action">
@@ -75,19 +80,41 @@
                 <view class="icon-search" bind:tap="toSearch"></view>
               </view>
             </view>
-            <view class="cu-tag">
+            <view class="cu-tag {{filter?'bg-main':''}}">
               <view class="cu-icon-image text-xl">
-                <view class="icon-filter" bind:tap="toFilter"></view>
+                <view class="icon-filter" bind:tap="toggleFilter"></view>
               </view>
             </view>
           </view>
         </view>
       </view>
-      <form-id>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" isPinTop="{{true}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+      <form-id wx:if="{{!filter && pinTopTaskFlowList.length}}">
+        <view class="cu-bar">
+          <view class="action">
+            <view class="icon-title text-main"></view>
+            <text class="text-grey">置顶任务流</text>
+          </view>
+          <view class="action" bind:tap="toggleFoldPinTaskFlow">
+            <view class="cu-tag bg-gray round margin-right-xs">
+              <view class="icon-{{isPinTaskFlowFold?'un':''}}fold"></view>
+            </view>
+          </view>
+        </view>
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" simplify="{{isPinTaskFlowFold}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
       </form-id>
       <form-id>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        <view wx:if="{{pinTopTaskFlowList.length}}" class="cu-bar">
+          <view class="action">
+            <view class="icon-title text-main"></view>
+            <text class="text-grey">{{filter?'筛选任务流':'所有任务流'}}</text>
+          </view>
+          <view class="action" bind:tap="toggleFoldTaskFlow">
+            <view class="cu-tag bg-gray round margin-right-xs">
+              <view class="icon-{{isTaskFlowFold?'un':''}}fold"></view>
+            </view>
+          </view>
+        </view>
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" simplify="{{isTaskFlowFold}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
       </form-id>
     </view>
     <view wx:else>

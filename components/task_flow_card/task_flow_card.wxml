@@ -1,14 +1,13 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
-<view wx:if="{{isPinTop}}" class="task-flow-card pin">
+<view wx:if="{{simplify}}" class="task-flow-card pin">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
-    <image  src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+    <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
+    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
   </view>
 </view>
 <view wx:else class="task-flow-card {{tfCardType === 'delete'?'mask':''}}">
-  <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}">
-
-  </image>
+  <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
@@ -39,9 +38,7 @@
       </view>
     </view>
     <view class="item">
-      <view class="title">
-        任务完成进度: {{paneData.taskData.complete}}/{{paneData.taskData.all}}
-      </view>
+      <view class="title">任务完成进度: {{paneData.taskData.complete}}/{{paneData.taskData.all}}</view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.taskData.percent}}%"></view>
       </view>

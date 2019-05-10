@@ -28,7 +28,7 @@ function* handleFetch(action) {
   yield put({ type: FETCH_START })
 
   let response;
-  console.log("p1")
+
 
   try {
     const auth = yield select(state => state.auth);

@@ -13,7 +13,7 @@ Component({
         })
       }
     },
-    isPinTop: {
+    simplify: {
       type: Boolean
     },
     tfCardType: {
