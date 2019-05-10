@@ -1,42 +1,47 @@
 // pages/settings/settings.js
-const initSettings = {
-  isPinTop: false,
-  intellectDatetime: false
-}
-Page({
+import {
+  connect
+} from '../../libs/wechat-weapp-redux';
+import { toggleSettingIntellectDatetime, toggleSettingPinTop } from '../../actions/settings';
+import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
+
+const page = {
 
   /**
    * 页面的初始数据
    */
-  data: initSettings,
+  data: {
+    isPinTop: false,
+    intellectDatetime: false
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const settings = wx.getStorageSync('settings') || initSettings;
-    const { isPinTop, intellectDatetime } = settings;
-    this.setData({
-      isPinTop: isPinTop || false,
-      intellectDatetime: intellectDatetime || false
-    })
+    
   },
   toggleIntellectDatetime: function (e) {
     const flag = e.detail.value;
-    const settings = wx.getStorageSync('settings') || initSettings;
-    settings.intellectDatetime = flag;
-    wx.setStorageSync('settings', settings);
-    this.setData({
-      intellectDatetime: flag
-    });
+    this.toggleSettingIntellectDatetime(flag);
   },
   togglePinTop: function (e) {
     const flag = e.detail.value;
-    const settings = wx.getStorageSync('settings') || initSettings;
-    settings.isPinTop = flag;
-    wx.setStorageSync('settings', settings);
-    this.setData({
-      isPinTop: flag
-    });
+    this.toggleSettingPinTop(flag);
   }
-})
+}
+const mapStateToData = state => {
+  const { isPinTop, intellectDatetime } = state.settings;
+  return {
+    isPinTop,
+    intellectDatetime
+  }
+}
+const mapDispatchToPage = dispatch => {
+  return {
+    toggleSettingPinTop: flag => dispatch(toggleSettingPinTop(flag)),
+    toggleSettingIntellectDatetime: flag => dispatch(toggleSettingIntellectDatetime(flag))
+  }
+}
+const _page = connect(mapStateToData, mapDispatchToPage)(page);
+Page(_page);

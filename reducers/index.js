@@ -7,6 +7,7 @@ import currentTaskMemberStatus from './currentTaskMemberStatus';
 import pinTopList from './pinTopList';
 import reviews from './reviews';
 import search from './search';
+import settings from './settings';
 export default () => {
   const reducers = combineReducers({
     entities,
@@ -16,7 +17,8 @@ export default () => {
     currentTaskMemberStatus,
     pinTopList,
     reviews,
-    search
+    search,
+    settings
   });
 
   return reducers;

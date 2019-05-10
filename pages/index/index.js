@@ -52,7 +52,7 @@ const page = {
     hasUserInfo: false,
     curOperation: MENU.NONE,
     curOperationText: '',
-
+    isPinTop: true,
     filter: false, // 是否进入筛选模式
     filterItems: [
       {
@@ -107,7 +107,7 @@ const page = {
     const pinTopTaskFlowList = this.data.pinTopTaskFlowList.slice();
 
     // 因为所有任务流和置顶任务流是分开的 但是筛选是在一起筛选的 所以此处要合并一下
-    const filterTaskFlowList = pinTopTaskFlowList.concat(taskFlowList).filter(tf => { 
+    const filterTaskFlowList = pinTopTaskFlowList.concat(taskFlowList).filter(tf => {
       if (filterCompleteTaskFlows && filterContinueTaskFlows) return true;
       if (filterContinueTaskFlows) return !tf.is_completed;
       if (filterCompleteTaskFlows) return tf.is_completed;
@@ -123,10 +123,6 @@ const page = {
     const which = e.currentTarget.dataset.id;
     let tfCardType = 'default';
     switch (which) {
-      case MENU.COMPLETED: // 查看已完成的任务流
-        {
-
-        }
       case MENU.DELETE: {
         tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
         this.setData({
@@ -207,11 +203,11 @@ const page = {
   },
   pinTopTf: function (e) {
     const tf_id = e.currentTarget.dataset.tfid;
-    this.pinTopTaskFlow(tf_id);
+    this.data.isPinTop && this.pinTopTaskFlow(tf_id);
   },
   cancelPinTopTf: function (e) {
     const tf_id = e.currentTarget.dataset.tfid;
-    this.cancelPinTopTaskFlow(tf_id);
+    this.data.isPinTop && this.cancelPinTopTaskFlow(tf_id);
   },
 
   classTabSelect(e) { // 按照分类筛选tf
@@ -310,7 +306,9 @@ const page = {
     if (SID) {
       const u_id = wx.getStorageSync('u_id');
       this.fetchTaskFlows(u_id, this.setTfIds);
-      this.getPinTopTaskFlow();
+      const settings = wx.getStorageSync('settings') || {};
+      const isPinTop = settings.isPinTop;
+      isPinTop && this.getPinTopTaskFlow();
     }
     console.log("globalData=>", app.globalData);
   },
@@ -322,6 +320,17 @@ const page = {
       tfCardType: 'default',
       curOperation: MENU.NONE,
       curOperationText: '',
+      filter:false,
+      filterTaskFlowList: [],
+      filterItems: [
+        {
+          which: CONTINUE,
+          active: false
+        },
+        {
+          which: COMPLETE,
+          active: false
+        }]
     })
   },
   onPullDownRefresh: function () {
@@ -354,24 +363,35 @@ const mapStateToData = (state, options) => {
     _item.members = members.map(mid => entities.members[mid]);
     return _item;
   }
-  const pinTopIds = ids.task_flows.filter(inPinTopList);
+  const settings = { ...state.settings };
+  const isPinTop = settings.isPinTop;
+
   // 组装一个完整的tf列表
   const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
-  const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
-  const pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
-  const pinIds = pinTopTaskFlowList.map(ptf => ptf.id);
+
   const allTaskFlowList = _taskFlowList.map(wrapTaskFlow);
-  const taskFlowList = allTaskFlowList.filter(tf => !pinIds.includes(tf.id)); // 筛选出不是置顶的tf
+
+  let taskFlowList = [];
+  let pinTopTaskFlowList = [];
+  if (isPinTop) {
+    const pinTopIds = ids.task_flows.filter(inPinTopList);
+    const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
+    pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
+    const pinIds = pinTopTaskFlowList.map(ptf => ptf.id);
+    taskFlowList = allTaskFlowList.filter(tf => !pinIds.includes(tf.id)); // 筛选出不是置顶的tf
+  } else {
+    taskFlowList = allTaskFlowList;
+  }
+
   const categories = getCategory(taskFlowList);
-
   app.globalData.categories = categories.slice(1, categories.length); // 将分类存到全局变量中
-
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",
     auth: state.auth.authenticated,
     pinTopTaskFlowList,
-    categories
+    categories,
+    isPinTop
   };
 }
 const mapDispatchToPage = dispatch => ({
