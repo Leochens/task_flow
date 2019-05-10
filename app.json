@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/settings/settings",
     "pages/calendar/calendar",
     "pages/invite/invite",
     "pages/task/task",
@@ -17,11 +18,12 @@
     "pages/auth/auth",
     "pages/task_flow/task_flow_data/task_flow_data",
     "pages/message/message",
-    "pages/settings/settings",
     "pages/about/about",
     "pages/data/data",
     "pages/review/review",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/feedback/feedback",
+    "pages/help/help"
   ],
   "tabBar": {
     "color": "#666",
@@ -55,8 +57,8 @@
     "navigationStyle": "custom",
     "navigationBarTextStyle": "black"
   },
-  "usingComponents":{
-    "nav-bar":"./common/nav_bar/nav_bar"
+  "usingComponents": {
+    "nav-bar": "./common/nav_bar/nav_bar"
   },
   "sitemapLocation": "sitemap.json"
 }

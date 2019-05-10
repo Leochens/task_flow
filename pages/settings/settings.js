@@ -1,66 +1,42 @@
 // pages/settings/settings.js
+const initSettings = {
+  isPinTop: false,
+  intellectDatetime: false
+}
 Page({
 
   /**
    * 页面的初始数据
    */
-  data: {
-
-  },
+  data: initSettings,
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const settings = wx.getStorageSync('settings') || initSettings;
+    const { isPinTop, intellectDatetime } = settings;
+    this.setData({
+      isPinTop: isPinTop || false,
+      intellectDatetime: intellectDatetime || false
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toggleIntellectDatetime: function (e) {
+    const flag = e.detail.value;
+    const settings = wx.getStorageSync('settings') || initSettings;
+    settings.intellectDatetime = flag;
+    wx.setStorageSync('settings', settings);
+    this.setData({
+      intellectDatetime: flag
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  togglePinTop: function (e) {
+    const flag = e.detail.value;
+    const settings = wx.getStorageSync('settings') || initSettings;
+    settings.isPinTop = flag;
+    wx.setStorageSync('settings', settings);
+    this.setData({
+      isPinTop: flag
+    });
   }
 })

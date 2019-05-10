@@ -1,6 +1,43 @@
-<!--pages/settings/settings.wxml-->
+<!-- pages/settings/settings.wxml -->
 <nav-bar isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">设置</view>
 </nav-bar>
-<view class="wrap">功能待开发</view>
+<view class="cu-list margin-top menu sm-border">
+  <view class="cu-item">
+    <view class="content padding-tb-sm">
+      <view class="">
+        <text class="icon-top"></text>
+        置顶任务流
+      </view>
+      <view class="text-sm text-grey">开启后置顶任务流将在所有任务流上方显示</view>
+    </view>
+    <view class="action">
+      <switch class="blue sm" checked="{{isPinTop}}" bindchange="togglePinTop"></switch>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content padding-tb-sm">
+      <view class="">
+        <text class="icon-time"></text>
+        智能显示日期
+      </view>
+      <view class="text-sm text-grey">开启后除起止日期时间外的日期时间将智能化显示</view>
+    </view>
+    <view class="action">
+      <switch class="blue sm" checked="{{intellectDatetime}}" bindchange="toggleIntellectDatetime"></switch>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content padding-tb-sm">
+      <view class="">
+        <text class="icon-delete"></text>
+        清空本地所有数据
+      </view>
+      <view class="text-sm text-grey">清空本地所有数据如登录信息,消息等</view>
+    </view>
+    <view class="action">
+      <button class="cu-btn round bg-main">清空</button>
+    </view>
+  </view>
+</view>

@@ -2,10 +2,7 @@
 <!-- <nav-bar bg-color="bg-main">
 </nav-bar> -->
 <view class="UCenter-bg bgc bg-main">
-
-<image class=" gif-wave" mode="scaleToFill" src="https://image.weilanwl.com/gif/wave.gif"></image>
-
-
+    <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
 </view>
 <view class="profile-card">
     <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132"></image>
@@ -23,7 +20,6 @@
         <view>完成:{{finishedCnt}}</view>
     </view>
 </view>
-
 <view class=" cu-list menu card-menu margin-top-xl  margin-bottom-xl shadow-lg radius ">
     <view class="cu-item arrow" bind:tap="toSettings">
         <view class="content center">
@@ -53,6 +49,18 @@
         <view class="content center">
             <image class="text-sm" src="../../assets/imgs/me/review.svg"></image>
             <view class="text-grey">审核</view>
+        </view>
+    </view>
+    <view class="cu-item arrow" bind:tap="">
+        <view class="content center">
+            <view class="icon-newshotfill text-xl text-black"></view>
+            <view class="text-grey">问题反馈</view>
+        </view>
+    </view>
+    <view class="cu-item arrow" bind:tap="">
+        <view class="content center">
+            <view class="icon-question text-xl text-black"></view>
+            <view class="text-grey">帮助</view>
         </view>
     </view>
 </view>

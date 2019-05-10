@@ -55,7 +55,7 @@
 </view>
 <view class='task-flows' style='margin-top:{{CustomBar}}px;'>
   <view class="UCenter-bg bg-main">
-    <image class="gif-wave" mode="scaleToFill" src="https://image.weilanwl.com/gif/wave.gif"></image>
+    <image class="gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
   </view>
   <view wx:if="{{currentCategoryTaskFlowList.length}}">
     <form-id>
