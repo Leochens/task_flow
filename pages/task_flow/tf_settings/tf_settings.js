@@ -15,7 +15,7 @@ const page = {
     console.log(options);
     const tf_id = options.tf_id;
     const is_leader = options.is_leader === 'true' ? true : false;
-    const invite = options.invite;
+    const invite = options.invite === 'true' ? true : false;
     this.setData({
       tf_id,
       is_leader,

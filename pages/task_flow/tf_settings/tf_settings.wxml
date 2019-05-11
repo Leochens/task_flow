@@ -29,7 +29,7 @@
       <text class="text-black">允许成员可以邀请成员</text>
     </view>
     <view class="action">
-      <switch class="blue sm" checked="{{invite===1}}" bindchange="toggleInviteStatus" />
+      <switch class="blue sm" checked="{{invite}}" bindchange="toggleInviteStatus" />
     </view>
   </view>
   <view class="cu-bar btn-group margin-top" wx:if="{{is_leader}}">
