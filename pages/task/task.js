@@ -24,7 +24,7 @@ const page = {
     const t_id = this.data.task.id;
     const that = this;
     wx.chooseImage({
-      count: 3,  //最多可以选择的图片总数  
+      count: 1,  //最多可以选择的图片总数  
       sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有  
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
       success: function (res) {
