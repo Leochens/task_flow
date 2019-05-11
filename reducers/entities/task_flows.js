@@ -93,7 +93,7 @@ const task_flows = (state = st_task_flows, action) => {
           ...state,
           [tf_id]: {
             ...state[tf_id],
-            invite: status
+            invite: Number(status)
           }
         }
         return newState;

@@ -3,7 +3,7 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import { addComment, addImage, fetchSingleTask } from '../../actions/index';
-import { formatTime } from '../../utils/util';
+import { formatTime, dynamicDate } from '../../utils/util';
 import APP from '../../appConfig';
 const app = getApp();
 const page = {
@@ -91,11 +91,13 @@ const page = {
   extendComment: function (cmt) {
     const { u_id } = cmt;
     const members = this.data.members;
+    const intellectDatetime = this.data.intellectDatetime;
     const author = members[u_id];
     return {
       ...cmt,
       nick_name: author.nick_name,
-      avatar_url: author.avatar_url
+      avatar_url: author.avatar_url,
+      create_time: intellectDatetime ? dynamicDate(cmt.create_time) : cmt.create_time
     }
   },
   extendImage: function (img) {
@@ -196,7 +198,7 @@ const page = {
 }
 
 const mapStateToData = state => {
-
+  const intellectDatetime = state.settings.intellectDatetime;
   const { members, tasks, images, comments, task_flows } = state.entities;
   const _tasks = { ...tasks };
   const _members = { ...members };
@@ -204,7 +206,6 @@ const mapStateToData = state => {
   const _comments = { ...comments };
   for (let t_id in _tasks) {
     const t = JSON.parse(JSON.stringify(tasks[t_id]));
-
     const { members: _m, images: _i, comments: _c } = t;
     const m = [..._m || []];
     const i = [..._i || []];
@@ -222,7 +223,8 @@ const mapStateToData = state => {
   return {
     members: state.entities.members,
     tasks: _tasks,
-    isLeader
+    isLeader,
+    intellectDatetime
   };
 }
 const mapDispatchToPage = dispatch => ({
