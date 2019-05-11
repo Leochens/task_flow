@@ -54,9 +54,7 @@ const task_flows = (state = st_task_flows, action) => {
           console.log("fetch Task结束")
           return newState;
         }
-        if (meta.resource === 'all_tasks') {
 
-        }
         return state;
       }
     case CRUD_UPDATE_SUCCESS: {
@@ -87,7 +85,20 @@ const task_flows = (state = st_task_flows, action) => {
         }
         wx.setStorageSync('st_task_flows', newState);
         return newState;
-      } else return state;
+      }
+      else if (meta.resource === 'invite') { // 更新tf的成员邀请权限
+        const { tf_id, status } = requestPayload.data;
+
+        const newState = {
+          ...state,
+          [tf_id]: {
+            ...state[tf_id],
+            invite: status
+          }
+        }
+        return newState;
+      }
+      else return state;
 
     }
 

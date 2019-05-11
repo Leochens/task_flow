@@ -18,7 +18,5 @@ export const toggleSettingIntellectDatetime = function (flag) {
     }
 }
 
-export const updateNickName = function (u_id, nickName) {
 
-    return crudUpdate('userinfo', u_id, { nickName }, `profile/${u_id}/nick_name`);
-}   
+

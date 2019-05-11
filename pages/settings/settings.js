@@ -4,8 +4,7 @@ import {
 } from '../../libs/wechat-weapp-redux';
 import {
   toggleSettingIntellectDatetime,
-  toggleSettingPinTop,
-  updateNickName
+  toggleSettingPinTop
 } from '../../actions/settings';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
 import APP from '../../appConfig';
@@ -48,9 +47,15 @@ const page = {
         const userInfo = wx.getStorageSync('userInfo');
         userInfo.nickName = nickName;
         wx.setStorageSync('userInfo', userInfo);
+        wx.showToast({
+          title:"修改成功"
+        });
       },
       fail: function (err) {
         console.log(err);
+        wx.showToast({
+          title:"修改失败"
+        });
       }
     })
 
@@ -78,7 +83,7 @@ const mapDispatchToPage = dispatch => {
   return {
     toggleSettingPinTop: flag => dispatch(toggleSettingPinTop(flag)),
     toggleSettingIntellectDatetime: flag => dispatch(toggleSettingIntellectDatetime(flag)),
-    updateNickName: nickName => dispatch(updateNickName(nickName))
+
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

@@ -28,7 +28,8 @@ const page = {
     is_leader: false,
     showModal: false,
     editable: false,
-    cateSelectorIsActive: false
+    cateSelectorIsActive: false,
+    invite: 1
   },
 
   editInfo: function () {
@@ -53,9 +54,9 @@ const page = {
     const _task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     const task_flow = { ..._task_flow };
     console.log(task_flow);
-    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id } = task_flow;
+    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,invite } = task_flow;
     this.setData({
-      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,
+      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,invite,
       leader: members.filter(mem => mem.id === leader_id)[0],
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
       editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
@@ -141,7 +142,7 @@ const page = {
   },
   toTaskFlowSettings: function () {
     wx.navigateTo({
-      url: './tf_settings/tf_settings?tf_id=' + this.data.id + "&is_leader=" + this.data.is_leader
+      url: './tf_settings/tf_settings?tf_id=' + this.data.id + "&is_leader=" + this.data.is_leader+"&invite="+this.data.invite
     })
   },
 
