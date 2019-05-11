@@ -13,46 +13,54 @@ const page = {
   data: {
     taskFlowsCnt: 0,
     myTaskFlowsCnt: 0,
-    finishedCnt: 0
+    finishedCnt: 0,
+    userInfo: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
-
-  toSettings: function () {
-
-    wx.navigateTo({
-      url:'../settings/settings'
+  onShow: function() {
+    const userInfo = wx.getStorageSync('userInfo') || {};
+    this.setData({
+      userInfo
     })
   },
-  toAbout: function () {
+  toSettings: function() {
+
+    wx.navigateTo({
+      url: '../settings/settings'
+    })
+  },
+  toAbout: function() {
     wx.navigateTo({
       url: '../about/about'
     })
   },
-  toData: function () {
+  toData: function() {
     wx.navigateTo({
       url: '../data/data'
     })
   },
-  toCalendar: function () {
+  toCalendar: function() {
     wx.navigateTo({
       url: '../calendar/calendar'
     })
   },
-  toReview: function () {
+  toReview: function() {
     wx.navigateTo({
       url: '../review/review'
     })
   }
 };
 const mapStateToData = state => {
-  const ids = { ...state.ids };
-  const entities = { ...state.entities };
+  const ids = { ...state.ids
+  };
+  const entities = { ...state.entities
+  };
   const u_id = wx.getStorageSync('u_id');
   const taskFlowsCnt = ids.task_flows.length;
   const tfs = ids.task_flows.map(tf_id => entities.task_flows[tf_id]);

@@ -2,65 +2,64 @@
 <!-- <nav-bar bg-color="bg-main">
 </nav-bar> -->
 <view class="UCenter-bg bgc bg-main">
-    <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
+  <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
 </view>
 <view class="profile-card">
-    <image class="avatar" src="https://wx.qlogo.cn/mmopen/vi_32/nqMXuic5mkp7E1sqceEicZBG6UP2gSf6OlCVObTjUOao7UjuwGDuZIBdk7Derlk56ia743IzGFheNzwKOlVSqGquA/132"></image>
-    <view class="nick-name">RyanHardy</view>
-    <view class="others">
-        <view class="location">
-            <image src="../../assets/imgs/me/location.svg" class="location-icon" />
-            河北 保定
-        </view>
-        <view class="gender">男</view>
+  <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+  <view class="nick-name">{{userInfo.nickName}}</view>
+  <view class="others">
+    <view class="location">
+      <image src="../../assets/imgs/me/location.svg" class="location-icon" /> {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
     </view>
-    <view class="tf-cnts">
-        <view>全部:{{taskFlowsCnt}}</view>
-        <view>负责:{{myTaskFlowsCnt}}</view>
-        <view>完成:{{finishedCnt}}</view>
-    </view>
+    <view class="gender">{{userInfo.gender?'男':'女'}}</view>
+  </view>
+  <view class="tf-cnts">
+    <view>全部:{{taskFlowsCnt}}</view>
+    <view>负责:{{myTaskFlowsCnt}}</view>
+    <view>完成:{{finishedCnt}}</view>
+  </view>
 </view>
 <view class=" cu-list menu card-menu margin-top-xl  margin-bottom-xl shadow-lg radius ">
-    <view class="cu-item arrow" bind:tap="toSettings">
-        <view class="content center">
-            <image class="text-sm" src="../../assets/imgs/me/setting.svg"></image>
-            <text class="text-grey">设置</text>
-        </view>
+  <view class="cu-item arrow" bind:tap="toSettings">
+    <view class="content center">
+      <image class="text-sm" src="../../assets/imgs/me/setting.svg"></image>
+      <text class="text-grey">设置</text>
     </view>
-    <view class="cu-item arrow" bind:tap="toCalendar">
-        <view class="content center">
-            <image class="text-sm" src="../../assets/imgs/me/calendar.svg"></image>
-            <view class="text-grey">日历</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="toCalendar">
+    <view class="content center">
+      <image class="text-sm" src="../../assets/imgs/me/calendar.svg"></image>
+      <view class="text-grey">日历</view>
     </view>
-    <view class="cu-item arrow" bind:tap="toAbout">
-        <view class="content center">
-            <image class="text-sm" src="../../assets/imgs/me/about.svg"></image>
-            <view class="text-grey">关于</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="toAbout">
+    <view class="content center">
+      <image class="text-sm" src="../../assets/imgs/me/about.svg"></image>
+      <view class="text-grey">关于</view>
     </view>
-    <view class="cu-item arrow" bind:tap="toData">
-        <view class="content center">
-            <image class="text-sm" src="../../assets/imgs/me/data.svg"></image>
-            <view class="text-grey">数据</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="toData">
+    <view class="content center">
+      <image class="text-sm" src="../../assets/imgs/me/data.svg"></image>
+      <view class="text-grey">数据</view>
     </view>
-    <view class="cu-item arrow" bind:tap="toReview">
-        <view class="content center">
-            <image class="text-sm" src="../../assets/imgs/me/review.svg"></image>
-            <view class="text-grey">审核</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="toReview">
+    <view class="content center">
+      <image class="text-sm" src="../../assets/imgs/me/review.svg"></image>
+      <view class="text-grey">审核</view>
     </view>
-    <view class="cu-item arrow" bind:tap="">
-        <view class="content center">
-            <view class="icon-newshotfill text-xl text-black"></view>
-            <view class="text-grey">问题反馈</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="">
+    <view class="content center">
+      <view class="icon-newshotfill text-xl text-black"></view>
+      <view class="text-grey">问题反馈</view>
     </view>
-    <view class="cu-item arrow" bind:tap="">
-        <view class="content center">
-            <view class="icon-question text-xl text-black"></view>
-            <view class="text-grey">帮助</view>
-        </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="">
+    <view class="content center">
+      <view class="icon-question text-xl text-black"></view>
+      <view class="text-grey">帮助</view>
     </view>
+  </view>
 </view>

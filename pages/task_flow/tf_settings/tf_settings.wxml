@@ -4,11 +4,6 @@
   <view slot="content">任务流设置</view>
 </nav-bar>
 <view class="cu-list menu margin-top sm-border">
-  <view class="cu-form-group">
-    <view class="title text-black">我的昵称</view>
-    <input placeholder="请输入昵称" value="" />
-    <button class="cu-btn bg-main">编辑</button>
-  </view>
   <view class="cu-item arrow " wx:if="{{is_leader}}">
     <view class="content">
       <text class="text-black">更换负责人</text>
@@ -17,6 +12,11 @@
   <view class="cu-item arrow ">
     <view class="content">
       <text class="text-black">任务流日志</text>
+    </view>
+  </view>
+  <view class="cu-item arrow ">
+    <view class="content">
+      <text class="text-black">任务流二维码</text>
     </view>
   </view>
   <view class="cu-item arrow">
@@ -38,5 +38,4 @@
   <view class="cu-bar btn-group margin-top" wx:else>
     <view class="cu-btn bg-red round basis-xl" hover-class="button-hover">退出任务流</view>
   </view>
-
 </view>

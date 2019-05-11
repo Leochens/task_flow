@@ -40,4 +40,11 @@
       <button class="cu-btn round bg-main">清空</button>
     </view>
   </view>
+  <form bindsubmit="changeNickName">
+    <view class="cu-form-group">
+      <view class="title text-black">我的昵称</view>
+      <input name="nickName" placeholder="请输入昵称" value="{{nickName}}" />
+      <button class="cu-btn bg-main" form-type="submit">修改</button>
+    </view>
+  </form>
 </view>
