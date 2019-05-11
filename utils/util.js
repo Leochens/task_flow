@@ -29,36 +29,32 @@ const getNowDate = () => {
 }
 
 
-const dynamicDate = date => {
-  const [d, t] = date.split(' ')
-  let res = date;
-  const _date = Date.parse(date); // 获取目标时间戳
-  const now = new Date();   // 获取当前时间戳
-  const flag = parseInt((now - _date) / day);
-  switch (flag) {
-    case 0:
-      res = '今天 ' + date;
-      break
-    case 1:
-      res = '昨天 ' + date;
-      break
-    case 2:
-      res = '前天 ' + date;
-      break
-    case -1:
-      res = '明天 ' + date;
-      break
-    case -2:
-      res = '后天 ' + date;
-      break
-    default: break;
+
+function dynamicDate(stringTime) {
+  var time1 = new Date().getTime();//当前的时间戳
+  console.log(time1);
+  var time2 = Date.parse(new Date(stringTime));//指定时间的时间戳
+  console.log(time2);
+  var time = time1 - time2;
+  var result = null;
+  if (time < 0) {
+    return stringTime;
+  } else if (time / month >= 1) {
+    result = parseInt(time / month) + "月前";
+  } else if (time / week >= 1) {
+    result = parseInt(time / week) + "周前";
+  } else if (time / day >= 1) {
+    result = parseInt(time / day) + "天前";
+  } else if (time / hour >= 1) {
+    result = parseInt(time / hour) + "小时前";
+  } else if (time / minute >= 1) {
+    result = parseInt(time / minute) + "分钟前";
+  } else {
+    result = "刚刚";
   }
-  return res;
-
+  console.log(result);
+  return result;
 }
-
-
-
 // 把对象中特定字段的的时间格式化
 const formatDateInObject = obj => {
 
@@ -114,5 +110,6 @@ module.exports = {
   compareDate3,
   formatDateInObject,
   getNowDate,
-  replaceNULL
+  replaceNULL,
+  dynamicDate
 }

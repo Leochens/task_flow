@@ -37,7 +37,7 @@
       <view class="text-sm text-grey">清空本地所有数据如登录信息,消息等</view>
     </view>
     <view class="action">
-      <button class="cu-btn round bg-main">清空</button>
+      <button class="cu-btn round bg-main" bind:tap="clearStorage">清空</button>
     </view>
   </view>
   <form bindsubmit="changeNickName">

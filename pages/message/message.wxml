@@ -29,7 +29,9 @@
         </view>
       </view>
       <view class="cu-capsule radius">
-        <view class="cu-tag line-main">{{item.create_time}}</view>
+        <view class="cu-tag line-main">
+          {{intellectDatetime?item.d_create_time:item.create_time}}
+        </view>
         <view class="cu-tag bg-main" hidden="{{!item.is_read}}">已读</view>
       </view>
     </view>

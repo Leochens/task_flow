@@ -4,7 +4,7 @@ import {
   fetchMessages,
   setMessageRead
 } from '../../actions/index';
-import { compareDate2, formatTime } from '../../utils/util';
+import { dynamicDate, formatTime } from '../../utils/util';
 const app = getApp();
 
 const page = {
@@ -63,10 +63,12 @@ const page = {
 }
 
 const mapStateToData = state => {
+  const intellectDatetime = state.settings.intellectDatetime;
+
   const m_ids = [...state.ids.messages];
   const _messages = { ...state.entities.messages };
   const messages = m_ids.map(m_id => {
-    const msg = _messages[m_id];
+    const msg = { ..._messages[m_id] };
     if (msg.tf_end_time) {
       msg.tf_end_time = formatTime(new Date(msg.tf_end_time));
     }
@@ -80,8 +82,16 @@ const mapStateToData = state => {
     return t2.create_time > t1.create_time ? 1 : -1;
   }
   messages.sort(sortby);
+
+  if (intellectDatetime) {
+    messages.forEach(m => {
+      m.d_create_time = dynamicDate(m.create_time);
+    })
+  }
+
   return {
-    messages
+    messages,
+    intellectDatetime
   }
 }
 const mapDispatchToPage = dispatch => {

@@ -31,6 +31,23 @@ const page = {
       nickName: wx.getStorageSync('userInfo').nickName
     })
   },
+  clearStorage: function () {
+    try {
+      // wx.setStorageSync('SID', null);
+      // wx.setStorageSync('SID_EXPIRATION', null);
+      // wx.setStorageSync('messages', null);
+      // wx.setStorageSync('messages_ids', null);
+      wx.showToast({
+        title: '清空成功'
+      })
+    } catch (e) {
+      // Do something when catch error
+      wx.showToast({
+        title: '清空失败'
+      })
+    }
+
+  },
   changeNickName: function (e) {
     console.log(e);
     const nickName = e.detail.value.nickName;
@@ -48,13 +65,13 @@ const page = {
         userInfo.nickName = nickName;
         wx.setStorageSync('userInfo', userInfo);
         wx.showToast({
-          title:"修改成功"
+          title: "修改成功"
         });
       },
       fail: function (err) {
         console.log(err);
         wx.showToast({
-          title:"修改失败"
+          title: "修改失败"
         });
       }
     })

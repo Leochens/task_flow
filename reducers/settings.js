@@ -29,6 +29,4 @@ const settings = (state = initSettings, action) => {
         default: return state;
     }
 }
-
-
 export default settings;
