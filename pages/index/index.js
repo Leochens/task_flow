@@ -127,7 +127,7 @@ const page = {
       default: break;
     }
     this.setData({
-      TabCur: which,
+      TabCur: -1,
       scrollLeft: (which - 1) * 60,
       isClassify: which == 1 ? true : false,
       tfCardType
