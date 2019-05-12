@@ -21,6 +21,10 @@ const task_flows = (state = st_task_flows, action) => {
   } = action;
 
   switch (type) {
+    case CRUD_CREATE_SUCCESS: {
+      if (!meta.resource === 'task_flows') return state;
+      wx.navigateBack();
+    }
     case CRUD_GET_LIST_SUCCESS:
       {
         if (!payload.entities) return state;

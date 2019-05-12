@@ -2,6 +2,7 @@
 const app = getApp();
 import {
   compareDate,
+  compareDate2,
   formatTime
 } from '../../utils/util';
 import { connect } from '../../libs/wechat-weapp-redux';
@@ -9,6 +10,9 @@ import {
   addTaskFlow,
   updateTaskFlow
 } from '../../actions/index';
+const day = 1000 * 60 * 60 * 24;
+const nextDay = new Date((Date.parse(new Date()) + day));
+
 const _page = {
 
   /**
@@ -17,7 +21,7 @@ const _page = {
   data: {
     CustomBar: app.globalData.CustomBar,
     beginDate: formatTime(new Date()),
-    endDate: formatTime(new Date()),
+    endDate: formatTime(nextDay),
     leader: wx.getStorageSync('userInfo').nickName,
     isUpdate: false,
     curCate: '默认分类',
@@ -67,10 +71,10 @@ const _page = {
       endDate
     } = this.data;
     const beginDate = e.detail;
-    if (compareDate(beginDate, endDate)) {
+    if (compareDate2(beginDate, endDate)) {
       wx.showModal({
         title: '日期选择有误',
-        content: '开始日期不能比结束日期大',
+        content: '开始日期应小于结束日期',
       });
       this.setData({
         beginDate: oldBegindate
@@ -87,10 +91,20 @@ const _page = {
       endDate: oldEndDate,
       beginDate
     } = this.data;
-    if (compareDate(beginDate, endDate)) {
+    if (compareDate2(formatTime(new Date()), endDate)) {
       wx.showModal({
         title: '日期选择有误',
-        content: '结束日期不能比开始日期小',
+        content: '结束时间应大于现在的时间',
+      })
+      this.setData({
+        endDate: oldEndDate
+      });
+      return false;
+    }
+    if (compareDate2(beginDate, endDate)) {
+      wx.showModal({
+        title: '日期选择有误',
+        content: '结束日期应大于开始日期',
       })
       this.setData({
         endDate: oldEndDate
@@ -100,13 +114,13 @@ const _page = {
     if (this.data.isUpdate) {
       const { testDate, tf_id } = this.data;
       const flag = testDate(tf_id, endDate);
-      if(!flag){
+      if (!flag) {
         wx.showModal({
           title: '日期选择有误',
-          content: "结束日期应比所有子任务的结束日期大",
+          content: "结束日期应比所有子任务的结束日期大,请修改子任务的日期后再修改",
         })
         this.setData({
-          endDate: oldEndDate
+          endDate: oldEndDate,
         })
         return false;
       }

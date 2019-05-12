@@ -5,6 +5,8 @@ import {
 } from '../../../utils/util';
 import { connect } from '../../../libs/wechat-weapp-redux';
 import { addTask, updateTask } from '../../../actions/index';
+const day = 1000 * 60 * 60 * 24;
+const nextDay = new Date((Date.parse(new Date()) + day));
 const _page = {
 
   /**
@@ -12,7 +14,7 @@ const _page = {
    */
   data: {
     beginDate: formatTime(new Date()),
-    endDate: formatTime(new Date()),
+    endDate: formatTime(nextDay),
     members: [],
     selectedMembersIds: [],
     selectedMembersNames: [],
