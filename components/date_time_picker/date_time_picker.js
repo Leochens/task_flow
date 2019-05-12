@@ -92,16 +92,16 @@ Component({
       });
     },
     changeDateTimeColumn(e) {
-      // var arr = this.data.dateTime,
-      //   dateArr = this.data.dateTimeArray;
+      var arr = this.data.dateTime,
+        dateArr = this.data.dateTimeArray;
 
-      // arr[e.detail.column] = e.detail.value;
-      // dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+      arr[e.detail.column] = e.detail.value;
+      dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
 
-      // this.setData({
-      //   dateTimeArray: dateArr,
-      //   dateTime: arr
-      // });
+      this.setData({
+        dateTimeArray: dateArr,
+        dateTime: arr
+      });
     },
     changeDateTimeColumn1(e) {
       var arr = this.data.dateTime1,

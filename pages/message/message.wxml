@@ -8,7 +8,7 @@
 </view>
 <view wx:if="{{messages.length}}" class="cu-timeline">
   <view class="cu-item" wx:for="{{messages}}" wx:key>
-    <view class="content {{item.is_read?'':'bg-white'}}">
+    <view class="content bg-{{item.is_read?'gray':'white'}}" >
       <view>
         <view class="text-main text-df">{{item.content}}</view>
         <view wx:if="{{item.t_name}}">
@@ -32,7 +32,9 @@
         <view class="cu-tag line-main">
           {{intellectDatetime?item.d_create_time:item.create_time}}
         </view>
-        <view class="cu-tag bg-main" hidden="{{!item.is_read}}">已读</view>
+        <view class="cu-tag bg-{{item.is_read?'main':'yellow text-white'}}">
+          {{item.is_read?'已读':'新'}}
+        </view>
       </view>
     </view>
   </view>
