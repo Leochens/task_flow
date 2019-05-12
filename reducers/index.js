@@ -8,7 +8,7 @@ import pinTopList from './pinTopList';
 import reviews from './reviews';
 import search from './search';
 import settings from './settings';
-import profile from './profile';
+import logs from './logs';
 export default () => {
   const reducers = combineReducers({
     entities,
@@ -20,7 +20,7 @@ export default () => {
     reviews,
     search,
     settings,
-    profile
+    logs
   });
 
   return reducers;

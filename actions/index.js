@@ -161,3 +161,8 @@ export const clearSeach = () => {
 export const toggleTaskFlowMemverInvite = (u_id, tf_id, status) => {
     return crudUpdate('invite', tf_id, { tf_id, status }, `users/${u_id}/task_flows/${tf_id}/invite`);
 }
+
+
+export const fetchLogs = (id, type, callback) => {
+    return crudGetList('logs', null, null, null, `logs/${type}/${id}`, { callback });
+}

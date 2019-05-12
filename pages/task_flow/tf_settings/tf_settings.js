@@ -26,6 +26,11 @@ const page = {
     const { tf_id, invite } = this.data;
     const u_id = app.globalData.u_id;
     this.toggleTaskFlowMemverInvite(u_id, tf_id, !invite);
+  },
+  toLogs: function () {
+    wx.navigateTo({
+      url: '../../log/log?id=' + this.data.tf_id + "&type=tf"
+    })
   }
 }
 const mapStateToData = state => {

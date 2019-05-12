@@ -9,7 +9,7 @@
       <text class="text-black">更换负责人</text>
     </view>
   </view>
-  <view class="cu-item arrow ">
+  <view class="cu-item arrow " bind:tap="toLogs">
     <view class="content">
       <text class="text-black">任务流日志</text>
     </view>
