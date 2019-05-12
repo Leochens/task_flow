@@ -6,6 +6,5 @@
     "search-bar": "/components/search_bar/search_bar"
   },
     "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true,
     "backgroundTextStyle":"dark"
 }

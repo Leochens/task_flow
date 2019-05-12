@@ -3,7 +3,7 @@ import { CRUD_GET_LIST_SUCCESS, CRUD_CREATE_SUCCESS, CRUD_CREATE, CRUD_UPDATE_SU
 import { formatDateInObject } from '../../utils/util';
 import { ADD_IMG } from '../../actions/index';
 
-const range = ['task_flows', 'tasks','all_tasks'];
+const range = ['task_flows', 'tasks', 'all_tasks'];
 const tasks = (state = {}, action) => {
     const { type, payload, requestPayload, meta } = action;
 
@@ -13,6 +13,8 @@ const tasks = (state = {}, action) => {
                 const { data: { task } } = requestPayload;
                 const { id, t_name, t_describe } = JSON.parse(task);
                 console.log("更新task成功", task);
+                wx.navigateBack();
+
                 return {
                     ...state,
                     [id]: {
@@ -50,6 +52,8 @@ const tasks = (state = {}, action) => {
                         sm.break_reason = break_reason;
                     }
                 })
+                // wx.navigateBack();
+
                 return {
                     ...state,
                     [t_id]: {

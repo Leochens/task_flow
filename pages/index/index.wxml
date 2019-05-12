@@ -25,9 +25,9 @@
               <text class="icon-apps  margin-0"></text>
             </view>
           </view>
-          <view class="action" bind:tap="toHelp" data-id="2">
+          <view class="action" bind:tap="_fetchTaskFlows" data-id="2">
             <view class='icon-cu-image text-white'>
-              <text class="icon-question margin-0"></text>
+              <text class="icon-refresh margin-0"></text>
             </view>
           </view>
           <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">

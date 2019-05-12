@@ -73,6 +73,7 @@ const task_flows = (state = st_task_flows, action) => {
           }
         }
         wx.setStorageSync('st_task_flows', newState);
+        wx.navigateBack();
         return newState;
       } else if (meta.resource === 'categories') {
         const { tf_id, category } = requestPayload.data;

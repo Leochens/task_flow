@@ -24,8 +24,15 @@ const page = {
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const u_id = wx.getStorageSync('u_id');
+    const u_id = app.globalData.u_id;
     this.fetchMessages(u_id);
+  },
+  refresh:function(){
+    const u_id = app.globalData.u_id;
+    this.fetchMessages(u_id);
+    wx.showToast({
+      title: '刷新中..',
+    })
   },
   onShow: function () {
 

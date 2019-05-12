@@ -2,13 +2,19 @@
 <view class="UCenter-bg bgc bg-main">
   <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
 </view>
-<view class="cu-capsule margin-top-xl margin-left margin-bottom sm round">
-  <view class="cu-tag bg-main" bind:tap="clearMsg">清空消息</view>
-  <view class="cu-tag line-main">{{messages.length}}</view>
+<view class="cu-bar">
+  <view class="action">
+    <view class="cu-tag bg-main round" bind:tap="clearMsg">清空 {{messages.length}} 条</view>
+  </view>
+  <view class="action">
+    <view class="cu-tag line-main round" bindtap='refresh'>
+      <view class='icon-refresh'></view>
+    </view>
+  </view>
 </view>
 <view wx:if="{{messages.length}}" class="cu-timeline">
-  <view class="cu-item" wx:for="{{messages}}" wx:key>
-    <view class="content bg-{{item.is_read?'gray':'white'}}" >
+  <view class="cu-item {{item.is_read?'text-main':'text-yellow'}}" wx:for="{{messages}}" wx:key>
+    <view class="content bg-white solid">
       <view>
         <view class="text-main text-df">{{item.content}}</view>
         <view wx:if="{{item.t_name}}">
@@ -28,13 +34,11 @@
           {{item.tf_end_time}}
         </view>
       </view>
-      <view class="cu-capsule radius">
+      <view class="{{item.is_read?'':'cu-capsule'}}radius">
         <view class="cu-tag line-main">
           {{intellectDatetime?item.d_create_time:item.create_time}}
         </view>
-        <view class="cu-tag bg-{{item.is_read?'main':'yellow text-white'}}">
-          {{item.is_read?'已读':'新'}}
-        </view>
+        <view wx:if="{{!item.is_read}}" class="cu-tag bg-yellow text-white">新</view>
       </view>
     </view>
   </view>
