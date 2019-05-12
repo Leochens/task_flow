@@ -159,6 +159,7 @@ export const clearSeach = () => {
 
 
 export const toggleTaskFlowMemverInvite = (u_id, tf_id, status) => {
+    console.log(status)
     return crudUpdate('invite', tf_id, { tf_id, status }, `users/${u_id}/task_flows/${tf_id}/invite`);
 }
 

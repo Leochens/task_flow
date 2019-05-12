@@ -26,6 +26,9 @@ const page = {
     const { tf_id, invite } = this.data;
     const u_id = app.globalData.u_id;
     this.toggleTaskFlowMemverInvite(u_id, tf_id, !invite);
+    this.setData({
+      invite: !invite
+    })
   },
   toLogs: function () {
     wx.navigateTo({
