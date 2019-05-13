@@ -4,7 +4,7 @@
   <view slot="content">任务流设置</view>
 </nav-bar>
 <view class="cu-list menu margin-top sm-border">
-  <view class="cu-item arrow " wx:if="{{is_leader}}" bind:tap="transferLeader">
+  <view class="cu-item arrow " wx:if="{{is_leader&&!tf.is_completed}}" bind:tap="transferLeader">
     <view class="content">
       <text class="text-black">更换负责人</text>
     </view>
@@ -24,7 +24,7 @@
       <text class="text-black">退出任务流</text>
     </view>
   </view>
-  <view class="cu-item" wx:if="{{is_leader}}">
+  <view class="cu-item" wx:if="{{is_leader && !tf.is_completed}}">
     <view class="content">
       <text class="text-black">允许成员可以邀请成员</text>
     </view>
@@ -32,7 +32,7 @@
       <switch class="blue sm" checked="{{invite}}" bindchange="toggleInviteStatus" />
     </view>
   </view>
-  <view class="cu-bar btn-group margin-top" wx:if="{{is_leader}}">
+  <view class="cu-bar btn-group margin-top" wx:if="{{is_leader && !tf.is_completed}}">
     <view class="cu-btn bg-main round basis-xl" hover-class="button-hover">提前完成任务流</view>
   </view>
   <view class="cu-bar btn-group margin-top" wx:if="{{is_leader}}">
@@ -49,8 +49,8 @@
         <view class="cu-item" wx:for="{{tf.members}}" wx:key>
           <label class="flex justify-between align-center flex-sub">
             <view class="flex-sub">
-            <view class="cu-avatar round margin-right" style="background-image:url({{item.avatar_url}})"></view>
-            {{item.nick_name}}
+              <view class="cu-avatar round margin-right" style="background-image:url({{item.avatar_url}})"></view>
+              {{item.nick_name}}
             </view>
             <radio disabled="{{item.id === u_id}}" class="round blue" bind:tap="radioChange" data-uid="{{item.id}}"></radio>
           </label>
@@ -60,5 +60,5 @@
     <view class="cu-btn bg-main lg block" bind:tap="confirmTransferLeader">确认</view>
   </view>
 </view>
-
 <!-- disabled="{{item.id === u_id}}" -->
+

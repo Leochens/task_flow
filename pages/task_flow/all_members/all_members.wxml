@@ -1,8 +1,8 @@
-<!--pages/task_flow/all_members/all_members.wxml-->
+<!-- pages/task_flow/all_members/all_members.wxml -->
 <nav-bar isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">全部成员</view>
 </nav-bar>
 <view class="members">
-    <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true"/>
+  <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true" isLeader="{{leader_id === item.id}}" data-uid="{{item.id}}" bind:longpress="deleteMember" />
 </view>

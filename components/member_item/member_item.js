@@ -14,7 +14,10 @@ Component({
       type: Boolean
     },
     disableSelect: {
-      type:Boolean
+      type: Boolean
+    },
+    isLeader: {
+      type: Boolean
     }
   },
 
@@ -24,7 +27,7 @@ Component({
   data: {
     flag: false
   },
-  ready: function(){
+  ready: function () {
     this.setData({
       flag: this.properties.isSelected ? true : false
     })
@@ -34,12 +37,10 @@ Component({
    */
   methods: {
     toggleSelect: function (e) {
-      if(this.data.disableSelect) return;
+      if (this.data.disableSelect) return;
       this.setData({
         flag: !this.data.flag
       });
-
-
     }
   }
 })

@@ -6,6 +6,10 @@ import { addComment, addImage, fetchSingleTask } from '../../actions/index';
 import { formatTime, dynamicDate } from '../../utils/util';
 import APP from '../../appConfig';
 const app = getApp();
+const deletedMember = {
+  nick_name: '已退出的成员',
+  avatar_url: ''
+}
 const page = {
 
   /**
@@ -92,7 +96,7 @@ const page = {
     const { u_id } = cmt;
     const members = this.data.members;
     const intellectDatetime = this.data.intellectDatetime;
-    const author = members[u_id];
+    const author = members[u_id] || deletedMember;
     return {
       ...cmt,
       nick_name: author.nick_name,
@@ -103,7 +107,7 @@ const page = {
   extendImage: function (img) {
     const { u_id } = img;
     const members = this.data.members;
-    const author = members[u_id];
+    const author = members[u_id] || deletedMember;
     return {
       ...img,
       nick_name: author.nick_name

@@ -67,7 +67,6 @@ const page = {
     });
   },
   confirmTransferLeader: function () { // 确认转让负责人
-    // api
     const { tf_id, transferUid } = this.data;
     if (!transferUid) return wx.showToast({ title: "请选择转让人" });
     this._transferLeader(tf_id, transferUid);
@@ -84,7 +83,6 @@ const page = {
       transferUid: u_id
     })
   }
-
 }
 const mapStateToData = state => {
 

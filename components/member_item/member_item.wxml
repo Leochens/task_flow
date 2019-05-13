@@ -1,5 +1,5 @@
 <!-- components/member_item/member_item.wxml -->
 <view class="member-item {{flag?'selected':''}} " bind:tap="toggleSelect">
-    <image class="avatar" src="{{avatarUrl}}" />
+    <image class="avatar {{isLeader?'leader':''}}" src="{{avatarUrl}}" />
     <view class="member-name">{{nickName}}</view>
 </view>

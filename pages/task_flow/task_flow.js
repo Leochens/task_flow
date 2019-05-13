@@ -29,7 +29,8 @@ const page = {
     showModal: false,
     editable: false,
     cateSelectorIsActive: false,
-    invite: 1
+    invite: 1,
+    leader_id:''
   },
 
   editInfo: function () {
@@ -47,7 +48,6 @@ const page = {
       tasks: classfiedTasks
     });
     console.log("此时set Data")
-    // wx.hideLoading();
   },
   setTaskFlowInfo: function () {
     const tf_id = this.data.id;
@@ -137,7 +137,7 @@ const page = {
   // 查看全部成员
   allMembers: function () {
     wx.navigateTo({
-      url: './all_members/all_members?tf_id=' + this.data.id + "&members=" + JSON.stringify(this.data.members)
+      url: './all_members/all_members?tf_id=' + this.data.id
     })
   },
   toTaskFlowSettings: function () {
