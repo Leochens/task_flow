@@ -1,6 +1,7 @@
 import { crudCreate, crudGetList, crudUpdate, crudDelete } from './dataActions'
 import Schemas from '../schemas/index';
 import { normalize } from '../libs/normalizr';
+
 export const fetchTaskFlows = (u_id, callback) => {
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
@@ -159,11 +160,16 @@ export const clearSeach = () => {
 
 
 export const toggleTaskFlowMemverInvite = (u_id, tf_id, status) => {
-    console.log(status)
     return crudUpdate('invite', tf_id, { tf_id, status }, `users/${u_id}/task_flows/${tf_id}/invite`);
 }
 
 
 export const fetchLogs = (id, type, callback) => {
     return crudGetList('logs', null, null, null, `logs/${type}/${id}`, { callback });
+}
+
+// 转让负责人
+export const transferLeader = (tf_id, new_leader_id) => {
+    const u_id = wx.getStorageSync('u_id');
+    return crudUpdate('transfer', tf_id, { tf_id, new_leader_id }, `users/${u_id}/task_flows/${tf_id}/transfer`);
 }

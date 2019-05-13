@@ -103,6 +103,18 @@ const task_flows = (state = st_task_flows, action) => {
         }
         return newState;
       }
+      else if (meta.resource === 'transfer') {
+        const { tf_id, new_leader_id } = requestPayload.data;
+        const newState = {
+          ...state,
+          [tf_id]: {
+            ...state[tf_id],
+            leader_id: new_leader_id
+          }
+        };
+        wx.navigateBack();
+        return newState;
+      }
       else return state;
 
     }
