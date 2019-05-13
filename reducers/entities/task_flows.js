@@ -22,8 +22,10 @@ const task_flows = (state = st_task_flows, action) => {
 
   switch (type) {
     case CRUD_CREATE_SUCCESS: {
-      if (!meta.resource === 'task_flows') return state;
+      if (meta.resource != 'task_flows') return state;
+      meta.callback && setTimeout(meta.callback, 100);
       wx.navigateBack();
+      return state;
     }
     case CRUD_GET_LIST_SUCCESS:
       {
@@ -118,7 +120,27 @@ const task_flows = (state = st_task_flows, action) => {
       else return state;
 
     }
-
+    case CRUD_DELETE_SUCCESS: {
+      if (meta.resource === 'task_flow_members') {
+        const { extra } = meta
+        const { tf_id, delete_user_id } = extra;
+        // 前端删除该成员
+        const tf = { ...state[tf_id] };
+        const members = [...tf.members];
+        if (members.includes(delete_user_id)) {
+          members.splice(members.indexOf(delete_user_id), 1);
+        } else return state;
+        meta.callback && setTimeout(meta.callback, 100);
+        return {
+          ...state,
+          [tf_id]: {
+            ...state[tf_id],
+            members
+          }
+        }
+      }
+      return state;
+    }
 
     default:
       return state;

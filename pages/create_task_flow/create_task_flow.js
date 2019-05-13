@@ -8,6 +8,7 @@ import {
 import { connect } from '../../libs/wechat-weapp-redux';
 import {
   addTaskFlow,
+  fetchTaskFlows,
   updateTaskFlow
 } from '../../actions/index';
 const day = 1000 * 60 * 60 * 24;
@@ -153,15 +154,22 @@ const _page = {
         category: curCate
       }));
     } else {
-      this.addTaskFlow(u_id, JSON.stringify({
+      const data = JSON.stringify({
         tf_name,
         tf_describe,
         begin_time,
         end_time,
         leader_id: u_id,
         category: curCate
-      }));
+      });
+      this.addTaskFlow(u_id, data, this.refresh);
     }
+  },
+  refresh: function () {
+    const u_id = app.globalData.u_id;
+    console.log('refresh');
+    
+    this.fetchTaskFlows(u_id);
   },
   addCate: function () {
     this.setData({
@@ -221,8 +229,10 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => {
   return {
-    addTaskFlow: (u_id, tf) => dispatch(addTaskFlow(u_id, tf)),
-    updateTaskFlow: (u_id, tf_id, tf) => dispatch(updateTaskFlow(u_id, tf_id, tf))
+    addTaskFlow: (u_id, tf, callback) => dispatch(addTaskFlow(u_id, tf, callback)),
+    updateTaskFlow: (u_id, tf_id, tf, callback) => dispatch(updateTaskFlow(u_id, tf_id, tf, callback)),
+    fetchTaskFlows: (u_id, callback) => dispatch(fetchTaskFlows(u_id, callback))
+
   }
 }
 

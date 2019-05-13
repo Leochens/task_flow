@@ -19,11 +19,15 @@ const _page = {
    */
   onLoad: function (options) {
     const tf_id = options.tf_id;
-    const tf = this.data.getTaskFlow(tf_id);
+    this.setData({
+      tf_id
+    })
+  },
+  onShow: function () {
+    const tf = this.data.getTaskFlow(this.data.tf_id);
     const leader_id = tf.leader_id;
     const members = tf.members;
     this.setData({
-      tf_id,
       members,
       leader_id,
       tf
@@ -35,7 +39,7 @@ const _page = {
     if (delete_user_id === this.data.leader_id) return; // 不能删除自己
     console.log('删除', delete_user_id);
     const u_id = app.globalData.u_id;
-    this.deleteTaskFlowMember(u_id, this.data.tf_id, delete_user_id);
+    this.deleteTaskFlowMember(u_id, this.data.tf_id, delete_user_id, this.onShow);
   }
 }
 
@@ -45,7 +49,7 @@ const mapStateToData = state => {
   const getTaskFlow = tf_id => {
     const tf = { ...entities.task_flows[tf_id] };
     const _members = [...tf.members];
-    const members = _members.map(m => membersEntity[m]);
+    const members = _members.map(m => ({ ...membersEntity[m] }));
     tf.members = members;
     return tf;
   }
@@ -55,7 +59,7 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => {
   return {
-    deleteTaskFlowMember: (u_id, tf_id, delete_user_id) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id))
+    deleteTaskFlowMember: (u_id, tf_id, delete_user_id,callback) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id,callback))
   }
 }
 

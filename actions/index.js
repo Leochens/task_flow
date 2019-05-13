@@ -9,7 +9,7 @@ export const fetchTaskFlows = (u_id, callback) => {
         console.log("nomalize后==>", task_flows);
         return task_flows;
     }
-    return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows/simple`, { normalizeFunc, callback });
+    return crudGetList('task_flows', null, null, null, `users/${u_id}/task_flows/simple`, { normalizeFunc }, callback);
 };
 export const fetchTasksAll = (u_id, callback) => {
     const normalizeFunc = response => {
@@ -18,7 +18,7 @@ export const fetchTasksAll = (u_id, callback) => {
         console.log("nomalize后==>", tasks);
         return tasks;
     }
-    return crudGetList('all_tasks', null, null, null, `users/${u_id}/tasks`, { normalizeFunc, callback });
+    return crudGetList('all_tasks', null, null, null, `users/${u_id}/tasks`, { normalizeFunc }, callback);
 };
 export const fetchTasks = (tf_id, callback) => {
     const normalizeFunc = response => {
@@ -27,7 +27,7 @@ export const fetchTasks = (tf_id, callback) => {
         console.log("nomalize后==>", tasks);
         return tasks;
     }
-    return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id, callback });
+    return crudGetList('tasks', null, null, null, `task_flows/${tf_id}/tasks`, { normalizeFunc, tf_id }, callback);
 };
 export const fetchSingleTask = (u_id, t_id, callback) => {
     const normalizeFunc = response => {
@@ -36,7 +36,7 @@ export const fetchSingleTask = (u_id, t_id, callback) => {
         console.log("nomalize后==>", tasks);
         return tasks;
     }
-    return crudGetList('tasks', null, null, null, `tasks/${t_id}`, { normalizeFunc, t_id, callback });
+    return crudGetList('tasks', null, null, null, `tasks/${t_id}`, { normalizeFunc, t_id }, callback);
 }
 export const fetchMessages = (u_id, callback) => {
     const normalizeFunc = response => {
@@ -45,7 +45,7 @@ export const fetchMessages = (u_id, callback) => {
         console.log("nomalize后==>", messages);
         return messages;
     }
-    return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc, callback });
+    return crudGetList('messages', null, null, null, `users/${u_id}/messages`, { normalizeFunc }, callback);
 };
 
 export const fetchReviewList = u_id => {
@@ -55,8 +55,8 @@ export const fetchReviewList = u_id => {
 export const setMessageRead = u_id => {
     return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages`)
 }
-export const addTaskFlow = (u_id, tf) => {
-    return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`);
+export const addTaskFlow = (u_id, tf, callback) => {
+    return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`, {},callback);
 }
 export const fetchTaskMemberStatus = (t_id, u_ids) => {
     return crudCreate('status', { u_ids }, `tasks/${t_id}/users/status`);
@@ -78,8 +78,8 @@ export const addComment = (t_id, cmt) => {
     return crudCreate('comments', { cmt }, `tasks/${t_id}/comments`, { t_id, cmt });
 }
 
-export const updateTaskFlow = (u_id, tf_id, tf) => {
-    return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`)
+export const updateTaskFlow = (u_id, tf_id, tf, callback) => {
+    return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`, callback)
 }
 export const updateTaskFlowCate = (u_id, tf_id, category) => {
     return crudUpdate('categories', tf_id, { category, tf_id, u_id }, `categories`)
@@ -88,8 +88,8 @@ export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
 
-export const deleteTaskFlowMember = (u_id, tf_id, delete_user_id) => {
-    return crudDelete('task_flows', delete_user_id, `users/${u_id}/task_flows/${tf_id}/members`);
+export const deleteTaskFlowMember = (u_id, tf_id, delete_user_id, callback) => {
+    return crudDelete('task_flow_members', delete_user_id, `users/${u_id}/task_flows/${tf_id}/members`, { tf_id, delete_user_id }, callback);
 }
 
 export const ADD_IMG = 'ADD_IMG';
