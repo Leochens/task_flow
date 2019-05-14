@@ -59,7 +59,7 @@ const page = {
       id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,invite,
       leader: members.filter(mem => mem.id === leader_id)[0],
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
-      editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())), // 判断是否可以进行更改
+      editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())) && is_completed === 0, // 判断是否可以进行更改
     });
   },
   onShow: function () {

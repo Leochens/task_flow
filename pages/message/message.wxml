@@ -1,6 +1,6 @@
 <!-- pages/message/message.wxml -->
 <view class="UCenter-bg bgc bg-main">
-  <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
+  <image class=" gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
 </view>
 <view class="cu-bar">
   <view class="action">

@@ -3,7 +3,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
-import { toggleTaskFlowMemverInvite, transferLeader } from '../../../actions/index';
+import { toggleTaskFlowMemverInvite, transferLeader, finishTaskFlow } from '../../../actions/index';
 const app = getApp();
 const page = {
   data: {
@@ -55,6 +55,10 @@ const page = {
   breakTaskFlow: function () {
     // 解散任务流
   },
+  finish: function () {
+    const { tf_id, u_id } = this.data;
+    this.finishTaskFlow(u_id, tf_id);
+  },
   hideModal: function () {
     this.setData({
       isModalActive: false
@@ -102,7 +106,8 @@ const mapStateToData = state => {
 const mapDispatchToPage = dispatch => {
   return {
     toggleTaskFlowMemverInvite: (u_id, tf_id, status) => dispatch(toggleTaskFlowMemverInvite(u_id, tf_id, status)),
-    _transferLeader: (tf_id, new_leader_id) => dispatch(transferLeader(tf_id, new_leader_id))
+    _transferLeader: (tf_id, new_leader_id) => dispatch(transferLeader(tf_id, new_leader_id)),
+    finishTaskFlow: (u_id, tf_id) => dispatch(finishTaskFlow(u_id, tf_id))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

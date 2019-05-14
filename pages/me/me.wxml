@@ -2,7 +2,7 @@
 <!-- <nav-bar bg-color="bg-main">
 </nav-bar> -->
 <view class="UCenter-bg bgc bg-main">
-  <image class=" gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
+  <image class=" gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
 </view>
 <view class="profile-card">
   <image class="avatar" src="{{userInfo.avatarUrl}}"></image>

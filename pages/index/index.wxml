@@ -1,4 +1,3 @@
-
 <view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
   <view class=" cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
@@ -55,7 +54,7 @@
 </view>
 <view class='task-flows' style='margin-top:{{CustomBar}}px;'>
   <view class="UCenter-bg bg-main">
-    <image class="gif-wave" mode="scaleToFill" src="../../assets/imgs/wave.gif"></image>
+    <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
   </view>
   <view wx:if="{{currentCategoryTaskFlowList.length}}">
     <form-id>

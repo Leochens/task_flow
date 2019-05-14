@@ -67,8 +67,8 @@ export const addTask = (tf_id, task, members) => {
 export const updateTask = (tf_id, task, members, u_id) => {
     return crudUpdate('tasks', task.id, { task, members, u_id }, `task_flows/${tf_id}/tasks`);
 }
-export const changeTaskInfo = (tf_id, u_id, t_id, field, value,callback) => {
-    return crudUpdate('task_info', field, { tf_id,t_id, u_id,field, value }, `tasks/${t_id}/${field}`,callback);
+export const changeTaskInfo = (tf_id, u_id, t_id, field, value, callback) => {
+    return crudUpdate('task_info', field, { tf_id, t_id, u_id, field, value }, `tasks/${t_id}/${field}`, callback);
 }
 
 export const completeTask = (t_id, u_id) => {
@@ -83,6 +83,9 @@ export const addComment = (t_id, cmt) => {
 
 export const updateTaskFlow = (u_id, tf_id, tf, callback) => {
     return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`, callback)
+}
+export const finishTaskFlow = (u_id, tf_id, callback) => {
+    return crudUpdate('finish', tf_id, { u_id, tf_id }, `users/${u_id}/task_flows/${tf_id}/finish`, callback)
 }
 export const updateTaskFlowCate = (u_id, tf_id, category) => {
     return crudUpdate('categories', tf_id, { category, tf_id, u_id }, `categories`)

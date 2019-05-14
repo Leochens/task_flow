@@ -32,7 +32,7 @@
       <switch class="blue sm" checked="{{invite}}" bindchange="toggleInviteStatus" />
     </view>
   </view>
-  <view class="cu-bar btn-group margin-top" wx:if="{{is_leader && !tf.is_completed}}">
+  <view class="cu-bar btn-group margin-top" wx:if="{{is_leader && !tf.is_completed}}" bind:tap="finish">
     <view class="cu-btn bg-main round basis-xl" hover-class="button-hover">提前完成任务流</view>
   </view>
   <view class="cu-bar btn-group margin-top" wx:if="{{is_leader}}">
