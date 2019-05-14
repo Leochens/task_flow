@@ -17,12 +17,19 @@
             <text class="text-grey">任务简介</text>
         </view>
         <view class="action">
-            <view class="text-cut text-grey text-sm" style="max-width:200rpx">{{task.t_describe}}</view>
+            <view class="text-cut text-grey text-sm" style="max-width:200rpx">
+                {{task.t_describe}}
+            </view>
         </view>
     </view>
-    <view class="cu-item arrow ">
+    <view class="cu-item arrow " bind:tap="showModal" data-target="add_member">
         <view class="content">
             <text class="text-grey">添加新成员</text>
+        </view>
+    </view>
+    <view class="cu-item arrow " bind:tap="showModal" data-target="end_time">
+        <view class="content">
+            <text class="text-grey">截止时间:{{task.end_time}}</text>
         </view>
     </view>
 </view>
@@ -70,6 +77,81 @@
                     取消
                 </view>
                 <button form-type="submit" class="cu-btn bg-white action margin-0 flex-sub  solid-left">
+                    确定
+                </button>
+            </view>
+        </form>
+    </view>
+</view>
+<view class="cu-modal {{modalName==='add_member'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">选择新成员</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view>
+        <form>
+            <view class="padding-xl">
+                <view class="basis-xl bg-white" bind:tap="addMember">
+                    {{selectedMembersNames.length?selectedMembersNames:'点我选择'}}
+                </view>
+            </view>
+            <view class="cu-bar bg-white">
+                <view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">
+                    取消
+                </view>
+                <button class="cu-btn bg-white action margin-0 flex-sub  solid-left" bind:tap="confirmAddMember">
+                    确定
+                </button>
+            </view>
+        </form>
+    </view>
+</view>
+<view class="cu-modal {{modalName==='t_describe'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">修改任务简介</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view>
+        <form bindsubmit="changeTaskDescribe">
+            <view class="padding-xl">
+                <view class="cu-form-group">
+                    <textarea name="t_describe" placeholder="输入新的任务简介" value="{{task.t_describe}}" />
+                </view>
+            </view>
+            <view class="cu-bar bg-white">
+                <view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">
+                    取消
+                </view>
+                <button form-type="submit" class="cu-btn bg-white action margin-0 flex-sub  solid-left">
+                    确定
+                </button>
+            </view>
+        </form>
+    </view>
+</view>
+<view class="cu-modal {{modalName==='end_time'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">更改截止时间</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
+            </view>
+        </view>
+        <form>
+            <view class="padding-xl">
+                <view class="basis-xl bg-white">
+                    <date-time-picker value='{{endDate}}' bind:onChange='bindEndDateChange' />
+                </view>
+            </view>
+            <view class="cu-bar bg-white">
+                <view class="action margin-0 flex-sub text-green solid-left" bindtap="hideModal">
+                    取消
+                </view>
+                <button class="cu-btn bg-white action margin-0 flex-sub  solid-left" bind:tap="changeEndTime">
                     确定
                 </button>
             </view>

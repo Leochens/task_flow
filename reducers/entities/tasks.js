@@ -24,15 +24,20 @@ const tasks = (state = {}, action) => {
                     }
                 }
             } else if (meta.resource === 'task_info') {
-                const { t_id, field, value } = requestPayload.data;
-                const newState = {
+                let { t_id, field, value } = requestPayload.data;
+                let newState = {}
+                if (meta.id === 'members') { // 如果value是数组 那么说明现在的操作是新增成员
+                    return state;
+                }
+
+                newState = {
                     ...state,
                     [t_id]: {
                         ...state[t_id],
                         [field]: value
                     }
                 }
-                meta.callback && setTimeout(meta.callback,100)
+                meta.callback && setTimeout(meta.callback, 100)
                 return newState;
             }
 
