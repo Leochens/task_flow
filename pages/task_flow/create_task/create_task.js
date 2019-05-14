@@ -44,15 +44,21 @@ const _page = {
     const tf_id = op.tf_id || '123456';
     const tf = this.data.getTaskFlow(tf_id);
     const t_id = op.t_id || null;
-    const task = this.data.getTask(t_id) || {}; // 得到旧的task来显示 
-    if (Object.keys(task).length) {
-      this._setTaskInfo(task);
-    }
-
+    const task = this.data.getTask(t_id) || {}; // 得到旧的task来显示
     const timeLimit = {
       beginDate: tf.begin_time,
       endDate: tf.end_time
     }
+    if (Object.keys(task).length) { //
+      this._setTaskInfo(task);
+    } else {
+      const { endDate: ed } = this.data;
+      this.setData({
+        endDate: ed > timeLimit.endDate ? timeLimit.endDate : ed // 超过tf结束时间 那么就设置为tf结束时间
+      })
+    }
+
+
     let members = tf.members || [];
     if (t_id) { // 有t_id说明是更新模式 那么选择任务人的时候要剔除掉已有的任务人
       const t_members = task.members;
@@ -64,7 +70,8 @@ const _page = {
       members,
       isUpdate: t_id ? true : false, // 是否是处于更新任务状态
       task,
-      t_id
+      t_id,
+
     })
   },
   bindBeginDateChange: function (e) {
