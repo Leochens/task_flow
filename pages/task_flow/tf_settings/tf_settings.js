@@ -48,7 +48,7 @@ const page = {
     if (this.data.is_leader) {// 如果是leader
       const cnt = getTaskFlow(tf_id).members.length;
       if (cnt === 1) { //并且现在任务流中只有他一个人 那么退出任务流就是解散任务流
-        this._breakTaskFlow();
+        this._breakTaskFlow("当前任务流中只有你一个成员,");
       } else if (cnt > 1) { // 有其他人 要转让负责人
         wx.showModal({
           title: "提示",
@@ -65,12 +65,12 @@ const page = {
     }
 
   },
-  _breakTaskFlow: function () {
+  _breakTaskFlow: function (msg) {
     // 解散任务流
     const that = this;
     wx.showModal({
       title: '警告',
-      content: "当前任务流中只有你一个成员，退出任务流即代表解散任务流，是否继续?",
+      content: msg + "退出任务流即代表解散任务流，是否继续?",
       success: function (e) {
         if (e.confirm) {
           console.log("解散任务流")
