@@ -1,7 +1,7 @@
 
 
 .members {
-  position: absolute;
+  /* position: absolute; */
   width: 90%;
   margin: 20rpx 5%;
   height: 80vh;

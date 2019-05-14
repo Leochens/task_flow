@@ -4,5 +4,10 @@
   <view slot="content">全部成员</view>
 </nav-bar>
 <view class="members">
-  <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true" isLeader="{{leader_id === item.id}}" data-uid="{{item.id}}" bind:longpress="deleteMember" />
+  <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true" isLeader="{{leader_id === item.id}}" isDelete="{{edit}}" data-uid="{{item.id}}" bind:tap="{{edit?'deleteMember':''}}" />
+</view>
+<view class=" basis-xl text-center">
+  <view class="cu-btn bg-main lg basis-xl round" hover-class="button-hover" bind:tap="edit">
+    {{edit?'完成':'编辑'}}
+  </view>
 </view>

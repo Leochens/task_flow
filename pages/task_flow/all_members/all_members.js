@@ -11,7 +11,8 @@ const _page = {
   data: {
     tf_id: '',
     members: [],
-    leader_id: ''
+    leader_id: '',
+    edit: false
   },
 
   /**
@@ -33,13 +34,27 @@ const _page = {
       tf
     })
   },
-  deleteMember: function (e) {
-    const delete_user_id = e.currentTarget.dataset.uid;
+  deleteMember: function (ee) {
+    const that = this;
+    const delete_user_id = ee.currentTarget.dataset.uid;
     // 删除该成员
-    if (delete_user_id === this.data.leader_id) return; // 不能删除自己
-    console.log('删除', delete_user_id);
-    const u_id = app.globalData.u_id;
-    this.deleteTaskFlowMember(u_id, this.data.tf_id, delete_user_id, this.onShow);
+    if (delete_user_id === that.data.leader_id) return; // 不能删除自己
+    wx.showModal({
+      title: "删除提醒",
+      content: `您确定移除该成员吗`,
+      success: function (e) {
+        if (e.confirm) {
+          console.log('删除', delete_user_id);
+          const u_id = app.globalData.u_id;
+          that.deleteTaskFlowMember(u_id, that.data.tf_id, delete_user_id, that.onShow);
+        }
+      }
+    });
+  },
+  edit: function () {
+    this.setData({
+      edit: !this.data.edit
+    })
   }
 }
 
@@ -59,7 +74,7 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => {
   return {
-    deleteTaskFlowMember: (u_id, tf_id, delete_user_id,callback) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id,callback))
+    deleteTaskFlowMember: (u_id, tf_id, delete_user_id, callback) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id, callback))
   }
 }
 

@@ -18,6 +18,9 @@ Component({
     },
     isLeader: {
       type: Boolean
+    },
+    isDelete: {
+      type: Boolean
     }
   },
 
@@ -41,6 +44,9 @@ Component({
       this.setData({
         flag: !this.data.flag
       });
+    },
+    deleteMember:function(e){
+      
     }
   }
 })

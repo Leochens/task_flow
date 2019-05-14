@@ -6,6 +6,7 @@
     padding: 10rpx 0;
     color: #666;
     font-size: 28rpx;
+    position: relative;
   }
   
   
@@ -46,4 +47,14 @@
 
   .leader{
     border: 2rpx solid #ddd;
+  }
+
+  .delete{
+    text-align:center;
+    color:red;
+    font-size:24rpx;
+    border:1rpx solid;
+    position:absolute;
+    top:0;
+    right:0;
   }
