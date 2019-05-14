@@ -1,17 +1,14 @@
 <!-- pages/task/task.wxml -->
 <wxs module="memberStatus" src="../wxs/memberStatus.wxs"></wxs>
-
 <nav-bar isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">子任务详情</view>
+    <view slot="backText">返回</view>
+    <view slot="content">子任务详情</view>
 </nav-bar>
 <view class="task-wrap">
     <view class="title-wrap">
         <view class="title">
             <view>
                 {{task.t_name}}
-                <!-- <image class="edit" wx:if="{{editable}}" src="../../assets/imgs/task_flow/edit.svg" bind:tap="editInfo" /> -->
-                <text wx:if="{{editable}}" class="icon-edit text-main" bind:tap="editInfo"></text>
             </view>
             <view>
                 <view class="icon-more text-main" bind:tap="toTaskSettings"></view>

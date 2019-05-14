@@ -16,7 +16,8 @@ const page = {
     selectedMembersIds: [],
     timeLimit: {},
     endDate: '',
-    beginDate: ''
+    beginDate: '',
+    isLeader: false
   },
   onLoad: function (options) {
     const t_id = options.t_id;
@@ -36,7 +37,8 @@ const page = {
       task, tf,
       endDate: task.end_time,
       beginDate: task.begin_time,
-      timeLimit
+      timeLimit,
+      isLeader: app.globalData.u_id === tf.leader_id
     })
   },
   showModal: function (e) {
@@ -116,7 +118,11 @@ const page = {
       endDate
     })
   },
-
+  toLog: function () {
+    wx.navigateTo({
+      url: '../../log/log?id=' + this.data.task.id + '&type=t'
+    })
+  },
   hideModal: function () {
     this.setData({
       modalName: ''

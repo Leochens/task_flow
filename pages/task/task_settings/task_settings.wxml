@@ -4,7 +4,7 @@
     <view slot="content">子任务设置</view>
 </nav-bar>
 <view class="cu-list menu">
-    <view class="cu-item arrow " bindtap="showModal" data-target="t_name">
+    <view class="cu-item arrow " wx:if="{{isLeader}}" bindtap="showModal" data-target="t_name">
         <view class="content">
             <text class="text-grey">任务名</text>
         </view>
@@ -12,7 +12,7 @@
             <text class="text-grey text-sm">{{task.t_name}}</text>
         </view>
     </view>
-    <view class="cu-item arrow " bindtap="showModal" data-target="t_describe">
+    <view class="cu-item arrow " wx:if="{{isLeader}}" bindtap="showModal" data-target="t_describe">
         <view class="content">
             <text class="text-grey">任务简介</text>
         </view>
@@ -22,14 +22,22 @@
             </view>
         </view>
     </view>
-    <view class="cu-item arrow " bind:tap="showModal" data-target="add_member">
+    <view class="cu-item arrow " wx:if="{{isLeader}}" bind:tap="showModal" data-target="add_member">
         <view class="content">
             <text class="text-grey">添加新成员</text>
         </view>
     </view>
-    <view class="cu-item arrow " bind:tap="showModal" data-target="end_time">
+    <view class="cu-item arrow " wx:if="{{isLeader && task.is_completed === 0}}" bind:tap="showModal" data-target="end_time">
         <view class="content">
-            <text class="text-grey">截止时间:{{task.end_time}}</text>
+            <text class="text-grey">截止时间</text>
+        </view>
+        <view class="action">
+            <view class="text-grey text-sm">{{task.end_time}}</view>
+        </view>
+    </view>
+    <view class="cu-item arrow " bind:tap="toLog">
+        <view class="content">
+            <text class="text-grey">子任务日志</text>
         </view>
     </view>
 </view>
