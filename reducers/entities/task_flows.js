@@ -24,7 +24,9 @@ const task_flows = (state = st_task_flows, action) => {
     case CRUD_CREATE_SUCCESS: {
       if (meta.resource != 'task_flows') return state;
       meta.callback && setTimeout(meta.callback, 100);
-      wx.navigateBack();
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
       return state;
     }
     case CRUD_GET_LIST_SUCCESS:

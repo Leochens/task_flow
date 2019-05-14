@@ -93,7 +93,10 @@ export const updateTaskFlowCate = (u_id, tf_id, category) => {
 export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
-
+// 解散任务流
+export const breakTaskFlow = (u_id,tf_id) => { 
+    return crudDelete('break_task_flows', tf_id, `users/${u_id}/task_flows/break`);
+}
 export const deleteTaskFlowMember = (u_id, tf_id, delete_user_id, callback) => {
     return crudDelete('task_flow_members', delete_user_id, `users/${u_id}/task_flows/${tf_id}/members`, { tf_id, delete_user_id }, callback);
 }

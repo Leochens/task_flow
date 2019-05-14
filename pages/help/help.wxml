@@ -1,2 +1,7 @@
 <!--pages/help/help.wxml-->
-<text>pages/help/help.wxml</text>
+<nav-bar isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">帮助</view>
+</nav-bar>
+
+功能待实现

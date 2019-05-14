@@ -9,7 +9,8 @@
   <view class="nick-name">{{userInfo.nickName}}</view>
   <view class="others">
     <view class="location">
-      <image src="../../assets/imgs/me/location.svg" class="location-icon" /> {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
+      <image src="../../assets/imgs/me/location.svg" class="location-icon" />
+      {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
     </view>
     <view class="gender">{{userInfo.gender?'男':'女'}}</view>
   </view>
@@ -50,13 +51,19 @@
       <view class="text-grey">审核</view>
     </view>
   </view>
-  <view class="cu-item arrow" bind:tap="">
+  <view class="cu-item arrow">
     <view class="content center">
       <view class="icon-newshotfill text-xl text-black"></view>
-      <view class="text-grey">问题反馈</view>
+      <button class="cu-btn text-grey bg-white padding-xs" open-type="feedback">问题反馈</button>
     </view>
   </view>
-  <view class="cu-item arrow" bind:tap="">
+  <view class="cu-item arrow">
+    <view class="content center">
+      <view class="icon-service text-xl text-black"></view>
+      <button class="cu-btn text-grey bg-white padding-xs" open-type="contact">人工服务</button>
+    </view>
+  </view>
+  <view class="cu-item arrow" bind:tap="toHelp">
     <view class="content center">
       <view class="icon-question text-xl text-black"></view>
       <view class="text-grey">帮助</view>

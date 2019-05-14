@@ -20,46 +20,53 @@ const page = {
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
 
   },
-  onShow: function() {
+  onShow: function () {
     const userInfo = wx.getStorageSync('userInfo') || {};
     this.setData({
       userInfo
     })
   },
-  toSettings: function() {
+  toSettings: function () {
 
     wx.navigateTo({
       url: '../settings/settings'
     })
   },
-  toAbout: function() {
+  toAbout: function () {
     wx.navigateTo({
       url: '../about/about'
     })
   },
-  toData: function() {
+  toData: function () {
     wx.navigateTo({
       url: '../data/data'
     })
   },
-  toCalendar: function() {
+  toCalendar: function () {
     wx.navigateTo({
       url: '../calendar/calendar'
     })
   },
-  toReview: function() {
+  toReview: function () {
     wx.navigateTo({
       url: '../review/review'
+    })
+  },
+  toHelp: function () {
+    wx.navigateTo({
+      url: '../help/help'
     })
   }
 };
 const mapStateToData = state => {
-  const ids = { ...state.ids
+  const ids = {
+    ...state.ids
   };
-  const entities = { ...state.entities
+  const entities = {
+    ...state.entities
   };
   const u_id = wx.getStorageSync('u_id');
   const taskFlowsCnt = ids.task_flows.length;

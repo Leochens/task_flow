@@ -172,7 +172,6 @@ const page = {
           })
         }
       },
-
       completed: function () {
         that.setData({
           tfCardType: 'default'
@@ -193,6 +192,11 @@ const page = {
     });
     // 向后端发送userInfo
     this.gotUserInfo(this.data.u_id, e.detail.userInfo);
+    this.setData({
+      showAuthModal: false
+    });
+    wx.showTabBar({});
+
   },
   pinTopTf: function (e) {
     const tf_id = e.currentTarget.dataset.tfid;
@@ -292,12 +296,20 @@ const page = {
     app.globalData.tf_ids = tf_ids;
   },
   //事件处理函数
-  onLoad: function () {
+  onLoad: function (options) {
+    const refresh = options.refresh;
     this.checkSID();
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
+    const u_id = wx.getStorageSync('u_id');
+    if (!u_id) {
+      this.setData({
+        showAuthModal: true
+      });
+      wx.hideTabBar({});
+
+    }
     if (SID) {
-      const u_id = wx.getStorageSync('u_id');
       this.fetchTaskFlows(u_id, this.setTfIds);
       const settings = wx.getStorageSync('settings') || {};
       const isPinTop = settings.isPinTop;

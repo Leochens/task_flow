@@ -3,7 +3,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
-import { toggleTaskFlowMemverInvite, transferLeader, finishTaskFlow } from '../../../actions/index';
+import { toggleTaskFlowMemverInvite, transferLeader, finishTaskFlow, deleteTaskFlow, breakTaskFlow } from '../../../actions/index';
 const app = getApp();
 const page = {
   data: {
@@ -42,18 +42,62 @@ const page = {
     })
   },
   exitTaskFlow: function () {
-    // 退出任务流 如果是leader 
-    if (!this.data.is_leader) return;
+    // 退出任务流 
     const { getTaskFlow, tf_id } = this.data;
-    const cnt = getTaskFlow(tf_id).members.length;
-    if (cnt === 1) { //并且现在任务流中只有他一个人 那么退出任务流就是解散任务流
-      this.breakTaskFlow();
-    } else if (cnt > 1) { // 有其他人 要转让负责人
-      this.transferLeader();
-    } else return;
+    const that = this;
+    if (this.data.is_leader) {// 如果是leader
+      const cnt = getTaskFlow(tf_id).members.length;
+      if (cnt === 1) { //并且现在任务流中只有他一个人 那么退出任务流就是解散任务流
+        this._breakTaskFlow();
+      } else if (cnt > 1) { // 有其他人 要转让负责人
+        wx.showModal({
+          title: "提示",
+          content: "您是负责人,在退出之前,您应再选择一位负责人,请选择完负责人后再退出",
+          success: function (e) {
+            if (e.confirm) {
+              that.transferLeader();
+            }
+          }
+        })
+      } else return;
+    } else { // 普通成员
+      this._quit();
+    }
+
   },
-  breakTaskFlow: function () {
+  _breakTaskFlow: function () {
     // 解散任务流
+    const that = this;
+    wx.showModal({
+      title: '警告',
+      content: "当前任务流中只有你一个成员，退出任务流即代表解散任务流，是否继续?",
+      success: function (e) {
+        if (e.confirm) {
+          console.log("解散任务流")
+          that.breakTaskFlow(app.globalData.u_id, that.data.tf_id);
+          wx.reLaunch({
+            url: '/pages/index/index?refresh=true',
+          })
+        }
+      }
+    });
+  },
+  _quit: function () {
+    const { tf_id } = this.data;
+    const u_id = app.globalData.u_id;
+    const that = this;
+    wx.showModal({
+      title: '警告',
+      content: "退出任务流将会删除该任务流中所有与你相关的子任务",
+      success: function (e) {
+        if (e.confirm) {
+          that.deleteTaskFlow(u_id, tf_id);
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      }
+    })
   },
   finish: function () {
     const { tf_id, u_id } = this.data;
@@ -107,7 +151,9 @@ const mapDispatchToPage = dispatch => {
   return {
     toggleTaskFlowMemverInvite: (u_id, tf_id, status) => dispatch(toggleTaskFlowMemverInvite(u_id, tf_id, status)),
     _transferLeader: (tf_id, new_leader_id) => dispatch(transferLeader(tf_id, new_leader_id)),
-    finishTaskFlow: (u_id, tf_id) => dispatch(finishTaskFlow(u_id, tf_id))
+    finishTaskFlow: (u_id, tf_id) => dispatch(finishTaskFlow(u_id, tf_id)),
+    deleteTaskFlow: (u_id, tf_id) => dispatch(deleteTaskFlow(u_id, tf_id)),
+    breakTaskFlow: (u_id, tf_id) => dispatch(breakTaskFlow(u_id, tf_id))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
