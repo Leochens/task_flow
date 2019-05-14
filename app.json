@@ -24,7 +24,8 @@
     "pages/feedback/feedback",
     "pages/help/help",
     "pages/task_flow/tf_settings/tf_settings",
-    "pages/log/log"
+    "pages/log/log",
+    "pages/task/task_settings/task_settings"
   ],
   "tabBar": {
     "color": "#666",

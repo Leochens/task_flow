@@ -14,8 +14,7 @@
                 <text wx:if="{{editable}}" class="icon-edit text-main" bind:tap="editInfo"></text>
             </view>
             <view>
-                <image class="people-count" src="../../assets/imgs/task_flow/member.svg" />
-                {{task.members.length}}
+                <view class="icon-more text-main" bind:tap="toTaskSettings"></view>
             </view>
         </view>
         <view class="deadline">开始:{{task.begin_time}}</view>

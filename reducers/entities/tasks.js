@@ -23,6 +23,17 @@ const tasks = (state = {}, action) => {
                         t_describe
                     }
                 }
+            } else if (meta.resource === 'task_info') {
+                const { t_id, field, value } = requestPayload.data;
+                const newState = {
+                    ...state,
+                    [t_id]: {
+                        ...state[t_id],
+                        [field]: value
+                    }
+                }
+                meta.callback && setTimeout(meta.callback,100)
+                return newState;
             }
 
             return state;

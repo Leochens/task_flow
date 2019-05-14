@@ -119,6 +119,12 @@ const page = {
       url: '../task_flow/create_task/create_task?tf_id=' + tf_id + "&t_id=" + t_id
     })
   },
+  toTaskSettings: function () { // 子任务设置
+    const { tf_id, id: t_id } = this.data.task;
+    wx.navigateTo({
+      url: './task_settings/task_settings?tf_id=' + tf_id + "&t_id=" + t_id
+    })
+  },
   initFromApi: function () {
     const { t_id, u_id } = this.data;
     this.fetchSingleTask(u_id, t_id, this.init); // 拉取单一的子任务的详情
@@ -136,7 +142,7 @@ const page = {
 
     task.comments = comments;
     task.imgs = imgs;
-    const editable = this.data.isLeader(task.tf_id, this.data.u_id) && task.is_completed === 0;
+    const editable = this.data.isLeader(task.tf_id, this.data.u_id) && task.is_completed != 1;
     console.log(task);
 
     this.setData({

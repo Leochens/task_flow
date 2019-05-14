@@ -112,7 +112,6 @@ const page = {
   },
   // 加新的子任务
   addTask: function () {
-    const { begin_time, end_time } = this.data;
     wx.navigateTo({
       url: './create_task/create_task?tf_id=' + this.data.id
     })

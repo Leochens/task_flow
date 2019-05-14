@@ -56,7 +56,7 @@ export const setMessageRead = u_id => {
     return crudUpdate('messages', u_id, { u_id }, `users/${u_id}/messages`)
 }
 export const addTaskFlow = (u_id, tf, callback) => {
-    return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`, {},callback);
+    return crudCreate('task_flows', { tf }, `users/${u_id}/task_flows`, {}, callback);
 }
 export const fetchTaskMemberStatus = (t_id, u_ids) => {
     return crudCreate('status', { u_ids }, `tasks/${t_id}/users/status`);
@@ -66,6 +66,9 @@ export const addTask = (tf_id, task, members) => {
 }
 export const updateTask = (tf_id, task, members, u_id) => {
     return crudUpdate('tasks', task.id, { task, members, u_id }, `task_flows/${tf_id}/tasks`);
+}
+export const changeTaskInfo = (tf_id, u_id, t_id, field, value,callback) => {
+    return crudUpdate('task_info', field, { tf_id,t_id, u_id,field, value }, `tasks/${t_id}/${field}`,callback);
 }
 
 export const completeTask = (t_id, u_id) => {
