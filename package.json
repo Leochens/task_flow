@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.0",
+    "chart.js": "^2.8.0",
     "miniprogram-datepicker": "^0.3.0",
     "normalizr": "^3.3.0",
     "redux": "^4.0.1",

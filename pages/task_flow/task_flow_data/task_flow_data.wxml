@@ -1,10 +1,25 @@
-<!--pages/task_flow/task_flow_data/task_flow_data.wxml-->
-
+<!-- pages/task_flow/task_flow_data/task_flow_data.wxml -->
 <nav-bar isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">任务流数据分析</view>
 </nav-bar>
-
-
-
-hello world
+<view class="cu-bar bg-white">
+  <view class="action">
+    <view class="icon-title text-main"></view>
+    <view class="">任务流数据</view>
+  </view>
+</view>
+<view class="margin-top-xl">
+  <canvas canvas-id="taskFlowRing" class="canvas" style='height:200px' bindtouchstart="touchHandler"></canvas>
+  <view class="table">
+    <view class="tr">
+      <view class="th">任务流</view>
+    </view>
+  </view>
+</view>
+<view class="margin-top-xl">
+  <canvas canvas-id="taskRing" class="canvas" style='height:200px' bindtouchstart="touchHandler"></canvas>
+</view>
+<view class="margin-top-xl">
+  <canvas canvas-id='taskColumn' id="taskColumn" class='' style="width:750rpx;height: 200px;" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend"></canvas>
+</view>

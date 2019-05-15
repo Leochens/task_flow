@@ -66,7 +66,10 @@ const page = {
                 title: '上传成功',
                 mask: true
               });
-              wx.navigateBack();
+              const { u_id, t_id, isFetch } = that.data;
+              wx.redirectTo({ // 刷新
+                url: `/pages/task/task?u_id=${u_id}&t_id=${t_id}&isFetch=${isFetch}`,
+              })
               uploadImgCount++;
             },
             fail: function (res) {

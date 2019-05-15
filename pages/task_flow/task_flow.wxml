@@ -70,7 +70,7 @@
           <view class="time">评论:{{item.comments.length}}</view>
           <view class="time">图片:{{item.images.length}}</view>
           <view class="dots">
-            <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':'#eee'}}"></view>
+            <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':it.user_status === 0?'yellow':'#eee'}}"></view>
           </view>
         </view>
         <view class="task-card" hover-class="hover-effect" bind:tap="taskDetail" data-tid="{{item.id}}">

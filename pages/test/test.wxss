@@ -1,4 +1,10 @@
 /* pages/test/test.wxss */
-page{
-    margin-top: 300rpx;
-}
+.canvas-container{
+    width: 98%;
+    height: 200px;
+    overflow: auto
+  }
+  .canvas-container canvas{
+    min-width: 100%;
+    height: 200px;
+  }
