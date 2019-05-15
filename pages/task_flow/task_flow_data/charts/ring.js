@@ -20,7 +20,7 @@ const getTaskFlowRing = function (windowWidth, id, data) {
             }
         },
         title: {
-            name: `${(data.completed / data.all).toFixed(2) * 100}%`,
+            name: `${data.all ? (data.completed / data.all).toFixed(2) * 100 : 0}%`,
             color: '#2967AF',
             fontSize: 25
         },
@@ -31,18 +31,18 @@ const getTaskFlowRing = function (windowWidth, id, data) {
         },
         series: [{
             name: '进行中',
-            data: 100,
+            data: data.all ? data.continues : data.all,
             stroke: true,
             color: "#A6B2E6"
         }, {
             name: '已逾期',
-            data: 63,
+            data: data.delay,
             stroke: false,
             color: "#E27884"
         },
         {
             name: '已完成',
-            data: 63,
+            data: data.completed,
             stroke: false,
             color: "#70A8EA"
         }],

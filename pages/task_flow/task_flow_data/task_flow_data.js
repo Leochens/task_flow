@@ -24,9 +24,9 @@ Page({
         completed: 0,
         all: 0
       },
-      task: [ ],
-      images:[],
-      comments:[],
+      task: [],
+      images: [],
+      comments: [],
       members: [ // 每个人的任务完成情况
       ]
     },
@@ -47,34 +47,42 @@ Page({
       showColumn: !this.data.showColumn
     })
   },
-  onShow:function(){
+  onShow: function () {
     const windowWidth = this.getWidth();
     const tf_id = this.data.tf_id;
 
     const that = this;
-    wx.request({
-      url: `${APP.apiBaseUrl}/users/${app.globalData.u_id}/task_flows/${tf_id}/data`,
-      success: function (res) {
-        console.log(res);
-        const { data: { data: tfData } } = res;
-        that.setData({
-          tfData,
-          taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
-          memberColumn: getMemberColumn(windowWidth, 'memberColumn', tfData.members)
-        });
-      }
-    })
+
   },
   onLoad: function (options) {
     const tf_id = options.tf_id
+    console.log(tf_id);
     const windowWidth = this.getWidth();
     // const tf_id = '4f8a9123b2d54c1479e66d16d28a69af';
     const {
       tfData
     } = this.data;
+    const that = this;
+
+    wx.request({
+      url: `${APP.apiBaseUrl}/users/${app.globalData.u_id}/task_flows/${tf_id}/data`,
+      success: function (res) {
+        console.log(res);
+        // return;
+        const { data: { data: tfData } } = res;
+        that.setData({
+          tfData,
+          taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
+          memberColumn: tfData.members.length ? getMemberColumn(windowWidth, 'memberColumn', tfData.members) : null
+        });
+      },
+      fail: function (err) {
+        console.log(err);
+      }
+    })
     this.setData({
-      taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
-      memberColumn: getMemberColumn(windowWidth, 'memberColumn', tfData.members),
+      // taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
+      // memberColumn: getMemberColumn(windowWidth, 'memberColumn', tfData.members),
       tf_id
     });
   },
