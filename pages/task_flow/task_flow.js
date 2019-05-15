@@ -125,7 +125,7 @@ const page = {
   // 任务数据
   checkData: function () {
     wx.navigateTo({
-      url: './task_flow_data/task_flow_data',
+      url: './task_flow_data/task_flow_data?tf_id='+this.data.id,
     })
   },
   myTasks: function () {

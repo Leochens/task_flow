@@ -1,10 +1,14 @@
 /* pages/task_flow/task_flow_data/task_flow_data.wxss */
+page{
+  background-color: #fff;
+}
 .canvas-container{
     width: 98%;
     height: 200px;
+    background-color: #fff;
     overflow: auto
   }
-  .canvas-container canvas{
+.canvas-container canvas{
     min-width: 100%;
     height: 200px;
   }

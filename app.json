@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/test/test",
     "pages/index/index",
+    "pages/task_flow/task_flow_data/task_flow_data",
+    "pages/test/test",
     "pages/settings/settings",
     "pages/calendar/calendar",
     "pages/invite/invite",
@@ -15,7 +16,6 @@
     "pages/task_flow/all_members/all_members",
     "pages/task_flow/task_flow",
     "pages/auth/auth",
-    "pages/task_flow/task_flow_data/task_flow_data",
     "pages/message/message",
     "pages/about/about",
     "pages/data/data",
