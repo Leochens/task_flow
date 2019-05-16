@@ -5,6 +5,7 @@ import {
   compareDate2,
   formatTime
 } from '../../utils/util';
+import replaceChar from '../../utils/replaceChar';
 import { connect } from '../../libs/wechat-weapp-redux';
 import {
   addTaskFlow,
@@ -146,21 +147,21 @@ const _page = {
     if (isUpdate) {
       console.log("开始更新")
       this.updateTaskFlow(u_id, this.data.tf_id, JSON.stringify({
-        tf_name,
-        tf_describe,
+        tf_name:replaceChar(tf_name),
+        tf_describe:replaceChar(tf_describe),
         begin_time: begin_time,
         end_time,
         leader_id: u_id,
-        category: curCate
+        category: replaceChar(curCate)
       }));
     } else {
       const data = JSON.stringify({
-        tf_name,
-        tf_describe,
+        tf_name:replaceChar(tf_name),
+        tf_describe:replaceChar(tf_describe),
         begin_time,
         end_time,
         leader_id: u_id,
-        category: curCate
+        category: replaceChar(curCate)
       });
       this.addTaskFlow(u_id, data, this.refresh);
     }
@@ -201,7 +202,7 @@ const _page = {
       newCateName: '',
       index: categories.length - 1,
       hideModal: true,
-      curCate: newCateName
+      curCate: replaceChar(newCateName)
     })
 
   },

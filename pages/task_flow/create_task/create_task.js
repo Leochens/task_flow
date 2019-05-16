@@ -3,6 +3,7 @@ import {
   compareDate,
   formatTime
 } from '../../../utils/util';
+import replaceChar from '../../../utils/replaceChar';
 import { connect } from '../../../libs/wechat-weapp-redux';
 import { addTask, updateTask } from '../../../actions/index';
 const day = 1000 * 60 * 60 * 24;
@@ -165,8 +166,8 @@ const _page = {
     const { t_name, t_describe } = data;
 
     const task = {
-      t_name,
-      t_describe,
+      t_name:replaceChar(t_name),
+      t_describe:replaceChar(t_describe),
       is_completed: false,
       begin_time: this.data.beginDate,
       end_time: this.data.endDate,

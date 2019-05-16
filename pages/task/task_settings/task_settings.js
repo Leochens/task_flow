@@ -4,6 +4,7 @@ import {
 } from '../../../libs/wechat-weapp-redux';
 import { changeTaskInfo } from '../../../actions/index';
 import { compareDate } from '../../../utils/util';
+import replaceChar from '../../../utils/replaceChar';
 const app = getApp();
 const page = {
   data: {
@@ -51,14 +52,14 @@ const page = {
     console.log(e);
     const { task: { tf_id, id: t_id } } = this.data;
     const u_id = app.globalData.u_id;
-    const t_name = e.detail.value.t_name;
+    const t_name = replaceChar(e.detail.value.t_name);
     this.changeTaskInfo(tf_id, u_id, t_id, 't_name', t_name, this.onShow);
     this.hideModal();
   },
   changeTaskDescribe: function (e) {
     const { task: { tf_id, id: t_id } } = this.data;
     const u_id = app.globalData.u_id;
-    const t_describe = e.detail.value.t_describe;
+    const t_describe = replaceChar(e.detail.value.t_describe);
     this.changeTaskInfo(tf_id, u_id, t_id, 't_describe', t_describe, this.onShow);
     this.hideModal();
   },

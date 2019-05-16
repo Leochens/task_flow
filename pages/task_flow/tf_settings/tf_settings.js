@@ -3,6 +3,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
+import replaceChar from '../../../utils/replaceChar';
 import { toggleTaskFlowMemverInvite, transferLeader, finishTaskFlow, deleteTaskFlow, breakTaskFlow } from '../../../actions/index';
 const app = getApp();
 const page = {

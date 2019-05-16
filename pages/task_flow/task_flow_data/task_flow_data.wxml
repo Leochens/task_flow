@@ -10,7 +10,7 @@
       <view class="text-grey text-sm flex text-cut">{{tfData.tf_describe}}</view>
     </view>
     <view class="action">
-      <view class="cu-tag line-main round" bind:tap="onRefresh">
+      <view class="cu-tag line-main round" bind:tap="fetch">
         <text class="icon-refresh"></text>
       </view>
     </view>

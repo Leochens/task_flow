@@ -47,23 +47,10 @@ Page({
       showColumn: !this.data.showColumn
     })
   },
-  onShow: function () {
-    const windowWidth = this.getWidth();
+  fetch:function(){
+    const that = this;
     const tf_id = this.data.tf_id;
-
-    const that = this;
-
-  },
-  onLoad: function (options) {
-    const tf_id = options.tf_id
-    console.log(tf_id);
     const windowWidth = this.getWidth();
-    // const tf_id = '4f8a9123b2d54c1479e66d16d28a69af';
-    const {
-      tfData
-    } = this.data;
-    const that = this;
-
     wx.request({
       url: `${APP.apiBaseUrl}/users/${app.globalData.u_id}/task_flows/${tf_id}/data`,
       success: function (res) {
@@ -78,11 +65,18 @@ Page({
       },
       fail: function (err) {
         console.log(err);
+        wx.showToast({
+          title:"请求失败"
+        })
       }
     })
+  },
+  onShow:function(){
+    this.fetch();
+  },
+  onLoad: function (options) {
+    const tf_id = options.tf_id
     this.setData({
-      // taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
-      // memberColumn: getMemberColumn(windowWidth, 'memberColumn', tfData.members),
       tf_id
     });
   },
