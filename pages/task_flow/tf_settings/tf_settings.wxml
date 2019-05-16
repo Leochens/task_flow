@@ -36,7 +36,9 @@
     <view class="cu-btn bg-main round basis-xl" hover-class="button-hover">提前完成任务流</view>
   </view>
   <view class="cu-bar btn-group margin-top" wx:if="{{is_leader}}">
-    <view class="cu-btn bg-red round basis-xl" hover-class="button-hover" bind:tap="_breakTaskFlow">解散任务流</view>
+    <view class="cu-btn bg-red round basis-xl" hover-class="button-hover" bind:tap="_breakTaskFlow">
+      解散任务流
+    </view>
   </view>
   <!-- <view class="cu-bar btn-group margin-top" wx:else>
     <view class="cu-btn bg-red round basis-xl" hover-class="button-hover">退出任务流</view>
@@ -44,6 +46,12 @@
 </view>
 <view class="cu-modal {{isModalActive?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog" catchtap>
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">选择成员</view>
+      <view class="action" bind:tap="hideModal">
+        <view class="icon-close text-red"></view>
+      </view>
+    </view>
     <radio-group class="block">
       <view class="cu-list menu text-left">
         <view class="cu-item" wx:for="{{tf.members}}" wx:key>
@@ -61,4 +69,3 @@
   </view>
 </view>
 <!-- disabled="{{item.id === u_id}}" -->
-

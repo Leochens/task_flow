@@ -12,7 +12,8 @@ const page = {
     is_leader: false,
     invite: true,
     isModalActive: false,
-    transferUid: ''
+    transferUid: '',
+    tf: {}
   },
   onLoad: function (options) {
     console.log(options);
@@ -71,7 +72,7 @@ const page = {
     const that = this;
     wx.showModal({
       title: '警告',
-      content: msg + "退出任务流即代表解散任务流，是否继续?",
+      content: typeof msg === 'string' ? msg : '' + "退出任务流即代表解散任务流，是否继续?",
       success: function (e) {
         if (e.confirm) {
           console.log("解散任务流")
@@ -102,7 +103,19 @@ const page = {
   },
   finish: function () {
     const { tf_id, u_id } = this.data;
-    this.finishTaskFlow(u_id, tf_id);
+    const that = this;
+    wx.showModal({
+      title: '警告',
+      content: "确定要提前完成任务流吗,这样所有的未完成任务将不可操作,是否继续?",
+      success: function (e) {
+        if (e.confirm) {
+          that.finishTaskFlow(u_id, tf_id);
+          wx.reLaunch({
+            url: '/pages/index/index',
+          });
+        }
+      }
+    })
   },
   hideModal: function () {
     this.setData({
@@ -110,6 +123,10 @@ const page = {
     })
   },
   transferLeader: function () {
+    if (this.data.tf.members.length === 1) return wx.showModal({
+      title: "转让失败",
+      content: "无剩余成员可选"
+    });
     // 转让负责人
     this.setData({
       isModalActive: true
