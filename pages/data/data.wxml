@@ -5,4 +5,7 @@
   <view slot="content">任务流数据分析</view>
 </nav-bar>
 
-功能待实现
+<view class="cu-bar">
+  <view class="icon-title text-main"></view>
+  <view class="content text-gray">功能待实现</view>
+</view>
