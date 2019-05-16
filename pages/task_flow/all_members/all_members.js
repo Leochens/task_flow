@@ -20,8 +20,11 @@ const _page = {
    */
   onLoad: function (options) {
     const tf_id = options.tf_id;
+    const u_id = app.globalData.u_id;
+
     this.setData({
-      tf_id
+      tf_id,
+      u_id
     })
   },
   onShow: function () {
@@ -36,6 +39,7 @@ const _page = {
   },
   deleteMember: function (ee) {
     const that = this;
+
     const delete_user_id = ee.currentTarget.dataset.uid;
     // 删除该成员
     if (delete_user_id === that.data.leader_id) return; // 不能删除自己

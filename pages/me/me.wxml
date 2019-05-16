@@ -54,13 +54,13 @@
   <view class="cu-item arrow">
     <view class="content center">
       <view class="icon-newshotfill text-xl text-black"></view>
-      <button class="cu-btn text-grey bg-white padding-xs" open-type="feedback">问题反馈</button>
+      <button class="content cu-btn text-grey bg-white padding-xs" open-type="feedback">问题反馈</button>
     </view>
   </view>
   <view class="cu-item arrow">
     <view class="content center">
       <view class="icon-service text-xl text-black"></view>
-      <button class="cu-btn text-grey bg-white padding-xs" open-type="contact">人工服务</button>
+      <button class="content cu-btn text-grey bg-white padding-xs" open-type="contact">人工服务</button>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toHelp">

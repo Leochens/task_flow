@@ -7,9 +7,7 @@
 <view class="task-wrap">
     <view class="title-wrap">
         <view class="title">
-            <view>
-                {{task.t_name}}
-            </view>
+            <view>{{task.t_name}}</view>
             <view>
                 <view class="icon-more text-main" bind:tap="toTaskSettings"></view>
             </view>
@@ -65,19 +63,17 @@
             </swiper-item>
             <swiper-item class="content">
                 <view class="begin-time">2019-2-1 14:35:44</view>
-                <view class="cu-chat">
-                    <view wx:if="{{task.comments.length}}">
-                        <view class="cu-item" wx:for="{{task.comments}}" wx:key>
-                            <view class="cu-avatar radius" style="background-image:url({{item.avatar_url}});"></view>
-                            <view class="main">
-                                <view class="date">{{item.nick_name}} {{item.create_time}}</view>
-                                <view class="content shadow">
-                                    <text>{{item.content}}</text>
-                                </view>
+                <view class="card card-comment">
+                    <view class="comment-item" wx:for="{{task.comments}}" wx:key>
+                        <image class="avatar" src="{{item.avatar_url}}" />
+                        <view class="comment">
+                            <view class="name-time">
+                                <text class="name">{{item.nick_name}}</text>
+                                <text class="time">{{item.create_time}}</text>
                             </view>
+                            <view class="comment-content">{{item.content}}</view>
                         </view>
                     </view>
-                    <view wx:else class="empty-comment">没有评论,快来添加一条吧</view>
                 </view>
                 <form wx:if="{{task.is_completed != 1}}" class="send-comment" bindsubmit="commentSubmit">
                     <view class="input-comment">

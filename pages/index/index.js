@@ -297,7 +297,7 @@ const page = {
   },
   //事件处理函数
   onLoad: function (options) {
-    const refresh = options.refresh;
+    // const refresh = options.refresh;
     this.checkSID();
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
