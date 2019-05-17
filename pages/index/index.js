@@ -66,7 +66,7 @@ const page = {
     filterItems: initFilterItems,
     isPinTaskFlowFold: false, // 是否折叠置顶的
     isTaskFlowFold: false, // 是否折叠其他的,
-    showAuthModal:false
+    showAuthModal: false
 
   },
 
@@ -135,7 +135,6 @@ const page = {
       tfCardType
     })
   },
-
   backToMenu: function () {
     this.setData({
       curOperation: MENU.NONE,
@@ -143,43 +142,6 @@ const page = {
       searchKeyword: '',
       tfCardType: 'default',
     })
-  },
-  onDeleteTaskFlow: function (e) {
-    console.log("fff", e);
-    const tf_id = e.currentTarget.dataset.tfid;
-
-    const tf = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
-    if (!tf.is_completed) {
-      wx.showModal({
-        title: "删除失败",
-        content: `想要删除任务流"${tf.tf_name}"您必须先结束它`
-      });
-      return;
-    }
-    const that = this;
-    wx.showModal({
-      title: "删除提醒",
-      content: `您确定删除任务流"${tf.tf_name}"吗`,
-      success: function (e) {
-        if (e.confirm) {
-          console.log("确定");
-          // 删除任务流api
-          const u_id = that.data.u_id;
-          that.deleteTaskFlow(u_id, tf_id);
-          that.setData({
-            tfCardType: 'default',
-            curOperation: MENU.NONE,
-            searchResultList: [],
-            searchKeyword: ''
-          })
-        }
-      },
-      completed: function () {
-        that.setData({
-          tfCardType: 'default'
-        })
-      }
-    });
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -197,6 +159,7 @@ const page = {
     this.setData({
       showAuthModal: false
     });
+    this._fetchTaskFlows();
     wx.showTabBar({});
   },
   pinTopTf: function (e) {

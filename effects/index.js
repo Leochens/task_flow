@@ -35,9 +35,14 @@ function* handleFetch(action) {
     response = yield call(restClient, restType, meta.resource, payload, auth);
     // response = JSON.parse(replaceNULL(JSON.stringify(response)));
 
-    yield put({
+    yield !response.errMsg ? put({
       type: `${type}_SUCCESS`,
       payload: meta.normalizeFunc ? meta.normalizeFunc(response) : response,
+      requestPayload: payload,
+      meta,
+    }) : yield put({
+      type: `${type}_FAILURE`,
+      error: response.errMsg ? response.errMsg : "未知错误",
       requestPayload: payload,
       meta,
     });

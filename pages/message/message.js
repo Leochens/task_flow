@@ -17,6 +17,22 @@ const page = {
   onLoad: function (options) {
 
   },
+  toDetail: function (e) {
+    const mid = e.currentTarget.dataset.mid;
+    const msg = this.data.messages[mid]; // 获得点击的msg
+    const { t_id, tf_id } = msg;
+
+    if (t_id) { // 有t_id的话 肯定是子任务相关 所以要跳task
+      wx.navigateTo({
+        url: `/pages/task/task?t_id=${t_id}&isFetch=true`
+      });
+    } else if (tf_id) { //没有t_id 有tf_id 是与任务流相关 跳task_flow
+      wx.navigateTo({
+        url: `/pages/task_flow/task_flow?tf_id=${tf_id}`
+      });
+    } else return; // 什么都么有 不跳
+
+  },
   refresh: function () {
     const u_id = app.globalData.u_id;
     this.fetchMessages(u_id);

@@ -5,7 +5,8 @@ import {
 const app = getApp();
 import {
   fetchTasks,
-  updateTaskFlowCate
+  updateTaskFlowCate,
+  fetchSingleTaskFlow
 } from '../../actions/index'
 import { compareDate, formatTime } from '../../utils/util';
 const page = {
@@ -30,7 +31,7 @@ const page = {
     editable: false,
     cateSelectorIsActive: false,
     invite: 1,
-    leader_id:''
+    leader_id: ''
   },
 
   editInfo: function () {
@@ -38,9 +39,19 @@ const page = {
       url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time + "&begin_time=" + this.data.begin_time
     })
   },
+
   setFunc: function (id) {
     const tf_id = this.data.id || id;
     const _task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
+    if (!_task_flow) { // 没有找到任务流
+      wx.showModal({
+        title: "提示",
+        content: "你已不在该任务流"
+      });
+      wx.navigateBack();
+      return;
+    }
+
     const task_flow = { ..._task_flow };
     const { tasks } = task_flow;
     const classfiedTasks = this.classifyTask(tasks);
@@ -54,9 +65,9 @@ const page = {
     const _task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     const task_flow = { ..._task_flow };
     console.log(task_flow);
-    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,invite } = task_flow;
+    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite } = task_flow;
     this.setData({
-      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id,invite,
+      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite,
       leader: members.filter(mem => mem.id === leader_id)[0],
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
       editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())) && is_completed === 0, // 判断是否可以进行更改
@@ -65,8 +76,9 @@ const page = {
   onShow: function () {
     // wx.showLoading();
     const tf_id = this.data.id;
+    const u_id = app.globalData.u_id;
     this.setTaskFlowInfo();
-    this.fetchTasks(tf_id, this.setFunc);
+    this.fetchSingleTaskFlow(u_id, tf_id, this.setFunc);
   },
   onLoad: function (options) {
     wx.hideTabBar({});
@@ -107,7 +119,7 @@ const page = {
     const tid = e.currentTarget.dataset.tid;
     const task = this.data.tasks.filter(t => t.id === tid)[0];
     wx.navigateTo({
-      url: '../task/task?t_id=' + task.id
+      url: '../task/task?t_id=' + task.id + "&isFetch=true"
     })
   },
   // 加新的子任务
@@ -125,7 +137,7 @@ const page = {
   // 任务数据
   checkData: function () {
     wx.navigateTo({
-      url: './task_flow_data/task_flow_data?tf_id='+this.data.id,
+      url: './task_flow_data/task_flow_data?tf_id=' + this.data.id,
     })
   },
   myTasks: function () {
@@ -141,7 +153,7 @@ const page = {
   },
   toTaskFlowSettings: function () {
     wx.navigateTo({
-      url: './tf_settings/tf_settings?tf_id=' + this.data.id + "&is_leader=" + this.data.is_leader+"&invite="+this.data.invite
+      url: './tf_settings/tf_settings?tf_id=' + this.data.id + "&is_leader=" + this.data.is_leader + "&invite=" + this.data.invite
     })
   },
 
@@ -193,7 +205,6 @@ const mapStateToData = _state => {
   // 组装一个完整的tf列表
   const tfl = ids.task_flows.map(id => entities.task_flows[id]);
   const _taskFlowList = [...tfl];
-  console.log(_taskFlowList);
 
   const taskFlowList = _taskFlowList.map(it => {
     const _item = { ...it };
@@ -202,24 +213,8 @@ const mapStateToData = _state => {
     const _tasks = tasks ? [...tasks] : [];
     _item.members = _members.map(mid => entities.members[mid]);
     _item.tasks = _tasks.map(tid => entities.tasks[tid]);
-    _item.tasks = tasks ? _item.tasks.map(t => {
-      const _t = { ...t };
-      const memIds = _t.members || [];
-      const cmtIds = _t.comments || [];
-      const imgIds = _t.images || [];
-      const mems = memIds.map(mid => entities.members[mid]);
-      const cmts = cmtIds.map(cid => entities.comments[cid]);
-      const imgs = imgIds.map(iid => entities.images[iid]);
-      _t.members = mems;
-      _t.comments = cmts;
-      _t.images = imgs;
-
-      return _t;
-    }) : [];
     return _item;
   });
-
-
   return {
     taskFlowList
   }
@@ -229,6 +224,7 @@ const mapDispatchToPage = dispatch => {
   return {
     fetchTasks: (tf_id, callback) => dispatch(fetchTasks(tf_id, callback)),
     updateTaskFlowCate: (u_id, tf_id, category) => dispatch(updateTaskFlowCate(u_id, tf_id, category)),
+    fetchSingleTaskFlow: (u_id, tf_id, callback) => dispatch(fetchSingleTaskFlow(u_id, tf_id, callback))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

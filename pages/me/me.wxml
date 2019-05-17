@@ -9,7 +9,8 @@
   <view class="nick-name">{{userInfo.nickName}}</view>
   <view class="others">
     <view class="location">
-      <image src="../../assets/imgs/me/location.svg" class="location-icon" />
+      <view class="icon-loca text-xl text-black"></view>
+    
       {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
     </view>
     <view class="gender">{{userInfo.gender?'男':'女'}}</view>
@@ -23,49 +24,49 @@
 <view class=" cu-list menu card-menu margin-top-xl  margin-bottom-xl shadow-lg radius ">
   <view class="cu-item arrow" bind:tap="toSettings">
     <view class="content center">
-      <image class="text-sm" src="../../assets/imgs/me/setting.svg"></image>
+      <view class="margin-right-sm icon-settingsfill text-xl text-black"></view>
       <text class="text-grey">设置</text>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toCalendar">
     <view class="content center">
-      <image class="text-sm" src="../../assets/imgs/me/calendar.svg"></image>
+      <view class="margin-right-sm icon-calendar text-xl text-black"></view>
       <view class="text-grey">日历</view>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toAbout">
     <view class="content center">
-      <image class="text-sm" src="../../assets/imgs/me/about.svg"></image>
+      <view class="margin-right-sm icon-info text-xl text-black"></view>
       <view class="text-grey">关于</view>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toData">
     <view class="content center">
-      <image class="text-sm" src="../../assets/imgs/me/data.svg"></image>
+      <view class="margin-right-sm icon-rankfill text-xl text-black"></view>
       <view class="text-grey">数据</view>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toReview">
     <view class="content center">
-      <image class="text-sm" src="../../assets/imgs/me/review.svg"></image>
+      <view class="margin-right-sm icon-formfill text-xl text-black"></view>
       <view class="text-grey">审核</view>
     </view>
   </view>
   <view class="cu-item arrow">
     <view class="content center">
-      <view class="icon-newshotfill text-xl text-black"></view>
+      <view class="margin-right-sm icon-newshotfill text-xl text-black"></view>
       <button class="content cu-btn text-grey bg-white padding-xs" open-type="feedback">问题反馈</button>
     </view>
   </view>
   <view class="cu-item arrow">
     <view class="content center">
-      <view class="icon-service text-xl text-black"></view>
+      <view class="margin-right-sm icon-service text-xl text-black"></view>
       <button class="content cu-btn text-grey bg-white padding-xs" open-type="contact">人工服务</button>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toHelp">
     <view class="content center">
-      <view class="icon-question text-xl text-black"></view>
+      <view class="margin-right-sm icon-question text-xl text-black"></view>
       <view class="text-grey">帮助</view>
     </view>
   </view>

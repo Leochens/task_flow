@@ -37,8 +37,12 @@ const page = {
       // wx.setStorageSync('SID_EXPIRATION', null);
       // wx.setStorageSync('messages', null);
       // wx.setStorageSync('messages_ids', null);
+      wx.clearStorageSync();
       wx.showToast({
         title: '清空成功'
+      });
+      wx.reLaunch({
+        url:'/pages/index/index'
       })
     } catch (e) {
       // Do something when catch error

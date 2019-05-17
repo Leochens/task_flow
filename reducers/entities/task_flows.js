@@ -62,7 +62,6 @@ const task_flows = (state = st_task_flows, action) => {
           console.log("fetch Task结束")
           return newState;
         }
-
         return state;
       }
     case CRUD_UPDATE_SUCCESS: {

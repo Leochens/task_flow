@@ -67,8 +67,8 @@
           <view class="{{item.renderDot?'dot ok':''}}"></view>
           <view class="date">{{item.renderDot?dateTimeSplit.dateSplit(item.begin_time):''}}</view>
           <view class="time">{{dateTimeSplit.timeSplit(item.begin_time)}}</view>
-          <view class="time">评论:{{item.comments.length}}</view>
-          <view class="time">图片:{{item.images.length}}</view>
+          <view class="time">评论:{{item.comment_cnt}}</view>
+          <view class="time">图片:{{item.image_cnt}}</view>
           <view class="dots">
             <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':it.user_status === 0?'yellow':'#eee'}}"></view>
           </view>
@@ -78,20 +78,16 @@
           <view class="task-title">
             <view class="title-wrap">
               <view class="task-name">{{item.t_name}}</view>
-              <view class="task-member-count">
-                <image src="../../assets/imgs/task_flow/member.svg" />
-                {{item.members.length}}
+              <view class="cu-tag line-main sm margin-left">
+                <view class="icon-group"></view>
+                <view class="text">{{item.member_cnt}}</view>
               </view>
             </view>
-            <image class="task-status " src="../../assets/imgs/task_flow/check{{item.is_completed && item.is_completed != 2 ?'_ok':''}}.svg" />
+            <view class="">
+              <view class="text-{{item.is_completed && item.is_completed != 2 ?'main':'grey'}} icon-roundcheck{{item.is_completed && item.is_completed != 2 ?'fill':''}}"></view>
+            </view>
           </view>
           <view class="task-info">
-            <view>
-              执行人:
-              <view class="exec-people" wx:for="{{item.members}}" wx:for-item="it" wx:for-index="id" wx:key="id">
-                {{it.nick_name}}
-              </view>
-            </view>
             <view class="deadline-time">截止到{{item.end_time}}</view>
           </view>
           <view class="task-describe">{{item.t_describe}}</view>
@@ -113,19 +109,20 @@
     </block>
     <block wx:else>
       <view class='tab-item' bind:tap="addTask" hidden="{{!is_leader}}">
-        <image src='../../assets/imgs/task_flow/add.svg' class='tab-item-icon'></image>
+        <view class="icon-add text-grey text-center text-xxl text-bold"></view>
         <view class='text'>加子任务</view>
       </view>
       <view class='tab-item' bind:tap="addMember" wx:if="{{is_leader||invite}}">
-        <image src='../../assets/imgs/task_flow/add_member.svg' class='tab-item-icon'></image>
+        <view class="icon-friendaddfill text-grey text-center text-xxl"></view>
+
         <view class='text'>加新成员</view>
       </view>
       <view class='tab-item' bind:tap="checkData">
-        <image src='../../assets/imgs/task_flow/curve.svg' class='tab-item-icon'></image>
+        <view class="icon-rankfill text-grey text-center text-xxl"></view>
         <view class='text'>任务曲线</view>
       </view>
       <view class='tab-item' bind:tap="allMembers">
-        <image src='../../assets/imgs/task_flow/all_members.svg' class='tab-item-icon'></image>
+        <view class="icon-group_fill text-grey text-center text-xxl"></view>
         <view class='text'>全部人员</view>
       </view>
       <view class='tab-item-important' bind:tap="myTasks">我的任务</view>
