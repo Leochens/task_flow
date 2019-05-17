@@ -3,6 +3,7 @@ import {
   connect
 } from '../../../libs/wechat-weapp-redux';
 import { applyTakeBreak, completeTask } from '../../../actions/index';
+import replaceChar from '../../../utils/replaceChar';
 const page = {
 
   /**
@@ -87,16 +88,21 @@ const page = {
   sendApply: function () {
     console.log("准备发射请求");
     const { breakTaskId, break_reason } = this.data;
+    if (replaceChar(break_reason)) return wx.showModal({
+      title: "数据错误",
+      content: "请勿包含特殊字符"
+    });
+    
     const u_id = wx.getStorageSync('u_id');
 
     this.applyTakeBreak(breakTaskId, u_id, break_reason);
-    setTimeout(wx.navigateBack,300);
+    setTimeout(wx.navigateBack, 300);
     this.setData({
       showInputIndex: -1,
     })
 
   },
-  cancelApply:function(){
+  cancelApply: function () {
     this.setData({
       showInputIndex: -1,
       breakTaskId: '',

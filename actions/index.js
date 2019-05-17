@@ -94,7 +94,7 @@ export const deleteTaskFlow = (u_id, tf_id) => {
     return crudDelete('task_flows', tf_id, `users/${u_id}/task_flows`);
 }
 // 解散任务流
-export const breakTaskFlow = (u_id,tf_id) => { 
+export const breakTaskFlow = (u_id, tf_id) => {
     return crudDelete('break_task_flows', tf_id, `users/${u_id}/task_flows/break`);
 }
 export const deleteTaskFlowMember = (u_id, tf_id, delete_user_id, callback) => {
@@ -140,13 +140,16 @@ export const applyTakeBreak = (t_id, u_id, break_reason) => {
     return crudCreate('breaks', { u_id, break_reason }, `tasks/${t_id}/break`, { t_id, u_id, break_reason });
 }
 // 同意请假
-export const allowTakeBreak = (t_id, u_id) => {
-    return crudUpdate('breaks', t_id, { u_id }, `tasks/${t_id}/break`);
+export const allowTakeBreak = (t_id, u_id, apply_user_id) => {
+    return crudUpdate('breaks', t_id, { u_id, apply_user_id }, `tasks/${t_id}/break`);
 }
 
+
+// TODO: 这个api改了 增加了一个apply_user_id 记得把所有调用它的地方改了
+
 // 拒绝请假
-export const refuseTakeBreak = (t_id, u_id, refuse_reason) => {
-    return crudUpdate('breaks', t_id, { u_id, refuse_reason }, `tasks/${t_id}/break`);
+export const refuseTakeBreak = (t_id, u_id, apply_user_id, refuse_reason) => {
+    return crudUpdate('breaks', t_id, { u_id, apply_user_id, refuse_reason }, `tasks/${t_id}/break`);
 }
 
 

@@ -4,7 +4,7 @@ import {
 } from '../../libs/wechat-weapp-redux';
 const app = getApp()
 import { fetchReviewList, allowTakeBreak, refuseTakeBreak } from '../../actions/index';
-
+import replaceChar from '../../utils/replaceChar';
 const page = {
 
   /**
@@ -13,20 +13,14 @@ const page = {
   data: {
     reason: '其他原因',
     hideModal: true,
-    curTid: ''
+    curTid: '',
+    reviews: [],
+    apply_user_id: ''
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     const u_id = this.data.u_id;
     this.fetchReviewList(u_id);
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
 
   },
@@ -43,19 +37,22 @@ const page = {
       reason
     })
   },
-  cancelM: function () {
+  clear: function () {
     this.setData({
       hideModal: true,
-      reason: ''
+      reason: '',
+      apply_user_id: ''
     })
   },
+  cancelM: function () {
+    this.clear();
+  },
   confirmM: function () { // 发送拒绝请求
-    const { reason, curTid, u_id } = this.data;
-    this.refuseTakeBreak(curTid, u_id, reason); // api
-    this.setData({
-      hideModal: true,
-      reason: ''
-    });
+    const { reason, curTid, u_id, apply_user_id } = this.data;
+
+    if (replaceChar(reason) === '') return wx.showToast({ title: '拒绝原因不能为空' });
+    this.refuseTakeBreak(curTid, u_id, apply_user_id, reason); // api
+    this.clear();
     this.onPullDownRefresh();
   },
   /**
@@ -68,24 +65,25 @@ const page = {
     wx.stopPullDownRefresh();
   },
   allow: function (e) {
-    console.log(e);
-    const t_id = e.currentTarget.dataset.tid;
-    this.allowTakeBreak(t_id, this.data.u_id);
+    const r_id = e.currentTarget.dataset.rid;
+    const review = this.data.reviews[r_id]
+    const { t_id, apply_user_id } = review;
+    this.allowTakeBreak(t_id, this.data.u_id, apply_user_id);
+    this.clear();
     this.onPullDownRefresh();
-
   },
   reject: function (e) {
-    const t_id = e.currentTarget.dataset.tid;
+    const r_id = e.currentTarget.dataset.rid;
+    const review = this.data.reviews[r_id]
+    const { t_id, apply_user_id } = review;
     this.setData({
       curTid: t_id,
-      hideModal: false
+      hideModal: false,
+      apply_user_id
     })
   }
 }
-
-
 const mapStateToData = (state) => {
-
   return {
     u_id: wx.getStorageSync('u_id') || "no_user_id",
     reviews: state.reviews
@@ -93,8 +91,8 @@ const mapStateToData = (state) => {
 }
 const mapDispatchToPage = dispatch => ({
   fetchReviewList: u_id => dispatch(fetchReviewList(u_id)),
-  allowTakeBreak: (t_id, u_id) => dispatch(allowTakeBreak(t_id, u_id)),
-  refuseTakeBreak: (t_id, u_id, refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id, refuse_reason))
+  allowTakeBreak: (t_id, u_id, apply_user_id) => dispatch(allowTakeBreak(t_id, u_id, apply_user_id)),
+  refuseTakeBreak: (t_id, u_id, apply_user_id, refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id, apply_user_id, refuse_reason))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

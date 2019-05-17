@@ -19,6 +19,21 @@
     <view class='copyright'>
       <image src='../../assets/imgs/copyright.png'></image>
     </view>
-  
+  </view>
+</view>
+
+<view class="cu-modal {{showAuthModal?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">授权</view>
+    </view>
+    <view class="padding-xl">
+      <view class='text-grey'>申请获得您的以下权限</view>
+      <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
+      
+      <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        确认授权
+      </button>
+    </view>
   </view>
 </view>

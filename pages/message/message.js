@@ -8,26 +8,16 @@ import { dynamicDate, formatTime } from '../../utils/util';
 const app = getApp();
 
 const page = {
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     messages: []
   },
-
-
   setRead: function (u_id) {
     this.setMessageRead(u_id);
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    const u_id = app.globalData.u_id;
-    this.fetchMessages(u_id);
+
   },
-  refresh:function(){
+  refresh: function () {
     const u_id = app.globalData.u_id;
     this.fetchMessages(u_id);
     wx.showToast({
@@ -35,7 +25,8 @@ const page = {
     })
   },
   onShow: function () {
-
+    const u_id = app.globalData.u_id;
+    this.fetchMessages(u_id);
   },
   onPullDownRefresh: function () {
     const u_id = wx.getStorageSync('u_id');

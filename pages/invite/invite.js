@@ -5,7 +5,8 @@ import {
 import {
   login
 } from '../../actions/auth';
-import { addNewTaskFlowMember} from '../../actions/index';
+import { addNewTaskFlowMember } from '../../actions/index';
+
 const app = getApp()
 const page = {
 
@@ -26,9 +27,26 @@ const page = {
     } else { // 不存在SID或SID已经过期 那么需要登录
       this._login();
       this.fetchTaskFlows(this.data.u_id)
-
       return;
     }
+  },
+  getUserInfo: function (e) {
+    console.log(e)
+    if (!e.detail.userInfo) {
+      return;
+    }
+    wx.setStorageSync('userInfo', e.detail.userInfo);
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    });
+    // 向后端发送userInfo
+    this.gotUserInfo(this.data.u_id, e.detail.userInfo);
+    this.setData({
+      showAuthModal: false
+    });
+    wx.showTabBar({});
   },
   _login: function () {
     const that = this;
@@ -54,7 +72,7 @@ const page = {
     //   title: 'test',
     //   content: JSON.stringify(options)
     // })
-    const { tf_id, who, cnt, tf_name,avatar } = options;
+    const { tf_id, who, cnt, tf_name, avatar } = options;
     this.setData({
       tf_id,
       who,
@@ -75,16 +93,16 @@ const page = {
     }
 
   },
-  confirm:function(){ // 确认加入
-    const u_id =  wx.getStorageSync('u_id');
-    
-    if(!u_id){
+  confirm: function () { // 确认加入
+    const u_id = wx.getStorageSync('u_id');
+
+    if (!u_id) {
       // 登录 
       this._login();
       return;
     }
 
-    this.addNewTaskFlowMember(this.data.tf_id,u_id);
+    this.addNewTaskFlowMember(this.data.tf_id, u_id);
     wx.showToast({
       title: '加入成功',
     });
@@ -93,7 +111,7 @@ const page = {
     })
 
   },
-  cancel:function(){ // 取消加入 到首页看一看吧
+  cancel: function () { // 取消加入 到首页看一看吧
 
   }
 }
@@ -104,7 +122,7 @@ const mapStateToData = (state, options) => {
 }
 const mapDispatchToPage = dispatch => ({
   login: code => dispatch(login(code)),
-  addNewTaskFlowMember: (tf_id,u_id)=>dispatch(addNewTaskFlowMember(tf_id,u_id))
+  addNewTaskFlowMember: (tf_id, u_id) => dispatch(addNewTaskFlowMember(tf_id, u_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

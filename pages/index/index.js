@@ -65,7 +65,9 @@ const page = {
     filter: false, // 是否进入筛选模式
     filterItems: initFilterItems,
     isPinTaskFlowFold: false, // 是否折叠置顶的
-    isTaskFlowFold: false // 是否折叠其他的
+    isTaskFlowFold: false, // 是否折叠其他的,
+    showAuthModal:false
+
   },
 
   toggleFilter: function () {
@@ -196,7 +198,6 @@ const page = {
       showAuthModal: false
     });
     wx.showTabBar({});
-
   },
   pinTopTf: function (e) {
     const tf_id = e.currentTarget.dataset.tfid;

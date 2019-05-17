@@ -14,15 +14,16 @@ const page = {
     const id = options.id;
     const type = options.type;
     if (!type || !id || !['tf', 't'].includes(type)) return;
-    this.fetchLogs(id, type);
     this.setData({
       id,
       type
     })
+  },
+  onShow: function () {
+    const { id, type } = this.data;
+    this.fetchLogs(id, type);
   }
 }
-
-
 const mapStateToData = (state) => {
   const logs = [...state.logs];
   const intellectDatetime = state.settings.intellectDatetime;
