@@ -31,7 +31,9 @@ const page = {
     editable: false,
     cateSelectorIsActive: false,
     invite: 1,
-    leader_id: ''
+    leader_id: '',
+    cur_user_avatar: '',
+    cur_user_name: ''
   },
 
   editInfo: function () {
@@ -65,9 +67,9 @@ const page = {
     const _task_flow = this.data.taskFlowList.filter(tf => tf.id === tf_id)[0];
     const task_flow = { ..._task_flow };
     console.log(task_flow);
-    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite } = task_flow;
+    const { id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite, nick_name: cur_user_name, avatar_url: cur_user_avatar } = task_flow;
     this.setData({
-      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite,
+      id, tf_describe, tf_name, is_completed, begin_time, end_time, category, members, leader_id, invite, cur_user_name, cur_user_avatar,
       leader: members.filter(mem => mem.id === leader_id)[0],
       is_leader: wx.getStorageSync('u_id') === leader_id, // 判断是否是leader
       editable: app.globalData.u_id === leader_id && compareDate(end_time, formatTime(new Date())) && is_completed === 0, // 判断是否可以进行更改
@@ -131,7 +133,7 @@ const page = {
   // 邀请新成员
   addMember: function () {
     wx.navigateTo({
-      url: './add_member/add_member?tf_id=' + this.data.id + "&who=" + this.data.leader.nick_name + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.members.length + "&avatar=" + this.data.leader.avatar_url
+      url: './add_member/add_member?tf_id=' + this.data.id + "&who=" + this.data.cur_user_name + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.members.length + "&avatar=" + this.data.cur_user_avatar
     })
   },
   // 任务数据
@@ -163,7 +165,7 @@ const page = {
   onPullDownRefresh: function () {
     // 下拉刷新任务
     wx.showNavigationBarLoading();
-    this.fetchTasks(this.data.id, this.setFunc);
+    this.fetchSingleTaskFlow(app.globalData.u_id, this.data.id, this.setFunc);
     wx.stopPullDownRefresh();
   },
   onSelectCate: function () {
@@ -203,9 +205,9 @@ const mapStateToData = _state => {
   const ids = { ...state.ids };
   const entities = { ...state.entities };
   // 组装一个完整的tf列表
-  const tfl = ids.task_flows.map(id => entities.task_flows[id]);
+  const tfl = ids.task_flows.map(id => ({ ...entities.task_flows[id] }));
   const _taskFlowList = [...tfl];
-
+  console.log(_taskFlowList);
   const taskFlowList = _taskFlowList.map(it => {
     const _item = { ...it };
     const { members, tasks } = _item;

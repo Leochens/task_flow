@@ -35,6 +35,7 @@ const task_flows = (state = st_task_flows, action) => {
         if (meta.resource === 'task_flows') {
           const { task_flows } = payload.entities;
           if (!task_flows) return state;
+          // console.log(task_flows);
           formatDateInObject(task_flows);
           const newState = {
             ...state,
@@ -61,6 +62,19 @@ const task_flows = (state = st_task_flows, action) => {
 
           console.log("fetch Task结束")
           return newState;
+        }
+        if (meta.resource === 'task_flows_one') {
+          const { task_flows } = payload.entities;
+          console.log(task_flows);
+          formatDateInObject(task_flows);
+          const newState = {
+            ...state,
+            ...task_flows
+          };
+          meta.callback && setTimeout(meta.callback, 100)
+          wx.setStorageSync('st_task_flows', newState);
+          return newState;
+
         }
         return state;
       }

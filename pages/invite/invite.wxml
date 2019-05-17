@@ -1,6 +1,12 @@
 <!-- pages/invite/invite.wxml -->
-<nav-bar blank="true" />
-<view class='wrap' >
+<nav-bar wx:if="{{!showAuthModal}}" isCustom="true">
+  <view slot="content">邀请</view>
+</nav-bar>
+<nav-bar wx:else >
+  <view slot="content">邀请</view>
+</nav-bar>
+
+<view class='wrap'>
   <view>
     <view class='card'>
       <view class='user-info'>
@@ -10,18 +16,13 @@
         邀请您加入任务流
       </view>
       <view class='title'>{{tf_name}}</view>
-      <view class='member-count'>当前参加人数: {{cnt}}</view>
     </view>
     <view class='btn-group'>
       <view class='confirm' bind:tap="confirm">确认加入</view>
       <view class='cancel' bind:tap="cancel">取消</view>
     </view>
-    <view class='copyright'>
-      <image src='../../assets/imgs/copyright.png'></image>
-    </view>
   </view>
 </view>
-
 <view class="cu-modal {{showAuthModal?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
@@ -30,7 +31,6 @@
     <view class="padding-xl">
       <view class='text-grey'>申请获得您的以下权限</view>
       <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
-      
       <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
         确认授权
       </button>

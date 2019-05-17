@@ -3,7 +3,8 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import {
-  login
+  login,
+  gotUserInfo
 } from '../../actions/auth';
 import { addNewTaskFlowMember } from '../../actions/index';
 
@@ -67,11 +68,6 @@ const page = {
     wx.hideTabBar({
     });
     this.checkSID();
-
-    // wx.showModal({
-    //   title: 'test',
-    //   content: JSON.stringify(options)
-    // })
     const { tf_id, who, cnt, tf_name, avatar } = options;
     this.setData({
       tf_id,
@@ -93,12 +89,19 @@ const page = {
     }
 
   },
+  showModal: function () {
+    this.setData({
+      showAuthModal: true
+    })
+  },
   confirm: function () { // 确认加入
     const u_id = wx.getStorageSync('u_id');
+    const userInfo = wx.getStorageSync('userInfo');
+    // 判断是否授权
 
-    if (!u_id) {
+    if (!u_id || !userInfo) {
       // 登录 
-      this._login();
+      this.showModal();
       return;
     }
 
@@ -106,8 +109,8 @@ const page = {
     wx.showToast({
       title: '加入成功',
     });
-    wx.switchTab({
-      url: '../index/index'
+    wx.reLaunch({
+      url: '/pages/index/index'
     })
 
   },
@@ -122,7 +125,8 @@ const mapStateToData = (state, options) => {
 }
 const mapDispatchToPage = dispatch => ({
   login: code => dispatch(login(code)),
-  addNewTaskFlowMember: (tf_id, u_id) => dispatch(addNewTaskFlowMember(tf_id, u_id))
+  addNewTaskFlowMember: (tf_id, u_id) => dispatch(addNewTaskFlowMember(tf_id, u_id)),
+  gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

@@ -29,11 +29,6 @@
               <text class="icon-refresh margin-0"></text>
             </view>
           </view>
-          <view class="action " bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="3">
-            <view class='icon-cu-image text-white'>
-              <text class="icon-delete{{3==TabCur && 3==isFilter?'fill':''}}  margin-0"></text>
-            </view>
-          </view>
           <view class="action {{4==TabCur?'cur':''}}" data-id="4">
             <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
               <text class='icon-add '></text>
@@ -58,7 +53,7 @@
   </view>
   <view wx:if="{{currentCategoryTaskFlowList.length}}">
     <form-id>
-      <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" wx:if="{{showCom}}" wx:for="{{currentCategoryTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+      <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" wx:if="{{showCom}}" wx:for="{{currentCategoryTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
     </form-id>
   </view>
   <view wx:else>
@@ -101,7 +96,7 @@
             </view>
           </view>
         </view>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" simplify="{{isPinTaskFlowFold}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" simplify="{{isPinTaskFlowFold}}" bind:longpress="cancelPinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{pinTopTaskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
       </form-id>
       <form-id>
         <view wx:if="{{pinTopTaskFlowList.length}}" class="cu-bar">
@@ -115,7 +110,7 @@
             </view>
           </view>
         </view>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" tfCardType="{{tfCardType}}" simplify="{{isTaskFlowFold}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" simplify="{{isTaskFlowFold}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
       </form-id>
     </view>
     <view wx:else>

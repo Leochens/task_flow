@@ -3,12 +3,6 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
-const MENU = {
-  NONE: 0,
-  CLASSIFY: "1",
-  COMPLETED: "2",
-  DELETE: "3"
-}
 const COMPLETE = '已完成';
 const CONTINUE = '进行中';
 // const RECENT = '近7天截止';
@@ -28,8 +22,7 @@ import {
   fetchTaskFlows,
   getPinTopTaskFlow,
   pinTopTaskFlow,
-  cancelPinTopTaskFlow,
-  deleteTaskFlow
+  cancelPinTopTaskFlow
 } from '../../actions/index';
 import {
   login,
@@ -44,7 +37,6 @@ const page = {
     currentIndex: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     isClassify: false,
-    isFilter: MENU.NONE,
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -57,21 +49,15 @@ const page = {
     searchResultList: [],
     currentCategoryTaskFlowList: [],
     searchKeyword: '',
-    tfCardType: 'default',
     hasUserInfo: false,
-    curOperation: MENU.NONE,
-    curOperationText: '',
     isPinTop: true,
     filter: false, // 是否进入筛选模式
     filterItems: initFilterItems,
     isPinTaskFlowFold: false, // 是否折叠置顶的
     isTaskFlowFold: false, // 是否折叠其他的,
     showAuthModal: false
-
   },
-
   toggleFilter: function () {
-
     this.setData({
       filter: !this.data.filter,
       filterTaskFlowList: [],
@@ -89,18 +75,14 @@ const page = {
     })
   },
   onFilter: function (e) {
-    console.log(e);
     const filterItemIndex = e.currentTarget.dataset.id;
-    console.log(filterItemIndex)
     const filterItems = this.data.filterItems.slice();
-
     filterItems[filterItemIndex].active = !filterItems[filterItemIndex].active;
     // 开始筛选
     const filterContinueTaskFlows = filterItems[0].active;
     const filterCompleteTaskFlows = filterItems[1].active;
     const taskFlowList = this.data.taskFlowList.slice();
     const pinTopTaskFlowList = this.data.pinTopTaskFlowList.slice();
-
     // 因为所有任务流和置顶任务流是分开的 但是筛选是在一起筛选的 所以此处要合并一下
     const filterTaskFlowList = pinTopTaskFlowList.concat(taskFlowList).filter(tf => {
       if (filterCompleteTaskFlows && filterContinueTaskFlows) return true;
@@ -112,35 +94,19 @@ const page = {
       filterItems,
       filterTaskFlowList
     })
-
   },
   menuTabSelect(e) {
     const which = e.currentTarget.dataset.id;
-    let tfCardType = 'default';
-    switch (which) {
-      case MENU.DELETE: {
-        tfCardType = this.data.tfCardType === 'delete' ? 'default' : 'delete'
-        this.setData({
-          curOperation: MENU.DELETE,
-          curOperationText: "选择一个任务流删除"
-        });
-        break;
-      }
-      default: break;
-    }
     this.setData({
       TabCur: -1,
       scrollLeft: (which - 1) * 60,
-      isClassify: which == 1 ? true : false,
-      tfCardType
+      isClassify: which == 1 ? true : false
     })
   },
   backToMenu: function () {
     this.setData({
-      curOperation: MENU.NONE,
       filterTaskFlowList: [],
-      searchKeyword: '',
-      tfCardType: 'default',
+      searchKeyword: ''
     })
   },
   getUserInfo: function (e) {
@@ -159,7 +125,7 @@ const page = {
     this.setData({
       showAuthModal: false
     });
-    this._fetchTaskFlows();
+    this._fetchTaskFlows(); // 重新拉取tf
     wx.showTabBar({});
   },
   pinTopTf: function (e) {
@@ -170,9 +136,7 @@ const page = {
     const tf_id = e.currentTarget.dataset.tfid;
     this.data.isPinTop && this.cancelPinTopTaskFlow(tf_id);
   },
-
   classTabSelect(e) { // 按照分类筛选tf
-    console.log(e.currentTarget.dataset);
     const { categories, taskFlowList } = this.data;
     const which = e.currentTarget.dataset.id;
     let isBack = false;
@@ -190,14 +154,12 @@ const page = {
   handleTouchStart: function (e) {
     this.startTime = e.timeStamp;
   },
-
   //手指离开
   handleTouchEnd: function (e) {
     this.endTime = e.timeStamp;
   },
-
   toTaskFlowDetail: function (e) {
-    if (this.endTime - this.startTime >= 350 || this.data.tfCardType != 'default') return;
+    if (this.endTime - this.startTime >= 350) return;
     const tf_id = e.target.dataset.tfid;
     wx.navigateTo({
       url: '../task_flow/task_flow?tf_id=' + tf_id
@@ -213,7 +175,6 @@ const page = {
       url: '../create_task_flow/create_task_flow'
     })
   },
-
   // 检测SID是否过期 过期后要重新登录
   checkSID: function () {
     const SID = wx.getStorageSync('SID');
@@ -261,7 +222,6 @@ const page = {
   },
   //事件处理函数
   onLoad: function (options) {
-    // const refresh = options.refresh;
     this.checkSID();
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
@@ -271,7 +231,6 @@ const page = {
         showAuthModal: true
       });
       wx.hideTabBar({});
-
     }
     if (SID) {
       this.fetchTaskFlows(u_id, this.setTfIds);
@@ -286,9 +245,6 @@ const page = {
       searchKeyword: '',
       searchResultList: [],
       filterTaskFlowList: [],
-      tfCardType: 'default',
-      curOperation: MENU.NONE,
-      curOperationText: '',
       filter: false,
       filterItems: initFilterItems
     })
@@ -362,8 +318,7 @@ const mapDispatchToPage = dispatch => ({
   gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
   getPinTopTaskFlow: () => dispatch(getPinTopTaskFlow()),
   pinTopTaskFlow: tf_id => dispatch(pinTopTaskFlow(tf_id)),
-  cancelPinTopTaskFlow: tf_id => dispatch(cancelPinTopTaskFlow(tf_id)),
-  deleteTaskFlow: (u_id, tf_id) => dispatch(deleteTaskFlow(u_id, tf_id)),
+  cancelPinTopTaskFlow: tf_id => dispatch(cancelPinTopTaskFlow(tf_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

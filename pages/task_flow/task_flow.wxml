@@ -98,11 +98,11 @@
   <view class='tabbar'>
     <block wx:if="{{is_completed}}" style="">
       <view class='tab-item' bind:tap="checkData">
-        <image src='../../assets/imgs/task_flow/curve.svg' class='tab-item-icon'></image>
+        <view class="icon-rankfill text-grey text-center text-xxl"></view>
         <view class='text'>任务曲线</view>
       </view>
       <view class='tab-item' bind:tap="allMembers">
-        <image src='../../assets/imgs/task_flow/all_members.svg' class='tab-item-icon'></image>
+        <view class="icon-group_fill text-grey text-center text-xxl"></view>
         <view class='text'>全部人员</view>
       </view>
       <view class='tab-item-important' bind:tap="myTasks">我的任务</view>
