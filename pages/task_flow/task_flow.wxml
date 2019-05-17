@@ -15,7 +15,7 @@
       <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
     </view>
     <view class="basis-xs text-right" bind:tap="toTaskFlowSettings">
-      <view class="cu-tag line-main">
+      <view class="cu-tag line-main round">
         <view class="icon-more text-bold"></view>
       </view>
     </view>

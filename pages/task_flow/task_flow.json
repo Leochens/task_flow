@@ -5,7 +5,7 @@
     "date-time-picker": "../../components/date_time_picker/date_time_picker",
     "category-selector": "../../components/category_selector/category_selector"
   },
-  "backgroundColor": "#000",
+  "backgroundColor": "#fff",
   "enablePullDownRefresh": true,
   "backgroundTextStyle":"dark"
   

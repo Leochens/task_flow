@@ -22,14 +22,6 @@
                     <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
                     {{item.members.length}}
                 </view>
-                <view class="b2">
-                    <view class="exec-people">
-                        执行人:
-                        <text wx:for="{{item.members}}" wx:key wx:for-item="it">
-                            {{it.nick_name}}
-                        </text>
-                    </view>
-                </view>
                 <view class="deadline">截止到:{{item.end_time}}</view>
                 <view class="t-describe">{{item.t_describe}}</view>
             </view>

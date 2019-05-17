@@ -146,18 +146,22 @@ const _page = {
     const u_id = wx.getStorageSync('u_id');
     if (isUpdate) {
       console.log("开始更新")
-      this.updateTaskFlow(u_id, this.data.tf_id, JSON.stringify({
-        tf_name:replaceChar(tf_name),
-        tf_describe:replaceChar(tf_describe),
+      const d = JSON.stringify({
+        tf_name: replaceChar(tf_name),
+        tf_describe: replaceChar(tf_describe),
         begin_time: begin_time,
         end_time,
         leader_id: u_id,
         category: replaceChar(curCate)
-      }));
+      });
+      const { tf_id } = this.data;
+      this.updateTaskFlow(u_id, tf_id, d, function () {
+        wx.navigateBack();
+      });
     } else {
       const data = JSON.stringify({
-        tf_name:replaceChar(tf_name),
-        tf_describe:replaceChar(tf_describe),
+        tf_name: replaceChar(tf_name),
+        tf_describe: replaceChar(tf_describe),
         begin_time,
         end_time,
         leader_id: u_id,
@@ -169,7 +173,7 @@ const _page = {
   refresh: function () {
     const u_id = app.globalData.u_id;
     console.log('refresh');
-    
+
     this.fetchTaskFlows(u_id);
   },
   addCate: function () {

@@ -93,8 +93,9 @@ const task_flows = (state = st_task_flows, action) => {
             category
           }
         }
+        
         wx.setStorageSync('st_task_flows', newState);
-        wx.navigateBack();
+        meta.callback && setTimeout(meta.callback, 100)
         return newState;
       } else if (meta.resource === 'categories') {
         const { tf_id, category } = requestPayload.data;

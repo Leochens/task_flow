@@ -37,7 +37,7 @@ const page = {
   },
   _taskFilter: function (tf_id, u_id, tasks) {
     return tasks.filter(task => {
-      const memberIds = task.members.map(mem => mem.id);
+      const memberIds = task.members;
       return (memberIds.includes(u_id) && task.tf_id === tf_id)
     })
   },

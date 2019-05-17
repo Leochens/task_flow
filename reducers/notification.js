@@ -79,6 +79,7 @@ const failureFilter = (resource, error) => {
         case 'task_flows': {
             wx.showToast({
                 title: error || "失败",
+                mask:true
             });
             setTimeout(
                 () => wx.navigateBack(),

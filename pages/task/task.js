@@ -223,7 +223,7 @@ const mapStateToData = state => {
     const m = [..._m || []];
     const i = [..._i || []];
     const c = [..._c || []];
-
+    
     t.members = m.map(mid => _members[mid]);
     t.comments = c.map(cid => _comments[cid]);
     t.images = i.map(iid => _images[iid]);
