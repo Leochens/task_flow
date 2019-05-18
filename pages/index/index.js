@@ -58,10 +58,14 @@ const page = {
     showAuthModal: false
   },
   toggleFilter: function () {
+
+    const { filter } = this.data;
+
     this.setData({
       filter: !this.data.filter,
       filterTaskFlowList: [],
-      filterItems: initFilterItems
+      filterItems: initFilterItems,
+      tip: filter ? '选择一个条件' : ''
     })
   },
   toggleFoldPinTaskFlow: function () {
@@ -92,7 +96,8 @@ const page = {
     })
     this.setData({
       filterItems,
-      filterTaskFlowList
+      filterTaskFlowList,
+      tip: ''
     })
   },
   menuTabSelect(e) {
@@ -284,17 +289,22 @@ const mapStateToData = (state, options) => {
 
   // 组装一个完整的tf列表
   const _taskFlowList = ids.task_flows.map(id => entities.task_flows[id]);
-
   const allTaskFlowList = _taskFlowList.map(wrapTaskFlow);
+  console.log("allTaskFlowList=>", allTaskFlowList);
 
   let taskFlowList = [];
   let pinTopTaskFlowList = [];
+
   if (isPinTop) {
     const pinTopIds = ids.task_flows.filter(inPinTopList);
-    const pinTopTFs = pinTopIds.map(id => entities.task_flows[id]);
+    const pinTopTFs = pinTopIds.map(id => ({ ...entities.task_flows[id] }));
     pinTopTaskFlowList = pinTopTFs.map(wrapTaskFlow);
     const pinIds = pinTopTaskFlowList.map(ptf => ptf.id);
-    taskFlowList = allTaskFlowList.filter(tf => !pinIds.includes(tf.id)); // 筛选出不是置顶的tf
+    taskFlowList = allTaskFlowList.filter(tf => {
+      if (pinIds.includes(tf.id)) return false;
+      else return true;
+    }); // 筛选出不是置顶的tf
+    console.log("taskFlowList", taskFlowList)
   } else {
     taskFlowList = allTaskFlowList;
   }

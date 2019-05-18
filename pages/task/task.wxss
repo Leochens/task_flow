@@ -1,4 +1,4 @@
-/* pages/task/task.wxss */
+pages/task/task.wxss
 .task-wrap{
     font-size: 35rpx;
     color: #666;

@@ -4,7 +4,73 @@
     <view slot="backText">返回</view>
     <view slot="content">子任务详情</view>
 </nav-bar>
-<view class="task-wrap">
+<view class="">
+    <view class="flex p-xs padding-sm ">
+        <view class="flex-sub solid-right">
+            <view class="text-xl">{{task.t_name}}</view>
+            <view class="text-sm text-grey margin-top">{{task.t_describe}}</view>
+        </view>
+        <view class="flex-twice">
+            <view class="cu-list grid col-{{task.members.length>=4?4:task.members.length}}">
+                <view class="cu-item solid-top" wx:for="{{task.members}}" wx:key>
+                    <view class="text-sm text-cut">{{item.nick_name}}</view>
+                    <view class="text-xs text-{{memberStatus(item,task.status_map)?'grey':'red'}}">
+                        {{memberStatus(item,task.status_map)}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="margin-sm margin-top-xs flex justify-between">
+        <view class="">
+            <text class="icon-calendar text-grey margin-right-sm"></text>
+            <text class="text-sm">{{task.begin_time}} ~ {{task.end_time}}</text>
+        </view>
+        <view class="cu-tag round line-main" bind:tap="toTaskSettings">
+            <view class="icon-more text-bold"></view>
+        </view>
+    </view>
+    <view class="margin-sm margin-top-xs ">
+        <text class="icon-{{task.is_completed === 1? 'roundcheck text-main':task.is_completed === 0 ? 'roundcheck text-grey' : 'roundcheck text-red'}}"></text>
+        <text class="text-main margin-left-sm">{{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}</text>
+    </view>
+    <view class="cu-form-group solid-top">
+        <view class="grid col-5 grid-square flex-sub">
+            <view class="bg-img" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="previewImg" data-url="{{item.url}}" style="margin-right:15rpx">
+                <image src='{{item.url}}' mode='aspectFill'></image>
+                <view class="cu-tag bg-grey light sm" data-index="{{index}}">
+                    {{item.nick_name}}
+                </view>
+            </view>
+            <view class="solids" bindtap="bindChooiceImage">
+                <text class="icon-cameraadd"></text>
+            </view>
+        </view>
+    </view>
+    <view class="margin-sm solid-top bg-gray ">
+        <view class="cu-list menu">
+            <view class="cu-item" wx:for="{{task.comments}}" wx:key>
+                <view class="action">
+                    <view class="cu-avatar round" style="background-image:url({{item.avatar_url}})"></view>
+                </view>
+                <view class="content">
+                    <view class="text-sm text-grey">{{item.nick_name}}</view>
+                    <view class="text-sm">{{item.content}}</view>
+                </view>
+                <view class="action">
+                    <view class="text-sm text-grey">{{item.create_time}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <form wx:if="{{task.is_completed != 1}}" class="cu-bar tabbar foot" bindsubmit="commentSubmit">
+        <view class="flex justify-between padding-sm">
+            <input name="comment" class="flex-treble" value="{{content}}" placeholder="请输入你的留言" />
+            <button form-type="submit" class="cu-btn bg-main" style="position: absolute;right: 20rpx;">留言</button>
+        </view>
+    </form>
+</view>
+<!-- <view class="task-wrap">
     <view class="title-wrap">
         <view class="title">
             <view>{{task.t_name}}</view>
@@ -85,4 +151,4 @@
             </swiper-item>
         </swiper>
     </view>
-</view>
+</view> -->

@@ -12,7 +12,8 @@ const page = {
    */
   data: {
     task_flows: [],
-    tasks: []
+    tasks: [],
+    hasResult: false
   },
 
   /**
@@ -28,6 +29,9 @@ const page = {
     console.log(e);
     const u_id = app.globalData.u_id;
     this.globalSearch(u_id, keyword);
+    this.setData({
+      hasResult: true
+    })
   },
   toTaskFlowDetail: function (e) {
     const tf_id = e.currentTarget.dataset.tfid;

@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/task/task",
     "pages/task_flow/task_flow_data/task_flow_data",
     "pages/test/test",
     "pages/settings/settings",
     "pages/calendar/calendar",
     "pages/invite/invite",
-    "pages/task/task",
     "pages/task_flow/create_task/create_task",
     "pages/create_task_flow/create_task_flow",
     "pages/me/me",

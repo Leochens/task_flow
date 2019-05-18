@@ -1,6 +1,7 @@
 import { PIN_TOP_TASK_FLOW, CANCEL_PIN_TOP_TASK_FLOW, GET_PIN_TOP_TASK_FLOW } from '../actions/index';
+const _pinTopList = wx.getStorageSync('pin_top_list') || [];
 
-const pinTopList = (state = [], action) => {
+const pinTopList = (state = _pinTopList, action) => {
     const { type, tf_id } = action;
     switch (type) {
         case GET_PIN_TOP_TASK_FLOW: { // 获得置顶的tf

@@ -1,21 +1,33 @@
 <!-- pages/search/search.wxml -->
-
 <nav-bar isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">全局搜索</view>
+    <view slot="backText">返回</view>
+    <view slot="content">全局搜索</view>
 </nav-bar>
 <search-bar bind:onSearch='onSearch'></search-bar>
 <view class="wrap" wx:if="{{task_flows.length}}">
-    <view class="text">任务流</view>
-    <view class="task-flow-item" hover-class="hover"  wx:for="{{task_flows}}" wx:key data-tfid="{{item.id}}" bind:tap="toTaskFlowDetail">
+    <view class="cu-bar ">
+        <view class="action">
+            <view class="icon-title text-main"></view>
+            <view class="text-gray text-bold">任务流</view>
+        </view>
+    </view>
+    <view class="task-flow-item" hover-class="hover" wx:for="{{task_flows}}" wx:key data-tfid="{{item.id}}" bind:tap="toTaskFlowDetail">
         <view class="name">{{item.tf_name}}</view>
         <view class="describe">{{item.tf_describe}}</view>
     </view>
 </view>
 <view class="wrap" wx:if="{{tasks.length}}">
-    <view class="text">子任务</view>
-    <view class="task-item"  hover-class="hover" wx:for="{{tasks}}" wx:key data-tid="{{item.id}}" bind:tap="toTaskDetail">
+    <view class="cu-bar">
+        <view class="action">
+            <view class="icon-title text-main"></view>
+            <view class="text-gray text-bold">子任务</view>
+        </view>
+    </view>
+    <view class="task-item" hover-class="hover" wx:for="{{tasks}}" wx:key data-tid="{{item.id}}" bind:tap="toTaskDetail">
         <view class="name">{{item.t_name}}</view>
         <view class="describe">{{item.t_describe}}</view>
     </view>
+</view>
+<view class="margin-top-xl" wx:if="{{hasResult && !task.length && !task_flows.length}}">
+    <view class="text-gray text-xl text-center">什么都没有找到....</view>
 </view>

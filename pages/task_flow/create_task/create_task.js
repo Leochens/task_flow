@@ -156,13 +156,13 @@ const _page = {
       })
       return false;
     }
-    if (!this.data.selectedMembers.length && !this.data.isUpdate) {
-      wx.showModal({
-        title: "提示",
-        content: "请至少选择一个任务人"
-      });
-      return false;
-    }
+    // if (!this.data.selectedMembers.length && !this.data.isUpdate) {
+    //   wx.showModal({
+    //     title: "提示",
+    //     content: "请至少选择一个任务人"
+    //   });
+    //   return false;
+    // }
     const { t_name, t_describe } = data;
 
     const task = {

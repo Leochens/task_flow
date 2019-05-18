@@ -20,7 +20,7 @@
   <view class='cu-form-group' wx:if="{{!isUpdate}}">
     <label class='title'>选择任务人</label>
     <view class='text text-main' bind:tap="selectMember">
-      {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择[至少一个]"}}
+      {{selectedMembersNames.length?selectedMembersNames:"点击我进行选择[选填]"}}
     </view>
   </view>
   <view class='cu-form-group' wx:else>

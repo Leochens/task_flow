@@ -159,9 +159,10 @@ const page = {
    */
   onLoad: function (options) {
     console.log("task options", options);
-    const t_id = options.t_id;
-    const u_id = app.globalData.u_id;
-    const isFetch = options.isFetch ? true : false;
+    const t_id = options.t_id || 'b98a85918c08c0550056bca4c783c902';
+    const u_id = app.globalData.u_id || '31a043db3bb00bc2db3bf6b7b55eb603';
+    // const isFetch = options.isFetch ? true : false;
+    const isFetch = true ;
     this.setData({
       t_id,
       u_id,

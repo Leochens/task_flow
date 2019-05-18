@@ -19,7 +19,7 @@
             <view bind:tap="taskDetail" data-tid="{{item.id}}">
                 <view class="b1">
                     <view class="name">{{item.t_name}}</view>
-                    <image class="people-count" src="../../../assets/imgs/task_flow/member.svg" />
+
                     {{item.members.length}}
                 </view>
                 <view class="deadline">截止到:{{item.end_time}}</view>
