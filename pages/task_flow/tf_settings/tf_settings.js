@@ -106,7 +106,7 @@ const page = {
     const that = this;
     wx.showModal({
       title: '警告',
-      content: "确定要提前完成任务流吗,这样所有的未完成任务将不可操作,是否继续?",
+      content: "确定要提前完成任务流吗,继续将不可添加新成员,不可添加子任务,任务流一旦完成便不可逆,是否继续?",
       success: function (e) {
         if (e.confirm) {
           that.finishTaskFlow(u_id, tf_id);

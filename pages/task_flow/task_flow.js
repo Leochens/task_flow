@@ -35,7 +35,38 @@ const page = {
     cur_user_avatar: '',
     cur_user_name: ''
   },
-
+  touchStart(e) {
+    console.log(e)
+    this.setData({
+      touchX: e.changedTouches[0].clientX,
+      touchY: e.changedTouches[0].clientY
+    });
+  },
+  touchEnd(e) {
+    let endX = e.changedTouches[0].clientX;
+    let endY = e.changedTouches[0].clientY;
+    const { touchX, touchY } = this.data;
+    this.getTouchData(endX, endY, touchX, touchY);
+  },
+  /***
+ * 判断用户滑动
+ * 左滑还是右滑
+ */
+  getTouchData(endX, endY, startX, startY) {
+    let turn = "";
+    if (endX - startX > 50 && Math.abs(endY - startY) < 50) {      //右滑
+      turn = "right";
+    } else if (endX - startX < -50 && Math.abs(endY - startY) < 50) {   //左滑
+      turn = "left";
+    }
+    console.log(turn);
+    if (turn === 'left') {
+      wx.navigateTo({
+        url: '../log/log?id=' + this.data.id + "&type=tf"
+      })
+    }
+    return turn;
+  },
   editInfo: function () {
     wx.navigateTo({
       url: '../create_task_flow/create_task_flow?flag=update&tf_id=' + this.data.id + "&tf_name=" + this.data.tf_name + "&tf_describe=" + this.data.tf_describe + "&end_time=" + this.data.end_time + "&begin_time=" + this.data.begin_time

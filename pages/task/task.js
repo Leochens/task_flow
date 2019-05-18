@@ -2,8 +2,9 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { addComment, addImage, fetchSingleTask } from '../../actions/index';
+import { addComment, addImage, fetchSingleTask, completeTask, applyTakeBreak } from '../../actions/index';
 import { formatTime, dynamicDate } from '../../utils/util';
+import replaceChar from '../../utils/replaceChar';
 import APP from '../../appConfig';
 const app = getApp();
 const deletedMember = {
@@ -21,7 +22,9 @@ const page = {
     imgs: [],
     isFetch: false, // 是否从网络上请求
     t_id: '',
-    editable: false
+    editable: false,
+    isMyTask: false,
+    showBreakModal: false
   },
   bindChooiceImage: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -95,6 +98,24 @@ const page = {
       urls // 需要预览的图片http链接列表
     })
   },
+  showModal: function () {
+    this.setData({
+      showBreakModal: true
+    })
+  },
+  hideModal: function () {
+    this.setData({
+      showBreakModal: false
+    })
+  },
+  _applyTakeBreak: function (e) {
+    const break_reason = e.detail.value.break_reason;
+    if (!replaceChar(break_reason)) return;
+    const { task: { id: t_id }, u_id } = this.data;
+    this.applyTakeBreak(t_id, u_id, break_reason);
+    this.hideModal();
+    this.initFromApi();
+  },
   extendComment: function (cmt) {
     const { u_id } = cmt;
     const members = this.data.members;
@@ -116,6 +137,11 @@ const page = {
       nick_name: author.nick_name
     }
   },
+  getMyStatus: function (status, u_id) {
+    const st = status.filter(st => st.u_id === u_id).pop();
+    if (st) return st.user_status;
+    else return null;
+  },
   editInfo: function () {
     const { tf_id, id: t_id } = this.data.task;
     wx.navigateTo({
@@ -132,7 +158,6 @@ const page = {
     const { t_id, u_id } = this.data;
     this.fetchSingleTask(u_id, t_id, this.init); // 拉取单一的子任务的详情
     console.log("api拉取子任务详情")
-
   },
   init: function () {
     // 筛选出t_id指向的task
@@ -148,10 +173,17 @@ const page = {
     const editable = this.data.isLeader(task.tf_id, this.data.u_id) && task.is_completed != 1;
     console.log(task);
 
+    const u_id = app.globalData.u_id;
+    const { members } = task;
+    const mids = members.map(m => m.id);
+    const isMyTask = mids.includes(u_id);
+    const user_status = this.getMyStatus(task.status_map, u_id);
     this.setData({
       task,
       imgs,
-      editable
+      editable,
+      isMyTask,
+      user_status
     });
   },
   /**
@@ -159,27 +191,60 @@ const page = {
    */
   onLoad: function (options) {
     console.log("task options", options);
-    const t_id = options.t_id || 'b98a85918c08c0550056bca4c783c902';
-    const u_id = app.globalData.u_id || '31a043db3bb00bc2db3bf6b7b55eb603';
+    const t_id = options.t_id;
+    const u_id = app.globalData.u_id;
     // const isFetch = options.isFetch ? true : false;
-    const isFetch = true ;
+    const isFetch = true;
     this.setData({
       t_id,
       u_id,
       isFetch
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
   onShow: function () {
     const isFetch = this.data.isFetch;
     isFetch ? this.initFromApi() : this.init();
+  },
+  touchStart(e) {
+    console.log(e)
+    this.setData({
+      touchX: e.changedTouches[0].clientX,
+      touchY: e.changedTouches[0].clientY
+    });
+  },
+  touchEnd(e) {
+    let endX = e.changedTouches[0].clientX;
+    let endY = e.changedTouches[0].clientY;
+    const { touchX, touchY } = this.data;
+    this.getTouchData(endX, endY, touchX, touchY);
+  },
+  /***
+ * 判断用户滑动
+ * 左滑还是右滑
+ */
+  getTouchData(endX, endY, startX, startY) {
+    let turn = "";
+    if (endX - startX > 50 && Math.abs(endY - startY) < 50) {      //右滑
+      turn = "right";
+    } else if (endX - startX < -50 && Math.abs(endY - startY) < 50) {   //左滑
+      turn = "left";
+    }
+    console.log(turn);
+    if (turn === 'left') {
+      wx.navigateTo({
+        url: '../log/log?id=' + this.data.task.id + '&type=t'
+      })
+    }
+    return turn;
   },
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
     this.initFromApi();
     wx.stopPullDownRefresh();
+  },
+  _completeTask: function () {
+    const { task: { id: t_id }, u_id } = this.data;
+    this.completeTask(t_id, u_id);
   },
   commentSubmit: function (e) {
     console.log(e);
@@ -224,7 +289,7 @@ const mapStateToData = state => {
     const m = [..._m || []];
     const i = [..._i || []];
     const c = [..._c || []];
-    
+
     t.members = m.map(mid => _members[mid]);
     t.comments = c.map(cid => _comments[cid]);
     t.images = i.map(iid => _images[iid]);
@@ -244,7 +309,9 @@ const mapStateToData = state => {
 const mapDispatchToPage = dispatch => ({
   addComment: (t_id, cmt) => dispatch(addComment(t_id, cmt)),
   addImage: (img) => dispatch(addImage(img)),
-  fetchSingleTask: (u_id, t_id, callback) => dispatch(fetchSingleTask(u_id, t_id, callback))
+  fetchSingleTask: (u_id, t_id, callback) => dispatch(fetchSingleTask(u_id, t_id, callback)),
+  completeTask: (t_id, u_id) => dispatch(completeTask(t_id, u_id)),
+  applyTakeBreak: (t_id, u_id, break_reason) => dispatch(applyTakeBreak(t_id, u_id, break_reason))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

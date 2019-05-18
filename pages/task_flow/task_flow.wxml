@@ -5,7 +5,7 @@
   <view slot="backText">返回</view>
   <view slot="content">任务流详情</view>
 </nav-bar>
-<view class='wrap'>
+<view class='wrap' bind:touchstart="touchStart" bind:touchend="touchEnd">
   <view class='task-flow-info'>
     <view class="basis-xl">
       <view class="task-flow-name">

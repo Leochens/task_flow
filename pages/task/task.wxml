@@ -4,7 +4,7 @@
     <view slot="backText">返回</view>
     <view slot="content">子任务详情</view>
 </nav-bar>
-<view class="">
+<view class="height-all"  bind:touchstart="touchStart" bind:touchend="touchEnd">
     <view class="flex p-xs padding-sm ">
         <view class="flex-sub solid-right">
             <view class="text-xl">{{task.t_name}}</view>
@@ -30,14 +30,27 @@
             <view class="icon-more text-bold"></view>
         </view>
     </view>
-    <view class="margin-sm margin-top-xs ">
-        <text class="icon-{{task.is_completed === 1? 'roundcheck text-main':task.is_completed === 0 ? 'roundcheck text-grey' : 'roundcheck text-red'}}"></text>
-        <text class="text-main margin-left-sm">{{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}</text>
+    <view class="margin-sm margin-top-xs flex justify-between">
+        <view class="">
+            <text class="icon-{{task.is_completed === 1? 'roundcheckfill text-main':task.is_completed === 0 ? 'roundcheck text-grey' : 'roundcheck text-red'}}"></text>
+            <text class="text-{{task.is_completed === 1? 'main':task.is_completed === 0 ? 'grey' : 'red'}} margin-left-sm">{{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}</text>
+        </view>
+        <view class="btn-group">
+            <view class="cu-btn margin-right-xs sm bg-main" wx:if="{{user_status === 1}}" catch:tap="_completeTask">
+                完成
+            </view>
+            <view class="cu-btn margin-right-xs sm bg-red" wx:if="{{user_status === 1}}" catch:tap="showModal">
+                请假
+            </view>
+            <view class="cu-btn margin-right-xs sm " wx:if="{{user_status === 2}}">已完成</view>
+            <view class="cu-btn margin-right-xs sm " wx:if="{{user_status === 3}}">请假中</view>
+            <view class="cu-btn margin-right-xs sm" wx:if="{{user_status === 0}}">已请假</view>
+        </view>
     </view>
     <view class="cu-form-group solid-top">
         <view class="grid col-5 grid-square flex-sub">
-            <view class="bg-img" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="previewImg" data-url="{{item.url}}" style="margin-right:15rpx">
-                <image src='{{item.url}}' mode='aspectFill'></image>
+            <view class="bg-img" wx:for="{{imgs}}" wx:key="{{index}}" bindtap="previewImg" data-id="{{index}}" data-url="{{item.url}}" style="margin-right:15rpx">
+                <image src='{{item.url}}' style="height:120rpx" mode='aspectFill'></image>
                 <view class="cu-tag bg-grey light sm" data-index="{{index}}">
                     {{item.nick_name}}
                 </view>
@@ -48,9 +61,9 @@
         </view>
     </view>
     <view class="margin-sm solid-top bg-gray ">
-        <view class="cu-list menu">
-            <view class="cu-item" wx:for="{{task.comments}}" wx:key>
-                <view class="action">
+        <view class="cu-list menu list">
+            <view class="cu-item no-border" wx:for="{{task.comments}}" wx:key>
+                <view class="action margin-right-sm">
                     <view class="cu-avatar round" style="background-image:url({{item.avatar_url}})"></view>
                 </view>
                 <view class="content">
@@ -63,92 +76,38 @@
             </view>
         </view>
     </view>
-    <form wx:if="{{task.is_completed != 1}}" class="cu-bar tabbar foot" bindsubmit="commentSubmit">
-        <view class="flex justify-between padding-sm">
-            <input name="comment" class="flex-treble" value="{{content}}" placeholder="请输入你的留言" />
-            <button form-type="submit" class="cu-btn bg-main" style="position: absolute;right: 20rpx;">留言</button>
-        </view>
-    </form>
 </view>
-<!-- <view class="task-wrap">
-    <view class="title-wrap">
-        <view class="title">
-            <view>{{task.t_name}}</view>
-            <view>
-                <view class="icon-more text-main" bind:tap="toTaskSettings"></view>
+<form wx:if="{{task.is_completed != 1}}" class="cu-bar tabbar foot bg-white" bindsubmit="commentSubmit">
+    <view class="flex justify-between padding-sm">
+        <input name="comment" class="flex-treble" value="{{content}}" placeholder="请输入你的留言" />
+        <button form-type="submit" class="cu-btn bg-main" style="position: absolute;right: 20rpx;">
+            留言
+        </button>
+    </view>
+</form>
+
+<view class="cu-modal {{showBreakModal?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">请假原因</view>
+            <view class="action" bindtap="hideModal">
+                <text class="icon-close text-red"></text>
             </view>
         </view>
-        <view class="deadline">开始:{{task.begin_time}}</view>
-    </view>
-    <view class="main">
-        <view class="line" style="border-color:{{task.is_completed === 1? '#2665AE':task.is_completed === 0 ?'':'red'}}">
-            <view class="dot" style="background-color:{{task.is_completed === 1? '#2665AE':task.is_completed === 0 ?'':'red'}}"></view>
-        </view>
-        <swiper class="swiper" indicator-dots="{{false}}" autoplay="{{false}}">
-            <swiper-item class="content">
-                <view class="begin-time">截止:{{task.end_time}}</view>
-                <view class="card">
-                    <view class="task-describe">
-                        <view class="describe-wrap">
-                            <label>内容:</label>
-                            <view class="status">
-                                <image class="is_completed" src="../../assets/imgs/task_flow/check{{task.is_completed === 1 ?'_ok':''}}.svg" />
-                                {{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}
-                            </view>
-                        </view>
-                        <view class="describe-content">{{task.t_describe}}</view>
-                    </view>
-                    <view class="task-exec-people">
-                        <label>执行人:</label>
-                        <view class="table">
-                            <view class="tr">
-                                <view class="th">人员</view>
-                                <view class="th">状态</view>
-                            </view>
-                            <view class="tr" wx:for="{{task.members}}" wx:key="">
-                                <view class="td">{{item.nick_name}}</view>
-                                <view class="td {{memberStatus(item,task.status_map)?'':'text-red'}}">
-                                    {{memberStatus(item,task.status_map)}}
-                                </view>
-                            </view>
-                        </view>
-                    </view>
-                    <view>
-                        <view class="images" class="grid col-3 grid-square flex-sub">
-                            <view class="bg-img" wx:for="{{imgs}}" wx:key>
-                                <image src="{{item.url}}" mode="aspectFill" bind:tap="previewImg" data-id="{{index}}" />
-                                <view class="cu-tag bg-grey light">{{item.nick_name}}</view>
-                            </view>
-                            <view bind:tap="bindChooiceImage" wx:if="{{task.is_completed != 1}}" class="solids">
-                                <text class="icon-cameraadd"></text>
-                            </view>
-                        </view>
-                    </view>
+        <form bindsubmit="_applyTakeBreak">
+            <view class="padding-sm">
+                <view class="cu-form-group">
+                    <input name="break_reason" placeholder="输入你请假的原因" value="" />
                 </view>
-                <view class="tip-btn">左滑进入留言区</view>
-            </swiper-item>
-            <swiper-item class="content">
-                <view class="begin-time">2019-2-1 14:35:44</view>
-                <view class="card card-comment">
-                    <view class="comment-item" wx:for="{{task.comments}}" wx:key>
-                        <image class="avatar" src="{{item.avatar_url}}" />
-                        <view class="comment">
-                            <view class="name-time">
-                                <text class="name">{{item.nick_name}}</text>
-                                <text class="time">{{item.create_time}}</text>
-                            </view>
-                            <view class="comment-content">{{item.content}}</view>
-                        </view>
-                    </view>
+            </view>
+            <view class="cu-bar bg-white">
+                <view class="action margin-0 flex-sub text-main solid-left" bindtap="hideModal">
+                    取消
                 </view>
-                <form wx:if="{{task.is_completed != 1}}" class="send-comment" bindsubmit="commentSubmit">
-                    <view class="input-comment">
-                        <input name="comment" value="{{content}}" />
-                    </view>
-                    <button form-type="submit" class="send-btn">留言</button>
-                </form>
-                <view class="tip-btn">右滑进入详情页</view>
-            </swiper-item>
-        </swiper>
+                <button form-type="submit" class="cu-btn bg-white action margin-0 flex-sub  solid-left">
+                    确定
+                </button>
+            </view>
+        </form>
     </view>
-</view> -->
+</view>

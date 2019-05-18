@@ -77,7 +77,7 @@
         <form bindsubmit="changeTaskDescribe">
             <view class="padding-xl">
                 <view class="cu-form-group">
-                    <textarea name="t_describe" placeholder="输入新的任务简介" value="{{task.t_describe}}" />
+                    <textarea wx:if="{{modalName==='t_describe'}}" name="t_describe" placeholder="输入新的任务简介" value="{{task.t_describe}}" />
                 </view>
             </view>
             <view class="cu-bar bg-white">
@@ -116,7 +116,7 @@
         </form>
     </view>
 </view>
-<view class="cu-modal {{modalName==='t_describe'?'show':''}}">
+<!-- <view class="cu-modal {{modalName==='t_describe'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
             <view class="content">修改任务简介</view>
@@ -125,9 +125,9 @@
             </view>
         </view>
         <form bindsubmit="changeTaskDescribe">
-            <view class="padding-xl">
+            <view class="padding-sm">
                 <view class="cu-form-group">
-                    <textarea name="t_describe" placeholder="输入新的任务简介" value="{{task.t_describe}}" />
+                    <input name="t_describe" placeholder="输入新的子任务名" value="{{task.t_describe}}" />
                 </view>
             </view>
             <view class="cu-bar bg-white">
@@ -140,7 +140,7 @@
             </view>
         </form>
     </view>
-</view>
+</view> -->
 <view class="cu-modal {{modalName==='end_time'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">

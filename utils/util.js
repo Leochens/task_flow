@@ -31,9 +31,12 @@ const getNowDate = () => {
 
 
 function dynamicDate(stringTime) {
+
   var time1 = new Date().getTime();//当前的时间戳
+
   console.log(time1);
   var time2 = Date.parse(new Date(stringTime));//指定时间的时间戳
+  if (isNaN(time2)) return stringTime;
   console.log(time2);
   var time = time1 - time2;
   var result = null;
