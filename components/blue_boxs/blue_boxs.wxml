@@ -2,15 +2,13 @@
 <view class="boxs">
     <view class="item" wx:for="{{boxs}}" wx:key>
         <view class="box {{index === boxs.length-1?'show':''}}" style="background:{{item.cnt?color[item.level]:'#eee'}}">
-            <view class="cnt">{{item.cnt}}</view>
-
+            <view class="cnt" style="{{!item.cnt?'color:#eee':''}}">{{item.cnt}}</view>
         </view>
     </view>
 </view>
 <view class="tips">
     <view>
         <view class="tip">由少到多</view>
-        <view class="sm-box" wx:for="{{color}}" wx:key style="background:{{color[index]}}">
-        </view>
+        <view class="sm-box" wx:for="{{color}}" wx:key style="background:{{color[index]}}"></view>
     </view>
 </view>
