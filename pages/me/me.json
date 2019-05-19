@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "nav-bar":"../../common/nav_bar/nav_bar"
+    "nav-bar":"../../common/nav_bar/nav_bar",
+    "blue-boxs":"../../components/blue_boxs/blue_boxs"
   },
   "navigationBarTextStyle": "white"
 }

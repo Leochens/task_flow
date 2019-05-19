@@ -9,6 +9,7 @@ import reviews from './reviews';
 import search from './search';
 import settings from './settings';
 import logs from './logs';
+import dayBox from './dayBox';
 export default () => {
   const reducers = combineReducers({
     entities,
@@ -20,7 +21,8 @@ export default () => {
     reviews,
     search,
     settings,
-    logs
+    logs,
+    dayBox
   });
 
   return reducers;

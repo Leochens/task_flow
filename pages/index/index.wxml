@@ -29,6 +29,11 @@
               <text class="icon-refresh margin-0"></text>
             </view>
           </view>
+          <view class="action" bind:tap="toHelp" data-id="3">
+            <view class='icon-cu-image text-white'>
+              <text class="icon-question margin-0"></text>
+            </view>
+          </view>
           <view class="action {{4==TabCur?'cur':''}}" data-id="4">
             <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
               <text class='icon-add '></text>

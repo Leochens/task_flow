@@ -15,6 +15,7 @@ const page = {
     myTaskFlowsCnt: 0,
     finishedCnt: 0,
     userInfo: {}
+    // opDatas: Array.from({ length: 30 }, (v, k) => ({ date: `2019-1-${1 + k}`, cnt: Math.random().toFixed(2) * 50 }))
   },
 
   /**
@@ -25,6 +26,7 @@ const page = {
   },
   onShow: function () {
     const userInfo = wx.getStorageSync('userInfo') || {};
+
     this.setData({
       userInfo
     })
@@ -73,11 +75,16 @@ const mapStateToData = state => {
   const tfs = ids.task_flows.map(tf_id => entities.task_flows[tf_id]);
   const finishedCnt = tfs.filter(tf => tf.is_completed).length;
   const myTaskFlowsCnt = tfs.filter(tf => tf.leader_id === u_id).length;
-
+  const dayBox = [];
+  for (let key in state.dayBox) {
+    dayBox.push({ ...state.dayBox[key] });
+  }
+  console.log("dayBox", dayBox);
   return {
     taskFlowsCnt,
     myTaskFlowsCnt,
-    finishedCnt
+    finishedCnt,
+    dayBox
   }
 }
 const mapDispatchToPage = dispatch => ({

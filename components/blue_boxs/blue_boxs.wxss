@@ -1,0 +1,62 @@
+/* components/blueBoxs/blue_boxs.wxss */
+.boxs{
+    width: 100%;
+}
+.item{
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+}
+.box{
+    display: inline-block;
+    background: #2967AF;
+    height: 30rpx;
+    width: 50%;
+    border-radius: 6rpx;
+}
+.sm-box{
+    display: inline-block;
+    height: 16rpx;
+    width: 16rpx;
+    border-radius: 4rpx;
+    margin-right: 4rpx;
+}
+.cnt{
+    color: #fff;
+    font-size: 16rpx;
+    text-align: center;
+    line-height: 30rpx;
+}
+.tips{
+    display: flex;
+    align-items: center;
+    margin-left: 16rpx;
+    margin-top: 12rpx;
+}
+.tip{
+    line-height: 0;
+    font-size: 16rpx;
+    justify-self: flex-end;
+    color: #666;
+}
+
+.box.show{
+    animation: zoomIn 1s ease-in-out;
+    position: relative;
+}   
+.box.show::after{
+    content: '今天';
+    display: block;
+    position: absolute;
+    width: 100%;
+    font-size: 12rpx;
+    top: -12rpx;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.5,1.5) rotate(45deg);
+    }to{
+        transform: scale(1,1);
+    }
+}

@@ -114,6 +114,11 @@ const page = {
       searchKeyword: ''
     })
   },
+  toHelp: function () {
+    wx.navigateTo({
+      url: '/pages/help/help'
+    })
+  },
   getUserInfo: function (e) {
     console.log(e)
     if (!e.detail.userInfo) {

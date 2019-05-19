@@ -15,7 +15,6 @@ const pinTopList = (state = _pinTopList, action) => {
             if (!pinTopList.includes(tf_id))
                 pinTopList.unshift(tf_id);
             wx.setStorageSync('pin_top_list', pinTopList);
-
             const _state = state.slice();
             if (!_state.includes(tf_id))
                 _state.unshift(tf_id);
@@ -32,7 +31,6 @@ const pinTopList = (state = _pinTopList, action) => {
         }
         default: return state;
     }
-    return [];
 }
 
 export default pinTopList;
