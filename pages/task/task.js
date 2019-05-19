@@ -62,12 +62,12 @@ const page = {
             },
             success: function (res) {
               console.log("上传成功 res=>", res);
-              const { u_id, t_id, isFetch,task } = that.data;
+              const { u_id, t_id, isFetch, task } = that.data;
               const json = JSON.parse(res.data);
               console.log("上传成功=>", json);
               const img = json.img;
               that.addImage(img);
-              that.recordOperation(`子任务${task.t_name}上传图片`,TYPE.CREATE)
+              that.recordOperation(`子任务${task.t_name}上传图片`, TYPE.CREATE)
               wx.hideToast();
               wx.showToast({
                 title: '上传成功',
@@ -195,6 +195,10 @@ const page = {
    */
   onLoad: function (options) {
     console.log("task options", options);
+    wx.showLoading({
+      title: "加载中...",
+      mask: true
+    })
     const t_id = options.t_id;
     const u_id = app.globalData.u_id;
     // const isFetch = options.isFetch ? true : false;
@@ -204,6 +208,9 @@ const page = {
       u_id,
       isFetch
     })
+  },
+  onReady:function(){
+    wx.hideLoading();
   },
   onShow: function () {
     const isFetch = this.data.isFetch;

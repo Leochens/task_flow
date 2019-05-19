@@ -115,12 +115,16 @@ const page = {
   },
   onLoad: function (options) {
     wx.hideTabBar({});
+    wx.showLoading();
     const tf_id = options.tf_id;
     if (!tf_id) return;
     this.setFunc(tf_id);
     this.setData({
       id: tf_id
     })
+  },
+  onReady:function(){
+    wx.hideLoading();
   },
   classifyTask: function (t) {
     // 将子任务按照开始日期分类 同一天的放进一个数组里 还要排序 日期大类排序决定渲染顺序  

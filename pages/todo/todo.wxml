@@ -1,2 +1,4 @@
 <!--pages/todo/todo.wxml-->
-<text>pages/todo/todo.wxml</text>
+<view class="UCenter-bg bgc bg-main">
+  <image class=" gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
+</view>

@@ -14,14 +14,19 @@ const page = {
     taskFlowsCnt: 0,
     myTaskFlowsCnt: 0,
     finishedCnt: 0,
-    userInfo: {}
+    userInfo: {},
+    showBlueBoxTipModal: false
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  hideModal: function () {
+    this.setData({
+      showBlueBoxTipModal: false
+    })
+  },
+  showModal: function () {
+    this.setData({
+      showBlueBoxTipModal: true
+    })
   },
   onShow: function () {
     const userInfo = wx.getStorageSync('userInfo') || {};

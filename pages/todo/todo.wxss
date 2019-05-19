@@ -1,1 +1,4 @@
 /* pages/todo/todo.wxss */
+.bgc{
+    height: 10vh;
+}

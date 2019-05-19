@@ -8,7 +8,7 @@
 </view>
 <view class="tips">
     <view>
-        <view class="tip">由少到多</view>
+        <!-- <view class="tip">由少到多</view> -->
         <view class="sm-box" wx:for="{{color}}" wx:key style="background:{{color[index]}}"></view>
     </view>
 </view>
