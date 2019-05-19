@@ -3,6 +3,8 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import { addComment, addImage, fetchSingleTask, completeTask, applyTakeBreak } from '../../actions/index';
+import { recordOperation, TYPE } from '../../actions/record';
+
 import { formatTime, dynamicDate } from '../../utils/util';
 import replaceChar from '../../utils/replaceChar';
 import APP from '../../appConfig';
@@ -60,16 +62,17 @@ const page = {
             },
             success: function (res) {
               console.log("上传成功 res=>", res);
+              const { u_id, t_id, isFetch,task } = that.data;
               const json = JSON.parse(res.data);
               console.log("上传成功=>", json);
               const img = json.img;
               that.addImage(img);
+              that.recordOperation(`子任务${task.t_name}上传图片`,TYPE.CREATE)
               wx.hideToast();
               wx.showToast({
                 title: '上传成功',
                 mask: true
               });
-              const { u_id, t_id, isFetch } = that.data;
               wx.redirectTo({ // 刷新
                 url: `/pages/task/task?u_id=${u_id}&t_id=${t_id}&isFetch=${isFetch}`,
               })
@@ -113,6 +116,7 @@ const page = {
     if (!replaceChar(break_reason)) return;
     const { task: { id: t_id }, u_id } = this.data;
     this.applyTakeBreak(t_id, u_id, break_reason);
+    this.recordOperation(`子任务${this.data.task.t_name}申请请假`, TYPE.UPDATE);
     this.hideModal();
     this.initFromApi();
   },
@@ -244,7 +248,10 @@ const page = {
   },
   _completeTask: function () {
     const { task: { id: t_id }, u_id } = this.data;
+
     this.completeTask(t_id, u_id);
+    const task = this.data.tasks[t_id];
+    task && this.recordOperation(`完成子任务${task.t_name}`, TYPE.UPDATE);
   },
   commentSubmit: function (e) {
     console.log(e);
@@ -311,7 +318,8 @@ const mapDispatchToPage = dispatch => ({
   addImage: (img) => dispatch(addImage(img)),
   fetchSingleTask: (u_id, t_id, callback) => dispatch(fetchSingleTask(u_id, t_id, callback)),
   completeTask: (t_id, u_id) => dispatch(completeTask(t_id, u_id)),
-  applyTakeBreak: (t_id, u_id, break_reason) => dispatch(applyTakeBreak(t_id, u_id, break_reason))
+  applyTakeBreak: (t_id, u_id, break_reason) => dispatch(applyTakeBreak(t_id, u_id, break_reason)),
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

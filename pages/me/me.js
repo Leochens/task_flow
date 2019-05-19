@@ -15,7 +15,6 @@ const page = {
     myTaskFlowsCnt: 0,
     finishedCnt: 0,
     userInfo: {}
-    // opDatas: Array.from({ length: 30 }, (v, k) => ({ date: `2019-1-${1 + k}`, cnt: Math.random().toFixed(2) * 50 }))
   },
 
   /**
@@ -75,10 +74,11 @@ const mapStateToData = state => {
   const tfs = ids.task_flows.map(tf_id => entities.task_flows[tf_id]);
   const finishedCnt = tfs.filter(tf => tf.is_completed).length;
   const myTaskFlowsCnt = tfs.filter(tf => tf.leader_id === u_id).length;
-  const dayBox = [];
+  const _dayBox = [];
   for (let key in state.dayBox) {
-    dayBox.push({ ...state.dayBox[key] });
+    _dayBox.push({ ...state.dayBox[key] });
   }
+  const dayBox = _dayBox.slice(-30);
   console.log("dayBox", dayBox);
   return {
     taskFlowsCnt,

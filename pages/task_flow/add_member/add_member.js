@@ -29,7 +29,8 @@ Page({
     console.log(e);
     wx.showShareMenu({
       withShareTicket: true
-    })
+    });
+
 
     return {
       title: '任务流邀请',//分享内容

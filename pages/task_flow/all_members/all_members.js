@@ -1,6 +1,8 @@
 // pages/task_flow/all_members/all_members.js
 import { connect } from '../../../libs/wechat-weapp-redux';
 import { deleteTaskFlowMember } from '../../../actions/index';
+import { recordOperation, TYPE } from '../../../actions/record';
+
 const app = getApp();
 
 const _page = {
@@ -12,7 +14,8 @@ const _page = {
     tf_id: '',
     members: [],
     leader_id: '',
-    edit: false
+    edit: false,
+    tf: {}
   },
 
   /**
@@ -51,6 +54,7 @@ const _page = {
           console.log('删除', delete_user_id);
           const u_id = app.globalData.u_id;
           that.deleteTaskFlowMember(u_id, that.data.tf_id, delete_user_id, that.onShow);
+          that.recordOperation(`移除${that.data.tf.tf_name}中的成员`, TYPE.DELETE);
         }
       }
     });
@@ -78,7 +82,9 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => {
   return {
-    deleteTaskFlowMember: (u_id, tf_id, delete_user_id, callback) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id, callback))
+    deleteTaskFlowMember: (u_id, tf_id, delete_user_id, callback) => dispatch(deleteTaskFlowMember(u_id, tf_id, delete_user_id, callback)),
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+
   }
 }
 

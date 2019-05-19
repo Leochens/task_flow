@@ -79,7 +79,7 @@ const page = {
     if (!_task_flow) { // 没有找到任务流
       wx.showModal({
         title: "提示",
-        content: "你已不在该任务流"
+        content: "你已不在该任务流,该任务流可能已解散或者你已经退出"
       });
       wx.navigateBack();
       return;

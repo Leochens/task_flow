@@ -3,6 +3,8 @@ import {
   connect
 } from '../../../libs/wechat-weapp-redux';
 import { changeTaskInfo } from '../../../actions/index';
+import { recordOperation, TYPE } from '../../../actions/record';
+
 import { compareDate } from '../../../utils/util';
 import replaceChar from '../../../utils/replaceChar';
 const app = getApp();
@@ -48,6 +50,11 @@ const page = {
       modalName
     });
   },
+  recordUpdate: function (e) {
+    const { task } = this.data;
+    task && this.recordOperation(`子任务${task.t_name}更新`, TYPE.UPDATE);
+
+  },
   changeTaskName: function (e) {
     console.log(e);
     const { task: { tf_id, id: t_id } } = this.data;
@@ -55,6 +62,7 @@ const page = {
     const t_name = replaceChar(e.detail.value.t_name);
     this.changeTaskInfo(tf_id, u_id, t_id, 't_name', t_name, this.onShow);
     this.hideModal();
+    this.recordUpdate();
   },
   changeTaskDescribe: function (e) {
     const { task: { tf_id, id: t_id } } = this.data;
@@ -62,6 +70,8 @@ const page = {
     const t_describe = replaceChar(e.detail.value.t_describe);
     this.changeTaskInfo(tf_id, u_id, t_id, 't_describe', t_describe, this.onShow);
     this.hideModal();
+    this.recordUpdate();
+
   },
   changeEndTime: function (e) {
     const { endDate, task: { tf_id, id: t_id } } = this.data;
@@ -70,6 +80,7 @@ const page = {
     //api
     this.changeTaskInfo(tf_id, u_id, t_id, 'end_time', endDate, this.onShow);
     this.hideModal();
+    this.recordUpdate();
   },
   addMember: function () { // 新增成员
     const t_members = this.data.task.members.map(m => m.id);
@@ -77,6 +88,7 @@ const page = {
     wx.navigateTo({
       url: '../../task_flow/create_task/select_member/select_member?members=' + JSON.stringify(members)
     });
+
   },
   confirmAddMember: function () {
     const { selectedMembersIds, task: { tf_id, id: t_id } } = this.data;
@@ -84,6 +96,7 @@ const page = {
     if (!selectedMembersIds.length) return;
     // api添加
     this.changeTaskInfo(tf_id, u_id, t_id, 'members', JSON.stringify(selectedMembersIds), this.onShow);
+    this.recordUpdate();
     this.hideModal();
   },
   bindEndDateChange: function (e) {
@@ -151,7 +164,8 @@ const mapStateToData = state => {
   }
 }
 const mapDispatchToPage = dispatch => ({
-  changeTaskInfo: (tf_id, u_id, t_id, field, value, callback) => dispatch(changeTaskInfo(tf_id, u_id, t_id, field, value, callback))
+  changeTaskInfo: (tf_id, u_id, t_id, field, value, callback) => dispatch(changeTaskInfo(tf_id, u_id, t_id, field, value, callback)),
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

@@ -25,7 +25,8 @@
     "pages/help/help",
     "pages/task_flow/tf_settings/tf_settings",
     "pages/log/log",
-    "pages/task/task_settings/task_settings"
+    "pages/task/task_settings/task_settings",
+    "pages/todo/todo"
   ],
   "tabBar": {
     "color": "#666",
@@ -37,6 +38,12 @@
         "iconPath": "assets/imgs/index/message.png",
         "pagePath": "pages/message/message",
         "text": "消息"
+      },
+      {
+        "selectedIconPath": "assets/imgs/index/todo_selected.png",
+        "iconPath": "assets/imgs/index/todo.png",
+        "pagePath": "pages/todo/todo",
+        "text": "代办"
       },
       {
         "selectedIconPath": "assets/imgs/index/task_flow_selected.png",

@@ -5,6 +5,8 @@ import {
 } from '../../../libs/wechat-weapp-redux';
 import replaceChar from '../../../utils/replaceChar';
 import { toggleTaskFlowMemverInvite, transferLeader, finishTaskFlow, deleteTaskFlow, breakTaskFlow } from '../../../actions/index';
+import { recordOperation, TYPE } from '../../../actions/record';
+
 const app = getApp();
 const page = {
   data: {
@@ -70,6 +72,7 @@ const page = {
   _breakTaskFlow: function (msg) {
     // 解散任务流
     const that = this;
+    const { tf } = that.data;
     wx.showModal({
       title: '警告',
       content: typeof msg === 'string' ? msg : '' + "退出任务流即代表解散任务流，是否继续?",
@@ -77,6 +80,7 @@ const page = {
         if (e.confirm) {
           console.log("解散任务流")
           that.breakTaskFlow(app.globalData.u_id, that.data.tf_id);
+          that.recordOperation(`解散任务流${tf.tf_name}`, TYPE.DELETE);
           wx.reLaunch({
             url: '/pages/index/index?refresh=true',
           })
@@ -85,7 +89,7 @@ const page = {
     });
   },
   _quit: function () {
-    const { tf_id } = this.data;
+    const { tf_id, tf } = this.data;
     const u_id = app.globalData.u_id;
     const that = this;
     wx.showModal({
@@ -94,6 +98,7 @@ const page = {
       success: function (e) {
         if (e.confirm) {
           that.deleteTaskFlow(u_id, tf_id);
+          that.recordOperation(`退出任务流${tf.tf_name}`, TYPE.DELETE);
           wx.reLaunch({
             url: '/pages/index/index',
           })
@@ -102,7 +107,7 @@ const page = {
     })
   },
   finish: function () {
-    const { tf_id, u_id } = this.data;
+    const { tf_id, u_id, tf } = this.data;
     const that = this;
     wx.showModal({
       title: '警告',
@@ -110,6 +115,8 @@ const page = {
       success: function (e) {
         if (e.confirm) {
           that.finishTaskFlow(u_id, tf_id);
+          that.recordOperation(`提前完成任务流${tf.tf_name}`, TYPE.DELETE);
+
           wx.reLaunch({
             url: '/pages/index/index',
           });
@@ -133,9 +140,10 @@ const page = {
     });
   },
   confirmTransferLeader: function () { // 确认转让负责人
-    const { tf_id, transferUid } = this.data;
+    const { tf_id, transferUid,tf } = this.data;
     if (!transferUid) return wx.showToast({ title: "请选择转让人" });
     this._transferLeader(tf_id, transferUid);
+    this.recordOperation(`转让任务流${tf.tf_name}`, TYPE.DELETE);
     this.hideModal();
     this.setData({
       transferUid: ''
@@ -171,7 +179,8 @@ const mapDispatchToPage = dispatch => {
     _transferLeader: (tf_id, new_leader_id) => dispatch(transferLeader(tf_id, new_leader_id)),
     finishTaskFlow: (u_id, tf_id) => dispatch(finishTaskFlow(u_id, tf_id)),
     deleteTaskFlow: (u_id, tf_id) => dispatch(deleteTaskFlow(u_id, tf_id)),
-    breakTaskFlow: (u_id, tf_id) => dispatch(breakTaskFlow(u_id, tf_id))
+    breakTaskFlow: (u_id, tf_id) => dispatch(breakTaskFlow(u_id, tf_id)),
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);

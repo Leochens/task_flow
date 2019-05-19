@@ -6,6 +6,8 @@ import {
 import replaceChar from '../../../utils/replaceChar';
 import { connect } from '../../../libs/wechat-weapp-redux';
 import { addTask, updateTask } from '../../../actions/index';
+import { recordOperation, TYPE } from '../../../actions/record';
+
 const day = 1000 * 60 * 60 * 24;
 const nextDay = new Date((Date.parse(new Date()) + day));
 const _page = {
@@ -166,8 +168,8 @@ const _page = {
     const { t_name, t_describe } = data;
 
     const task = {
-      t_name:replaceChar(t_name),
-      t_describe:replaceChar(t_describe),
+      t_name: replaceChar(t_name),
+      t_describe: replaceChar(t_describe),
       is_completed: false,
       begin_time: this.data.beginDate,
       end_time: this.data.endDate,
@@ -179,7 +181,10 @@ const _page = {
     if (this.data.isUpdate) {
       this.updateTask(this.data.tf_id, JSON.stringify(task), this.data.selectedMembers, this.data.u_id);
     } else {
+
       this.addTask(this.data.tf_id, JSON.stringify(task), this.data.selectedMembers);
+      this.recordOperation(`添加子任务${task.t_name}`, TYPE.CREATE);
+
     }
 
   }
@@ -203,7 +208,9 @@ const mapStateToData = state => {
 const mapDispatchToPage = dispatch => {
   return {
     addTask: (tf_id, task, members) => dispatch(addTask(tf_id, task, members)),
-    updateTask: (tf_id, task, members, u_id) => dispatch(updateTask(tf_id, task, members, u_id))
+    updateTask: (tf_id, task, members, u_id) => dispatch(updateTask(tf_id, task, members, u_id)),
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+
   }
 }
 

@@ -12,6 +12,8 @@ import {
   fetchTaskFlows,
   updateTaskFlow
 } from '../../actions/index';
+
+import { recordOperation, TYPE } from '../../actions/record';
 const day = 1000 * 60 * 60 * 24;
 const nextDay = new Date((Date.parse(new Date()) + day));
 
@@ -155,8 +157,11 @@ const _page = {
         category: replaceChar(curCate)
       });
       const { tf_id } = this.data;
+      const ro = this.recordOperation;
       this.updateTaskFlow(u_id, tf_id, d, function () {
         wx.navigateBack();
+        ro(`更新任务流${tf_name}`, TYPE.UPDATE);
+
       });
     } else {
       const data = JSON.stringify({
@@ -168,12 +173,12 @@ const _page = {
         category: replaceChar(curCate)
       });
       this.addTaskFlow(u_id, data, this.refresh);
+      this.recordOperation(`创建任务流${tf_name}`, TYPE.CREATE);
     }
   },
   refresh: function () {
     const u_id = app.globalData.u_id;
     console.log('refresh');
-
     this.fetchTaskFlows(u_id);
   },
   addCate: function () {
@@ -191,16 +196,16 @@ const _page = {
     // 将新的分类添加到data中并选择它
     const { newCateName } = this.data;
     const categories = this.data.categories.slice();
-
     if (!newCateName) {
       this.setData({
         hideModal: true
       });
       return;
     }
-
     categories.push(newCateName);
     app.globalData.categories = categories;
+    this.recordOperation(`添加新分类${newCateName}`, TYPE.CREATE);
+
     this.setData({
       categories,
       newCateName: '',
@@ -208,7 +213,6 @@ const _page = {
       hideModal: true,
       curCate: replaceChar(newCateName)
     })
-
   },
   inputCategory: function (e) {
     console.log(e);
@@ -236,7 +240,8 @@ const mapDispatchToPage = dispatch => {
   return {
     addTaskFlow: (u_id, tf, callback) => dispatch(addTaskFlow(u_id, tf, callback)),
     updateTaskFlow: (u_id, tf_id, tf, callback) => dispatch(updateTaskFlow(u_id, tf_id, tf, callback)),
-    fetchTaskFlows: (u_id, callback) => dispatch(fetchTaskFlows(u_id, callback))
+    fetchTaskFlows: (u_id, callback) => dispatch(fetchTaskFlows(u_id, callback)),
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
 
   }
 }
