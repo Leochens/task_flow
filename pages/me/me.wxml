@@ -30,13 +30,16 @@
     <view class="grid flex-sub padding-lr">
       <view class="bg-img" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}"></view>
     </view>
-    <view class="text-gray text-sm text-right padding">
-      <text class="icon-title margin-lr-xs text-grey"></text>
-      全部:{{taskFlowsCnt}}
-      <text class="icon-title margin-lr-xs text-orange"></text>
-      负责:{{myTaskFlowsCnt}}
-      <text class="icon-title margin-lr-xs text-main"></text>
-      完成:{{finishedCnt}}
+    <view class=" padding solid-top margin-left-sm margin-right-sm flex justify-between align-center " style="margin:auto">
+      <view class="text-grey text-sm">任务流情况</view>
+      <view class="text-gray text-sm text-right">
+        <text class="icon-title margin-lr-xs text-grey"></text>
+        全部:{{taskFlowsCnt}}
+        <text class="icon-title margin-lr-xs text-orange"></text>
+        负责:{{myTaskFlowsCnt}}
+        <text class="icon-title margin-lr-xs text-main"></text>
+        完成:{{finishedCnt}}
+      </view>
     </view>
   </view>
 </view>
@@ -101,7 +104,7 @@
       </view>
     </view>
     <view class="padding-xl">
-        小蓝格记录了30天来您使用活动任务流的各种操作记录,颜色由浅至深代表了操作量由少到多。如果今天没有任何操作，那么将是灰色的格子，有操作的话将会变蓝。
+      小蓝格记录了30天来您使用活动任务流的各种操作记录,颜色由浅至深代表了操作量由少到多。如果今天没有任何操作，那么将是灰色的格子，有操作的话将会变蓝。
         颜色的深浅是相对您近30天来的每天的操作量来计算的。最后一个格子始终代表今天
     </view>
   </view>

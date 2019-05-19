@@ -2,6 +2,8 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
+import { recordOperation, TYPE } from '../../actions/record';
+
 const app = getApp();
 import {
   fetchTasks,
@@ -123,7 +125,7 @@ const page = {
       id: tf_id
     })
   },
-  onReady:function(){
+  onReady: function () {
     wx.hideLoading();
   },
   classifyTask: function (t) {
@@ -217,6 +219,8 @@ const page = {
       const u_id = app.globalData.u_id;
       const { id: tf_id, tf_name, tf_describe, begin_time, end_time } = this.data;
       this.updateTaskFlowCate(u_id, tf_id, newCate);
+      this.recordOperation(`添加新分类${newCate}`, TYPE.CREATE);
+
       setTimeout(this.setTaskFlowInfo, 1000);
       console.log("更新成功");
     } else {
@@ -261,7 +265,9 @@ const mapDispatchToPage = dispatch => {
   return {
     fetchTasks: (tf_id, callback) => dispatch(fetchTasks(tf_id, callback)),
     updateTaskFlowCate: (u_id, tf_id, category) => dispatch(updateTaskFlowCate(u_id, tf_id, category)),
-    fetchSingleTaskFlow: (u_id, tf_id, callback) => dispatch(fetchSingleTaskFlow(u_id, tf_id, callback))
+    fetchSingleTaskFlow: (u_id, tf_id, callback) => dispatch(fetchSingleTaskFlow(u_id, tf_id, callback)),
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+
   }
 }
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
