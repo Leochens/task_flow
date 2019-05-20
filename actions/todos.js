@@ -7,12 +7,15 @@ export const TOGGLE_COMPLETE_TODO = 'TOGGLE_COMPLETE_TODO'; // 在某一todo面�
 export const DEL_TODO = 'DEL_TODO'; // 在某一todo面板里删除一条todo
 
 
-const getTimeStamp = () => Date.parse(new Date());
+function genID(length) {
+    return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
+}
+
 export const addTodoConnect = (data) => {
     const { t_id, t_name, todo_pane_name } = data;
     return {
         type: ADD_TODO_CONNECT,
-        pane_id: 'p' + getTimeStamp(),
+        pane_id: 'p' + genID(),
         t_id,
         t_name,
         todo_pane_name,
@@ -23,7 +26,7 @@ export const addTodoNoConnect = (data) => {
     const { todo_pane_name } = data;
     return {
         type: ADD_TODO_NO_CONNECT,
-        pane_id: 'p' + getTimeStamp(),
+        pane_id: 'p' + genID(),
         todo_pane_name,
         connect: false
     }
@@ -35,22 +38,22 @@ export const delTodoPane = (pane_id) => {
         pane_id
     }
 }
-export const addTodo = (content,pane_id) => {
+export const addTodo = (content, pane_id) => {
     return {
         type: ADD_TODO,
-        todo_id: 't' + getTimeStamp(),
+        todo_id: 't' + genID(),
         content,
         pane_id
     }
 }
-export const toggleCompleteTodo = (todo_id,pane_id) => {
+export const toggleCompleteTodo = (todo_id, pane_id) => {
     return {
         type: TOGGLE_COMPLETE_TODO,
         todo_id,
         pane_id
     }
 }
-export const delTodo = (todo_id,pane_id) => {
+export const delTodo = (todo_id, pane_id) => {
     return {
         type: DEL_TODO,
         todo_id,

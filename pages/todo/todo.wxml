@@ -2,8 +2,78 @@
 <view class="UCenter-bg bgc bg-main">
   <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
 </view>
-<view class="cu-btn " bind:tap="_addTodoConnect">_addTodoConnect</view>
-<view class="cu-btn " bind:tap="_addTodoNoConnect">_addTodoNoConnect</view>
-<view class="cu-btn " bind:tap="_addTodo">_addTodo</view>
-<view class="cu-btn " bind:tap="_toggleCompleteTodo">_toggleCompleteTodo</view>
-<view class="cu-btn " bind:tap="_delTodo">_delTodo</view>
+<view class="margin">
+  <view class="cu-tag {{isDelete?'bg':'line'}}-main" bind:tap="toggleDeleteMode">
+    <view class="icon-delete{{isDelete?'fill text-white':''}}"></view>
+  </view>
+  <view wx:if="{{!isDelete}}" class="cu-tag line-main" bind:tap="_addTodoNoConnect">
+    <view class="icon-add"></view>
+  </view>
+</view>
+<view class="cu-card dynamic">
+  <view class="cu-item shadow" wx:for="{{todoPanes}}" wx:for-item="pane" wx:key>
+    <view class="cu-bar solid-bottom">
+      <view class="action">
+        <text class="icon-sort margin-right-sm text-gray"></text>
+        <text class="text-gray">{{pane.todo_pane_name}}</text>
+      </view>
+      <view class="action">
+        <view class="cu-tag line-{{isDelete?'red round':'main'}} " bind:tap="{{isDelete?'_delTodoPane':'_addTodo'}}" data-paneid="{{pane.pane_id}}">
+          <view class="icon-{{isDelete?'close text-red text-bold':'add'}} "></view>
+        </view>
+      </view>
+    </view>
+    <view class="margin-sm">
+      <view class="text-gray margin-top flex align-center" wx:for="{{pane.todos}}" wx:key bind:tap="_toggleCompleteTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}">
+        <text class="text-xl icon-squarecheck{{item.status?'fill text-main':''}} margin-right-xs"></text>
+        <text class="text-bold " style="color:{{item.status?'#ccc':''}}">{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='todoPane'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">新建非关联代办面板</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <form bindsubmit="_comfirmAddTodoPane">
+      <view class="padding-xl">
+        <view class="cu-form-group">
+          <input name="paneName" placeholder="输入名称" value="{{todoPaneName}}" />
+        </view>
+      </view>
+      <view class="cu-bar bg-white ">
+        <view class="action margin-0 flex-sub text-grey" bind:tap="hideModal">取消</view>
+        <button form-type="submit" plain="{{true}}" class="action margin-0 flex-sub text-main text-df" style="border:none;color:#2967af">
+          确认
+        </button>
+      </view>
+    </form>
+  </view>
+</view>
+<view class="cu-modal {{modalName=='todo'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">新建待办事项</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <form bindsubmit="_comfirmAddTodo">
+      <view class="padding-xl">
+        <view class="cu-form-group">
+          <input name="todoName" placeholder="输入待办内容" value="{{todoName}}" />
+        </view>
+      </view>
+      <view class="cu-bar bg-white ">
+        <view class="action margin-0 flex-sub text-grey" bind:tap="hideModal">取消</view>
+        <button form-type="submit" plain="{{true}}" class="action margin-0 flex-sub text-main text-df" style="border:none;color:#2967af">
+          确认
+        </button>
+      </view>
+    </form>
+  </view>
+</view>
