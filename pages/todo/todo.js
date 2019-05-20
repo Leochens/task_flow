@@ -10,17 +10,40 @@ const page = {
     todoName: '',
     paneName: '',
     paneId: '',
-    isDelete: false
+    isDelete: false,
+    dropDown: [],
+    moreOperation:[]
+
   },
   onLoad: function (options) {
-
+    const length = this.data.todoPanes.length;
+    this.setData({
+      dropDown: (new Array(length)).fill(true), // 设置都开启下拉
+      moreOperation: (new Array(length)).fill(false) // 设置都开启下拉
+    })
   },
   hideModal: function () {
     this.setData({
       modalName: '',
       todoName: '',
       todoPaneName: '',
-      paneId: ''
+      paneId: '',
+    })
+  },
+  toggleMoreOperation:function(e){
+    const idx = e.currentTarget.dataset.idx;
+    const moreOperation = this.data.moreOperation.slice();
+    moreOperation[idx] = !moreOperation[idx];
+    this.setData({
+      moreOperation
+    })
+  },
+  toggleDropdown: function (e) {
+    const idx = e.currentTarget.dataset.idx;
+    const dropDown = this.data.dropDown.slice();
+    dropDown[idx] = !dropDown[idx];
+    this.setData({
+      dropDown
     })
   },
   _addTodoConnect: function (e) {

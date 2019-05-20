@@ -18,15 +18,26 @@
         <text class="text-gray">{{pane.todo_pane_name}}</text>
       </view>
       <view class="action">
-        <view class="cu-tag line-{{isDelete?'red round':'main'}} " bind:tap="{{isDelete?'_delTodoPane':'_addTodo'}}" data-paneid="{{pane.pane_id}}">
-          <view class="icon-{{isDelete?'close text-red text-bold':'add'}} "></view>
+        <view class="cu-tag line-white " bind:tap="{{isDelete?'_delTodoPane':'_addTodo'}}" data-paneid="{{pane.pane_id}}">
+          <view class="icon-{{isDelete?'close text-red':'add text-main'}} text-bold "></view>
+        </view>
+        <view class="cu-tag line-white">
+          <text class="icon-triangle{{dropDown[index]?'up':'down'}}fill text-grey text-xl" bind:tap="toggleDropdown" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
         </view>
       </view>
     </view>
-    <view class="margin-sm">
-      <view class="text-gray margin-top flex align-center" wx:for="{{pane.todos}}" wx:key bind:tap="_toggleCompleteTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}">
-        <text class="text-xl icon-squarecheck{{item.status?'fill text-main':''}} margin-right-xs"></text>
-        <text class="text-bold " style="color:{{item.status?'#ccc':''}}">{{item.content}}</text>
+    <view wx:if="{{dropDown[index]}}" class="margin-sm">
+      <view class="text-gray margin-top flex align-center justify-between" wx:for="{{pane.todos}}" wx:for-index="todo_list_index" wx:key="{{todo_list_index}}" bind:tap="_toggleCompleteTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}">
+        <view class="flex align-center">
+          <text class="text-xl icon-squarecheck{{item.status?'fill text-main':''}} margin-right-xs"></text>
+          <text class="text-bold " style="color:{{item.status?'#ccc':''}}">{{item.content}}</text>
+        </view>
+        <view wx:if="{{moreOperation[index]}}" class="flex">
+          <text class="icon-close text-bold text-grey margin-right"></text>
+        </view>
+      </view>
+      <view wx:if="{{pane.todos.length}}" class="margin-right flex justify-end">
+        <text class="icon-more {{moreOperation[index]?'text-bold text-main':''}} text-grey text-xl" bind:tap="toggleMoreOperation" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
       </view>
     </view>
   </view>
@@ -42,7 +53,7 @@
     <form bindsubmit="_comfirmAddTodoPane">
       <view class="padding-xl">
         <view class="cu-form-group">
-          <input name="paneName" placeholder="输入名称" value="{{todoPaneName}}" />
+          <input maxlength="15" name="paneName" placeholder="输入名称[15字以内]" value="{{todoPaneName}}" />
         </view>
       </view>
       <view class="cu-bar bg-white ">
@@ -65,7 +76,7 @@
     <form bindsubmit="_comfirmAddTodo">
       <view class="padding-xl">
         <view class="cu-form-group">
-          <input name="todoName" placeholder="输入待办内容" value="{{todoName}}" />
+          <input maxlength="50" name="todoName" placeholder="输入待办内容[50字以内]" value="{{todoName}}" />
         </view>
       </view>
       <view class="cu-bar bg-white ">
