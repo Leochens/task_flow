@@ -4,7 +4,7 @@ import {
 } from '../../libs/wechat-weapp-redux';
 import { addComment, addImage, fetchSingleTask, completeTask, applyTakeBreak } from '../../actions/index';
 import { recordOperation, TYPE } from '../../actions/record';
-
+import { addTodoConnect } from '../../actions/todos';
 import { formatTime, dynamicDate } from '../../utils/util';
 import replaceChar from '../../utils/replaceChar';
 import APP from '../../appConfig';
@@ -14,10 +14,6 @@ const deletedMember = {
   avatar_url: ''
 }
 const page = {
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     task: {},
     content: "",
@@ -26,7 +22,11 @@ const page = {
     t_id: '',
     editable: false,
     isMyTask: false,
-    showBreakModal: false
+    showBreakModal: false,
+    hasTodo: false,
+    todoPane: {},
+    showTodoModal: false,
+    paneName: ''
   },
   bindChooiceImage: function () {
     const u_id = wx.getStorageSync('u_id');
@@ -106,9 +106,37 @@ const page = {
       showBreakModal: true
     })
   },
+  _showTodoModal: function () {
+    this.setData({
+      showTodoModal: true
+    })
+  },
+  connetTodo: function () {
+    this.setData({
+      showTodoModal: true,
+      paneName: this.data.task.t_name
+    })
+  },
+  toTaskFlow: function () {
+    const { task } = this.data;
+    const tf_id = task.tf_id;
+    wx.redirectTo({
+      url: `/pages/task_flow/task_flow?tf_id=${tf_id}`
+    })
+  },
+  _comfirmAddTodoPane: function (e) { //确认添加一个任务关联面板
+    const paneName = e.detail.value.paneName;
+    console.log(paneName)
+    const { task: { id: t_id, t_name } } = this.data;
+
+    if (paneName.trim() === '' || !t_id) return;
+    this.addTodoConnect({ t_id, t_name, todo_pane_name: paneName });
+    this.hideModal();
+  },
   hideModal: function () {
     this.setData({
-      showBreakModal: false
+      showBreakModal: false,
+      showTodoModal: false
     })
   },
   _applyTakeBreak: function (e) {
@@ -167,6 +195,8 @@ const page = {
     // 筛选出t_id指向的task
     const t_id = this.data.t_id;
     console.log(t_id);
+    const todoPane = this.data.todoPanes.filter(tp => tp.t_id === t_id && tp.connect === true).pop();
+
     const task = this.data.tasks[t_id];
     // 获得task后紧接着获得这个task的评论和人员的状态
     const comments = task.comments.map(cmt => this.extendComment(cmt));
@@ -187,12 +217,14 @@ const page = {
       imgs,
       editable,
       isMyTask,
-      user_status
+      user_status,
+      hasTodo: todoPane ? true : false,
+      todoPane: todoPane || {}
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  _addTodoConnect: function () {
+
+  },
   onLoad: function (options) {
     console.log("task options", options);
     wx.showLoading({
@@ -209,7 +241,7 @@ const page = {
       isFetch
     })
   },
-  onReady:function(){
+  onReady: function () {
     wx.hideLoading();
   },
   onShow: function () {
@@ -291,6 +323,7 @@ const page = {
 }
 
 const mapStateToData = state => {
+  const todoPanes = [...state.todos];
   const intellectDatetime = state.settings.intellectDatetime;
   const { members, tasks, images, comments, task_flows } = state.entities;
   const _tasks = { ...tasks };
@@ -317,7 +350,8 @@ const mapStateToData = state => {
     members: state.entities.members,
     tasks: _tasks,
     isLeader,
-    intellectDatetime
+    intellectDatetime,
+    todoPanes
   };
 }
 const mapDispatchToPage = dispatch => ({
@@ -326,7 +360,8 @@ const mapDispatchToPage = dispatch => ({
   fetchSingleTask: (u_id, t_id, callback) => dispatch(fetchSingleTask(u_id, t_id, callback)),
   completeTask: (t_id, u_id) => dispatch(completeTask(t_id, u_id)),
   applyTakeBreak: (t_id, u_id, break_reason) => dispatch(applyTakeBreak(t_id, u_id, break_reason)),
-  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type)),
+  addTodoConnect: (data) => dispatch(addTodoConnect(data))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

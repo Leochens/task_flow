@@ -4,7 +4,18 @@
     <view slot="backText">返回</view>
     <view slot="content">子任务详情</view>
 </nav-bar>
-<view class="height-all"  bind:touchstart="touchStart" bind:touchend="touchEnd">
+<view class="height-all" bind:touchstart="touchStart" bind:touchend="touchEnd">
+    <view class="padding-xs padding-left-sm padding-right-sm flex justify-between align-center" style="background:#F2F6FB">
+        <view class="text-sm text-grey flex align-center" bind:tap="toTaskFlow">
+            <text class="icon-pullleft margin-right-sm text-xl"></text>
+            <text class="text-sm">查看所属任务流</text>
+        </view>
+        <view class="text-sm text-grey flex align-center" bind:tap="connetTodo">
+            <text class="icon-sort margin-right-sm text-xl"></text>
+            <text wx:if="{{hasTodo}}" class="text-sm text-main">已关联待办 {{todoModal.todos.length}}</text>
+            <text wx:else class="text-sm">关联待办</text>
+        </view>
+    </view>
     <view class="flex p-xs padding-sm ">
         <view class="flex-sub solid-right">
             <view class="text-xl">{{task.t_name}}</view>
@@ -31,7 +42,7 @@
         </view>
     </view>
     <view class="margin-sm margin-top-xs flex justify-between">
-        <view class="">
+        <view class="margin-0">
             <text class="icon-{{task.is_completed === 1? 'roundcheckfill text-main':task.is_completed === 0 ? 'roundcheck text-grey' : 'roundcheck text-red'}}"></text>
             <text class="text-{{task.is_completed === 1? 'main':task.is_completed === 0 ? 'grey' : 'red'}} margin-left-sm">{{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}</text>
         </view>
@@ -85,7 +96,6 @@
         </button>
     </view>
 </form>
-
 <view class="cu-modal {{showBreakModal?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
@@ -106,6 +116,29 @@
                 </view>
                 <button form-type="submit" class="cu-btn bg-white action margin-0 flex-sub  solid-left">
                     确定
+                </button>
+            </view>
+        </form>
+    </view>
+</view>
+<view class="cu-modal {{showTodoModal?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class="content">新建子任务关联待办面板</view>
+            <view class="action" bindtap="hideModal">
+                <text class="cuIcon-close text-red"></text>
+            </view>
+        </view>
+        <form bindsubmit="_comfirmAddTodoPane">
+            <view class="padding-xl">
+                <view class="cu-form-group">
+                    <input maxlength="15" name="paneName" placeholder="输入名称[15字以内]" value="{{paneName}}" />
+                </view>
+            </view>
+            <view class="cu-bar bg-white ">
+                <view class="action margin-0 flex-sub text-grey" bind:tap="hideModal">取消</view>
+                <button form-type="submit" plain="{{true}}" class="action margin-0 flex-sub text-main text-df" style="border:none;color:#2967af">
+                    确认
                 </button>
             </view>
         </form>

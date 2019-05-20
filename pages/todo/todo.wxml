@@ -46,7 +46,7 @@
 <view class="cu-modal {{modalName=='todoPane'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">新建非关联代办面板</view>
+      <view class="content">新建非关联待办面板</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>
