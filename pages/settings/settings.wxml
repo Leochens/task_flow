@@ -4,6 +4,14 @@
   <view slot="content">设置</view>
 </nav-bar>
 <view class="cu-list margin-top menu sm-border">
+  <form bindsubmit="changeNickName">
+    <view class="cu-form-group">
+      <view class="icon-profile margin-right-xs"></view>
+      <view class="title text-black">我的昵称</view>
+      <input name="nickName" placeholder="请输入昵称" value="{{nickName}}" />
+      <button class="cu-btn bg-main" form-type="submit">修改</button>
+    </view>
+  </form>
   <view class="cu-item">
     <view class="content padding-tb-sm">
       <view class="">
@@ -40,11 +48,4 @@
       <button class="cu-btn round bg-main" bind:tap="clearStorage">清空</button>
     </view>
   </view>
-  <form bindsubmit="changeNickName">
-    <view class="cu-form-group">
-      <view class="title text-black">我的昵称</view>
-      <input name="nickName" placeholder="请输入昵称" value="{{nickName}}" />
-      <button class="cu-btn bg-main" form-type="submit">修改</button>
-    </view>
-  </form>
 </view>

@@ -19,13 +19,16 @@
             {{userInfo.gender?'男':'女'}}
           </view>
         </view>
-        <view class="margin-right-xl" bind:tap="showModal">
-          <view class="icon-question text-gray text-xl"></view>
+        <view class="margin-right-xl" bind:tap="toSettings">
+          <view class="icon-settingsfill text-gray text-xl"></view>
         </view>
       </view>
     </view>
-    <view class="text-content">
+    <view class="text-content" style="position: relative;">
       <blue-boxs datas="{{dayBox}}"></blue-boxs>
+      <view class="margin-right-xl tip" bind:tap="showModal">
+        <view class="icon-question text-gray text-xl"></view>
+      </view>
     </view>
     <view class="grid flex-sub padding-lr">
       <view class="bg-img" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}"></view>
@@ -44,12 +47,6 @@
   </view>
 </view>
 <view class=" cu-list menu card-menu margin-top-xs  margin-bottom-xl shadow-lg radius ">
-  <view class="cu-item arrow" bind:tap="toSettings">
-    <view class="content center">
-      <view class="margin-right-sm icon-settingsfill text-xl text-black"></view>
-      <text class="text-grey">设置</text>
-    </view>
-  </view>
   <view class="cu-item arrow" bind:tap="toCalendar">
     <view class="content center">
       <view class="margin-right-sm icon-calendar text-xl text-black"></view>

@@ -109,4 +109,11 @@
     mix-blend-mode: screen;  
     height: 100rpx;   
   }
-  
+
+
+
+  .tip{
+      position: absolute;
+      bottom: -12rpx;
+      right: -6rpx;
+  }
