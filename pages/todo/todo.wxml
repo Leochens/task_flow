@@ -1,7 +1,9 @@
 <!-- pages/todo/todo.wxml -->
 <view class="UCenter-bg bgc bg-main">
-  <image class=" gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
+  <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
 </view>
-<view class="cu-bar">
-  <view class="text-grey">任务人自定义代办小册子正在开发中，敬请期待...</view>
-</view>
+<view class="cu-btn " bind:tap="_addTodoConnect">_addTodoConnect</view>
+<view class="cu-btn " bind:tap="_addTodoNoConnect">_addTodoNoConnect</view>
+<view class="cu-btn " bind:tap="_addTodo">_addTodo</view>
+<view class="cu-btn " bind:tap="_toggleCompleteTodo">_toggleCompleteTodo</view>
+<view class="cu-btn " bind:tap="_delTodo">_delTodo</view>

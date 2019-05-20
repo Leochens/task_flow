@@ -43,7 +43,7 @@
         "selectedIconPath": "assets/imgs/index/todo_selected.png",
         "iconPath": "assets/imgs/index/todo.png",
         "pagePath": "pages/todo/todo",
-        "text": "代办"
+        "text": "待办册"
       },
       {
         "selectedIconPath": "assets/imgs/index/task_flow_selected.png",

@@ -10,6 +10,7 @@ import search from './search';
 import settings from './settings';
 import logs from './logs';
 import dayBox from './dayBox';
+import todos from './todos';
 export default () => {
   const reducers = combineReducers({
     entities,
@@ -22,7 +23,8 @@ export default () => {
     search,
     settings,
     logs,
-    dayBox
+    dayBox,
+    todos
   });
 
   return reducers;
