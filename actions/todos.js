@@ -5,7 +5,7 @@ export const DEL_TODO_PANE = 'DEL_TODO_PANE'; // 删除一个todo面板
 export const ADD_TODO = 'ADD_TODO'; // 在某一todo面板里增加一条todo
 export const TOGGLE_COMPLETE_TODO = 'TOGGLE_COMPLETE_TODO'; // 在某一todo面板里完成或者取消完成一条todo
 export const DEL_TODO = 'DEL_TODO'; // 在某一todo面板里删除一条todo
-
+export const UP_TODO = 'UP_TODO'
 
 function genID(length) {
     return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36);
@@ -56,6 +56,14 @@ export const toggleCompleteTodo = (todo_id, pane_id) => {
 export const delTodo = (todo_id, pane_id) => {
     return {
         type: DEL_TODO,
+        todo_id,
+        pane_id
+    }
+}
+
+export const upTodo = (todo_id, pane_id) => {
+    return {
+        type: UP_TODO,
         todo_id,
         pane_id
     }

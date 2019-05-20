@@ -32,11 +32,12 @@
           <text class="text-xl icon-squarecheck{{item.status?'fill text-main':''}} margin-right-xs"></text>
           <text class="text-bold " style="color:{{item.status?'#ccc':''}}">{{item.content}}</text>
         </view>
-        <view wx:if="{{moreOperation[index]}}" class="flex">
-          <text class="icon-close text-bold text-grey margin-right"></text>
+        <view wx:if="{{moreOperation[index]}}" class="flex" >
+          <text class="icon-close text-bold text-grey margin-right" catch:tap="_delTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
+          <text class="icon-top text-bold text-grey margin-right" catch:tap="_upTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
         </view>
       </view>
-      <view wx:if="{{pane.todos.length}}" class="margin-right flex justify-end">
+      <view wx:if="{{pane.todos.length}}" class="margin-right flex justify-end margin-top-sm">
         <text class="icon-more {{moreOperation[index]?'text-bold text-main':''}} text-grey text-xl" bind:tap="toggleMoreOperation" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
       </view>
     </view>

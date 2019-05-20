@@ -1,60 +1,12 @@
 import { CRUD_GET_LIST_SUCCESS } from '../actions/dataActions';
-import { DEL_TODO, DEL_TODO_PANE, TOGGLE_COMPLETE_TODO, ADD_TODO, ADD_TODO_CONNECT, ADD_TODO_NO_CONNECT } from '../actions/todos';
-const init = [
-    {
-        pane_id: 0,
-        connect: true,  //  是否关联子任务
-        t_name: 'hehe',
-        t_id: 'sdfghjkl',
-        todo_pane_name: '关联子任务todo',
-        todos: [
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 0
-            },
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 1
-            },
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 0
-            }
-        ]
-    },
-    {
-        pane_id: 1,
-        connect: false,  //  是否关联子任务
-        todo_pane_name: '自定义todo',
-        todos: [
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 0
-            },
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 1
-            },
-            {
-                todo_id: 'sdfghgjh',
-                content: '哈哈哈',
-                status: 0
-            }
-        ]
-    }
-];
+import { DEL_TODO, UP_TODO, DEL_TODO_PANE, TOGGLE_COMPLETE_TODO, ADD_TODO, ADD_TODO_CONNECT, ADD_TODO_NO_CONNECT } from '../actions/todos';
 
 const todos = (state = wx.getStorageSync('todoPanes') || [], action) => {
     const { type, content, pane_id, todo_id, t_name, t_id, todo_pane_name } = action;
     switch (type) {
         case ADD_TODO_CONNECT: {
             const _state = state.slice();
-            _state.unshift({
+            _state.push({
                 pane_id,
                 connect: true,
                 t_id,
@@ -70,7 +22,7 @@ const todos = (state = wx.getStorageSync('todoPanes') || [], action) => {
         case ADD_TODO_NO_CONNECT: {
             const _state = state.slice();
 
-            _state.unshift({
+            _state.push({
                 pane_id,
                 connect: false,
                 todo_pane_name,
@@ -101,7 +53,7 @@ const todos = (state = wx.getStorageSync('todoPanes') || [], action) => {
                 if (_state[i].pane_id === pane_id) {
                     const oldPane = { ..._state[i] };
                     const todos = [...oldPane.todos];
-                    todos.unshift({ todo_id, content, status: false }); // 把新的待办扔进去
+                    todos.push({ todo_id, content, status: false }); // 把新的待办扔进去
                     oldPane.todos = todos;
                     _state[i] = oldPane;
                     break;
@@ -145,6 +97,30 @@ const todos = (state = wx.getStorageSync('todoPanes') || [], action) => {
                         }
                     }
                     if (index != -1) todos.splice(index, 1);
+                    oldPane.todos = todos;
+                    _state[i] = oldPane;
+                    break;
+                }
+            }
+            wx.setStorageSync('todoPanes', _state);
+            return _state;
+        }
+        case UP_TODO: {
+            const _state = state.slice();
+            for (let i = 0; i < _state.length; i++) {
+                if (_state[i].pane_id === pane_id) {
+                    const oldPane = { ..._state[i] };
+                    const todos = [...oldPane.todos];
+                    let index = -1;
+                    for (let j = 0; j < todos.length; j++) {
+                        if (todos[j].todo_id === todo_id) {
+                            index = j; // 找到要删除的idx
+                        }
+                    }
+                    if (index === -1) return state; // 没找到就返回原来的 不变
+                    let willUpTodo = { ...todos[index] };
+                    todos.splice(index, 1);
+                    todos.unshift(willUpTodo);
                     oldPane.todos = todos;
                     _state[i] = oldPane;
                     break;

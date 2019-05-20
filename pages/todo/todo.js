@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../libs/wechat-weapp-redux';
-import { addTodoConnect, addTodo, addTodoNoConnect, delTodo, delTodoPane, toggleCompleteTodo } from '../../actions/todos';
+import { addTodoConnect, addTodo, addTodoNoConnect, delTodo, delTodoPane, toggleCompleteTodo, upTodo } from '../../actions/todos';
 const app = getApp();
 const page = {
   data: {
@@ -12,7 +12,7 @@ const page = {
     paneId: '',
     isDelete: false,
     dropDown: [],
-    moreOperation:[]
+    moreOperation: []
 
   },
   onLoad: function (options) {
@@ -30,7 +30,7 @@ const page = {
       paneId: '',
     })
   },
-  toggleMoreOperation:function(e){
+  toggleMoreOperation: function (e) {
     const idx = e.currentTarget.dataset.idx;
     const moreOperation = this.data.moreOperation.slice();
     moreOperation[idx] = !moreOperation[idx];
@@ -100,11 +100,13 @@ const page = {
   _delTodo: function (e) {
     const paneId = e.currentTarget.dataset.paneid;
     const todoId = e.currentTarget.dataset.todoid;
-    this.delTodo("t1558336956000", paneId);
+    this.delTodo(todoId, paneId);
   },
-  clear: function () {
-    wx.setStorageSync('todoPanes', []);
-    this.onLoad();
+  _upTodo: function (e) {
+    const paneId = e.currentTarget.dataset.paneid;
+    const todoId = e.currentTarget.dataset.todoid;
+    this.upTodo(todoId, paneId);
+
   }
 }
 
@@ -123,6 +125,7 @@ const mapDispatchToPage = dispatch => ({
   addTodo: (content, pane_id) => dispatch(addTodo(content, pane_id)),
   toggleCompleteTodo: (todo_id, pane_id) => dispatch(toggleCompleteTodo(todo_id, pane_id)),
   delTodo: (todo_id, pane_id) => dispatch(delTodo(todo_id, pane_id)),
+  upTodo: (todo_id, pane_id) => dispatch(upTodo(todo_id, pane_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);
