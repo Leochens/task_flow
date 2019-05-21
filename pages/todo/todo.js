@@ -12,8 +12,8 @@ const page = {
     paneId: '',
     isDelete: false,
     dropDown: [],
-    moreOperation: []
-
+    moreOperation: [],
+    dropDownAll: true
   },
   onLoad: function (options) {
     const length = this.data.todoPanes.length;
@@ -22,12 +22,27 @@ const page = {
       moreOperation: (new Array(length)).fill(false) // 设置都开启下拉
     })
   },
+  toTask: function (e) {
+    const t_id = e.currentTarget.dataset.tid;
+    wx.navigateTo({
+      url: `/pages/task/task?t_id=${t_id}&&isFetch=true`
+    });
+  },
+
   hideModal: function () {
     this.setData({
       modalName: '',
       todoName: '',
       todoPaneName: '',
       paneId: '',
+    })
+  },
+  toggleDropdownAll: function () {
+    const { dropDownAll, dropDown } = this.data;
+    const dd = dropDown.map(item => !dropDownAll);
+    this.setData({
+      dropDown: dd,
+      dropDownAll: !dropDownAll
     })
   },
   toggleMoreOperation: function (e) {

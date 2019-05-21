@@ -10,10 +10,10 @@
             <text class="icon-pullleft margin-right-sm text-xl"></text>
             <text class="text-sm">查看所属任务流</text>
         </view>
-        <view class="text-sm text-grey flex align-center" bind:tap="connetTodo">
+        <view class="text-sm text-grey flex align-center" >
             <text class="icon-sort margin-right-sm text-xl"></text>
             <text wx:if="{{hasTodo}}" class="text-sm text-main">已关联待办 {{todoModal.todos.length}}</text>
-            <text wx:else class="text-sm">关联待办</text>
+            <text wx:else class="text-sm" bind:tap="connetTodo">关联待办</text>
         </view>
     </view>
     <view class="flex p-xs padding-sm ">
@@ -84,6 +84,9 @@
                 <view class="action">
                     <view class="text-sm text-grey">{{item.create_time}}</view>
                 </view>
+            </view>
+            <view class="cu-item no-border">
+                <view class="content text-white">占位</view>
             </view>
         </view>
     </view>
