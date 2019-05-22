@@ -75,7 +75,7 @@ const page = {
     const { tf } = that.data;
     wx.showModal({
       title: '警告',
-      content: typeof msg === 'string' ? msg : '' + "退出任务流即代表解散任务流，是否继续?",
+      content: (typeof msg === 'string' ? msg : '') + "退出任务流即代表解散任务流，是否继续?",
       success: function (e) {
         if (e.confirm) {
           console.log("解散任务流")
@@ -140,7 +140,7 @@ const page = {
     });
   },
   confirmTransferLeader: function () { // 确认转让负责人
-    const { tf_id, transferUid,tf } = this.data;
+    const { tf_id, transferUid, tf } = this.data;
     if (!transferUid) return wx.showToast({ title: "请选择转让人" });
     this._transferLeader(tf_id, transferUid);
     this.recordOperation(`转让任务流${tf.tf_name}`, TYPE.DELETE);

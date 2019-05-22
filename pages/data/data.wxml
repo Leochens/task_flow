@@ -21,20 +21,20 @@
     <view class='content' style='top:{{StatusBar}}px;'>数据记录</view>
   </view>
 </view>
-<swiper class="screen-swiper round-dot" style="padding-top:{{CustomBar}}px;min-height:500rpx" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+<!-- <swiper class="screen-swiper round-dot" style="padding-top:{{CustomBar}}px;min-height:500rpx" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
   <swiper-item wx:for="{{1}}" wx:key>
-    <!-- <image src="https://image.weilanwl.com/img/4x3-{{index+1}}.jpg" mode='aspectFill'></image> -->
+
     这里是统计曲线图
   </swiper-item>
-</swiper>
+</swiper> -->
 
-<view class="VerticalBox">
-  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 500rpx )">
+<view class="VerticalBox" style="margin-top:{{CustomBar}}px">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - {{CustomBar}}px )">
     <view style="width:150rpx" wx:if="{{item.cnt}}" class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{dayDatas}}" wx:key bindtap='tabSelect' data-id="{{index}}">
       <view class="text-xs text-grey text-bold">{{item.date}}</view>
     </view>
   </scroll-view>
-  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - 500rpx)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - {{CustomBar}}px)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
     <view class="padding-top padding-lr" wx:for="{{dayDatas}}" wx:key id="main-{{index}}" wx:for-item="dayItem">
       <view wx:if="{{dayItem.cnt}}">
         <view class='cu-bar solid-bottom bg-white'>

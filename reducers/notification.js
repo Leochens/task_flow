@@ -77,13 +77,17 @@ const failureFilter = (resource, error) => {
         case 'completation':
         case 'reviews':
         case 'task_flows': {
-            wx.showToast({
-                title: error || "失败",
-                mask:true
-            });
+
             setTimeout(
-                () => wx.navigateBack(),
-                1000);
+                () => {
+                    wx.navigateBack();
+                    wx.showModal({
+                        title: "请求失败提示",
+                        content: error || "失败",
+                        mask: true
+                    });
+                },
+                10);
             break;
         }
         default: return;

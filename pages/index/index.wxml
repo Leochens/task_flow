@@ -1,4 +1,4 @@
-<view class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+<view class="DrawerPage {{modalName=='viewModal'?'show':''}}" style="height:auto">
   <view class=" cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar tabbar fixed custom-bar" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
       <view class="action text-center" style='width: 100rpx'>
@@ -7,52 +7,70 @@
           <view class="cu-avatar round" style="background-image:url({{userInfo.avatarUrl}})" data-target="viewModal"></view>
         </block>
       </view>
+      <block wx:if="{{!hasUserInfo}}"></block>
       <!-- 主菜单 -->
-      <block wx:if="{{!isClassify}}">
-        <block wx:if="{{curOperation}}">
-          <view class="cur-op">
-            <view class='icon-cu-image text-white'>
-              <text class="pin-left icon-{{curOperation === 2?'roundcheck':'delete'}}fill  margin-0"></text>
-            </view>
-            <text>{{curOperationText}}</text>
-            <view class="back-menu-btn" bindtap='backToMenu'>返回</view>
-          </view>
-        </block>
-        <block wx:else>
-          <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
-            <view class='icon-cu-image text-white'>
-              <text class="icon-apps  margin-0"></text>
-            </view>
-          </view>
-          <view class="action" bind:tap="_fetchTaskFlows" data-id="2">
-            <view class='icon-cu-image text-white'>
-              <text class="icon-refresh margin-0"></text>
-            </view>
-          </view>
-          <view class="action" bind:tap="toHelp" data-id="3">
-            <view class='icon-cu-image text-white'>
-              <text class="icon-question margin-0"></text>
-            </view>
-          </view>
-          <view class="action {{4==TabCur?'cur':''}}" data-id="4">
-            <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
-              <text class='icon-add '></text>
-            </view>
-          </view>
-        </block>
-      </block>
-      <!-- 分类菜单 -->
       <block wx:else>
-        <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
-          <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{categories}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
-            {{index>0?item:"返回"}}
-          </view>
-        </scroll-view>
+        <block wx:if="{{!isClassify}}">
+          <block wx:if="{{curOperation}}">
+            <view class="cur-op">
+              <view class='icon-cu-image text-white'>
+                <text class="pin-left icon-{{curOperation === 2?'roundcheck':'delete'}}fill  margin-0"></text>
+              </view>
+              <text>{{curOperationText}}</text>
+              <view class="back-menu-btn" bindtap='backToMenu'>返回</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="action {{1==TabCur?'cur':''}}" bindtap='{{!isClassify?"menuTabSelect":""}}' data-id="1">
+              <view class='icon-cu-image text-white'>
+                <text class="icon-apps  margin-0"></text>
+              </view>
+            </view>
+            <view class="action" bind:tap="_fetchTaskFlows" data-id="2">
+              <view class='icon-cu-image text-white'>
+                <text class="icon-refresh margin-0"></text>
+              </view>
+            </view>
+            <view class="action" bind:tap="toHelp" data-id="3">
+              <view class='icon-cu-image text-white'>
+                <text class="icon-question margin-0"></text>
+              </view>
+            </view>
+            <view class="action {{4==TabCur?'cur':''}}" data-id="4">
+              <view class='icon-cu-image text-white text-bold' bindtap='addNewTaskFlow'>
+                <text class='icon-add '></text>
+              </view>
+            </view>
+          </block>
+        </block>
+        <!-- 分类菜单 -->
+        <block wx:else>
+          <scroll-view scroll-x class="nav" scroll-with-animation scroll-left="{{scrollLeft}}" style='width:calc(100% - 440rpx)'>
+            <view class="cu-item text-white {{index==TabCur?'text-bold cur':''}}" wx:for="{{categories}}" wx:key bindtap='{{isClassify?"classTabSelect":""}}' data-id="{{index}}">
+              {{index>0?item:"返回"}}
+            </view>
+          </scroll-view>
+        </block>
       </block>
     </view>
   </view>
 </view>
-<view class='task-flows' style='margin-top:{{CustomBar}}px;'>
+<view wx:if="{{!hasUserInfo && canIUse}}" style="margin-top:{{CustomBar}}px;">
+  <view class="UCenter-bg bg-main">
+    <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
+  </view>
+  <view class="margin-top" style="margin-top:100rpx">
+    <view class="padding-xl">
+      <view class='text-grey'>申请获得您的以下权限</view>
+      <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
+      <view class='text-grey text-sm'>我们不会在除本小程序外的地方使用您的公开信息</view>
+      <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+        确认授权
+      </button>
+    </view>
+  </view>
+</view>
+<view wx:else class='task-flows' style='margin-top:{{CustomBar}}px;'>
   <view class="UCenter-bg bg-main">
     <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
   </view>

@@ -84,7 +84,7 @@ const mapStateToData = (state) => {
     _dayBox.push({ ...state.dayBox[key] });
   }
   return {
-    dayDatas: _dayBox
+    dayDatas: _dayBox.reverse()
   }
 }
 const mapDispatchToPage = dispatch => ({

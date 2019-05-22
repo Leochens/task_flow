@@ -99,7 +99,7 @@
     <block wx:if="{{is_completed}}" style="">
       <view class='tab-item' bind:tap="checkData">
         <view class="icon-rankfill text-grey text-center text-xxl"></view>
-        <view class='text'>任务曲线</view>
+        <view class='text'>任务数据</view>
       </view>
       <view class='tab-item' bind:tap="allMembers">
         <view class="icon-group_fill text-grey text-center text-xxl"></view>
@@ -119,7 +119,7 @@
       </view>
       <view class='tab-item' bind:tap="checkData">
         <view class="icon-rankfill text-grey text-center text-xxl"></view>
-        <view class='text'>任务曲线</view>
+        <view class='text'>任务数据</view>
       </view>
       <view class='tab-item' bind:tap="allMembers">
         <view class="icon-group_fill text-grey text-center text-xxl"></view>

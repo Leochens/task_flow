@@ -40,6 +40,11 @@
             <text class="text-grey">子任务日志</text>
         </view>
     </view>
+    <view class="cu-item arrow " wx:if="{{isLeader}}"  bind:tap="_deleteTask">
+        <view class="content">
+            <text class="text-red">删除子任务</text>
+        </view>
+    </view>
 </view>
 <view class="cu-modal {{modalName==='t_name'?'show':''}}">
     <view class="cu-dialog">

@@ -8,8 +8,11 @@
   <view class="cu-item shadow">
     <view class="cu-list menu-avatar margin-top">
       <view class="cu-item flex justify-between align-center">
-        <view class="cu-avatar round lg" style="background-image:url({{userInfo.avatarUrl}});"></view>
-        <view class="content flex-sub">
+        <view wx:if="{{hasUserInfo}}" class="cu-avatar round lg" style="background-image:url({{userInfo.avatarUrl}});"></view>
+        <view wx:else class="cu-avatar round lg bg-green">
+          <view class="icon-people"></view>
+        </view>
+        <view wx:if="{{hasUserInfo}}" class="content flex-sub">
           <view>{{userInfo.nickName}}</view>
           <view class="text-gray text-sm flex justify-between">
             {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
@@ -19,9 +22,12 @@
             {{userInfo.gender?'男':'女'}}
           </view>
         </view>
-        <view class="margin-right-xl" bind:tap="toSettings">
+        <view wx:if="{{hasUserInfo}}" class="margin-right-xl" bind:tap="toSettings">
           <view class="icon-settingsfill text-gray text-xl"></view>
         </view>
+        <button wx:if="{{!hasUserInfo}}" class="cu-btn bg-main margin-left-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+          确认授权
+        </button>
       </view>
     </view>
     <view class="text-content" style="position: relative;">
@@ -47,7 +53,7 @@
   </view>
 </view>
 <view class=" cu-list menu card-menu margin-top-xs  margin-bottom-xl shadow-lg radius ">
-  <view class="cu-item arrow" bind:tap="toCalendar">
+  <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toCalendar">
     <view class="content center">
       <view class="margin-right-sm icon-calendar text-xl text-black"></view>
       <view class="text-grey">日历</view>
@@ -59,13 +65,13 @@
       <view class="text-grey">关于</view>
     </view>
   </view>
-  <view class="cu-item arrow" bind:tap="toData">
+  <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toData">
     <view class="content center">
       <view class="margin-right-sm icon-rankfill text-xl text-black"></view>
       <view class="text-grey">数据</view>
     </view>
   </view>
-  <view class="cu-item arrow" bind:tap="toReview">
+  <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toReview">
     <view class="content center">
       <view class="margin-right-sm icon-formfill text-xl text-black"></view>
       <view class="text-grey">审核</view>

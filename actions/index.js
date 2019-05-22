@@ -84,6 +84,9 @@ export const changeTaskInfo = (tf_id, u_id, t_id, field, value, callback) => {
 export const completeTask = (t_id, u_id) => {
     return crudCreate('completation', { u_id }, `tasks/${t_id}/complete`, { u_id, t_id });
 }
+export const deleteTask = (t_id, tf_id, u_id) => {
+    return crudDelete('tasks', t_id, `task_flows/${tf_id}/tasks`,null, null, { t_id, u_id });
+}
 export const addNewTaskFlowMember = (tf_id, u_id) => {
     return crudCreate('users', { u_id }, `task_flows/${tf_id}/users`);
 }

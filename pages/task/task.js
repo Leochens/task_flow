@@ -132,6 +132,10 @@ const page = {
     if (paneName.trim() === '' || !t_id) return;
     this.addTodoConnect({ t_id, t_name, todo_pane_name: paneName });
     this.hideModal();
+    wx.showToast({
+      title: "关联成功"
+    });
+    this.setData({ hasTodo: true })
   },
   hideModal: function () {
     this.setData({

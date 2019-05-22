@@ -18,12 +18,12 @@ const getDayBox = () => {
     const dayBoxKeys = Object.keys(dayBox);
     const lastDay = dayBoxKeys[dayBoxKeys.length - 1]; // 找到上次操作的最后一天
 
-    const today = formatTime(new Date(new Date().setDate(new Date().getDate() ))).split(' ')[0];
+    const today = formatTime(new Date(new Date().setDate(new Date().getDate()))).split(' ')[0];
     const days = Math.ceil(((new Date(today)) - (new Date(lastDay))) / (1000 * 60 * 60 * 24)); // 算出距离上次操作的最后一天差多少天
 
     if (!days) return dayBox; // 不差天 说明今天已经有过操作了 就直接返回
-    const dates = getDays(days,today).map(date => ({ date, cnt: 0, update: [], delete: [], create: [] }));
-    console.log("dates",dates);
+    const dates = getDays(days, today).map(date => ({ date, cnt: 0, update: [], delete: [], create: [] }));
+    console.log("dates", dates);
     const datesObj = {};
     dates.forEach(date => {
         datesObj[date.date] = date;
@@ -32,7 +32,7 @@ const getDayBox = () => {
         ...dayBox,
         ...datesObj
     }
-    console.log("last now 差 现", lastDay, today, days,newDayBox);
+    // console.log("last now 差 现", lastDay, today, days,newDayBox);
 
     wx.setStorageSync('dayBox', newDayBox);
     return newDayBox;
@@ -46,7 +46,7 @@ const dayBox = (state = dayBoxInit, action) => {
     console.log(state);
     const { type, op_type, msg } = action;
     const today = formatTime(new Date(new Date().setDate(new Date().getDate()))).split(' ')[0];
-    const cnt = state[today].cnt;
+    const cnt = state[today] ? state[today].cnt : 0;
     switch (type) {
         case RECORD_OPERATION: {
             const _state = { ...state };

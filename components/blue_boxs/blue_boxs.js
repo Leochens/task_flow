@@ -19,7 +19,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    color: ['#DAEAFD', '#7DA6D4', '#3A6EAA', '#214F84', '#2C4767']
+    color: ['#DAEAFD', '#7DA6D4', '#3A6EAA', '#214F84', '#2C4767'],
+    curTip: -1
   },
   ready: function () {
     const datas = this.properties.datas;
@@ -81,6 +82,13 @@ Component({
       })
       console.log("res", res); // 
 
+    },
+    showCurTip:function(e){
+      console.log(e);
+      const idx = e.currentTarget.dataset.idx;
+      this.setData({
+        curTip:idx
+      })
     }
   }
 })

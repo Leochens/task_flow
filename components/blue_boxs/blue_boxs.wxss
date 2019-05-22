@@ -1,11 +1,13 @@
 /* components/blueBoxs/blue_boxs.wxss */
 .boxs{
     width: 100%;
+    position: relative;
 }
 .item{
     display: inline-block;
     width: 10%;
     text-align: center;
+    position: relative;
 }
 .box{
     display: inline-block;
@@ -13,6 +15,7 @@
     height: 30rpx;
     width: 50%;
     border-radius: 6rpx;
+    position: relative;
 }
 .sm-box{
     display: inline-block;
@@ -20,6 +23,43 @@
     width: 16rpx;
     border-radius: 4rpx;
     margin-right: 4rpx;
+}
+.black-tip{
+    position: absolute;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 4rpx;
+    height: 40rpx;
+    width: 80rpx;
+    color: #fff;
+    z-index: 100;
+}
+.top{
+    top: -42rpx;
+}
+.top::after{
+    content: '';
+    position: absolute;
+    display: block;
+    border-width: 10rpx;
+    bottom: -20rpx;
+    border-style: solid;
+    border-color:rgba(0, 0, 0, .6) transparent transparent transparent;
+}
+.bottom{
+    bottom:-42rpx;
+}
+.bottom::after{
+    content: '';
+    position: absolute;
+    display: block;
+    border-width: 10rpx;
+    top: -20rpx;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, .6) transparent;
+}
+
+.black-tip view{
+    font-size: 14rpx;
 }
 .cnt{
     color: #fff;

@@ -236,12 +236,12 @@ const page = {
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
     const u_id = wx.getStorageSync('u_id');
-    if (!u_id) {
-      this.setData({
-        showAuthModal: true
-      });
-      wx.hideTabBar({});
-    }
+    // if (!u_id) {
+    //   this.setData({
+    //     showAuthModal: true
+    //   });
+    //   wx.hideTabBar({});
+    // }
     if (SID) {
       this.fetchTaskFlows(u_id, this.setTfIds);
       const settings = wx.getStorageSync('settings') || {};

@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
-import { changeTaskInfo } from '../../../actions/index';
+import { changeTaskInfo, deleteTask } from '../../../actions/index';
 import { recordOperation, TYPE } from '../../../actions/record';
 
 import { compareDate } from '../../../utils/util';
@@ -42,6 +42,21 @@ const page = {
       beginDate: task.begin_time,
       timeLimit,
       isLeader: app.globalData.u_id === tf.leader_id
+    })
+  },
+  _deleteTask: function () {
+    const { isLeader, task: { tf_id, id } } = this.data;
+    const u_id = app.globalData.u_id;
+    if (!isLeader) return;
+    const that = this;
+    wx.showModal({
+      title: '删除警告',
+      content: "确定删除子任务吗",
+      success: function (e) {
+        if (e.confirm) {
+          that.deleteTask(id, tf_id, u_id);
+        }
+      }
     })
   },
   showModal: function (e) {
@@ -165,7 +180,8 @@ const mapStateToData = state => {
 }
 const mapDispatchToPage = dispatch => ({
   changeTaskInfo: (tf_id, u_id, t_id, field, value, callback) => dispatch(changeTaskInfo(tf_id, u_id, t_id, field, value, callback)),
-  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type)),
+  deleteTask: (t_id, tf_id, u_id) => dispatch(deleteTask(t_id, tf_id, u_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

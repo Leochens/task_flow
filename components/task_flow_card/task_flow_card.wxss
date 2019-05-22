@@ -3,9 +3,6 @@
 .task-flow-card{
   width: 660rpx;
   position: relative;
-  /* height: 240rpx; */
-  /* box-shadow: -4rpx 5rpx 6rpx #ddd; */
-  border: 1rpx solid #eee;
   padding: 16rpx;
   border-radius: 20rpx;
   font-size: 25rpx;
@@ -15,6 +12,9 @@
   padding-bottom: 0;
   animation: slideInLeft .3s ease-in-out;
   transition: background-color .3s ease-in-out;
+}
+.shadow {
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 
 .title-wrap{

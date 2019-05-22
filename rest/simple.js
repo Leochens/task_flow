@@ -36,6 +36,7 @@ export default (apiUrl, httpClient = fetchJson) => {
       case DELETE:
         url = `${apiUrl}/${basePath ? basePath : resource}/${params.id}`;
         options.method = 'DELETE';
+        options.data = JSON.stringify(params.data);
         break;
       default:
         throw new Error(`Unsupported fetch action type ${type}`);

@@ -1,7 +1,10 @@
 <!-- pages/task_flow/task_flow_data/task_flow_data.wxml -->
-<nav-bar isBack="{{true}}" style="background:#fff">
+<nav-bar wx:if="{{!isShare}}" isBack="{{true}}" style="background:#fff">
   <view slot="backText">返回</view>
   <view slot="content">任务流数据分析</view>
+</nav-bar>
+<nav-bar wx:else isCustom="true">
+  <view slot="content">任务流数据分析快照</view>
 </nav-bar>
 <view class="cu-list bg-white margin-top menu">
   <view class="cu-item padding-df padding-left-xl">
@@ -13,6 +16,9 @@
       <view class="cu-tag line-main round" wx:if="{{!isShare}}" bind:tap="fetch">
         <text class="icon-refresh"></text>
       </view>
+      <button open-type="share" class="cu-tag line-main round" plain="{{true}}" style="border:none" wx:if="{{!isShare}}">
+        <text class="icon-share"></text>
+      </button>
       <view wx:else class="text-main">截止到{{date}}</view>
     </view>
   </view>

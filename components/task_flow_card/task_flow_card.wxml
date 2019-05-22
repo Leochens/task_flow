@@ -1,12 +1,12 @@
 <!-- components/task_flow_card/task_flow_card.wxml -->
-<view wx:if="{{simplify}}" class="task-flow-card pin">
+<view wx:if="{{simplify}}" class="task-flow-card pin shadow">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
     <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
     <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
   </view>
 </view>
-<view wx:else class="task-flow-card {{tfCardType === 'delete'?'mask':''}}">
+<view wx:else class="task-flow-card shadow {{tfCardType === 'delete'?'mask':''}}">
   <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>

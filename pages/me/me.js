@@ -3,7 +3,11 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import regeneratorRuntime from '../../libs/regenerator-runtime/runtime';
-
+import {
+  login,
+  gotUserInfo
+} from '../../actions/auth';
+const app = getApp()
 
 const page = {
 
@@ -15,9 +19,27 @@ const page = {
     myTaskFlowsCnt: 0,
     finishedCnt: 0,
     userInfo: {},
-    showBlueBoxTipModal: false
+    showBlueBoxTipModal: false,
+    hasUserInfo: false
   },
-
+  getUserInfo: function (e) {
+    console.log(e)
+    if (!e.detail.userInfo) {
+      return;
+    }
+    wx.setStorageSync('userInfo', e.detail.userInfo);
+    app.globalData.userInfo = e.detail.userInfo
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    });
+    // 向后端发送userInfo
+    this.gotUserInfo(this.data.u_id, e.detail.userInfo);
+    this.setData({
+      showAuthModal: false
+    });
+    wx.showTabBar({});
+  },
   hideModal: function () {
     this.setData({
       showBlueBoxTipModal: false
@@ -32,7 +54,8 @@ const page = {
     const userInfo = wx.getStorageSync('userInfo') || {};
 
     this.setData({
-      userInfo
+      userInfo,
+      hasUserInfo: userInfo.nickName ? true : false
     })
   },
   toSettings: function () {
@@ -93,6 +116,7 @@ const mapStateToData = state => {
   }
 }
 const mapDispatchToPage = dispatch => ({
+  gotUserInfo: (u_id, userInfo) => dispatch(gotUserInfo(u_id, userInfo)),
 
 });
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
