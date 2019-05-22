@@ -50,6 +50,19 @@
       </view>
     </view>
   </view>
+  <form-id wx:if="{{!todoPanes.length}}">
+    <view class="margin-top-xl">
+      <view class="icon-magic text-grey text-xxl text-center" style="font-size:100rpx"></view>
+      <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
+      <view class="margin-top-sm text-center text-sm text-grey ">
+        点击上方的
+        <view class="cu-tag bg-main round sm">
+          <text class="text-bold icon-add"></text>
+        </view>
+        添加待办板
+      </view>
+    </view>
+  </form-id>
 </view>
 <view class="cu-modal {{modalName=='todoPane'?'show':''}}">
   <view class="cu-dialog">

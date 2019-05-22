@@ -1,8 +1,7 @@
 <!-- pages/calendar/calendar.wxml -->
-
 <nav-bar isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">任务日历</view>
+    <view slot="backText">返回</view>
+    <view slot="content">任务日历</view>
 </nav-bar>
 <view class="wrap">
     <view class="top" style="max-height:{{Height - 350}}px">
@@ -12,8 +11,16 @@
             <text class="text-red text-bold">{{todayTasks.length}}</text>
         </view>
         <view class="text" wx:else>
-            {{calendar.selectedDay[0].year}}-{{calendar.selectedDay[0].month}}-{{calendar.selectedDay[0].day}}
-            日无与我相关任务
+
+            <form-id>
+                <view class="margin-top-xl">
+                    <view class="icon-magic text-grey text-xxl text-center" style="font-size:100rpx"></view>
+                    <view class="margin-top-xl text-grey  text-center">
+                        {{calendar.selectedDay[0].year}}-{{calendar.selectedDay[0].month}}-{{calendar.selectedDay[0].day}}日
+                    </view>
+                    <view class="margin-top-sm text-grey  text-center">没有与我相关任务</view>
+                </view>
+            </form-id>
         </view>
         <view class="" wx:for="{{todayTasks}}" wx:key>
             <view class="task-card {{item.isDelay?'bgc-grey':''}}" bind:tap="toTaskDetail" data-tid="{{item.id}}">

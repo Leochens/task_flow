@@ -1,4 +1,4 @@
-// pages/feedback/feedback.js
+// pages/help/fresh_help/fresh_help.js
 Page({
 
   /**

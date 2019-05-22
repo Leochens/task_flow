@@ -43,4 +43,11 @@
     </view>
   </view>
 </view>
-<view wx:else class="margin-top-xl text text-bold text-center">暂时还没有新消息</view>
+<view wx:else class="margin-top-xl  text-center">
+  <form-id>
+    <view class="margin-top-xl">
+      <view class="icon-magic text-grey text-xxl text-center" style="font-size:100rpx"></view>
+      <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
+    </view>
+  </form-id>
+</view>

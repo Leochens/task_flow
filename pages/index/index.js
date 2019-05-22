@@ -114,9 +114,9 @@ const page = {
       searchKeyword: ''
     })
   },
-  toHelp: function () {
+  toCalendar: function () {
     wx.navigateTo({
-      url: '/pages/help/help'
+      url: '/pages/calendar/calendar'
     })
   },
   getUserInfo: function (e) {

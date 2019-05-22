@@ -31,9 +31,9 @@
                 <text class="icon-refresh margin-0"></text>
               </view>
             </view>
-            <view class="action" bind:tap="toHelp" data-id="3">
+            <view class="action" bind:tap="toCalendar" data-id="3">
               <view class='icon-cu-image text-white'>
-                <text class="icon-question margin-0"></text>
+                <text class="icon-calendar margin-0"></text>
               </view>
             </view>
             <view class="action {{4==TabCur?'cur':''}}" data-id="4">
@@ -60,8 +60,8 @@
     <image class="gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
   </view>
   <view class="margin-top" style="margin-top:100rpx">
-    <view class="padding-xl">
-      <view class='text-grey'>申请获得您的以下权限</view>
+    <view class="padding-xl text-center">
+      <view class='text-grey text-bold'>申请获得您的以下权限</view>
       <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
       <view class='text-grey text-sm'>我们不会在除本小程序外的地方使用您的公开信息</view>
       <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
@@ -80,7 +80,7 @@
     </form-id>
   </view>
   <view wx:else>
-    <view wx:if="{{filterTaskFlowList.length || taskFlowList.length||pinTopTaskFlowList}}">
+    <view wx:if="{{filterTaskFlowList.length || taskFlowList.length || pinTopTaskFlowList.length}}">
       <view class="cu-bar bg-white">
         <view class="action">
           <view class="cu-tag line-main">
@@ -138,7 +138,18 @@
     </view>
     <view wx:else>
       <form-id>
-        <view class="empty-list">还没有任务流呢,快点击上方的加号添加吧！</view>
+        <view class="margin-top-xl">
+          <view class="icon-magic text-grey text-xxl text-center" style="font-size:100rpx"></view>
+          <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
+          <view class="margin-top-sm text-center text-sm text-grey ">
+            点击上方的
+            <view class="cu-tag bg-main round sm">
+              <text class="text-bold icon-add"></text>
+            </view>
+            添加任务流
+          </view>
+          <view class="margin-top-sm text-main text-sm text-center" style="text-decoration:underline">如果您是新手,请点击我</view>
+        </view>
       </form-id>
     </view>
   </view>

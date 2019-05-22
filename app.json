@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/help/help",
     "pages/index/index",
     "pages/task/task",
     "pages/task_flow/task_flow_data/task_flow_data",
@@ -15,18 +16,15 @@
     "pages/task_flow/my_tasks/my_tasks",
     "pages/task_flow/all_members/all_members",
     "pages/task_flow/task_flow",
-    "pages/auth/auth",
     "pages/message/message",
     "pages/about/about",
     "pages/data/data",
     "pages/review/review",
     "pages/search/search",
-    "pages/feedback/feedback",
-    "pages/help/help",
     "pages/task_flow/tf_settings/tf_settings",
-    "pages/log/log",
     "pages/task/task_settings/task_settings",
-    "pages/todo/todo"
+    "pages/todo/todo",
+    "pages/help/fresh_help/fresh_help"
   ],
   "tabBar": {
     "color": "#666",
