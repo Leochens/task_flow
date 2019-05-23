@@ -4,9 +4,9 @@
   <view slot="content">帮助</view>
 </nav-bar>
 <view class=" margin-top" style="background:#fff">
-  <view class="cu-list menu solid-bottom">
+  <view class="cu-list menu solid-bottom" bind:tap="toFreshHelp">
     <view class="cu-item arrow ">
-      <view class="content" bind:tap="toFreshHelp">
+      <view class="content" >
         <view class="text-xl text-grey">
           <text class="icon-magic"></text>
           新手帮助
