@@ -8,6 +8,6 @@
 </view>
 <view class=" basis-xl text-center" wx:if="{{u_id === leader_id}}">
   <view class="cu-btn bg-main lg basis-xl round" hover-class="button-hover" bind:tap="edit">
-    {{edit?'完成':'编辑'}}
+    {{edit?'完成':'移除成员'}}
   </view>
 </view>

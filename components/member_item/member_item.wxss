@@ -46,7 +46,7 @@
   }
 
   .leader{
-    border: 2rpx solid #ddd;
+    border: 2rpx solid #2967af;
   }
 
   .delete{
@@ -55,6 +55,8 @@
     font-size:24rpx;
     border:1rpx solid;
     position:absolute;
+    font-weight: 500;
+    border-radius: 6rpx;
     top:0;
     right:0;
   }
