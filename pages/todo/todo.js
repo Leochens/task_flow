@@ -3,6 +3,8 @@ import {
   connect
 } from '../../libs/wechat-weapp-redux';
 import { addTodoConnect, addTodo, addTodoNoConnect, delTodo, delTodoPane, toggleCompleteTodo, upTodo } from '../../actions/todos';
+import { recordOperation, TYPE } from '../../actions/record';
+
 const app = getApp();
 const page = {
   data: {
@@ -83,7 +85,10 @@ const page = {
       content: `您确定删除该待办面板吗`,
       success: function (e) {
         if (e.confirm) {
+
           that.delTodoPane(paneId);
+          that.recordOperation(`删除待办面板`, TYPE.DELETE)
+
         }
       }
     });
@@ -96,12 +101,15 @@ const page = {
     const paneName = e.detail.value.paneName;
     if (paneName.trim() === '') return;
     this.addTodoNoConnect({ todo_pane_name: paneName });
+    this.recordOperation(`创建非关联待办面板[${paneName}]`, TYPE.CREATE)
+
     this.hideModal();
   },
 
   _comfirmAddTodo: function (e) {
     console.log(e);
     const todoName = e.detail.value.todoName;
+
     if (todoName.trim() === '') return;
     const { paneId } = this.data;
     this.addTodo(todoName, paneId);
@@ -140,7 +148,9 @@ const mapDispatchToPage = dispatch => ({
   addTodo: (content, pane_id) => dispatch(addTodo(content, pane_id)),
   toggleCompleteTodo: (todo_id, pane_id) => dispatch(toggleCompleteTodo(todo_id, pane_id)),
   delTodo: (todo_id, pane_id) => dispatch(delTodo(todo_id, pane_id)),
-  upTodo: (todo_id, pane_id) => dispatch(upTodo(todo_id, pane_id))
+  upTodo: (todo_id, pane_id) => dispatch(upTodo(todo_id, pane_id)),
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

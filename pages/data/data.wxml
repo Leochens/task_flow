@@ -47,14 +47,15 @@
           <view class="cu-item">
             <view class="cu-bar">
               <view class="text-df text-main text-bold">
-                创建
+                创建型
                 <text class="icon-unfold text-bold text-gray"></text>
               </view>
             </view>
           </view>
           <view class="cu-item bg-white" wx:for="{{dayItem.create}}" wx:for-item="createItem">
             <view class="content">
-              <view class="text-grey">{{createItem}}</view>
+              <view class="text-grey">{{createItem.msg}}</view>
+              <view class="text-grey text-sm">{{createItem.datetime}}</view>
             </view>
           </view>
         </view>
@@ -62,14 +63,15 @@
           <view class="cu-item">
             <view class="cu-bar">
               <view class="text-df text-main text-bold">
-                更新
+                更新型
                 <text class="icon-unfold text-bold text-gray"></text>
               </view>
             </view>
           </view>
           <view class="cu-item bg-white" wx:for="{{dayItem.update}}" wx:for-item="updateItem">
             <view class="content">
-              <view class="text-grey">{{updateItem}}</view>
+              <view class="text-grey">{{updateItem.msg}}</view>
+              <view class="text-grey text-sm">{{updateItem.datetime}}</view>
             </view>
           </view>
         </view>
@@ -77,14 +79,15 @@
           <view class="cu-item">
             <view class="cu-bar">
               <view class="text-df text-main text-bold">
-                删除
+                删除型
                 <text class="icon-unfold text-bold text-gray"></text>
               </view>
             </view>
           </view>
           <view class="cu-item bg-white" wx:for="{{dayItem.delete}}" wx:for-item="deleteItem">
             <view class="content">
-              <view class="text-grey">{{deleteItem}}</view>
+              <view class="text-grey">{{deleteItem.msg}}</view>
+              <view class="text-grey text-sm">{{deleteItem.datetime}}</view>
             </view>
           </view>
         </view>

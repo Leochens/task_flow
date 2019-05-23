@@ -71,7 +71,7 @@ const page = {
     this._completeTask(t_id, u_id);
     // 后端请求完成任务的api
     const task = this.data.tasks[t_id];
-    task && this.recordOperation(`完成子任务${task.t_name}`, TYPE.UPDATE);
+    task && this.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
   },
   applyBreak: function (e) {
     console.log("e=>", e);
@@ -91,7 +91,7 @@ const page = {
   sendApply: function () {
     console.log("准备发射请求");
     const { breakTaskId, break_reason, showInputIndex } = this.data;
-    if (replaceChar(break_reason)) return wx.showModal({
+    if (!replaceChar(break_reason)) return wx.showModal({
       title: "数据错误",
       content: "请勿包含特殊字符"
     });
@@ -99,7 +99,7 @@ const page = {
     const u_id = wx.getStorageSync('u_id');
     const task = this.data.tasks[showInputIndex];
     this.applyTakeBreak(breakTaskId, u_id, break_reason);
-    task && this.recordOperation(`子任务${task.t_name}申请请假`, TYPE.UPDATE);
+    task && this.recordOperation(`子任务[${task.t_name}]申请请假`, TYPE.UPDATE);
 
     setTimeout(wx.navigateBack, 300);
     this.setData({

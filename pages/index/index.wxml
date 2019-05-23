@@ -148,7 +148,7 @@
             </view>
             添加任务流
           </view>
-          <view class="margin-top-sm text-main text-sm text-center" style="text-decoration:underline">如果您是新手,请点击我</view>
+          <view class="margin-top-sm text-main text-sm text-center" style="text-decoration:underline" bind:tap="toFreshHelp">如果您是新手,请点击我</view>
         </view>
       </form-id>
     </view>

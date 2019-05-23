@@ -51,7 +51,11 @@ const dayBox = (state = dayBoxInit, action) => {
         case RECORD_OPERATION: {
             const _state = { ...state };
             const list = [..._state[today][op_type]];//获得相应类型的操作记录列表
-            list.unshift(msg);
+            const day_msg = {
+                msg,
+                datetime: formatTime(new Date())
+            }
+            list.unshift(day_msg);
             const newState = {
                 ...state,
                 [today]: {

@@ -80,7 +80,7 @@ const page = {
         if (e.confirm) {
           console.log("解散任务流")
           that.breakTaskFlow(app.globalData.u_id, that.data.tf_id);
-          that.recordOperation(`解散任务流${tf.tf_name}`, TYPE.DELETE);
+          that.recordOperation(`解散任务流[${tf.tf_name}]`, TYPE.DELETE);
           wx.reLaunch({
             url: '/pages/index/index?refresh=true',
           })
@@ -98,7 +98,7 @@ const page = {
       success: function (e) {
         if (e.confirm) {
           that.deleteTaskFlow(u_id, tf_id);
-          that.recordOperation(`退出任务流${tf.tf_name}`, TYPE.DELETE);
+          that.recordOperation(`退出任务流[${tf.tf_name}]`, TYPE.DELETE);
           wx.reLaunch({
             url: '/pages/index/index',
           })
@@ -115,7 +115,7 @@ const page = {
       success: function (e) {
         if (e.confirm) {
           that.finishTaskFlow(u_id, tf_id);
-          that.recordOperation(`提前完成任务流${tf.tf_name}`, TYPE.DELETE);
+          that.recordOperation(`提前完成任务流[${tf.tf_name}]`, TYPE.DELETE);
 
           wx.reLaunch({
             url: '/pages/index/index',
@@ -143,7 +143,7 @@ const page = {
     const { tf_id, transferUid, tf } = this.data;
     if (!transferUid) return wx.showToast({ title: "请选择转让人" });
     this._transferLeader(tf_id, transferUid);
-    this.recordOperation(`转让任务流${tf.tf_name}`, TYPE.DELETE);
+    this.recordOperation(`转让任务流[${tf.tf_name}]`, TYPE.DELETE);
     this.hideModal();
     this.setData({
       transferUid: ''

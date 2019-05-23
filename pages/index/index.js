@@ -114,6 +114,11 @@ const page = {
       searchKeyword: ''
     })
   },
+  toFreshHelp: function () {
+    wx.navigateTo({
+      url: "/pages/help/fresh_help/fresh_help"
+    })
+  },
   toCalendar: function () {
     wx.navigateTo({
       url: '/pages/calendar/calendar'

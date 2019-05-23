@@ -1,1 +1,6 @@
 /* pages/help/fresh_help/fresh_help.wxss */
+.help-image{
+    width: 100%;
+    border-radius: 6rpx;
+    
+}

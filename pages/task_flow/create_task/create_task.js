@@ -183,7 +183,7 @@ const _page = {
     } else {
 
       this.addTask(this.data.tf_id, JSON.stringify(task), this.data.selectedMembers);
-      this.recordOperation(`添加子任务${task.t_name}`, TYPE.CREATE);
+      this.recordOperation(`添加子任务[${task.t_name}]`, TYPE.CREATE);
 
     }
 

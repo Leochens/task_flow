@@ -3,7 +3,159 @@
   <view slot="backText">返回</view>
   <view slot="content">帮助</view>
 </nav-bar>
-<view class="cu-bar">
-  <view class="icon-title text-main"></view>
-  <view class="content text-gray">功能待实现</view>
+<view class=" margin-top" style="background:#fff">
+  <view class="cu-list menu solid-bottom">
+    <view class="cu-item arrow ">
+      <view class="content" bind:tap="toFreshHelp">
+        <view class="text-xl text-grey">
+          <text class="icon-magic"></text>
+          新手帮助
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-bar">
+    <view class="action ">
+      <view class="icon-title text-main"></view>
+      <view class="text-grey">您可能要找的问题</view>
+    </view>
+  </view>
+  <view class="cu-card dynamic">
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          待办册是什么?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view>
+          <view class="text-sm margin-bottom-sm">待办册服务于每个任务流的子任务的事务管理工具。</view>
+          <view class="text-sm margin-bottom-sm">作为任务人，在某些情况下也需要定制自己的任务步骤，决定好自己事务的先后顺序。</view>
+          <view class="text-sm margin-bottom-sm">
+            同时待办册是完全由任务人自己控制的，所以任务人可以自行安排事务。待子任务的一切事务都完毕后，任务人便可以去子任务界面点击完成了。
+          </view>
+          <view class="text-bold text-grey margin-bottom-sm">
+            <text class="icon-title text-grey"></text>
+            待办面板的分类
+          </view>
+          <view class="text-sm margin-bottom-sm">(1) 关联待办板: 在子任务界面进行关联,点击待办板上的链接可以直达子任务。</view>
+          <view class="text-sm margin-bottom-sm">
+            (2) 非关联待办板: 用户在待办册界面创建的待办板,与子任务毫无关联,可以作为用户自定义的待办事项面板
+          </view>
+          <view class="text-bold text-grey margin-bottom-sm">
+            <text class="icon-title text-grey"></text>
+            如何使用待办册
+          </view>
+          <view class="text-sm margin-bottom-sm">
+            (1) 在子任务界面右上角可以进行待办面板关联,关联成功后即可在待办册页面看到已关联子任务的待办板。
+          </view>
+          <view class="text-sm margin-bottom-sm">(2) 在待办册页面可以点击左上角的按钮进行非关联待办板的添加。</view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          如何置顶重要的任务流?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">(1) 确保在设置界面打开[置顶任务流]的开关以允许置顶任务流</view>
+        <view class="text-sm margin-bottom-sm">(2）在任务流界面选择一个任务流长按即可置顶</view>
+        <view class="text-sm margin-bottom-sm">(3）置顶后任务流界面将会分为[置顶任务流]和[全部任务流]两种</view>
+        <view class="text-sm margin-bottom-sm">(4) 长按置顶后的任务流可以取消该任务流的置顶状态</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          为什么添加新成员后添加子任务却没有新成员可选？
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top">
+        <view class="text-sm ">
+          出现这种问题可能是刷新延迟，建议到任务流页面顶端点击
+          <text class="icon-refresh text-main"></text>
+          按钮刷新。如果此方法不奏效，请反馈或联系客服。
+        </view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          创建的子任务的成员都请假了怎么办?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">
+          (1) 在子任务界面点击
+          <text class="icon-more text-main"></text>
+          进入到子任务的设置页面。
+        </view>
+        <view class="text-sm margin-bottom-sm">(2) 选择删除任务流结束它 或 添加新成员继续下去。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          收到成员的请假申请应如何应答?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">在[我的]页面中点击[审核]到审核页面进行操作即可。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          [我的]页面顶部的蓝色记录格有什么用?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">蓝色记录格(记录格)是我们为用户提供的工作记录评估的统计工具。</view>
+        <view class="text-bold text-grey margin-bottom-sm">
+          <text class="icon-title text-grey"></text>
+          它是如何计算颜色的
+        </view>
+        <view class="text-sm margin-bottom-sm">(1) 记录格每天的颜色是相对于该日向前30天的记录量比较得出的。</view>
+        <view class="text-sm margin-bottom-sm">
+          (2) 记录格的颜色分为5个等级,从浅到深代表记录量依次增多。若该日没有任何记录，则显示为灰色。
+        </view>
+        <view class="text-sm margin-bottom-sm">(3) 在30天的记录内,一天的记录量越多,那么颜色则越深。</view>
+        <view class="text-sm margin-bottom-sm">(4) 记录格只显示30天的色值变化,超过30天则按照最新的30天的记录计算。</view>
+        <view class="text-bold text-grey margin-bottom-sm">
+          <text class="icon-title text-grey"></text>
+          它是如何计算操作记录的,以下为有效的记录
+        </view>
+        <view class="text-sm margin-bottom-sm">· 创建任务流</view>
+        <view class="text-sm margin-bottom-sm">· 创建子任务</view>
+        <view class="text-sm margin-bottom-sm">· 分享任务流数据</view> 
+        <view class="text-sm margin-bottom-sm">· 创建一个新的分类</view>
+        <view class="text-sm margin-bottom-sm">· 更新任务流的信息(名称,简介,截止时间)</view>
+        <view class="text-sm margin-bottom-sm">· 更新子任务的基本信息(名称,简介,截止时间)</view>
+        <view class="text-sm margin-bottom-sm">· 完成子任务</view>
+        <view class="text-sm margin-bottom-sm">· 审核请假信息</view>
+        <view class="text-sm margin-bottom-sm">· 子任务申请请假</view>
+        <view class="text-sm margin-bottom-sm">· 添加待办面板(关联,非关联)</view>
+        <view class="text-sm margin-bottom-sm">· 删除待办面板(关联,非关联)</view>
+        <view class="text-sm margin-bottom-sm">· 退出任务流</view>
+        <view class="text-sm margin-bottom-sm">· 移除任务流成员</view>
+        <view class="text-sm margin-bottom-sm">· 提前完成任务流</view>
+        <view class="text-sm margin-bottom-sm">· 解散任务流</view>
+        <view class="text-sm margin-bottom-sm">· 转让任务流</view>
+
+        <view class="text-bold text-grey margin-bottom-sm">
+          <text class="icon-title text-grey"></text>
+          该如何看到自己每天的记录
+        </view>
+        <view class="text-sm margin-bottom-sm">在[我的]页面点击[数据]进入数据统计页面即可查看全部的记录。</view>
+      </view>
+    </view>
+  </view>
 </view>

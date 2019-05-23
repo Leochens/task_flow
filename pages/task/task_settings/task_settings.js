@@ -67,7 +67,7 @@ const page = {
   },
   recordUpdate: function (e) {
     const { task } = this.data;
-    task && this.recordOperation(`子任务${task.t_name}更新`, TYPE.UPDATE);
+    task && this.recordOperation(`子任务[${task.t_name}]更新`, TYPE.UPDATE);
 
   },
   changeTaskName: function (e) {

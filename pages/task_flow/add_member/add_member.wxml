@@ -1,14 +1,16 @@
 <!-- pages/task_flow/add_member/add_member.wxml -->
-
 <nav-bar isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">邀请新成员</view>
+    <view slot="backText">返回</view>
+    <view slot="content">邀请新成员</view>
 </nav-bar>
-<view class="main">
-    <view class="tip">开始召集伙伴</view>
-    <image src="../../../assets/imgs/task_flow/add.svg" class="add" />
-    <view class="tip">
-        点我分享给微信好友或微信群添加伙伴
-        <button plain="{{true}}" open-type="share">分享</button>
-    </view>
+<view style="height:100rpx">
+</view>
+<view class="margin-xl">
+    <view class="text-center">分享至微信好友或微信群添加伙伴</view>
+</view>
+
+<view class="margin-xl flex">
+    <button class="margin-xl flex-sub cu-btn bg-main lg" open-type="share">
+        <view class="icon-add text-xxl text-center text-white"></view>
+    </button>
 </view>

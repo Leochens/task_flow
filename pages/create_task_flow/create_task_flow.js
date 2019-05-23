@@ -160,7 +160,7 @@ const _page = {
       const ro = this.recordOperation;
       this.updateTaskFlow(u_id, tf_id, d, function () {
         wx.navigateBack();
-        ro(`更新任务流${tf_name}`, TYPE.UPDATE);
+        ro(`更新任务流[${tf_name}]`, TYPE.UPDATE);
 
       });
     } else {
@@ -173,7 +173,7 @@ const _page = {
         category: replaceChar(curCate)
       });
       this.addTaskFlow(u_id, data, this.refresh);
-      this.recordOperation(`创建任务流${tf_name}`, TYPE.CREATE);
+      this.recordOperation(`创建任务流[${tf_name}]`, TYPE.CREATE);
     }
   },
   refresh: function () {
@@ -204,7 +204,7 @@ const _page = {
     }
     categories.push(newCateName);
     app.globalData.categories = categories;
-    this.recordOperation(`添加新分类${newCateName}`, TYPE.CREATE);
+    this.recordOperation(`添加新分类[${newCateName}]`, TYPE.CREATE);
 
     this.setData({
       categories,

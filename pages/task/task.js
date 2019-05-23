@@ -128,7 +128,7 @@ const page = {
     const paneName = e.detail.value.paneName;
     console.log(paneName)
     const { task: { id: t_id, t_name } } = this.data;
-
+    this.recordOperation(`创建子任务[${t_name}]的关联面板[${paneName}]`,TYPE.CREATE)
     if (paneName.trim() === '' || !t_id) return;
     this.addTodoConnect({ t_id, t_name, todo_pane_name: paneName });
     this.hideModal();
@@ -148,7 +148,7 @@ const page = {
     if (!replaceChar(break_reason)) return;
     const { task: { id: t_id }, u_id } = this.data;
     this.applyTakeBreak(t_id, u_id, break_reason);
-    this.recordOperation(`子任务${this.data.task.t_name}申请请假`, TYPE.UPDATE);
+    this.recordOperation(`子任务[${this.data.task.t_name}]申请请假`, TYPE.UPDATE);
     this.hideModal();
     this.initFromApi();
   },
@@ -294,7 +294,7 @@ const page = {
 
     this.completeTask(t_id, u_id);
     const task = this.data.tasks[t_id];
-    task && this.recordOperation(`完成子任务${task.t_name}`, TYPE.UPDATE);
+    task && this.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
   },
   commentSubmit: function (e) {
     console.log(e);

@@ -35,6 +35,7 @@ Page({
     return {
       title: '任务流邀请',//分享内容
       path: '/pages/invite/invite?tf_id=' + this.data.tf_id + "&who=" + this.data.who + "&tf_name=" + this.data.tf_name + "&cnt=" + this.data.cnt + "&avatar=" + this.data.avatar,//分享地址
+      imageUrl:'http://mokis.top/open_imgs/task_flow/copyright.jpg'
     }
 
   }

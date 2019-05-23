@@ -5,6 +5,8 @@ import {
 const app = getApp()
 import { fetchReviewList, allowTakeBreak, refuseTakeBreak } from '../../actions/index';
 import replaceChar from '../../utils/replaceChar';
+import { recordOperation, TYPE } from '../../actions/record';
+
 const page = {
 
   /**
@@ -69,6 +71,8 @@ const page = {
     const review = this.data.reviews[r_id]
     const { t_id, apply_user_id } = review;
     this.allowTakeBreak(t_id, this.data.u_id, apply_user_id);
+    this.recordOperation(`同意子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`,TYPE.UPDATE)
+
     this.clear();
     this.onPullDownRefresh();
   },
@@ -76,6 +80,8 @@ const page = {
     const r_id = e.currentTarget.dataset.rid;
     const review = this.data.reviews[r_id]
     const { t_id, apply_user_id } = review;
+    this.recordOperation(`拒绝子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`,TYPE.UPDATE)
+
     this.setData({
       curTid: t_id,
       hideModal: false,
@@ -92,7 +98,9 @@ const mapStateToData = (state) => {
 const mapDispatchToPage = dispatch => ({
   fetchReviewList: u_id => dispatch(fetchReviewList(u_id)),
   allowTakeBreak: (t_id, u_id, apply_user_id) => dispatch(allowTakeBreak(t_id, u_id, apply_user_id)),
-  refuseTakeBreak: (t_id, u_id, apply_user_id, refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id, apply_user_id, refuse_reason))
+  refuseTakeBreak: (t_id, u_id, apply_user_id, refuse_reason) => dispatch(refuseTakeBreak(t_id, u_id, apply_user_id, refuse_reason)),
+  recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

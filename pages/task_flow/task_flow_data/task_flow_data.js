@@ -3,12 +3,16 @@
 import getTaskFlowRing from './charts/ring';
 import getMemberColumn from './charts/column';
 import { formatTime } from '../../../utils/util';
+import { recordOperation, TYPE } from '../../../actions/record';
+import {
+  connect
+} from '../../../libs/wechat-weapp-redux';
 import APP from '../../../appConfig'
 // 此页面可以分享 用户天然的快照属性 因为分享时的数据是暂时的
 // 当onLoad里的option中的isShare为true时 使用分享数据 并关闭刷新按钮
 // 如果不是share的 那么就用拉取数据来看
 const app = getApp();
-Page({
+const _page = {
   /**
    * 页面的初始数据
    */
@@ -89,6 +93,7 @@ Page({
     else this.getShareData();
   },
   onLoad: function (options) {
+
     const { tf_id, data, date } = options;
     const tfData = data ? JSON.parse(options.data) : null;
     const isShare = options.isShare;
@@ -124,10 +129,22 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-
+    this.recordOperation(`分享任务流[${this.data.tfData.tf_name}]的数据`, TYPE.CREATE);
     return {
       title: `${this.data.tfData.tf_name}数据统计`,//分享内容
       path: '/pages/task_flow/task_flow_data/task_flow_data?data=' + JSON.stringify(this.data.tfData) + '&isShare=true&tf_id=' + this.data.tf_id + "&date=" + formatTime(new Date()),
     }
   }
-})
+}
+const mapStateToData = state => {
+  return {}
+}
+const mapDispatchToPage = dispatch => {
+  return {
+    recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type))
+  }
+}
+
+const page = connect(mapStateToData, mapDispatchToPage)(_page);
+
+Page(page)

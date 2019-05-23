@@ -54,7 +54,7 @@ const _page = {
           console.log('删除', delete_user_id);
           const u_id = app.globalData.u_id;
           that.deleteTaskFlowMember(u_id, that.data.tf_id, delete_user_id, that.onShow);
-          that.recordOperation(`移除${that.data.tf.tf_name}中的成员`, TYPE.DELETE);
+          that.recordOperation(`移除任务流[${that.data.tf.tf_name}]中的成员`, TYPE.DELETE);
         }
       }
     });
