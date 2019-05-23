@@ -101,14 +101,16 @@
 <view class="cu-modal {{showBlueBoxTipModal?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">小蓝格提示</view>
+      <view class="content">说明</view>
       <view class="action" bindtap="hideModal">
         <text class="icon-close text-red"></text>
       </view>
     </view>
     <view class="padding-xl">
-      小蓝格记录了30天来您使用活动任务流的各种操作记录,颜色由浅至深代表了操作量由少到多。如果今天没有任何操作，那么将是灰色的格子，有操作的话将会变蓝。
-        颜色的深浅是相对您近30天来的每天的操作量来计算的。最后一个格子始终代表今天
+      <view class="text-grey">蓝色记录格记录了30天来您使用活动任务流的各种操作记录</view>
+      <view  class="text-grey">颜色由浅至深代表了操作量由少到多</view>
+      <view  class="text-grey">点击每个格子会显示该日的记录量</view>
+      <view  class="text-main margin-top-sm " style="text-decoration:underline" bind:tap="toHelp">猛击我查看具体说明></view>
     </view>
   </view>
 </view>

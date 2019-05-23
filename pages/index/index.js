@@ -43,7 +43,7 @@ const page = {
     TabCur: 1,
     scrollLeft: 0,
     height: app.globalData.height * 6,
-    filterTaskFlowList: [],
+    filterTaskFlowList: null,
     taskFlowList: [],
     pinTopTaskFlowList: [],
     searchResultList: [],
@@ -55,17 +55,33 @@ const page = {
     filterItems: initFilterItems,
     isPinTaskFlowFold: false, // 是否折叠置顶的
     isTaskFlowFold: false, // 是否折叠其他的,
-    showAuthModal: false
+    showAuthModal: false,
+    filterCondition: '',
+
   },
   toggleFilter: function () {
 
-    const { filter } = this.data;
+    const { filter, filterCondition, filterTaskFlowList } = this.data;
 
     this.setData({
-      filter: !this.data.filter,
-      filterTaskFlowList: [],
-      filterItems: initFilterItems,
-      tip: filter ? '选择一个条件' : ''
+      filter: !filter,
+      filterTaskFlowList: filterTaskFlowList ? null : [],
+      filterCondition: filterCondition ? '' : '待选择'
+    });
+  },
+  filterCompletedTaskFlow: function () {
+    const filterTaskFlowList = this.data.taskFlowList.filter(tf => tf.is_completed);
+    this.setData({
+      filterCondition: '已完成',
+      filterTaskFlowList
+    })
+  },
+  filterContinueTaskFlow: function () {
+    const filterTaskFlowList = this.data.taskFlowList.filter(tf => !tf.is_completed);
+    this.setData({
+      filterCondition: '进行中',
+      filterTaskFlowList
+
     })
   },
   toggleFoldPinTaskFlow: function () {
@@ -78,28 +94,7 @@ const page = {
       isTaskFlowFold: !this.data.isTaskFlowFold
     })
   },
-  onFilter: function (e) {
-    const filterItemIndex = e.currentTarget.dataset.id;
-    const filterItems = this.data.filterItems.slice();
-    filterItems[filterItemIndex].active = !filterItems[filterItemIndex].active;
-    // 开始筛选
-    const filterContinueTaskFlows = filterItems[0].active;
-    const filterCompleteTaskFlows = filterItems[1].active;
-    const taskFlowList = this.data.taskFlowList.slice();
-    const pinTopTaskFlowList = this.data.pinTopTaskFlowList.slice();
-    // 因为所有任务流和置顶任务流是分开的 但是筛选是在一起筛选的 所以此处要合并一下
-    const filterTaskFlowList = pinTopTaskFlowList.concat(taskFlowList).filter(tf => {
-      if (filterCompleteTaskFlows && filterContinueTaskFlows) return true;
-      if (filterContinueTaskFlows) return !tf.is_completed;
-      if (filterCompleteTaskFlows) return tf.is_completed;
-      return true;
-    })
-    this.setData({
-      filterItems,
-      filterTaskFlowList,
-      tip: ''
-    })
-  },
+
   menuTabSelect(e) {
     const which = e.currentTarget.dataset.id;
     this.setData({
@@ -110,7 +105,7 @@ const page = {
   },
   backToMenu: function () {
     this.setData({
-      filterTaskFlowList: [],
+      filterTaskFlowList: null,
       searchKeyword: ''
     })
   },
@@ -259,7 +254,7 @@ const page = {
     this.setData({
       searchKeyword: '',
       searchResultList: [],
-      filterTaskFlowList: [],
+      filterTaskFlowList: null,
       filter: false,
       filterItems: initFilterItems
     })

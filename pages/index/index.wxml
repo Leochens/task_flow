@@ -61,9 +61,9 @@
   </view>
   <view class="margin-top" style="margin-top:100rpx">
     <view class="padding-xl text-center">
-      <view class='text-grey text-bold'>申请获得您的以下权限</view>
-      <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
-      <view class='text-grey text-sm'>我们不会在除本小程序外的地方使用您的公开信息</view>
+      <view class='text-grey text-xl text-bold'>申请获得您的以下权限</view>
+      <view class='text-grey text'>获得您的公开信息(昵称，头像等)</view>
+      <view class='text-grey text'>我们不会在除本小程序外的地方使用您的公开信息</view>
       <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
         确认授权
       </button>
@@ -88,8 +88,11 @@
           </view>
         </view>
         <view style="display:flex" wx:if="{{filter}}">
-          <view class="cu-tag line-{{item.active?'orange':'grey'}}" wx:for="{{filterItems}}" wx:key data-id="{{index}}" bind:tap="onFilter">
-            {{item.which}}
+          <view class="cu-tag line-{{filterCondition === '已完成'?'orange':'grey'}}" bind:tap="filterCompletedTaskFlow">
+            已完成
+          </view>
+          <view class="cu-tag line-{{filterCondition === '进行中'?'orange':'grey'}}" bind:tap="filterContinueTaskFlow">
+            进行中
           </view>
         </view>
         <view class="action">
@@ -107,7 +110,10 @@
           </view>
         </view>
       </view>
-      <form-id wx:if="{{!filter && pinTopTaskFlowList.length}}">
+      <form-id wx:if="{{filterCondition === '待选择'}}">
+        <view class="text-center text-sm text-grey padding margin">请点击选择筛选条件</view>
+      </form-id>
+      <form-id wx:if="{{!filter && !filterCondition && pinTopTaskFlowList.length}}">
         <view class="cu-bar">
           <view class="action">
             <view class="icon-title text-main"></view>
@@ -133,7 +139,7 @@
             </view>
           </view>
         </view>
-        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" simplify="{{isTaskFlowFold}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList.length?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
+        <task-flow-card bind:onDeleteTaskFlow="onDeleteTaskFlow" simplify="{{isTaskFlowFold}}" bind:longpress="pinTopTf" bind:touchstart="handleTouchStart" bind:touchend="handleTouchEnd" wx:if="{{showCom}}" wx:for="{{filterTaskFlowList?filterTaskFlowList:taskFlowList}}" wx:key="{{key}}" taskFlowData="{{item}}" bindtap='toTaskFlowDetail' data-tfid='{{item.id}}' />
       </form-id>
     </view>
     <view wx:else>
@@ -148,23 +154,11 @@
             </view>
             添加任务流
           </view>
-          <view class="margin-top-sm text-main text-sm text-center" style="text-decoration:underline" bind:tap="toFreshHelp">如果您是新手,请点击我</view>
+          <view class="margin-top-sm text-main text-sm text-center" style="text-decoration:underline" bind:tap="toFreshHelp">
+            如果您是新手,请点击我
+          </view>
         </view>
       </form-id>
-    </view>
-  </view>
-</view>
-<view class="cu-modal {{showAuthModal?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">授权</view>
-    </view>
-    <view class="padding-xl">
-      <view class='text-grey'>申请获得您的以下权限</view>
-      <view class='text-grey text-sm'>获得您的公开信息(昵称，头像等)</view>
-      <button class="cu-btn bg-main margin-top-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
-        确认授权
-      </button>
     </view>
   </view>
 </view>
