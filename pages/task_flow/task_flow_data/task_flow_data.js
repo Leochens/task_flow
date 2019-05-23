@@ -66,7 +66,7 @@ const _page = {
         that.setData({
           tfData,
           taskFlowRing: getTaskFlowRing(windowWidth, 'taskFlowRing', tfData.task_flow),
-          memberColumn: tfData.members.length ? getMemberColumn(windowWidth, 'memberColumn', tfData.members) : null
+          memberColumn: tfData.members.length ? getMemberColumn(windowWidth, 'memberColumn', tfData.members || []) : null
         });
       },
       fail: function (err) {
@@ -97,10 +97,6 @@ const _page = {
     const { tf_id, data, date } = options;
     const tfData = data ? JSON.parse(options.data) : null;
     const isShare = options.isShare;
-    wx.showModal({
-      title: "hello",
-      content: options
-    })
     this.setData({
       tfData: tfData || this.data.tfData,
       tf_id: tf_id || '',

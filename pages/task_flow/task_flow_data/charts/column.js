@@ -1,5 +1,9 @@
 import wxCharts from '../../../../libs/wxcharts';
-
+wxCharts.prototype.scrollStart = function(e) {
+    if (e.touches[0] && this.opts.enableScroll === true) {
+      this.scrollOption.startTouchX = Math.abs(this.scrollOption.distance) + e.touches[0].x;
+    }
+  };
 /**
  *   data: [ // 每个人的任务完成情况
     {
@@ -19,12 +23,13 @@ import wxCharts from '../../../../libs/wxcharts';
 const getMemberColumn = function (windowWidth, id, data) {
 
     // TODO: 名字太长的处理一下
-
+    // const data = _data.concat(_data).concat(_data).concat(_data).concat(_data).concat(_data).concat(_data);
     const taskColumn = new wxCharts({
         canvasId: id,
         type: 'column',
         animation: true,
         enableScroll: true,
+        // scrollEnd: function () { },
         categories: data.map(m => m.nick_name),
         series: [{
             name: '参与任务数',
@@ -32,7 +37,7 @@ const getMemberColumn = function (windowWidth, id, data) {
             format: function (val, name) {
                 return val + '个';
             },
-            color:'#A6B2E6'
+            color: '#A6B2E6'
         },
         {
             name: '完成任务数',
@@ -40,7 +45,7 @@ const getMemberColumn = function (windowWidth, id, data) {
             format: function (val, name) {
                 return val + '个';
             },
-            color:"#70A8EA"
+            color: "#70A8EA"
         },
         {
             name: '请假任务数',
@@ -48,7 +53,7 @@ const getMemberColumn = function (windowWidth, id, data) {
             format: function (val, name) {
                 return val + '个';
             },
-            color:"#E27884"
+            color: "#E27884"
         }],
         yAxis: {
             format: function (val) {
