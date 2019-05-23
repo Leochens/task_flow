@@ -31,9 +31,9 @@
       <view class="text-content text-grey margin-top" style="max-height:none">
         <view>
           <view class="text-sm margin-bottom-sm">待办册服务于每个任务流的子任务的事务管理工具。</view>
-          <view class="text-sm margin-bottom-sm">作为任务人，在某些情况下也需要定制自己的任务步骤，决定好自己事务的先后顺序。</view>
+          <view class="text-sm margin-bottom-sm">作为任务人,在某些情况下也需要定制自己的任务步骤,决定好自己事务的先后顺序。</view>
           <view class="text-sm margin-bottom-sm">
-            同时待办册是完全由任务人自己控制的，所以任务人可以自行安排事务。待子任务的一切事务都完毕后，任务人便可以去子任务界面点击完成了。
+            同时待办册是完全由任务人自己控制的,所以任务人可以自行安排事务。待子任务的一切事务都完毕后,任务人便可以去子任务界面点击完成了。
           </view>
           <view class="text-bold text-grey margin-bottom-sm">
             <text class="icon-title text-grey"></text>
@@ -77,26 +77,10 @@
       </view>
       <view class="text-content text-grey margin-top">
         <view class="text-sm ">
-          出现这种问题可能是刷新延迟，建议到任务流页面顶端点击
+          出现这种问题可能是刷新延迟,建议到任务流页面顶端点击
           <text class="icon-refresh text-main"></text>
-          按钮刷新。如果此方法不奏效，请反馈或联系客服。
+          按钮刷新。如果此方法不奏效,请反馈或联系客服。
         </view>
-      </view>
-    </view>
-    <view class="cu-item shadow">
-      <view class="cu-bar">
-        <view class="action">
-          <view class="icon-titles text-orange"></view>
-          创建的子任务的成员都请假了怎么办?
-        </view>
-      </view>
-      <view class="text-content text-grey margin-top" style="max-height:none">
-        <view class="text-sm margin-bottom-sm">
-          (1) 在子任务界面点击
-          <text class="icon-more text-main"></text>
-          进入到子任务的设置页面。
-        </view>
-        <view class="text-sm margin-bottom-sm">(2) 选择删除任务流结束它 或 添加新成员继续下去。</view>
       </view>
     </view>
     <view class="cu-item shadow">
@@ -125,7 +109,7 @@
         </view>
         <view class="text-sm margin-bottom-sm">(1) 记录格每天的颜色是相对于该日向前30天的记录量比较得出的。</view>
         <view class="text-sm margin-bottom-sm">
-          (2) 记录格的颜色分为5个等级,从浅到深代表记录量依次增多。若该日没有任何记录，则显示为灰色。
+          (2) 记录格的颜色分为5个等级,从浅到深代表记录量依次增多。若该日没有任何记录,则显示为灰色。
         </view>
         <view class="text-sm margin-bottom-sm">(3) 在30天的记录内,一天的记录量越多,那么颜色则越深。</view>
         <view class="text-sm margin-bottom-sm">(4) 记录格只显示30天的色值变化,超过30天则按照最新的30天的记录计算。</view>
@@ -135,7 +119,7 @@
         </view>
         <view class="text-sm margin-bottom-sm">· 创建任务流</view>
         <view class="text-sm margin-bottom-sm">· 创建子任务</view>
-        <view class="text-sm margin-bottom-sm">· 分享任务流数据</view> 
+        <view class="text-sm margin-bottom-sm">· 分享任务流数据</view>
         <view class="text-sm margin-bottom-sm">· 创建一个新的分类</view>
         <view class="text-sm margin-bottom-sm">· 更新任务流的信息(名称,简介,截止时间)</view>
         <view class="text-sm margin-bottom-sm">· 更新子任务的基本信息(名称,简介,截止时间)</view>
@@ -149,12 +133,83 @@
         <view class="text-sm margin-bottom-sm">· 提前完成任务流</view>
         <view class="text-sm margin-bottom-sm">· 解散任务流</view>
         <view class="text-sm margin-bottom-sm">· 转让任务流</view>
-
         <view class="text-bold text-grey margin-bottom-sm">
           <text class="icon-title text-grey"></text>
           该如何看到自己每天的记录
         </view>
         <view class="text-sm margin-bottom-sm">在[我的]页面点击[数据]进入数据统计页面即可查看全部的记录。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          创建的子任务的成员都请假了怎么办?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">
+          (1) 在子任务界面点击
+          <text class="icon-more text-main"></text>
+          进入到子任务的设置页面。
+        </view>
+        <view class="text-sm margin-bottom-sm">(2) 选择删除任务流结束它 或 添加新成员继续下去。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          为什么到截止日期后任务流已经完成了或者子任务已经逾期了但是还是显示进行中?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">因为服务器判断截止时间是有很短的一个周期的,所以会造成延迟,通常延迟为1分钟。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          为什么我参与了任务流但是任务流数据中没有我的数据?
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">因为你没有参与任何子任务,请参与子任务后查看数据。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          一些小技巧
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">
+          (1) 在任务流和子任务界面左滑
+          <text class="icon-pullleft"></text>
+          可以快速查看日志。
+        </view>
+        <view class="text-sm margin-bottom-sm">(2) 在[消息]页面点击每一条消息可以快速跳转到与之相关的任务流或子任务。</view>
+        <view class="text-sm margin-bottom-sm">
+          (3) 在[设置]页面开启了[智能显示时间]后,除起止日期外的时间格式会变成[刚刚,x分钟前,x天前]字样。
+        </view>
+        <view class="text-sm margin-bottom-sm">(4) 在[我的]页面点击每个蓝色记录格可以看到当日的记录量。</view>
+      </view>
+    </view>
+    <view class="cu-item shadow">
+      <view class="cu-bar">
+        <view class="action">
+          <view class="icon-titles text-orange"></view>
+          注意事项
+        </view>
+      </view>
+      <view class="text-content text-grey margin-top" style="max-height:none">
+        <view class="text-sm margin-bottom-sm">
+          (1) 任务流一旦完成(包括提前完成或者到截止时间)是不可逆的,完成后将不可添加子任务和新成员。但是未完成的子任务还可以继续完成。
+        </view>
+        <view class="text-sm margin-bottom-sm">(2) [设置]页面的清空本地所有数据会清空您的本地消息,待办板还有数据记录等本地数据,所以请谨慎使用。设置数据清空的初衷是在程序出现异常时可以使用清空数据的方式和服务器同步。</view>
       </view>
     </view>
   </view>
