@@ -2,10 +2,9 @@
 <nav-bar wx:if="{{!showAuthModal}}" isCustom="true">
   <view slot="content">邀请</view>
 </nav-bar>
-<nav-bar wx:else >
+<nav-bar wx:else>
   <view slot="content">邀请</view>
 </nav-bar>
-
 <view class='wrap'>
   <view>
     <view class='card'>
@@ -18,8 +17,10 @@
       <view class='title'>{{tf_name}}</view>
     </view>
     <view class='btn-group'>
-      <view class='confirm' bind:tap="confirm">确认加入</view>
-      <view class='cancel' bind:tap="cancel">取消</view>
+      <form-id>
+        <view class='confirm' bind:tap="confirm">确认加入</view>
+        <view class='cancel' bind:tap="cancel">取消</view>
+      </form-id>
     </view>
   </view>
 </view>

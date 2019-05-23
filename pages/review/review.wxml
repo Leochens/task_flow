@@ -3,15 +3,17 @@
     <view slot="backText">返回</view>
     <view slot="content">人事审核</view>
 </nav-bar>
-<view class="wrap" wx:for="{{reviews}}" wx:key>
-    <view class="info" bind:tap="toDetail" data-rid="{{index}}">
-        <view class="text">请假人:{{item.apply_user_name}}</view>
-        <view class="text">请假原因:{{item.break_reason}}</view>
-        <view class="text">所属子任务:{{item.t_name}}</view>
-        <view class="text">所属任务流:{{item.tf_name}}</view>
-        <view class="operations">
-            <view class="btn" catch:tap="allow" data-rid="{{index}}">同意</view>
-            <view class="btn red" catch:tap="reject" data-rid="{{index}}">拒绝</view>
+<view class="cu-card dynamic" wx:for="{{reviews}}" wx:key>
+    <view class="cu-item shadow padding-top" bind:tap="toDetail" data-rid="{{index}}">
+        <view class="text-content" style="max-height:none">
+            <view class="text-grey margin-bottom-xs text-sm">请假人: {{item.apply_user_name}}</view>
+            <view class="text-grey margin-bottom-xs text-sm">请假原因: {{item.break_reason}}</view>
+            <view class="text-grey margin-bottom-xs text-sm">所属子任务: {{item.t_name}}</view>
+            <view class="text-grey margin-bottom-xs text-sm">所属任务流: {{item.tf_name}}</view>
+        </view>
+        <view class="flex solid-top">
+            <view class="cu-btn bg-main  flex-sub" catch:tap="allow" data-rid="{{index}}">同意</view>
+            <view class="cu-btn bg-red  flex-sub" catch:tap="reject" data-rid="{{index}}">拒绝</view>
         </view>
     </view>
 </view>

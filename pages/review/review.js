@@ -53,7 +53,7 @@ const page = {
     const { reason, curTid, u_id, apply_user_id } = this.data;
 
     if (replaceChar(reason) === '') return wx.showToast({ title: '拒绝原因不能为空' });
-    this.refuseTakeBreak(curTid, u_id, apply_user_id, reason); // api
+    this.refuseTakeBreak(curTid, u_id, apply_user_id, reason || '无理由'); // api
     this.clear();
     this.onPullDownRefresh();
   },
@@ -71,7 +71,7 @@ const page = {
     const review = this.data.reviews[r_id]
     const { t_id, apply_user_id } = review;
     this.allowTakeBreak(t_id, this.data.u_id, apply_user_id);
-    this.recordOperation(`同意子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`,TYPE.UPDATE)
+    this.recordOperation(`同意子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`, TYPE.UPDATE)
 
     this.clear();
     this.onPullDownRefresh();
@@ -80,7 +80,7 @@ const page = {
     const r_id = e.currentTarget.dataset.rid;
     const review = this.data.reviews[r_id]
     const { t_id, apply_user_id } = review;
-    this.recordOperation(`拒绝子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`,TYPE.UPDATE)
+    this.recordOperation(`拒绝子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`, TYPE.UPDATE)
 
     this.setData({
       curTid: t_id,

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "nav-bar":"../../common/nav_bar/nav_bar"
+    "nav-bar":"../../common/nav_bar/nav_bar",
+    "form-id":"../../components/form_id/form_id"
   }
 }

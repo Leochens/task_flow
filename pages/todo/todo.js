@@ -30,7 +30,11 @@ const page = {
       url: `/pages/task/task?t_id=${t_id}&&isFetch=true`
     });
   },
-
+  toHelp: function () {
+    wx.navigateTo({
+      url: `/pages/help/help`
+    });
+  },
   hideModal: function () {
     this.setData({
       modalName: '',

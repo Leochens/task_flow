@@ -28,7 +28,7 @@
     </picker>
   </view>
   <view class="cu-form-group">
-    <textarea placeholder="请输入任务流概要" name="tf_describe" value="{{tf_describe}}"></textarea>
+    <textarea placeholder="请输入任务流概要" name="tf_describe" bindinput="bindTfDescribeChange" value="{{tf_describe}}"></textarea>
     <view class="cu-tag line-orange">必填</view>
   </view>
   <view class="padding flex flex-direction">

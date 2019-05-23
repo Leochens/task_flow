@@ -32,24 +32,30 @@ const page = {
     })
   },
   clearStorage: function () {
-    try {
-      // wx.setStorageSync('SID', null);
-      // wx.setStorageSync('SID_EXPIRATION', null);
-      // wx.setStorageSync('messages', null);
-      // wx.setStorageSync('messages_ids', null);
-      wx.clearStorageSync();
-      wx.showToast({
-        title: '清空成功'
-      });
-      wx.reLaunch({
-        url:'/pages/index/index'
-      })
-    } catch (e) {
-      // Do something when catch error
-      wx.showToast({
-        title: '清空失败'
-      })
-    }
+
+    wx.showModal({
+      title: "三思而后行",
+      content: "您确认清除吗?",
+      success: function (e) {
+        if (e.confirm) {
+          try {
+            wx.clearStorageSync();
+            wx.showToast({
+              title: '清空成功'
+            });
+            wx.reLaunch({
+              url: '/pages/index/index'
+            })
+          } catch (e) {
+            // Do something when catch error
+            wx.showToast({
+              title: '清空失败'
+            })
+          }
+        }
+      }
+    })
+
 
   },
   changeNickName: function (e) {

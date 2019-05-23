@@ -32,6 +32,7 @@ const _page = {
     tf_id: "",
     tf_name: "",
     tf_describe: "",
+    _tf_describe: "",
     index: 0,
     categories: [],
     hideModal: true,
@@ -134,6 +135,12 @@ const _page = {
       end_time: endDate
     })
   },
+  bindTfDescribeChange:function(e){
+    console.log(e);
+    this.setData({
+      tf_describe:e.detail.value
+    })
+  },
   onSubmit: function (e) {
     const { tf_name, tf_describe } = e.detail.value;
     console.log(e, this.data);
@@ -183,13 +190,17 @@ const _page = {
   },
   addCate: function () {
     this.setData({
-      hideModal: false
+      hideModal: false,
+      _tf_describe: this.data.tf_describe,
+      tf_describe: ' '
     })
   },
   cancelM: function () {
     this.setData({
       hideModal: true,
-      newCateName: ''
+      newCateName: '',
+      tf_describe: this.data._tf_describe,
+      _tf_describe: ''
     })
   },
   confirmM: function () {
@@ -198,7 +209,7 @@ const _page = {
     const categories = this.data.categories.slice();
     if (!newCateName) {
       this.setData({
-        hideModal: true
+        hideModal: true,
       });
       return;
     }
@@ -211,7 +222,10 @@ const _page = {
       newCateName: '',
       index: categories.length - 1,
       hideModal: true,
-      curCate: replaceChar(newCateName)
+      curCate: replaceChar(newCateName),
+      tf_describe: this.data._tf_describe,
+      _tf_describe: ''
+
     })
   },
   inputCategory: function (e) {
