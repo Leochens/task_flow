@@ -7,7 +7,7 @@
   <member-item wx:for="{{members}}" wx:key nickName="{{item.nick_name}}" avatarUrl="{{item.avatar_url}}" disableSelect="true" isLeader="{{leader_id === item.id}}" isDelete="{{edit}}" data-uid="{{item.id}}" bind:tap="{{edit?'deleteMember':''}}" />
 </view>
 <view class=" basis-xl text-center" wx:if="{{u_id === leader_id}}">
-  <view class="cu-btn bg-main lg basis-xl round" hover-class="button-hover" bind:tap="edit">
+  <view class="cu-btn bg-main lg basis-xl radius" hover-class="button-hover" bind:tap="edit">
     {{edit?'完成':'移除成员'}}
   </view>
 </view>

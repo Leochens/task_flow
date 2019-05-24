@@ -45,7 +45,7 @@
       <view class="text-sm text-grey">清空本地所有数据如授权信息,本地消息,日志等</view>
     </view>
     <view class="action">
-      <button class="cu-btn round bg-main" bind:tap="clearStorage">清空</button>
+      <button class="cu-btn radius bg-red" bind:tap="clearStorage">清空</button>
     </view>
   </view>
 </view>

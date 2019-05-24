@@ -44,8 +44,8 @@
                 </view>
                 <view class="break-reason" wx:if="{{index === showInputIndex}}">
                     <input placeholder="请输入请假理由" bindinput="inputChange" />
-                    <view class="cu-btn sm margin-left-sm round bg-main" catch:tap="sendApply"><text class="icon-check text-white"></text></view>
-                    <view class="cu-btn sm margin-left-sm round bg-main" catch:tap="cancelApply"><text class="icon-close text-white"></text></view>
+                    <view class="cu-btn sm margin-left-sm radius bg-main" catch:tap="sendApply"><text class="icon-check text-white"></text></view>
+                    <view class="cu-btn sm margin-left-sm radius bg-main" catch:tap="cancelApply"><text class="icon-close text-white"></text></view>
                 </view>
             </view>
         </view>

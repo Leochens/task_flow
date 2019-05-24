@@ -13,10 +13,10 @@
       <view class="text-grey text-sm flex text-cut">{{tfData.tf_describe}}</view>
     </view>
     <view class="action">
-      <view class="cu-tag line-main round" wx:if="{{!isShare}}" bind:tap="fetch">
+      <view class="cu-tag line-main radius" wx:if="{{!isShare}}" bind:tap="fetch">
         <text class="icon-refresh"></text>
       </view>
-      <button open-type="share" class="cu-tag line-main round" plain="{{true}}" style="border:none" wx:if="{{!isShare}}">
+      <button open-type="share" class="cu-tag line-main radius" plain="{{true}}" style="border:none" wx:if="{{!isShare}}">
         <text class="icon-share"></text>
       </button>
       <view wx:else class="text-main">截止到{{date}}</view>
@@ -50,10 +50,10 @@
 <view class="bg-white margin-top">
   <canvas canvas-id="taskFlowRing" class="canvas" style='height:200px' bindtouchstart="touchHandler"></canvas>
   <view class="text-center">
-    <view class="cu-tag line-main round">全部 {{tfData.task_flow.all}}</view>
-    <view class="cu-tag line-main round">进行中 {{tfData.task_flow.continues}}</view>
-    <view class="cu-tag line-main round">已完成 {{tfData.task_flow.completed}}</view>
-    <view class="cu-tag line-main round">逾期 {{tfData.task_flow.delay}}</view>
+    <view class="cu-tag line-main radius">全部 {{tfData.task_flow.all}}</view>
+    <view class="cu-tag line-main radius">进行中 {{tfData.task_flow.continues}}</view>
+    <view class="cu-tag line-main radius">已完成 {{tfData.task_flow.completed}}</view>
+    <view class="cu-tag line-main radius">逾期 {{tfData.task_flow.delay}}</view>
   </view>
 </view>
 <view class="cu-bar bg-white">
@@ -62,7 +62,7 @@
     <view class="">成员数据</view>
   </view>
   <view class="action" bind:tap="toggleShowColumn">
-    <view class="cu-tag line-orange round">切换{{showColumn?'表格':'柱图'}}</view>
+    <view class="cu-tag line-orange radius">切换{{showColumn?'表格':'柱图'}}</view>
   </view>
 </view>
 <view class="bg-white margin-top-xl margin-bottom-xl">

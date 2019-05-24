@@ -34,6 +34,7 @@
 .task-flow-date-limit{
   font-size: 20rpx;
   color: #666;
+  margin-bottom: 30rpx;
 }
 .task-flow-member-count{
   margin: 10rpx 0;

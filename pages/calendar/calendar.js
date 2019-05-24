@@ -26,7 +26,7 @@ const _page = {
       const nowDate = `${year}-${month}-${day}`;
       const tasks = this.data.tasks;
       const todayTasks = tasks.filter(t => {
-        // const isMyTask = t.members.includes(u_id);
+        const isMyTask = t.members.includes(u_id);
         const notComplete = t.is_completed != 1;
         const isDelay = t.is_completed === 2;
         const beginDate = t.begin_time.split(' ')[0];
@@ -42,7 +42,7 @@ const _page = {
         else if (todayIsEnd) t.flag = '截止';
         else if (isContinue) t.flag = '进行中';
         else { };
-        return isContinue && notComplete;
+        return isContinue && notComplete && isMyTask;
       });
       return todayTasks;
     }

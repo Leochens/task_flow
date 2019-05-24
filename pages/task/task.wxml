@@ -37,20 +37,20 @@
             <text class="icon-calendar text-grey margin-right-sm"></text>
             <text class="text-sm">{{task.begin_time}} ~ {{task.end_time}}</text>
         </view>
-        <view class="cu-tag round line-main" bind:tap="toTaskSettings">
+        <view class="cu-tag radius line-main" bind:tap="toTaskSettings">
             <view class="icon-more text-bold"></view>
         </view>
     </view>
     <view class="margin-sm margin-top-xs flex justify-between">
         <view class="margin-0">
-            <text class="icon-{{task.is_completed === 1? 'roundcheckfill text-main':task.is_completed === 0 ? 'roundcheck text-grey' : 'roundcheck text-red'}}"></text>
+            <text class="icon-{{task.is_completed === 1? 'squarecheckfill text-main':task.is_completed === 0 ? 'squarecheck text-grey' : 'roundcheck text-red'}}"></text>
             <text class="text-{{task.is_completed === 1? 'main':task.is_completed === 0 ? 'grey' : 'red'}} margin-left-sm">{{task.is_completed === 1? '已完成':task.is_completed === 0 ? '进行中' : '已逾期'}}</text>
         </view>
         <view class="btn-group">
-            <view class="cu-btn margin-right-xs sm bg-main" wx:if="{{user_status === 1}}" catch:tap="_completeTask">
+            <view class="cu-btn margin-right-xs sm radius bg-main" wx:if="{{user_status === 1}}" catch:tap="_completeTask">
                 完成
             </view>
-            <view class="cu-btn margin-right-xs sm bg-red" wx:if="{{user_status === 1}}" catch:tap="showModal">
+            <view class="cu-btn margin-right-xs sm radius bg-red" wx:if="{{user_status === 1}}" catch:tap="showModal">
                 请假
             </view>
             <view class="cu-btn margin-right-xs sm " wx:if="{{user_status === 2}}">已完成</view>

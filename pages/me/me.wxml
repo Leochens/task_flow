@@ -14,16 +14,16 @@
         </view>
         <view wx:if="{{hasUserInfo}}" class="content flex-sub">
           <view>{{userInfo.nickName}}</view>
-          <view class="text-gray text-sm flex justify-between">
+          <view class="text-grey text-sm flex justify-between">
             {{userInfo.city}} {{userInfo.province}} {{userInfo.country}}
           </view>
-          <view class="text-gray text-sm flex align-center">
+          <view class="text-grey text-sm flex align-center">
             <view class="icon-{{userInfo.gender?'male text-main':'female text-orange'}} margin-right-sm"></view>
             {{userInfo.gender?'男':'女'}}
           </view>
         </view>
         <view wx:if="{{hasUserInfo}}" class="margin-right-xl" bind:tap="toSettings">
-          <view class="icon-settingsfill text-gray text-xl"></view>
+          <view class="icon-settingsfill text-grey text-xl"></view>
         </view>
         <button wx:if="{{!hasUserInfo}}" class="cu-btn bg-main margin-left-xl" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
           确认授权
@@ -33,7 +33,7 @@
     <view class="text-content" style="position: relative;">
       <blue-boxs datas="{{dayBox}}"></blue-boxs>
       <view class="margin-right-xl tip" bind:tap="showModal">
-        <view class="icon-question text-gray text-xl"></view>
+        <view class="icon-question text-grey text-xl"></view>
       </view>
     </view>
     <view class="grid flex-sub padding-lr">
@@ -41,7 +41,7 @@
     </view>
     <view class=" padding solid-top margin-left-sm margin-right-sm flex justify-between align-center " style="margin:auto">
       <view class="text-grey text-sm">任务流情况</view>
-      <view class="text-gray text-sm text-right">
+      <view class="text-grey text-sm text-right">
         <text class="icon-title margin-lr-xs text-grey"></text>
         全部:{{taskFlowsCnt}}
         <text class="icon-title margin-lr-xs text-orange"></text>
@@ -55,31 +55,31 @@
 <view class=" cu-list menu card-menu margin-top-xs  margin-bottom-xl shadow-lg radius ">
   <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toCalendar">
     <view class="content center">
-      <view class="margin-right-sm icon-calendar text-xl text-black"></view>
+      <view class="margin-right-sm icon-calendar text-xl text-grey"></view>
       <view class="text-grey">日历</view>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toAbout">
     <view class="content center">
-      <view class="margin-right-sm icon-info text-xl text-black"></view>
+      <view class="margin-right-sm icon-info text-xl text-grey"></view>
       <view class="text-grey">关于</view>
     </view>
   </view>
   <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toData">
     <view class="content center">
-      <view class="margin-right-sm icon-rankfill text-xl text-black"></view>
+      <view class="margin-right-sm icon-rankfill text-xl text-grey"></view>
       <view class="text-grey">数据</view>
     </view>
   </view>
   <view wx:if="{{hasUserInfo}}" class="cu-item arrow" bind:tap="toReview">
     <view class="content center">
-      <view class="margin-right-sm icon-formfill text-xl text-black"></view>
+      <view class="margin-right-sm icon-formfill text-xl text-grey"></view>
       <view class="text-grey">审核</view>
     </view>
   </view>
   <view class="cu-item arrow">
     <view class="content center">
-      <view class="margin-right-sm icon-newshotfill text-xl text-black"></view>
+      <view class="margin-right-sm icon-newshotfill text-xl text-grey"></view>
       <button class="content cu-btn text-grey bg-white padding-xs" open-type="feedback">
         问题反馈
       </button>
@@ -87,13 +87,13 @@
   </view>
   <view class="cu-item arrow">
     <view class="content center">
-      <view class="margin-right-sm icon-service text-xl text-black"></view>
+      <view class="margin-right-sm icon-service text-xl text-grey"></view>
       <button class="content cu-btn text-grey bg-white padding-xs" open-type="contact">人工服务</button>
     </view>
   </view>
   <view class="cu-item arrow" bind:tap="toHelp">
     <view class="content center">
-      <view class="margin-right-sm icon-question text-xl text-black"></view>
+      <view class="margin-right-sm icon-question text-xl text-grey"></view>
       <view class="text-grey">帮助</view>
     </view>
   </view>

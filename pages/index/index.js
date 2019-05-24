@@ -70,18 +70,19 @@ const page = {
     });
   },
   filterCompletedTaskFlow: function () {
-    const filterTaskFlowList = this.data.taskFlowList.filter(tf => tf.is_completed);
+    const { taskFlowList, pinTopTaskFlowList } = this.data;
+    const filterTaskFlowList = taskFlowList.concat(pinTopTaskFlowList).filter(tf => tf.is_completed);
     this.setData({
       filterCondition: '已完成',
       filterTaskFlowList
     })
   },
   filterContinueTaskFlow: function () {
-    const filterTaskFlowList = this.data.taskFlowList.filter(tf => !tf.is_completed);
+    const { taskFlowList, pinTopTaskFlowList } = this.data;
+    const filterTaskFlowList = taskFlowList.concat(pinTopTaskFlowList).filter(tf => !tf.is_completed);
     this.setData({
       filterCondition: '进行中',
       filterTaskFlowList
-
     })
   },
   toggleFoldPinTaskFlow: function () {
@@ -147,12 +148,12 @@ const page = {
     this.data.isPinTop && this.cancelPinTopTaskFlow(tf_id);
   },
   classTabSelect(e) { // 按照分类筛选tf
-    const { categories, taskFlowList } = this.data;
+    const { categories, taskFlowList, pinTopTaskFlowList } = this.data;
     const which = e.currentTarget.dataset.id;
     let isBack = false;
     if (which === 0) isBack = true;
     const curCat = categories[which]; // 获得当前选择的分类
-    const currentCategoryTaskFlowList = taskFlowList.filter(tf => tf.category === curCat);
+    const currentCategoryTaskFlowList = taskFlowList.concat(pinTopTaskFlowList).filter(tf => tf.category === curCat);
     this.setData({
       TabCur: which,
       scrollLeft: (which - 1) * 60,
@@ -271,6 +272,7 @@ const getCategory = (task_flows) => {
   const cats = ['']; // 兼容返回按钮
   for (let i = 0; i < task_flows.length; i++) {
     const { category } = task_flows[i];
+    console.log(category)
     if (!cats.includes(category))
       cats.push(category);
   }
@@ -314,8 +316,8 @@ const mapStateToData = (state, options) => {
     taskFlowList = allTaskFlowList;
   }
 
-  const categories = getCategory(taskFlowList);
-  app.globalData.categories = categories.slice(1, categories.length); // 将分类存到全局变量中
+  const categories = getCategory(pinTopTaskFlowList.concat(taskFlowList));
+  app.globalData.categories = categories; // 将分类存到全局变量中
   return {
     taskFlowList,
     u_id: wx.getStorageSync('u_id') || "no_user_id",

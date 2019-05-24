@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/help/help",
+    "pages/log/log",
     "pages/help/fresh_help/fresh_help",
     "pages/task/task",
     "pages/task_flow/task_flow_data/task_flow_data",

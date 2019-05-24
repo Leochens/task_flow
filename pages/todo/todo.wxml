@@ -4,7 +4,7 @@
 </view>
 <view class="margin flex justify-between align-center">
   <view>
-    <view class="cu-tag {{isDelete?'bg':'line'}}-main" bind:tap="toggleDeleteMode">
+    <view class="cu-tag {{isDelete?'bg':'line'}}-red" bind:tap="toggleDeleteMode">
       <view class="icon-delete{{isDelete?'fill text-white':''}}"></view>
     </view>
     <view wx:if="{{!isDelete}}" class="cu-tag line-main" bind:tap="_addTodoNoConnect">
@@ -56,7 +56,7 @@
       <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
       <view class="margin-top-sm text-center text-sm text-grey ">
         点击上方的
-        <view class="cu-tag bg-main round sm">
+        <view class="cu-tag bg-main square sm">
           <text class="text-bold icon-add"></text>
         </view>
         添加待办板

@@ -15,7 +15,7 @@
       <view class="task-flow-date">{{begin_time}}~{{end_time}}</view>
     </view>
     <view class="basis-xs text-right" bind:tap="toTaskFlowSettings">
-      <view class="cu-tag line-main round">
+      <view class="cu-tag line-main radius">
         <view class="icon-more text-bold"></view>
       </view>
     </view>
@@ -25,7 +25,7 @@
       <view class="line "></view>
       <view class="item">
         <view class="dot-wrap">
-          <view class="dot" style="background-color:#1EA227"></view>
+          <view class="dot" style="background-color:#2967af"></view>
           <view class="date">{{dateTimeSplit.dateSplit(begin_time)}}</view>
           <view class="time">{{dateTimeSplit.timeSplit(begin_time)}}</view>
         </view>
@@ -70,7 +70,7 @@
           <view class="time">评论:{{item.comment_cnt}}</view>
           <view class="time">图片:{{item.image_cnt}}</view>
           <view class="dots">
-            <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':it.user_status === 0?'yellow':'#eee'}}"></view>
+            <view wx:for="{{item.status_map}}" wx:for-item="it" wx:key class="spot" style="background-color:{{it.user_status === 2 ? '#2665AE':it.user_status === 0?'orange':'#eee'}}"></view>
           </view>
         </view>
         <view class="task-card" hover-class="hover-effect" bind:tap="taskDetail" data-tid="{{item.id}}">
@@ -84,7 +84,7 @@
               </view>
             </view>
             <view class="">
-              <view class="text-{{item.is_completed && item.is_completed != 2 ?'main':'grey'}} icon-roundcheck{{item.is_completed && item.is_completed != 2 ?'fill':''}}"></view>
+              <view class="text-{{item.is_completed && item.is_completed != 2 ?'main':'grey'}} icon-squarecheck{{item.is_completed && item.is_completed != 2 ?'fill':''}}"></view>
             </view>
           </view>
           <view class="task-info">

@@ -4,10 +4,10 @@
 </view>
 <view class="cu-bar">
   <view class="action">
-    <view class="cu-tag bg-main round" bind:tap="clearMsg">清空 {{messages.length}} 条</view>
+    <view class="cu-tag bg-main radius" bind:tap="clearMsg">清空 {{messages.length}} 条</view>
   </view>
   <view class="action">
-    <view class="cu-tag line-main round" bindtap='refresh'>
+    <view class="cu-tag line-main radius" bindtap='refresh'>
       <view class='icon-refresh'></view>
     </view>
   </view>

@@ -23,7 +23,7 @@ Component({
   observers: {
     'taskFlowData': function (taskFlowData) {
       const tf = taskFlowData;
-      const leader = tf.members.filter(mem => mem.id === tf.leader_id)[0];
+      const leader = tf.members.filter(mem => mem.id ? mem.id === tf.leader_id : false)[0];
       const { begin_time, end_time, members, taskStatus: taskData } = tf;
       const dateData = this.calculateDate(begin_time, end_time);
       taskData.percent = (taskData.complete / (taskData.all || 1)).toFixed(4) * 100;
