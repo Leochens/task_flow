@@ -7,7 +7,7 @@
   <view class="cu-list menu solid-bottom" bind:tap="toFreshHelp">
     <view class="cu-item arrow ">
       <view class="content" >
-        <view class="text-xl text-grey">
+        <view class="text text-grey">
           <text class="icon-magic"></text>
           新手帮助
         </view>
@@ -196,6 +196,7 @@
           (3) 在[设置]页面开启了[智能显示时间]后,除起止日期外的时间格式会变成[刚刚,x分钟前,x天前]字样。
         </view>
         <view class="text-sm margin-bottom-sm">(4) 在[我的]页面点击每个蓝色记录格可以看到当日的记录量。</view>
+        <view class="text-sm margin-bottom-sm">(5) 在首页长按一个任务流可以置顶该任务流，同时解锁[收起任务流]功能,当您需要置顶任务流的时候,应该已经有了许多任务流,此时您可以点击<view class="cu-tag sm round bg-grey"><text class="icon-fold"></text></view>来收起任务流。</view>
       </view>
     </view>
     <view class="cu-item shadow">

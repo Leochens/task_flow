@@ -46,13 +46,19 @@ Page({
       text: ['好友参与进来后，你们就可以一同准备这个素拓活动了','简易教程到此为止,还有更多功能敬请探索！'],
       image:'http://mokis.top/open_imgs/task_flow/help/fresh_help/demo.jpg'
     },
-  
+    {
+    },  
   ]
   },
   swipperChage: function (e) {
     const idx = e.detail.current;
     this.setData({
       scroll: idx
+    })
+  },
+  toHelp:function(){
+    wx.redirectTo({
+      url:'/pages/help/help'
     })
   },
   scrollSteps() {
