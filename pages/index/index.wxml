@@ -88,15 +88,15 @@
           </view>
         </view>
         <view style="display:flex" wx:if="{{filter}}">
-          <view class="cu-tag line-{{filterCondition === '已完成'?'orange':'grey'}}" bind:tap="filterCompletedTaskFlow">
+          <view class="cu-tag radius line-{{filterCondition === '已完成'?'orange':'grey'}}" bind:tap="filterCompletedTaskFlow">
             已完成
           </view>
-          <view class="cu-tag line-{{filterCondition === '进行中'?'orange':'grey'}}" bind:tap="filterContinueTaskFlow">
+          <view class="cu-tag radius line-{{filterCondition === '进行中'?'orange':'grey'}}" bind:tap="filterContinueTaskFlow">
             进行中
           </view>
         </view>
         <view class="action">
-          <view class="cu-capsule round">
+          <view class="cu-capsule radius">
             <view class="cu-tag">
               <view class="cu-icon-image text-xl">
                 <view class="icon-search" bind:tap="toSearch"></view>
@@ -111,7 +111,9 @@
         </view>
       </view>
       <form-id wx:if="{{filterCondition === '待选择'}}">
-        <view class="text-center text-sm text-grey padding margin">请点击选择筛选条件</view>
+        <view class="flex justify-center align-center">
+          <view class="cu-tag line-orange text-center margin">请选择条件</view>
+        </view>
       </form-id>
       <form-id wx:if="{{!filter && !filterCondition && pinTopTaskFlowList.length}}">
         <view class="cu-bar">
@@ -120,7 +122,7 @@
             <text class="text-grey">置顶任务流</text>
           </view>
           <view class="action" bind:tap="toggleFoldPinTaskFlow">
-            <view class="cu-tag bg-gray round margin-right-xs">
+            <view class="cu-tag bg-gray radius margin-right-xs">
               <view class="icon-{{isPinTaskFlowFold?'un':''}}fold"></view>
             </view>
           </view>
@@ -134,7 +136,7 @@
             <text class="text-grey">{{filter?'筛选任务流':'所有任务流'}}</text>
           </view>
           <view class="action" bind:tap="toggleFoldTaskFlow">
-            <view class="cu-tag bg-gray round margin-right-xs">
+            <view class="cu-tag bg-gray radius margin-right-xs">
               <view class="icon-{{isTaskFlowFold?'un':''}}fold"></view>
             </view>
           </view>
@@ -149,7 +151,7 @@
           <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
           <view class="margin-top-sm text-center text-sm text-grey ">
             点击上方的
-            <view class="cu-tag bg-main round sm">
+            <view class="cu-tag bg-main radius sm">
               <text class="text-bold icon-add"></text>
             </view>
             添加任务流

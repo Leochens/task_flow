@@ -2,35 +2,36 @@
 <view wx:if="{{simplify}}" class="task-flow-card pin shadow">
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
-    <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
-    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+    <!-- <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image> -->
+    <view class="icon-squarecheck{{tfData.is_completed?'fill':''}} text-{{tfData.is_completed?'main':'grey'}} text-xl"></view>
+
   </view>
 </view>
 <view wx:else class="task-flow-card shadow {{tfCardType === 'delete'?'mask':''}}">
-  <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image>
+  <!-- <image bind:tap="delete" src="../../assets/imgs/index/del.svg" class="del-btn {{tfCardType === 'delete'?'show':''}}"></image> -->
   <view class="title-wrap">
     <view class="task-flow-title">{{tfData.tf_name}}</view>
-    <image src="../../assets/imgs/task_flow/check{{tfData.is_completed?'_ok':''}}.svg" class="task-flow-status" />
+    <view class="icon-squarecheck{{tfData.is_completed?'fill':''}} text-{{tfData.is_completed?'main':'grey'}} text-xl"></view>
   </view>
   <view class="task-flow-date-limit">{{tfData.begin_time}}~{{tfData.end_time}}</view>
   <view class="task-flow-member-count">
     参与人员:{{count}}人
     <view class="avatars">
-      <image class="avatar-item" wx:for="{{members}}" wx:key src="{{item.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
+      <image class="avatar-item" wx:for="{{members}}" wx:key src="{{item.avatar_url}}" />
     </view>
   </view>
   <view class="task-flow-leader">
     负责人:
-    <image class="avatar-item" src="{{leader.avatar_url||'../../assets/imgs/empty_avatar.png'}}" />
+    <image class="avatar-item" src="{{leader.avatar_url}}" />
     {{leader.nick_name}}
   </view>
   <view class="task-flow-describe">
     任务概要: {{tfData.tf_describe}}
-    <image class="toggle" style="transform: rotate({{isProcessPaneActive?180:0}}deg);" catch:tap="toggle" src="../../assets/imgs/index/arrow.svg"></image>
+    <view class="icon-{{isProcessPaneActive?'':'un'}}fold text-grey toggle text-xl text-bold"    catch:tap="toggle" ></view>
   </view>
   <view class="process-pane" style="max-height:{{isProcessPaneActive?'':0}};transform:translateX({{isProcessPaneActive?0:-1000}}rpx)">
     <view class="item">
-      <view class="title">
+      <view class="item-title">
         截止日期{{tfData.end_time}} 一共{{paneData.dateData.duration}}天 还剩{{paneData.dateData.last}}天 {{paneData.dateData.last?'':'已结束'}}
       </view>
       <view class="bar-wrap">
@@ -38,7 +39,7 @@
       </view>
     </view>
     <view class="item">
-      <view class="title">任务完成进度: {{paneData.taskData.complete}}/{{paneData.taskData.all}}</view>
+      <view class="item-title">任务完成进度: {{paneData.taskData.complete}}/{{paneData.taskData.all}}</view>
       <view class="bar-wrap">
         <view class="bar-inner" style="width:{{paneData.taskData.percent}}%"></view>
       </view>

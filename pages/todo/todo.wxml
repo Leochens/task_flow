@@ -4,14 +4,14 @@
 </view>
 <view class="margin flex justify-between align-center">
   <view>
-    <view class="cu-tag {{isDelete?'bg':'line'}}-red" bind:tap="toggleDeleteMode">
+    <view class="cu-tag {{isDelete?'bg':'line'}}-red radius" bind:tap="toggleDeleteMode">
       <view class="icon-delete{{isDelete?'fill text-white':''}}"></view>
     </view>
-    <view wx:if="{{!isDelete}}" class="cu-tag line-main" bind:tap="_addTodoNoConnect">
+    <view wx:if="{{!isDelete}}" class="cu-tag line-main radius" bind:tap="_addTodoNoConnect">
       <view class="icon-add"></view>
     </view>
   </view>
-  <view class="cu-tag line-main" bind:tap="toggleDropdownAll">
+  <view class="cu-tag line-main radius" bind:tap="toggleDropdownAll">
     <view class="icon-{{dropDownAll?'':'un'}}fold text-bold"></view>
   </view>
 </view>
@@ -20,17 +20,17 @@
     <view class="cu-bar solid-bottom">
       <view class="action">
         <text class="icon-sort margin-right-sm text-gray"></text>
-        <view class="text-gray">
+        <view class="text-gray flex align-center">
           {{pane.todo_pane_name}}
-          <text wx:if="{{pane.connect}}" class="icon-link text-df text-main" data-tid="{{pane.t_id}}" bind:tap="toTask"></text>
+          <text wx:if="{{pane.connect}}" class="icon-link text-xl text-main " data-tid="{{pane.t_id}}" bind:tap="toTask"></text>
         </view>
       </view>
       <view class="action">
         <view class="cu-tag line-white " bind:tap="{{isDelete?'_delTodoPane':'_addTodo'}}" data-paneid="{{pane.pane_id}}">
-          <view class="icon-{{isDelete?'close text-red':'add text-main'}} text-bold "></view>
+          <view class="icon-{{isDelete?'close text-red':'add text-main'}} text-bold text-xl"></view>
         </view>
-        <view class="cu-tag line-white">
-          <text class="icon-triangle{{dropDown[index]?'up':'down'}}fill text-grey text-xl" bind:tap="toggleDropdown" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
+        <view class="cu-tag line-white ">
+          <text class="icon-triangle{{dropDown[index]?'up':'down'}}fill text-grey text-xxl" bind:tap="toggleDropdown" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
         </view>
       </view>
     </view>
@@ -41,12 +41,12 @@
           <text class="text-bold " style="color:{{item.status?'#ccc':''}}">{{item.content}}</text>
         </view>
         <view wx:if="{{moreOperation[index]}}" class="flex">
-          <text class="icon-close text-bold text-grey margin-right" catch:tap="_delTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
-          <text class="icon-top text-bold text-grey margin-right" catch:tap="_upTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
+          <text class="icon-close text-grey margin-right text-xl" catch:tap="_delTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
+          <text class="icon-top text-grey margin-right text-xl" catch:tap="_upTodo" data-paneid="{{pane.pane_id}}" data-todoid="{{item.todo_id}}"></text>
         </view>
       </view>
       <view wx:if="{{pane.todos.length}}" class="margin-right flex justify-end margin-top-sm">
-        <text class="icon-more {{moreOperation[index]?'text-bold text-main':''}} text-grey text-xl" bind:tap="toggleMoreOperation" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
+        <text class="icon-more {{moreOperation[index]?'text-bold text-main':''}} text-grey text-xxl" bind:tap="toggleMoreOperation" data-idx="{{index}}" data-paneid="{{pane.pane_id}}"></text>
       </view>
     </view>
   </view>
@@ -56,7 +56,7 @@
       <view class="margin-top-xl text-grey  text-center text-xxl">此处空空荡荡</view>
       <view class="margin-top-sm text-center text-sm text-grey ">
         点击上方的
-        <view class="cu-tag bg-main square sm">
+        <view class="cu-tag bg-main square sm radius">
           <text class="text-bold icon-add"></text>
         </view>
         添加待办板

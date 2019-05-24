@@ -1,5 +1,9 @@
 // components/task_flow_card/task_flow_card.js
 Component({
+  options: {
+    addGlobalClass: true,
+    // externalClasses: ['text-main', 'text-grey', 'icon-squarefill', 'icon-square']
+  },
   /**
    * 组件的属性列表
    */

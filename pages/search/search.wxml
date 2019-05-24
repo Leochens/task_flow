@@ -30,7 +30,7 @@
 </view>
 <view class="margin-top-xl" wx:if="{{hasResult && !task.length && !task_flows.length}}">
     <view class="margin flex justify-center">
-        <view class="cu-tag line-orange radius">
+        <view class="cu-tag line-orange">
         <text class="text-sm ">没有更多了...</text>
         </view>
     </view>

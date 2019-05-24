@@ -74,7 +74,7 @@
   height: 55rpx;
   width: 55rpx;
   position: absolute;
-  right: -4rpx;
+  right: -18rpx;
   top: -20rpx;
   transition: transform .3s ease-in-out;
 }
@@ -85,7 +85,7 @@
   overflow: hidden;
   transition: transform .3s ease-in-out;
 }
-.process-pane .title{
+.process-pane .item-title{
   font-size: 20rpx;
 
 }

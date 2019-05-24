@@ -13,7 +13,7 @@
   </view>
 </view>
 <view wx:if="{{messages.length}}" class="cu-timeline">
-  <view class="cu-item {{item.is_read?'text-main':'text-yellow'}}" wx:for="{{messages}}" data-mid="{{index}}" wx:key bind:tap="toDetail">
+  <view class="cu-item {{item.is_read?'text-main':'text-orange'}}" wx:for="{{messages}}" data-mid="{{index}}" wx:key bind:tap="toDetail">
     <view class="content bg-white solid">
       <view>
         <view class="text-main text-df">{{item.content}}</view>
@@ -38,7 +38,7 @@
         <view class="cu-tag line-main fr sm">
           {{intellectDatetime?item.d_create_time:item.create_time}}
         </view>
-        <view wx:if="{{!item.is_read}}" class="cu-tag bg-yellow text-white sm fr">新</view>
+        <view wx:if="{{!item.is_read}}" class="cu-tag bg-orange text-white sm fr">新</view>
       </view>
     </view>
   </view>
