@@ -67,11 +67,21 @@ const page = {
     console.log(e);
     const t_id = e.currentTarget.dataset.tid;
     const u_id = wx.getStorageSync('u_id');
+    const that = this;
 
-    this._completeTask(t_id, u_id);
-    // 后端请求完成任务的api
-    const task = this.data.tasks[t_id];
-    task && this.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
+    wx.showModal({
+      title: "提示",
+      content: "您确定完成该任务吗",
+      success: function (e) {
+        if (e.confirm) {
+          that._completeTask(t_id, u_id);
+          // 后端请求完成任务的api
+          const task = that.data.tasks[t_id];
+          task && that.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
+        }
+      }
+    })
+
   },
   applyBreak: function (e) {
     console.log("e=>", e);

@@ -128,7 +128,7 @@ const page = {
     const paneName = e.detail.value.paneName;
     console.log(paneName)
     const { task: { id: t_id, t_name } } = this.data;
-    this.recordOperation(`创建子任务[${t_name}]的关联面板[${paneName}]`,TYPE.CREATE)
+    this.recordOperation(`创建子任务[${t_name}]的关联面板[${paneName}]`, TYPE.CREATE)
     if (paneName.trim() === '' || !t_id) return;
     this.addTodoConnect({ t_id, t_name, todo_pane_name: paneName });
     this.hideModal();
@@ -291,10 +291,19 @@ const page = {
   },
   _completeTask: function () {
     const { task: { id: t_id }, u_id } = this.data;
+    const that = this;
+    wx.showModal({
+      title: "提示",
+      content: "您确定完成该任务吗",
+      success: function (e) {
+        if (e.confirm) {
+          that.completeTask(t_id, u_id);
+          const task = that.data.tasks[t_id];
+          task && that.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
+        }
+      }
+    })
 
-    this.completeTask(t_id, u_id);
-    const task = this.data.tasks[t_id];
-    task && this.recordOperation(`完成子任务[${task.t_name}]`, TYPE.UPDATE);
   },
   commentSubmit: function (e) {
     console.log(e);
