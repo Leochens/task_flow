@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/about/about",
     "pages/help/help",
     "pages/log/log",
     "pages/help/fresh_help/fresh_help",
@@ -19,7 +20,6 @@
     "pages/task_flow/all_members/all_members",
     "pages/task_flow/task_flow",
     "pages/message/message",
-    "pages/about/about",
     "pages/data/data",
     "pages/review/review",
     "pages/search/search",

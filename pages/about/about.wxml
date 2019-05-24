@@ -1,9 +1,32 @@
-<!--pages/about/about.wxml-->
+<!-- pages/about/about.wxml -->
 <nav-bar isBack="{{true}}">
   <view slot="backText">返回</view>
-  <view slot="content">关于我们</view>
+  <view slot="content">关于小程序</view>
 </nav-bar>
-<view class="cu-bar">
-  <view class="icon-title text-main"></view>
-  <view class="content text-gray">功能待实现</view>
+<view class="wrap" style="">
+  <view class="UCenter-bg bgc bg-main" style="transform:rotate(180deg)">
+    <image class=" gif-wave" mode="scaleToFill" src="http://mokis.top/wave.gif"></image>
+  </view>
+  <view class="bg"></view>
+</view>
+<view class="cu-card dynamic">
+  <view class="cu-item shadow card" style="margin-top: 10vh">
+    <view class="margin flex justify-center align-center margin-bottom-sm">
+      <view class="cu-avatar lg round solid" style="background-image:url(http://mokis.top/open_imgs/task_flow/logo.jpg);"></view>
+    </view>
+    <view class="margin">
+      <view class="text-bold text-grey text-xl text-center margin-bottom-lg">活动任务流</view>
+      <view style="color:#666" class=" margin-bottom-sm">一款轻型的,支持多人协作分工,服务于中小型活动的线上任务管理类小程序。</view>
+      <view style="color:#666" class=" margin-bottom-sm">很荣幸能够成为您工作中的得力助手,希望我们的缘分可以一直继续下去!</view>
+      <view style="color:#666" class=" margin-bottom ">如果您在使用过程中发现了问题或不解的地方,欢迎联系开发者。下方是联系方式:</view>
+      <view class="text-grey margin-bottom-sm ">
+        <text class="icon-title text-orange"></text>
+        QQ: 1183422598
+      </view>
+      <view class="text-grey margin-bottom-sm ">
+        <text class="icon-title text-green"></text>
+        微信: zhllc99
+      </view>
+    </view>
+  </view>
 </view>
