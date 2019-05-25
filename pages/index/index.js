@@ -33,6 +33,7 @@ const app = getApp()
 const page = {
   data: {
     hasAuth: false,
+    nonet: app.globalData.nonet,
     showCom: true,
     currentIndex: 0,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -237,12 +238,20 @@ const page = {
     this.getUserInfoFromStorage();
     const SID = wx.getStorageSync('SID');
     const u_id = wx.getStorageSync('u_id');
-    // if (!u_id) {
-    //   this.setData({
-    //     showAuthModal: true
-    //   });
-    //   wx.hideTabBar({});
-    // }
+    const that = this;
+    wx.onNetworkStatusChange(function (res) {
+      console.log(res)
+      if (res.networkType == "none") {
+        that.setData({ nonet: true });
+        wx.showModal({
+          title:''
+        })
+        wx.hideTabBar();
+      } else {
+        that.setData({ nonet: false })
+        wx.showTabBar();
+      }
+    })
     if (SID) {
       this.fetchTaskFlows(u_id, this.setTfIds);
       const settings = wx.getStorageSync('settings') || {};

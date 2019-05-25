@@ -6,17 +6,19 @@ import {
 const configureStore = require('./store/store.js');
 const store = configureStore();
 App(Provider(store)({
-  onLaunch: function(options) {
+  onLaunch: function (options) {
     console.log("opts", options);
-    if(options.shareTicket){
+
+
+    if (options.shareTicket) {
       wx.showModal({
-        title:'test',
-        content:JSON.stringify(options.shareTicket)
+        title: 'test',
+        content: JSON.stringify(options.shareTicket)
       })
     }
     const that = this;
     wx.getSystemInfo({
-      success: function(e) {
+      success: function (e) {
         that.globalData.StatusBar = e.statusBarHeight;
         let custom = wx.getMenuButtonBoundingClientRect();
         that.globalData.Custom = custom;

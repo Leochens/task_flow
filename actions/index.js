@@ -3,6 +3,7 @@ import Schemas from '../schemas/index';
 import { normalize } from '../libs/normalizr';
 
 export const fetchTaskFlows = (u_id, callback) => {
+
     const normalizeFunc = response => {
         console.log("待nomalize==>", response);
         const task_flows = normalize(response.data, Schemas.taskFlows);
@@ -81,11 +82,16 @@ export const changeTaskInfo = (tf_id, u_id, t_id, field, value, callback) => {
     return crudUpdate('task_info', field, { tf_id, t_id, u_id, field, value }, `tasks/${t_id}/${field}`, callback);
 }
 
+
+
 export const completeTask = (t_id, u_id) => {
     return crudCreate('completation', { u_id }, `tasks/${t_id}/complete`, { u_id, t_id });
 }
+export const forceCompleteTask = (t_id, u_id) => {
+    return crudCreate('completation', { u_id }, `tasks/${t_id}/force_complete`, { u_id, t_id });
+}
 export const deleteTask = (t_id, tf_id, u_id) => {
-    return crudDelete('tasks', t_id, `task_flows/${tf_id}/tasks`,null, null, { t_id, u_id });
+    return crudDelete('tasks', t_id, `task_flows/${tf_id}/tasks`, null, null, { t_id, u_id });
 }
 export const addNewTaskFlowMember = (tf_id, u_id) => {
     return crudCreate('users', { u_id }, `task_flows/${tf_id}/users`);
@@ -93,6 +99,7 @@ export const addNewTaskFlowMember = (tf_id, u_id) => {
 export const addComment = (t_id, cmt) => {
     return crudCreate('comments', { cmt }, `tasks/${t_id}/comments`, { t_id, cmt });
 }
+
 
 export const updateTaskFlow = (u_id, tf_id, tf, callback) => {
     return crudUpdate('task_flows', tf_id, { tf, tf_id }, `users/${u_id}/task_flows`, callback)

@@ -2,7 +2,7 @@
 import {
   connect
 } from '../../../libs/wechat-weapp-redux';
-import { changeTaskInfo, deleteTask } from '../../../actions/index';
+import { changeTaskInfo, deleteTask, forceCompleteTask } from '../../../actions/index';
 import { recordOperation, TYPE } from '../../../actions/record';
 
 import { compareDate } from '../../../utils/util';
@@ -55,6 +55,21 @@ const page = {
       success: function (e) {
         if (e.confirm) {
           that.deleteTask(id, tf_id, u_id);
+        }
+      }
+    })
+  },
+  _completeTask: function (e) {
+    const u_id = app.globalData.u_id;
+    const { t_id, isLeader } = this.data;
+    if (!isLeader) return wx.showToast({ title: "你不是负责人" });
+    const that = this;
+    wx.showModal({
+      title: "三思后行",
+      content: "您确认要提前完成这个子任务吗,所有进行中的任务人的状态将会改为完成。",
+      success: function (e) {
+        if (e.confirm) {
+          that.forceCompleteTask(t_id,u_id);
         }
       }
     })
@@ -181,7 +196,8 @@ const mapStateToData = state => {
 const mapDispatchToPage = dispatch => ({
   changeTaskInfo: (tf_id, u_id, t_id, field, value, callback) => dispatch(changeTaskInfo(tf_id, u_id, t_id, field, value, callback)),
   recordOperation: (msg, op_type) => dispatch(recordOperation(msg, op_type)),
-  deleteTask: (t_id, tf_id, u_id) => dispatch(deleteTask(t_id, tf_id, u_id))
+  deleteTask: (t_id, tf_id, u_id) => dispatch(deleteTask(t_id, tf_id, u_id)),
+  forceCompleteTask: (t_id, u_id) => dispatch(forceCompleteTask(t_id, u_id))
 })
 const _page = connect(mapStateToData, mapDispatchToPage)(page);
 Page(_page);

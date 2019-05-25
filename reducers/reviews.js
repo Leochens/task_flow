@@ -7,6 +7,7 @@ const reviews = (state = [], action) => {
         case CRUD_GET_LIST_SUCCESS: {
             if (meta.resource != 'reviews') return state;
             const { data } = payload;
+
             return data;
         }
         default: return state;

@@ -27,6 +27,12 @@ const successFilter = (resource, payload) => {
                         title: payload.msg
                     });
                 }
+                if (payload.modalMsg) {
+                    wx.showModal({
+                        title: "提示",
+                        content: payload.modalMsg
+                    })
+                }
                 break;
             }
         case 'tasks':

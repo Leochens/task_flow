@@ -40,9 +40,14 @@
             <text class="text-grey">子任务日志</text>
         </view>
     </view>
-    <view class="cu-item arrow " wx:if="{{isLeader}}"  bind:tap="_deleteTask">
+    <view class="cu-item arrow " wx:if="{{isLeader}}" bind:tap="_deleteTask">
         <view class="content">
             <text class="text-red">删除子任务</text>
+        </view>
+    </view>
+    <view class="cu-item arrow " wx:if="{{isLeader}}" bind:tap="_completeTask">
+        <view class="content">
+            <text class="text-red">提前完成子任务</text>
         </view>
     </view>
 </view>
