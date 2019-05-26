@@ -27,7 +27,11 @@ const page = {
 
   },
   toDetail: function (e) {
-    const t_id = e.currentTarget.dataset.tid;
+    const r_id = e.currentTarget.dataset.rid;
+    const review = this.data.reviews[r_id]
+    const { t_id } = review;
+
+    console.log(e);
     wx.navigateTo({
       url: '../task/task?t_id=' + t_id
     })
@@ -69,12 +73,22 @@ const page = {
   allow: function (e) {
     const r_id = e.currentTarget.dataset.rid;
     const review = this.data.reviews[r_id]
-    const { t_id, apply_user_id } = review;
-    this.allowTakeBreak(t_id, this.data.u_id, apply_user_id);
-    this.recordOperation(`同意子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`, TYPE.UPDATE)
+    const { t_id, apply_user_id, warn } = review;
+    const that = this;
+    wx.showModal({
+      title: "提示",
+      content: warn ? "同意该任务人的请假后该子任务将无其他'进行任务中'成员,您可在子任务管理界面进行提前完成子任务操作或添加新的任务人。是否同意请假?" : "是否同意请假?",
+      success: function (e) {
+        if (e.confirm) {
+          that.allowTakeBreak(t_id, that.data.u_id, apply_user_id);
+          that.recordOperation(`同意子任务[${review.t_name}]成员[${review.apply_user_name}]的请假`, TYPE.UPDATE)
+          that.clear();
+          that.onPullDownRefresh();
+        }
+      }
+    })
 
-    this.clear();
-    this.onPullDownRefresh();
+
   },
   reject: function (e) {
     const r_id = e.currentTarget.dataset.rid;

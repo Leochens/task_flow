@@ -61,15 +61,17 @@ const page = {
   },
   _completeTask: function (e) {
     const u_id = app.globalData.u_id;
-    const { t_id, isLeader } = this.data;
+    const { t_id, isLeader,task } = this.data;
     if (!isLeader) return wx.showToast({ title: "你不是负责人" });
     const that = this;
     wx.showModal({
       title: "三思后行",
-      content: "您确认要提前完成这个子任务吗,所有进行中的任务人的状态将会改为完成。",
+      content: "当所有的任务人都完成任务后,该任务会自动完成。您确认现在要提前完成这个子任务吗,所有进行中的任务人的状态将会改为完成。",
       success: function (e) {
         if (e.confirm) {
-          that.forceCompleteTask(t_id,u_id);
+          that.forceCompleteTask(t_id, u_id);
+          task && that.recordOperation(`子任务[${task.t_name}]提前完成`, TYPE.UPDATE);
+
         }
       }
     })

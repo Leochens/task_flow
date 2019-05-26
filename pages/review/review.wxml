@@ -10,6 +10,7 @@
             <view class="text-grey margin-bottom-xs text-sm">请假原因: {{item.break_reason}}</view>
             <view class="text-grey margin-bottom-xs text-sm">所属子任务: {{item.t_name}}</view>
             <view class="text-grey margin-bottom-xs text-sm">所属任务流: {{item.tf_name}}</view>
+            <view class="text-sm margin-bottom-xs text-orange" wx:if="{{item.warn}}"><text class="icon-info"></text> 请假后无其他任务人</view>
         </view>
         <view class="flex solid-top">
             <view class="cu-btn bg-main  flex-sub" catch:tap="allow" data-rid="{{index}}">同意</view>

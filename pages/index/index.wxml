@@ -167,6 +167,5 @@
   </view>
 </view>
 <view wx:else>
-  断网了
-
+  <view class="margin-xxl text-bold text-xl text-center">您已断网</view>
 </view>

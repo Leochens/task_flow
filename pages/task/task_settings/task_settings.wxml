@@ -45,7 +45,7 @@
             <text class="text-red">删除子任务</text>
         </view>
     </view>
-    <view class="cu-item arrow " wx:if="{{isLeader}}" bind:tap="_completeTask">
+    <view class="cu-item arrow " wx:if="{{isLeader && task.is_completed != 1}}" bind:tap="_completeTask">
         <view class="content">
             <text class="text-red">提前完成子任务</text>
         </view>

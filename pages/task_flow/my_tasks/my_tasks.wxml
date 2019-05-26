@@ -27,19 +27,19 @@
                 <view class="t-describe">{{item.t_describe}}</view>
             </view>
             <view class="btn-group">
-                <view class="cu-btn sm margin-right-sm bg-main" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="completeTask" data-tid="{{item.id}}">
+                <view class="cu-btn radius sm margin-right-sm bg-main" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="completeTask" data-tid="{{item.id}}">
                     完成
                 </view>
-                <view class="cu-btn sm margin-right-sm bg-green" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="applyBreak" data-idx="{{index}}" data-tid="{{item.id}}">
+                <view class="cu-btn radius sm margin-right-sm bg-green" wx:if="{{item.myStatus === 1 && index != showInputIndex}}" catch:tap="applyBreak" data-idx="{{index}}" data-tid="{{item.id}}">
                     请假
                 </view>
-                <view class="cu-btn sm margin-right-sm bg-grey" wx:if="{{item.myStatus === 2 && index != showInputIndex}}">
+                <view class="cu-btn radius sm margin-right-sm bg-grey" wx:if="{{item.myStatus === 2 && index != showInputIndex}}">
                     已完成
                 </view>
-                <view class="cu-btn sm margin-right-sm bg-grey" wx:if="{{item.myStatus === 3 && index != showInputIndex}}">
+                <view class="cu-btn radius sm margin-right-sm bg-grey" wx:if="{{item.myStatus === 3 && index != showInputIndex}}">
                     请假中
                 </view>
-                <view class="cu-btn sm margin-right-sm bg-red" wx:if="{{item.myStatus === 0 && index != showInputIndex}}">
+                <view class="cu-btn radius sm margin-right-sm bg-red" wx:if="{{item.myStatus === 0 && index != showInputIndex}}">
                     已请假
                 </view>
                 <view class="break-reason" wx:if="{{index === showInputIndex}}">

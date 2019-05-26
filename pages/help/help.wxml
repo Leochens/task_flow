@@ -124,6 +124,7 @@
         <view class="text-sm margin-bottom-sm">· 更新任务流的信息(名称,简介,截止时间)</view>
         <view class="text-sm margin-bottom-sm">· 更新子任务的基本信息(名称,简介,截止时间)</view>
         <view class="text-sm margin-bottom-sm">· 完成子任务</view>
+        <view class="text-sm margin-bottom-sm">· 提前完成子任务</view>
         <view class="text-sm margin-bottom-sm">· 审核请假信息</view>
         <view class="text-sm margin-bottom-sm">· 子任务申请请假</view>
         <view class="text-sm margin-bottom-sm">· 添加待办面板(关联,非关联)</view>
