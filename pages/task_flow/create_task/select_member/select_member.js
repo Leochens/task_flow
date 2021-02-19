@@ -1,6 +1,7 @@
 // pages/task_flow/create_task/select_member/select_member.js
-
-Page({
+import { connect } from '../../../../libs/wechat-weapp-redux';
+const app = getApp();
+const _page = {
 
   /**
    * 页面的初始数据
@@ -15,9 +16,12 @@ Page({
    */
   onLoad: function (options) {
     // console.log(options);
-    const members = JSON.parse(options.members);
+    const tf_id = options.tf_id;
     const selected_members = options.selected_members ? JSON.parse(options.selected_members) : [];
-    console.log(members);
+
+    const tf = this.data.getTaskFlow(tf_id);
+    const leader_id = tf.leader_id;
+    const members = tf.members;
     members.forEach(mem => {
       if (selected_members.includes(mem.id)) {
         mem.is_selected = true;
@@ -65,4 +69,26 @@ Page({
   }
 
 
-})
+}
+const mapStateToData = state => {
+  const entities = { ...state.entities };
+  const membersEntity = { ...state.entities.members };
+  const getTaskFlow = tf_id => {
+    const tf = { ...entities.task_flows[tf_id] };
+    const _members = [...tf.members];
+    const members = _members.map(m => ({ ...membersEntity[m] }));
+    tf.members = members;
+    return tf;
+  }
+  return {
+    getTaskFlow
+  }
+}
+const mapDispatchToPage = dispatch => {
+  return {
+  }
+}
+
+const page = connect(mapStateToData, mapDispatchToPage)(_page);
+
+Page(page)

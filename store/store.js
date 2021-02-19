@@ -28,7 +28,7 @@ function configureStore() {
   }, {
     name: "profile"
   }]), compose(
-    applyMiddleware(sm, logger),
+    applyMiddleware(sm),
   ));
   sm.run(sagas);
   return store;

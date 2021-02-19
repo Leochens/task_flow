@@ -118,7 +118,7 @@ const page = {
     const t_members = this.data.task.members.map(m => m.id);
     const members = this.data.tf.members.filter(m => !t_members.includes(m.id));
     wx.navigateTo({
-      url: '../../task_flow/create_task/select_member/select_member?members=' + JSON.stringify(members)
+      url: '../../task_flow/create_task/select_member/select_member?tf_id=' + this.data.tf.id
     });
 
   },

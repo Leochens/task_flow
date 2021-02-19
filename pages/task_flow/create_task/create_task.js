@@ -144,7 +144,7 @@ const _page = {
   selectMember: function (e) {
     // console.log()
     wx.navigateTo({
-      url: './select_member/select_member?members=' + JSON.stringify(this.data.members) + "&selected_members=" + JSON.stringify(this.data.selectedMembersIds)
+      url: './select_member/select_member?tf_id=' + this.data.tf_id + "&selected_members=" + JSON.stringify(this.data.selectedMembersIds)
     })
   },
   onSubmit: function (e) {
